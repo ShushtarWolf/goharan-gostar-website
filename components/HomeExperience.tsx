@@ -13,6 +13,8 @@ type VideoBlock = {
   src: string;
   title: string;
   body: string;
+  /** Hero loads immediately; others lazy-load near viewport. */
+  eager?: boolean;
 };
 
 const VIDEO_BLOCKS: VideoBlock[] = [
@@ -21,6 +23,7 @@ const VIDEO_BLOCKS: VideoBlock[] = [
     src: asset("/videos/sUOZV.mp4"),
     title: "مهندسی آنچه دیده نمی‌شود",
     body: "ساختارهای میکروسکوپی که عملکرد محصولات واقعی را شکل می‌دهند",
+    eager: true,
   },
   {
     id: "silencer",
@@ -43,31 +46,27 @@ const VIDEO_BLOCKS: VideoBlock[] = [
 ];
 
 const INTRO_PHOTOS = [
-  asset("/photos/ead0bbd7-a967-487d-be1c-817c241baab5.png"),
-  asset("/photos/7f84af14-4ce0-4bcb-8ec7-a0d98287dcd4.png"),
-  asset("/photos/80969f47-178f-4997-93f5-cd0355fa0800.png"),
+  asset("/photos/ead0bbd7-a967-487d-be1c-817c241baab5.webp"),
+  asset("/photos/7f84af14-4ce0-4bcb-8ec7-a0d98287dcd4.webp"),
+  asset("/photos/80969f47-178f-4997-93f5-cd0355fa0800.webp"),
 ];
+
+function ensureVideoSource(video: HTMLVideoElement) {
+  const src = video.dataset.src;
+  if (!src) return;
+  if (video.getAttribute("src") === src) return;
+  video.src = src;
+  video.load();
+}
 
 function wireScrubVideo(
   section: HTMLElement,
   video: HTMLVideoElement,
   copy: HTMLElement,
 ) {
-  const ensureReady = () =>
-    new Promise<void>((resolve) => {
-      if (video.readyState >= 1 && video.duration) {
-        resolve();
-        return;
-      }
-      const onMeta = () => {
-        video.removeEventListener("loadedmetadata", onMeta);
-        resolve();
-      };
-      video.addEventListener("loadedmetadata", onMeta);
-      video.load();
-    });
+  const eager = video.dataset.eager === "true";
 
-  ensureReady().then(() => {
+  const startScrub = () => {
     const duration = video.duration || 1;
     video.pause();
     video.currentTime = 0;
@@ -116,6 +115,36 @@ function wireScrubVideo(
         },
       },
     );
+  };
+
+  const whenReady = () =>
+    new Promise<void>((resolve) => {
+      if (video.readyState >= 1 && video.duration) {
+        resolve();
+        return;
+      }
+      const onMeta = () => {
+        video.removeEventListener("loadedmetadata", onMeta);
+        resolve();
+      };
+      video.addEventListener("loadedmetadata", onMeta);
+    });
+
+  if (eager) {
+    ensureVideoSource(video);
+    whenReady().then(startScrub);
+    return;
+  }
+
+  // Lazy: attach src when section is near viewport, then scrub once metadata is ready.
+  ScrollTrigger.create({
+    trigger: section,
+    start: "top bottom+=40%",
+    once: true,
+    onEnter: () => {
+      ensureVideoSource(video);
+      whenReady().then(startScrub);
+    },
   });
 }
 
@@ -187,10 +216,12 @@ export default function HomeExperience() {
       >
         <video
           className="absolute inset-0 h-full w-full object-cover"
+          data-src={VIDEO_BLOCKS[0].src}
+          data-eager="true"
           src={VIDEO_BLOCKS[0].src}
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           aria-hidden
         />
         <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25" />
@@ -235,6 +266,8 @@ export default function HomeExperience() {
                 key={src}
                 src={src}
                 alt=""
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding="async"
                 className={`h-40 w-full object-cover md:h-52 ${
                   i === 0 ? "col-span-2" : ""
                 }`}
@@ -262,7 +295,7 @@ export default function HomeExperience() {
         </div>
       </section>
 
-      {/* 4–6. Product scrub videos */}
+      {/* 4–6. Product scrub videos (lazy src) */}
       {VIDEO_BLOCKS.slice(1).map((block) => (
         <section
           key={block.id}
@@ -272,10 +305,10 @@ export default function HomeExperience() {
         >
           <video
             className="absolute inset-0 h-full w-full object-cover"
-            src={block.src}
+            data-src={block.src}
             muted
             playsInline
-            preload="auto"
+            preload="none"
             aria-hidden
           />
           <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/60 to-transparent" />
