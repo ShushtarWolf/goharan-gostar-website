@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "اولین و تخصصی‌ترین تولیدکننده قطعات متخلخل پلیمری در ایران و خاورمیانه",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fa" dir="rtl" className={`${vazirmatn.variable} h-full antialiased`}>
       <head>
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="image/webp"
         />
       </head>
-      <body className="min-h-full font-sans">{children}</body>
+      <body className="min-h-full bg-graphite font-sans text-mist">{children}</body>
     </html>
   );
 }

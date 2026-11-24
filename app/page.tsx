@@ -1,5 +1,7 @@
-import HomeExperience from "@/components/HomeExperience";
+import { defaultLocale } from "@/lib/i18n";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return <HomeExperience />;
+/** FA is default — send `/` to `/fa/`. */
+export default function RootPage() {
+  redirect(`/${defaultLocale}/`);
 }

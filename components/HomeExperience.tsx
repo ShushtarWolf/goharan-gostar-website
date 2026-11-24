@@ -5,45 +5,23 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { asset } from "@/lib/asset";
+import { homeCopy } from "@/content/home";
+import { ui } from "@/content/ui";
+import { productsForHomeScene } from "@/content/products";
+import { href } from "@/lib/paths";
+import { t, type Locale } from "@/lib/i18n";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const FRAME_COUNT = 48;
 
-type Scene = {
-  id: string;
-  folder: string;
-  title: string;
-  body: string;
-  eager?: boolean;
-};
+type SceneId = "hero" | "silencer" | "pipette" | "medical";
 
-const SCENES: Scene[] = [
-  {
-    id: "hero",
-    folder: "sUOZV",
-    title: "مهندسی آنچه دیده نمی‌شود",
-    body: "ساختارهای میکروسکوپی که عملکرد محصولات واقعی را شکل می‌دهند",
-    eager: true,
-  },
-  {
-    id: "silencer",
-    folder: "ggT4W",
-    title: "صداگیر پنوماتیک",
-    body: "ساختار متخلخل جریان هوا را کنترل و صدای خروجی را کاهش می‌دهد",
-  },
-  {
-    id: "pipette",
-    folder: "T3KVy",
-    title: "فیلتر سرسمپلر",
-    body: "حفاظت از نمونه‌ها در برابر آلودگی با فیلتراسیون دقیق در مقیاس میکرو",
-  },
-  {
-    id: "medical",
-    folder: "GcRW0",
-    title: "کاربرد پزشکی",
-    body: "هوا عبور می‌کند؛ مایع متوقف می‌شود — حفاظت دقیق در لحظه‌ای که اهمیت دارد",
-  },
+const SCENES: { id: SceneId; folder: string; eager?: boolean; homeScene?: "silencer" | "pipette" | "medical" }[] = [
+  { id: "hero", folder: "sUOZV", eager: true },
+  { id: "silencer", folder: "ggT4W", homeScene: "silencer" },
+  { id: "pipette", folder: "T3KVy", homeScene: "pipette" },
+  { id: "medical", folder: "GcRW0", homeScene: "medical" },
 ];
 
 const INTRO_PHOTOS = [
@@ -76,9 +54,7 @@ function wireFrameScrub(
   const ctx = canvas.getContext("2d", { alpha: false });
   if (!ctx) return;
 
-  // Fixed-length slot list; missing frames fall back to nearest loaded.
   const frames: (HTMLImageElement | null)[] = Array(FRAME_COUNT).fill(null);
-  let loadedCount = 0;
 
   const pickFrame = (progress: number) => {
     const i = Math.min(
@@ -161,14 +137,11 @@ function wireFrameScrub(
   };
 
   const boot = async () => {
-    // First frame only → instant paint + scrub can start.
     const first = await loadImage(frameUrl(folder, 0));
     frames[0] = first;
-    loadedCount = 1;
     draw(first);
     attachScrub();
 
-    // Load remaining in small batches so the network stays usable.
     const BATCH = 6;
     for (let start = 1; start < FRAME_COUNT; start += BATCH) {
       const jobs = [];
@@ -178,11 +151,8 @@ function wireFrameScrub(
           loadImage(frameUrl(folder, idx))
             .then((img) => {
               frames[idx] = img;
-              loadedCount += 1;
             })
-            .catch(() => {
-              /* keep nearest-frame fallback */
-            }),
+            .catch(() => undefined),
         );
       }
       await Promise.all(jobs);
@@ -204,7 +174,44 @@ function wireFrameScrub(
   });
 }
 
-export default function HomeExperience() {
+function RelatedStrip({
+  locale,
+  scene,
+}: {
+  locale: Locale;
+  scene: "silencer" | "pipette" | "medical";
+}) {
+  const items = productsForHomeScene(scene);
+  if (!items.length) return null;
+  return (
+    <section className="border-y border-white/10 bg-graphite-soft px-6 py-14 md:px-12">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-4">
+        <h3 className="text-lg font-semibold text-mist md:text-xl">
+          {t(homeCopy.related, locale)}
+        </h3>
+        <a href={href(locale, "products")} className="text-sm text-cyan hover:underline">
+          {t(homeCopy.viewAll, locale)}
+        </a>
+      </div>
+      <div className="mx-auto mt-8 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((p) => (
+          <a
+            key={p.slug}
+            href={href(locale, `products/${p.slug}`)}
+            className="border border-white/10 bg-graphite px-5 py-6 transition hover:border-cyan/50"
+          >
+            <p className="text-base font-medium text-mist">{t(p.name, locale)}</p>
+            <p className="mt-2 line-clamp-2 text-sm text-mist/60">
+              {t(p.intro, locale)}
+            </p>
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export default function HomeExperience({ locale }: { locale: Locale }) {
   const rootRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -251,24 +258,13 @@ export default function HomeExperience() {
     { scope: rootRef },
   );
 
-  const hero = SCENES[0];
-  const heroPoster = frameUrl(hero.folder, 0);
+  const heroPoster = frameUrl("sUOZV", 0);
 
   return (
     <div ref={rootRef} className="relative bg-graphite text-mist">
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-start p-4 md:p-6">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={asset("/logo-fa.png")}
-          alt="GXPORE"
-          className="pointer-events-auto h-8 w-auto opacity-95 md:h-10"
-        />
-      </header>
-
-      {/* 1. Hero — WebP frame scrub */}
       <section
         data-frame-section
-        data-folder={hero.folder}
+        data-folder="sUOZV"
         data-eager="true"
         data-id="hero"
         className="relative h-screen overflow-hidden bg-graphite"
@@ -284,30 +280,30 @@ export default function HomeExperience() {
           data-copy
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
         >
-          <p className="mb-4 text-xs tracking-[0.35em] text-cyan md:text-sm">GXPORE</p>
+          <p className="mb-4 text-xs tracking-[0.35em] text-cyan md:text-sm">
+            {t(homeCopy.heroEyebrow, locale)}
+          </p>
           <h1 className="max-w-3xl text-3xl font-semibold leading-tight text-mist md:text-5xl lg:text-6xl">
-            {hero.title}
+            {t(homeCopy.heroTitle, locale)}
           </h1>
-          <p className="mt-5 max-w-xl text-base text-mist/85 md:text-lg">{hero.body}</p>
+          <p className="mt-5 max-w-xl text-base text-mist/85 md:text-lg">
+            {t(homeCopy.heroBody, locale)}
+          </p>
         </div>
       </section>
 
-      {/* 2. Company intro */}
       <section
         data-fade-section
         className="relative flex min-h-screen items-center bg-mist px-6 py-24 text-ink md:px-12"
       >
         <div data-copy className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
-            <p className="mb-3 text-sm text-navy">گوهران گستر نادین</p>
+            <p className="mb-3 text-sm text-navy">{t(homeCopy.introEyebrow, locale)}</p>
             <h2 className="text-2xl font-semibold leading-snug md:text-4xl">
-              اولین و تخصصی‌ترین تولیدکننده قطعات متخلخل در ایران و خاورمیانه
+              {t(homeCopy.introTitle, locale)}
             </h2>
             <p className="mt-6 text-base leading-8 text-ink/80 md:text-lg">
-              گوهران گستر نادین با برند بین‌المللی GXPORE، اولین و تخصصی‌ترین
-              تولیدکننده قطعات متخلخل پلیمری در ایران و خاورمیانه. ما ساختار مواد
-              را مهندسی می‌کنیم تا عملکرد دقیق و قابل‌اتکا در فیلتراسیون، تجهیزات
-              پزشکی و سیستم‌های صنعتی خلق شود.
+              {t(homeCopy.introBody, locale)}
             </p>
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -326,78 +322,89 @@ export default function HomeExperience() {
         </div>
       </section>
 
-      {/* 3. Structure range */}
       <section
         data-fade-section
         className="relative flex min-h-[80vh] items-center bg-graphite-soft px-6 py-24 md:px-12"
       >
         <div data-copy className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 text-sm text-cyan">از ساختار تا محصول</p>
-          <h2 className="text-2xl font-semibold md:text-4xl">منافذ از ۱ تا ۲۰۰ میکرون</h2>
+          <p className="mb-3 text-sm text-cyan">{t(homeCopy.structureEyebrow, locale)}</p>
+          <h2 className="text-2xl font-semibold md:text-4xl">
+            {t(homeCopy.structureTitle, locale)}
+          </h2>
           <p className="mt-6 text-base leading-8 text-mist/75 md:text-lg">
-            اندازه حفرات قابل تنظیم از ۱ تا ۲۰۰ میکرون، بنا به کاربرد و اندازه
-            ناخالصی‌ها، با توزیع یکنواخت — ناخالصی‌ها را جدا می‌کند و جریانی پاک و
-            قابل‌اتکا می‌سازد.
+            {t(homeCopy.structureBody, locale)}
           </p>
         </div>
       </section>
 
-      {/* 4–6. Product frame scrubs */}
-      {SCENES.slice(1).map((scene) => (
-        <section
-          key={scene.id}
-          data-frame-section
-          data-folder={scene.folder}
-          data-id={scene.id}
-          className="relative h-screen overflow-hidden bg-graphite"
-          style={{
-            backgroundImage: `url(${frameUrl(scene.folder, 0)})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <canvas className="absolute inset-0 h-full w-full" aria-hidden />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/45 to-transparent" />
-          <div
-            data-copy
-            className="relative z-10 flex h-full flex-col items-center justify-end px-6 pb-24 text-center md:pb-32"
-          >
-            <h2 className="text-3xl font-semibold text-mist md:text-5xl">{scene.title}</h2>
-            <p className="mt-4 max-w-lg text-base text-mist/85 md:text-lg">{scene.body}</p>
+      {SCENES.filter((s) => s.id !== "hero").map((scene) => {
+        const copyKey = scene.homeScene!;
+        const sceneCopy = homeCopy.scenes[copyKey];
+        return (
+          <div key={scene.id}>
+            <section
+              data-frame-section
+              data-folder={scene.folder}
+              data-id={scene.id}
+              className="relative h-screen overflow-hidden bg-graphite"
+              style={{
+                backgroundImage: `url(${frameUrl(scene.folder, 0)})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <canvas className="absolute inset-0 h-full w-full" aria-hidden />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/45 to-transparent" />
+              <div
+                data-copy
+                className="relative z-10 flex h-full flex-col items-center justify-end px-6 pb-24 text-center md:pb-32"
+              >
+                <h2 className="text-3xl font-semibold text-mist md:text-5xl">
+                  {t(sceneCopy.title, locale)}
+                </h2>
+                <p className="mt-4 max-w-lg text-base text-mist/85 md:text-lg">
+                  {t(sceneCopy.body, locale)}
+                </p>
+              </div>
+            </section>
+            <RelatedStrip locale={locale} scene={copyKey} />
           </div>
-        </section>
-      ))}
+        );
+      })}
 
-      {/* 7 */}
       <section
         data-fade-section
         className="relative flex min-h-[70vh] items-center bg-graphite px-6 py-24 md:px-12"
       >
         <div data-copy className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 text-sm text-cyan">ساختار و عملکرد</p>
+          <p className="mb-3 text-sm text-cyan">
+            {t(homeCopy.performanceEyebrow, locale)}
+          </p>
           <h2 className="text-2xl font-semibold leading-snug md:text-4xl">
-            اندازه، توزیع و هندسه منافذ، رفتار نهایی محصول را تعیین می‌کند
+            {t(homeCopy.performanceTitle, locale)}
           </h2>
         </div>
       </section>
 
-      {/* 8 */}
       <section
         data-fade-section
         className="relative flex min-h-[70vh] items-center justify-center bg-navy px-6 py-28"
       >
         <div data-copy className="max-w-2xl text-center">
           <h2 className="text-2xl font-semibold leading-snug md:text-4xl">
-            بیایید آنچه را که بعد می‌آید مهندسی کنیم
+            {t(homeCopy.ctaTitle, locale)}
           </h2>
-          <p className="mt-8 inline-block border border-cyan/60 px-8 py-3 text-sm tracking-wide text-cyan">
-            تماس — به‌زودی
-          </p>
+          <a
+            href={href(locale, "contact")}
+            className="mt-8 inline-block border border-cyan/60 px-8 py-3 text-sm tracking-wide text-cyan"
+          >
+            {t(ui.ctaSoon, locale)}
+          </a>
         </div>
       </section>
 
       <footer className="border-t border-white/10 bg-graphite px-6 py-8 text-center text-xs text-mist/45">
-        © گوهران گستر نادین · GXPORE
+        {t(ui.footer, locale)}
       </footer>
     </div>
   );
