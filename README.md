@@ -1,61 +1,16 @@
-# GXPORE — گوهران گستر نادین
+# گوهران گستر نادین · GXPORE
 
-سایت بازاریابی استاتیک (Next.js App Router + TypeScript + Tailwind CSS) برای برند بین‌المللی **GXPORE** / شرکت **گوهران گستر نادین**.
+Persian (RTL) cinematic homepage redesign — scroll-scrubbed product videos, Next.js App Router, Tailwind, GSAP ScrollTrigger.
 
-فقط فرانت‌اند فارسی و RTL — بدون بک‌اند، API یا پایگاه داده.
-
-## راه‌اندازی / Setup
+## Local
 
 ```bash
 npm install
 npm run dev
 ```
 
-ساخت production:
+## GitHub Pages
 
-```bash
-npm run build
-npm start
-```
+Pushes to `main` build a static export and deploy to:
 
-## ویدیوها / Videos
-
-چهار فایل ویدیو را در مسیر زیر قرار دهید (نام‌ها دقیق باشد):
-
-| فایل | بخش |
-|------|------|
-| `public/videos/hero.mp4` | هیرو |
-| `public/videos/silencer.mp4` | صداگیر پنوماتیک |
-| `public/videos/pipette.mp4` | فیلتر سرسمپلر |
-| `public/videos/medical.mp4` | کاربرد پزشکی |
-
-تا زمان افزودن فایل‌ها، سایت با گرادیان/انیمیشن CSS به‌عنوان fallback کار می‌کند.
-
-## لوگو / Logo
-
-لوگوی قابل تعویض:
-
-`public/images/gxpore-logo.svg`
-
-## برند / Brand
-
-- Navy `#0A3D7A`
-- Cyan `#00A8E8`
-- Graphite `#0a0e12`
-- فونت: Vazirmatn
-- انیمیشن اسکرول: GSAP + ScrollTrigger
-
-## ساختار
-
-```
-app/                  # App Router
-components/
-  Header.tsx
-  Logo.tsx
-  VideoBackground.tsx
-  ScrollStory.tsx
-  sections/           # بخش‌های صفحهٔ اصلی
-public/
-  images/
-  videos/
-```
+https://shushtarwolf.github.io/goharan-gostar-website/
