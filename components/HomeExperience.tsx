@@ -11,9 +11,9 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 type VideoBlock = {
   id: string;
   src: string;
+  poster: string;
   title: string;
   body: string;
-  /** Hero loads immediately; others lazy-load near viewport. */
   eager?: boolean;
 };
 
@@ -21,6 +21,7 @@ const VIDEO_BLOCKS: VideoBlock[] = [
   {
     id: "hero",
     src: asset("/videos/sUOZV.mp4"),
+    poster: asset("/posters/sUOZV.webp"),
     title: "مهندسی آنچه دیده نمی‌شود",
     body: "ساختارهای میکروسکوپی که عملکرد محصولات واقعی را شکل می‌دهند",
     eager: true,
@@ -28,18 +29,21 @@ const VIDEO_BLOCKS: VideoBlock[] = [
   {
     id: "silencer",
     src: asset("/videos/ggT4W.mp4"),
+    poster: asset("/posters/ggT4W.webp"),
     title: "صداگیر پنوماتیک",
     body: "ساختار متخلخل جریان هوا را کنترل و صدای خروجی را کاهش می‌دهد",
   },
   {
     id: "pipette",
     src: asset("/videos/T3KVy.mp4"),
+    poster: asset("/posters/T3KVy.webp"),
     title: "فیلتر سرسمپلر",
     body: "حفاظت از نمونه‌ها در برابر آلودگی با فیلتراسیون دقیق در مقیاس میکرو",
   },
   {
     id: "medical",
     src: asset("/videos/GcRW0.mp4"),
+    poster: asset("/posters/GcRW0.webp"),
     title: "کاربرد پزشکی",
     body: "هوا عبور می‌کند؛ مایع متوقف می‌شود — حفاظت دقیق در لحظه‌ای که اهمیت دارد",
   },
@@ -59,12 +63,71 @@ function ensureVideoSource(video: HTMLVideoElement) {
   video.load();
 }
 
+function wireHeroCopy(section: HTMLElement, copy: HTMLElement) {
+  // Visible immediately — short entrance, not scroll-gated.
+  gsap.fromTo(
+    copy.children,
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.55, stagger: 0.08, ease: "power2.out", delay: 0.05 },
+  );
+
+  // Fade out only when scrolling away.
+  gsap.to(copy, {
+    opacity: 0,
+    ease: "none",
+    scrollTrigger: {
+      trigger: section,
+      start: "top top",
+      end: "+=70%",
+      scrub: true,
+    },
+  });
+}
+
+function wireProductCopy(section: HTMLElement, copy: HTMLElement) {
+  // Visible as soon as the section pins / enters — no scrub-in from invisible.
+  gsap.set(copy, { opacity: 1 });
+  gsap.fromTo(
+    copy.children,
+    { opacity: 0, y: 24 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.45,
+      stagger: 0.06,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    },
+  );
+
+  gsap.to(copy, {
+    opacity: 0,
+    ease: "none",
+    scrollTrigger: {
+      trigger: section,
+      start: "center top",
+      end: "+=50%",
+      scrub: true,
+    },
+  });
+}
+
 function wireScrubVideo(
   section: HTMLElement,
   video: HTMLVideoElement,
   copy: HTMLElement,
 ) {
   const eager = video.dataset.eager === "true";
+
+  if (eager) {
+    wireHeroCopy(section, copy);
+  } else {
+    wireProductCopy(section, copy);
+  }
 
   const startScrub = () => {
     const duration = video.duration || 1;
@@ -83,38 +146,6 @@ function wireScrubVideo(
         if (Number.isFinite(t)) video.currentTime = t;
       },
     });
-
-    gsap.fromTo(
-      copy.children,
-      { opacity: 0, y: 36 },
-      {
-        opacity: 1,
-        y: 0,
-        stagger: 0.08,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "+=55%",
-          scrub: true,
-        },
-      },
-    );
-
-    gsap.fromTo(
-      copy,
-      { opacity: 1 },
-      {
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "center top",
-          end: "+=50%",
-          scrub: true,
-        },
-      },
-    );
   };
 
   const whenReady = () =>
@@ -136,7 +167,6 @@ function wireScrubVideo(
     return;
   }
 
-  // Lazy: attach src when section is near viewport, then scrub once metadata is ready.
   ScrollTrigger.create({
     trigger: section,
     start: "top bottom+=40%",
@@ -197,6 +227,8 @@ export default function HomeExperience() {
     { scope: rootRef },
   );
 
+  const hero = VIDEO_BLOCKS[0];
+
   return (
     <div ref={rootRef} className="relative bg-graphite text-mist">
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-start p-4 md:p-6">
@@ -208,20 +240,29 @@ export default function HomeExperience() {
         />
       </header>
 
-      {/* 1. Hero — scrub video */}
+      {/* 1. Hero — poster first, text immediate, scrub video */}
       <section
         data-video-section
         data-id="hero"
         className="relative h-screen overflow-hidden"
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={hero.poster}
+          alt=""
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
         <video
           className="absolute inset-0 h-full w-full object-cover"
-          data-src={VIDEO_BLOCKS[0].src}
+          data-src={hero.src}
           data-eager="true"
-          src={VIDEO_BLOCKS[0].src}
+          src={hero.src}
+          poster={hero.poster}
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           aria-hidden
         />
         <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25" />
@@ -233,10 +274,10 @@ export default function HomeExperience() {
             GXPORE
           </p>
           <h1 className="max-w-3xl text-3xl font-semibold leading-tight md:text-5xl lg:text-6xl">
-            {VIDEO_BLOCKS[0].title}
+            {hero.title}
           </h1>
           <p className="mt-5 max-w-xl text-base text-mist/80 md:text-lg">
-            {VIDEO_BLOCKS[0].body}
+            {hero.body}
           </p>
         </div>
       </section>
@@ -295,7 +336,7 @@ export default function HomeExperience() {
         </div>
       </section>
 
-      {/* 4–6. Product scrub videos (lazy src) */}
+      {/* 4–6. Product scrub videos */}
       {VIDEO_BLOCKS.slice(1).map((block) => (
         <section
           key={block.id}
@@ -303,9 +344,18 @@ export default function HomeExperience() {
           data-id={block.id}
           className="relative h-screen overflow-hidden"
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={block.poster}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
           <video
             className="absolute inset-0 h-full w-full object-cover"
             data-src={block.src}
+            poster={block.poster}
             muted
             playsInline
             preload="none"
@@ -337,7 +387,7 @@ export default function HomeExperience() {
         </div>
       </section>
 
-      {/* 8. CTA — contact later */}
+      {/* 8. CTA */}
       <section
         data-fade-section
         className="relative flex min-h-[70vh] items-center justify-center bg-navy px-6 py-28"

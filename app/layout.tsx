@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
+import { asset } from "@/lib/asset";
 import "./globals.css";
 
 const vazirmatn = Vazirmatn({
@@ -17,6 +18,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="fa" dir="rtl" className={`${vazirmatn.variable} h-full antialiased`}>
+      <head>
+        <link rel="preload" as="image" href={asset("/posters/sUOZV.webp")} type="image/webp" />
+      </head>
       <body className="min-h-full font-sans">{children}</body>
     </html>
   );
