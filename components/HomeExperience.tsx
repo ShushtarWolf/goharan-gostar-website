@@ -17,7 +17,12 @@ const FRAME_COUNT = 48;
 
 type SceneId = "hero" | "silencer" | "pipette" | "medical";
 
-const SCENES: { id: SceneId; folder: string; eager?: boolean; homeScene?: "silencer" | "pipette" | "medical" }[] = [
+const SCENES: {
+  id: SceneId;
+  folder: string;
+  eager?: boolean;
+  homeScene?: "silencer" | "pipette" | "medical";
+}[] = [
   { id: "hero", folder: "sUOZV", eager: true },
   { id: "silencer", folder: "ggT4W", homeScene: "silencer" },
   { id: "pipette", folder: "T3KVy", homeScene: "pipette" },
@@ -55,6 +60,7 @@ function wireFrameScrub(
   if (!ctx) return;
 
   const frames: (HTMLImageElement | null)[] = Array(FRAME_COUNT).fill(null);
+  const kids = Array.from(copy.children) as HTMLElement[];
 
   const pickFrame = (progress: number) => {
     const i = Math.min(
@@ -97,24 +103,22 @@ function wireFrameScrub(
     ctx.drawImage(img, dx, dy, dw, dh);
   };
 
+  // Entrance: text rises in as the scene arrives (before / at pin).
   gsap.set(copy, { opacity: 1 });
-  gsap.set(copy.children, { opacity: 1, y: 0 });
-  // Keep product-scene copy readable through most of the scrub; fade late.
-  gsap.fromTo(
-    copy,
-    { opacity: 1 },
-    {
-      opacity: 0,
-      ease: "none",
-      immediateRender: false,
-      scrollTrigger: {
-        trigger: section,
-        start: eager ? "top+=12% top" : "bottom-=35% top",
-        end: eager ? "+=50%" : "+=40%",
-        scrub: true,
-      },
+  gsap.set(kids, { opacity: 0, y: 36, filter: "blur(10px)" });
+  gsap.to(kids, {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    stagger: 0.12,
+    duration: 1.05,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: section,
+      start: "top 70%",
+      toggleActions: "play none none reverse",
     },
-  );
+  });
 
   const attachScrub = () => {
     ScrollTrigger.create({
@@ -128,6 +132,12 @@ function wireFrameScrub(
       onUpdate: (self) => {
         const img = pickFrame(self.progress);
         if (img) draw(img);
+        // Stay readable through most of the scrub; soft exit in last ~25%.
+        const fade =
+          self.progress < 0.72
+            ? 1
+            : Math.max(0, 1 - (self.progress - 0.72) / 0.28);
+        gsap.set(copy, { opacity: fade });
       },
       onRefresh: (self) => {
         const img = pickFrame(self.progress);
@@ -185,30 +195,37 @@ function RelatedStrip({
   const items = productsForHomeScene(scene);
   if (!items.length) return null;
   return (
-    <section className="bg-graphite-soft px-6 py-20 md:px-12">
-      <div className="mx-auto max-w-3xl text-center">
-        <p className="text-sm tracking-wide text-cyan">
+    <section
+      data-fade-section
+      data-premium="true"
+      className="bg-graphite-soft px-6 py-24 md:px-12 md:py-32"
+    >
+      <div data-copy className="mx-auto max-w-3xl text-center">
+        <p
+          data-reveal
+          className="text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
+        >
           {t(homeCopy.related, locale)}
         </p>
-        <div className="mt-10 flex flex-col items-center gap-10">
-          {items.map((p) => (
-            <a
-              key={p.slug}
-              href={href(locale, `products/${p.slug}`)}
-              className="group block max-w-xl transition"
-            >
-              <span className="block text-2xl font-semibold text-mist transition group-hover:text-cyan md:text-3xl">
-                {t(p.name, locale)}
-              </span>
-              <span className="mt-3 block text-base leading-7 text-mist/65 md:text-lg">
-                {t(p.intro, locale)}
-              </span>
-            </a>
-          ))}
-        </div>
+        {items.map((p) => (
+          <a
+            key={p.slug}
+            data-reveal
+            href={href(locale, `products/${p.slug}`)}
+            className="group mt-12 block max-w-2xl md:mt-14"
+          >
+            <span className="block text-3xl font-medium leading-tight tracking-tight text-mist transition duration-300 group-hover:text-cyan md:text-5xl md:leading-[1.15]">
+              {t(p.name, locale)}
+            </span>
+            <span className="mt-5 block text-base leading-8 text-mist/55 md:text-lg md:leading-9">
+              {t(p.intro, locale)}
+            </span>
+          </a>
+        ))}
         <a
+          data-reveal
           href={href(locale, "products")}
-          className="mt-12 inline-block text-sm text-cyan transition hover:text-mist"
+          className="mt-16 inline-block text-sm tracking-[0.15em] text-cyan transition hover:text-mist"
         >
           {t(homeCopy.viewAll, locale)}
         </a>
@@ -243,24 +260,27 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         const copy = section.querySelector<HTMLElement>("[data-copy]");
         if (!copy) return;
         const premium = section.dataset.premium === "true";
+        const targets = copy.querySelectorAll<HTMLElement>("[data-reveal]");
+        const els = targets.length ? Array.from(targets) : Array.from(copy.children);
+
         gsap.fromTo(
-          copy.children,
+          els,
           {
             opacity: 0,
-            y: premium ? 48 : 28,
-            filter: premium ? "blur(8px)" : "blur(0px)",
+            y: premium ? 56 : 32,
+            filter: premium ? "blur(12px)" : "blur(4px)",
           },
           {
             opacity: 1,
             y: 0,
             filter: "blur(0px)",
-            stagger: premium ? 0.14 : 0.08,
-            duration: premium ? 1.15 : 0.7,
-            ease: premium ? "power3.out" : "power2.out",
+            stagger: premium ? 0.16 : 0.1,
+            duration: premium ? 1.25 : 0.85,
+            ease: "power3.out",
             immediateRender: false,
             scrollTrigger: {
               trigger: section,
-              start: "top 75%",
+              start: "top 78%",
               toggleActions: "play none none reverse",
             },
           },
@@ -287,49 +307,73 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         }}
       >
         <canvas className="absolute inset-0 h-full w-full" aria-hidden />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/40 to-graphite/25" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/50 to-graphite/30" />
         <div
           data-copy
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
         >
-          <p className="mb-4 text-xs tracking-[0.35em] text-cyan md:text-sm">
+          <p className="mb-5 text-[11px] font-medium tracking-[0.4em] text-cyan md:text-xs">
             {t(homeCopy.heroEyebrow, locale)}
           </p>
-          <h1 className="max-w-3xl text-3xl font-semibold leading-tight text-mist md:text-5xl lg:text-6xl">
+          <h1 className="max-w-3xl text-4xl font-medium leading-[1.15] tracking-tight text-mist md:text-6xl lg:text-7xl">
             {t(homeCopy.heroTitle, locale)}
           </h1>
-          <p className="mt-5 max-w-xl text-base text-mist/85 md:text-lg">
+          <p className="mt-6 max-w-lg text-base leading-8 text-mist/80 md:text-xl md:leading-9">
             {t(homeCopy.heroBody, locale)}
           </p>
         </div>
       </section>
 
+      {/* Intro — redesigned with premium load motion */}
       <section
         data-fade-section
-        className="relative flex min-h-screen items-center bg-mist px-6 py-24 text-ink md:px-12"
+        data-premium="true"
+        className="relative overflow-hidden bg-mist px-6 py-28 text-ink md:px-12 md:py-36"
       >
-        <div data-copy className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div>
-            <p className="mb-3 text-sm text-navy">{t(homeCopy.introEyebrow, locale)}</p>
-            <h2 className="text-2xl font-semibold leading-snug md:text-4xl">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(10,61,122,0.08),transparent_55%)]" />
+        <div
+          data-copy
+          className="relative mx-auto grid max-w-6xl gap-16 lg:grid-cols-2 lg:items-center lg:gap-20"
+        >
+          <div className="order-2 lg:order-1">
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
+              {INTRO_PHOTOS.map((src, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={src}
+                  data-reveal
+                  src={src}
+                  alt=""
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  className={`w-full object-cover ${
+                    i === 0
+                      ? "col-span-2 h-48 md:h-64"
+                      : "h-36 md:h-44"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="order-1 lg:order-2">
+            <p
+              data-reveal
+              className="mb-5 text-[11px] font-medium tracking-[0.3em] text-navy md:text-xs"
+            >
+              {t(homeCopy.introEyebrow, locale)}
+            </p>
+            <h2
+              data-reveal
+              className="text-3xl font-medium leading-[1.25] tracking-tight md:text-5xl md:leading-[1.2]"
+            >
               {t(homeCopy.introTitle, locale)}
             </h2>
-            <p className="mt-6 text-base leading-8 text-ink/80 md:text-lg">
+            <p
+              data-reveal
+              className="mt-8 max-w-xl text-base leading-9 text-ink/70 md:text-lg md:leading-10"
+            >
               {t(homeCopy.introBody, locale)}
             </p>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            {INTRO_PHOTOS.map((src, i) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={src}
-                src={src}
-                alt=""
-                loading={i === 0 ? "eager" : "lazy"}
-                decoding="async"
-                className={`h-40 w-full object-cover md:h-52 ${i === 0 ? "col-span-2" : ""}`}
-              />
-            ))}
           </div>
         </div>
       </section>
@@ -340,13 +384,13 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         className="relative flex min-h-[80vh] items-center bg-graphite-soft px-6 py-24 md:px-12"
       >
         <div data-copy className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 text-sm tracking-[0.2em] text-cyan">
+          <p className="mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs">
             {t(homeCopy.structureEyebrow, locale)}
           </p>
-          <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">
+          <h2 className="text-3xl font-medium tracking-tight md:text-5xl lg:text-6xl">
             {t(homeCopy.structureTitle, locale)}
           </h2>
-          <p className="mt-8 text-base leading-9 text-mist/75 md:text-xl md:leading-10">
+          <p className="mt-8 text-base leading-9 text-mist/65 md:text-xl md:leading-10">
             {t(homeCopy.structureBody, locale)}
           </p>
         </div>
@@ -369,15 +413,15 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               }}
             >
               <canvas className="absolute inset-0 h-full w-full" aria-hidden />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/45 to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25" />
               <div
                 data-copy
                 className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
               >
-                <h2 className="text-3xl font-semibold text-mist drop-shadow-lg md:text-5xl">
+                <h2 className="max-w-3xl text-4xl font-medium leading-tight tracking-tight text-mist md:text-6xl">
                   {t(sceneCopy.title, locale)}
                 </h2>
-                <p className="mt-5 max-w-xl text-base leading-8 text-mist/90 drop-shadow md:text-lg md:leading-9">
+                <p className="mt-6 max-w-xl text-base leading-8 text-mist/85 md:text-xl md:leading-9">
                   {t(sceneCopy.body, locale)}
                 </p>
               </div>
@@ -393,10 +437,10 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         className="relative flex min-h-[70vh] items-center bg-graphite px-6 py-24 md:px-12"
       >
         <div data-copy className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 text-sm tracking-[0.2em] text-cyan">
+          <p className="mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs">
             {t(homeCopy.performanceEyebrow, locale)}
           </p>
-          <h2 className="text-3xl font-semibold leading-snug tracking-tight md:text-5xl">
+          <h2 className="text-3xl font-medium leading-snug tracking-tight md:text-5xl">
             {t(homeCopy.performanceTitle, locale)}
           </h2>
         </div>
@@ -408,7 +452,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         className="relative flex min-h-[70vh] items-center justify-center bg-navy px-6 py-28"
       >
         <div data-copy className="max-w-2xl text-center">
-          <h2 className="text-3xl font-semibold leading-snug tracking-tight md:text-5xl">
+          <h2 className="text-3xl font-medium leading-snug tracking-tight md:text-5xl">
             {t(homeCopy.ctaTitle, locale)}
           </h2>
           <div className="mt-10 flex flex-col items-center gap-4 text-base text-mist/85 md:text-lg">
@@ -435,7 +479,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
             </a>
             <a
               href={href(locale, "contact")}
-              className="mt-4 text-sm tracking-wide text-cyan transition hover:text-mist"
+              className="mt-4 text-sm tracking-[0.15em] text-cyan transition hover:text-mist"
             >
               {t(ui.ctaContact, locale)}
             </a>
