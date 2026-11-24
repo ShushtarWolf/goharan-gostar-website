@@ -63,57 +63,75 @@ function ensureVideoSource(video: HTMLVideoElement) {
   video.load();
 }
 
-function wireHeroCopy(section: HTMLElement, copy: HTMLElement) {
-  // Visible immediately — short entrance, not scroll-gated.
-  gsap.fromTo(
-    copy.children,
-    { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: 0.55, stagger: 0.08, ease: "power2.out", delay: 0.05 },
-  );
-
-  // Fade out only when scrolling away.
-  gsap.to(copy, {
-    opacity: 0,
-    ease: "none",
-    scrollTrigger: {
-      trigger: section,
-      start: "top top",
-      end: "+=70%",
-      scrub: true,
-    },
+function whenMeta(video: HTMLVideoElement) {
+  return new Promise<void>((resolve) => {
+    if (video.readyState >= 1 && video.duration) {
+      resolve();
+      return;
+    }
+    const done = () => {
+      video.removeEventListener("loadedmetadata", done);
+      resolve();
+    };
+    video.addEventListener("loadedmetadata", done);
   });
 }
 
-function wireProductCopy(section: HTMLElement, copy: HTMLElement) {
-  // Visible as soon as the section pins / enters — no scrub-in from invisible.
-  gsap.set(copy, { opacity: 1 });
+function revealVideoWhenReady(video: HTMLVideoElement) {
+  // Keep poster visible; video is opacity-0 until a real frame exists (avoids black flash).
+  gsap.set(video, { opacity: 0 });
+  const show = () => {
+    gsap.to(video, { opacity: 1, duration: 0.35, ease: "power1.out" });
+  };
+  if (video.readyState >= 2) {
+    show();
+    return;
+  }
+  video.addEventListener("loadeddata", show, { once: true });
+}
+
+function wireHeroCopy(section: HTMLElement, copy: HTMLElement) {
+  // Never start at opacity 0 — that caused the empty/no-text screenshots.
+  gsap.set(copy, { opacity: 1, clearProps: "transform" });
+  gsap.set(copy.children, { opacity: 1, y: 0 });
+
+  // Fade out only after the user has scrolled into the pin — not at load.
   gsap.fromTo(
-    copy.children,
-    { opacity: 0, y: 24 },
+    copy,
+    { opacity: 1 },
     {
-      opacity: 1,
-      y: 0,
-      duration: 0.45,
-      stagger: 0.06,
-      ease: "power2.out",
+      opacity: 0,
+      ease: "none",
+      immediateRender: false,
       scrollTrigger: {
         trigger: section,
-        start: "top 80%",
-        toggleActions: "play none none reverse",
+        start: "top+=10% top",
+        end: "+=55%",
+        scrub: true,
       },
     },
   );
+}
 
-  gsap.to(copy, {
-    opacity: 0,
-    ease: "none",
-    scrollTrigger: {
-      trigger: section,
-      start: "center top",
-      end: "+=50%",
-      scrub: true,
+function wireProductCopy(section: HTMLElement, copy: HTMLElement) {
+  gsap.set(copy, { opacity: 1 });
+  gsap.set(copy.children, { opacity: 1, y: 0 });
+
+  gsap.fromTo(
+    copy,
+    { opacity: 1 },
+    {
+      opacity: 0,
+      ease: "none",
+      immediateRender: false,
+      scrollTrigger: {
+        trigger: section,
+        start: "center top",
+        end: "+=45%",
+        scrub: true,
+      },
     },
-  });
+  );
 }
 
 function wireScrubVideo(
@@ -123,57 +141,56 @@ function wireScrubVideo(
 ) {
   const eager = video.dataset.eager === "true";
 
-  if (eager) {
-    wireHeroCopy(section, copy);
-  } else {
-    wireProductCopy(section, copy);
-  }
+  if (eager) wireHeroCopy(section, copy);
+  else wireProductCopy(section, copy);
 
-  const startScrub = () => {
+  const startScrub = async () => {
+    ensureVideoSource(video);
+    await whenMeta(video);
+    revealVideoWhenReady(video);
+
     const duration = video.duration || 1;
     video.pause();
-    video.currentTime = 0;
+    try {
+      video.currentTime = 0;
+    } catch {
+      /* ignore seek errors before ready */
+    }
 
     ScrollTrigger.create({
       trigger: section,
       start: "top top",
       end: "+=180%",
       pin: true,
-      scrub: 0.35,
+      scrub: 0.4,
       anticipatePin: 1,
+      invalidateOnRefresh: true,
       onUpdate: (self) => {
         const t = self.progress * duration;
-        if (Number.isFinite(t)) video.currentTime = t;
+        if (Number.isFinite(t)) {
+          try {
+            video.currentTime = t;
+          } catch {
+            /* ignore */
+          }
+        }
       },
     });
+
+    ScrollTrigger.refresh();
   };
 
-  const whenReady = () =>
-    new Promise<void>((resolve) => {
-      if (video.readyState >= 1 && video.duration) {
-        resolve();
-        return;
-      }
-      const onMeta = () => {
-        video.removeEventListener("loadedmetadata", onMeta);
-        resolve();
-      };
-      video.addEventListener("loadedmetadata", onMeta);
-    });
-
   if (eager) {
-    ensureVideoSource(video);
-    whenReady().then(startScrub);
+    startScrub();
     return;
   }
 
   ScrollTrigger.create({
     trigger: section,
-    start: "top bottom+=40%",
+    start: "top bottom+=50%",
     once: true,
     onEnter: () => {
-      ensureVideoSource(video);
-      whenReady().then(startScrub);
+      startScrub();
     },
   });
 }
@@ -197,31 +214,21 @@ export default function HomeExperience() {
         if (!copy) return;
         gsap.fromTo(
           copy.children,
-          { opacity: 0, y: 40 },
+          { opacity: 0.35, y: 28 },
           {
             opacity: 1,
             y: 0,
-            stagger: 0.1,
+            stagger: 0.08,
             ease: "power2.out",
+            immediateRender: false,
             scrollTrigger: {
               trigger: section,
-              start: "top 75%",
-              end: "top 35%",
+              start: "top 80%",
+              end: "top 40%",
               scrub: true,
             },
           },
         );
-        gsap.to(copy, {
-          opacity: 0,
-          y: -24,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "bottom 55%",
-            end: "bottom 15%",
-            scrub: true,
-          },
-        });
       });
     },
     { scope: rootRef },
@@ -240,11 +247,12 @@ export default function HomeExperience() {
         />
       </header>
 
-      {/* 1. Hero — poster first, text immediate, scrub video */}
+      {/* 1. Hero */}
       <section
         data-video-section
         data-id="hero"
-        className="relative h-screen overflow-hidden"
+        className="relative h-screen overflow-hidden bg-graphite"
+        style={{ backgroundImage: `url(${hero.poster})`, backgroundSize: "cover", backgroundPosition: "center" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -255,7 +263,7 @@ export default function HomeExperience() {
           className="absolute inset-0 h-full w-full object-cover"
         />
         <video
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover opacity-0"
           data-src={hero.src}
           data-eager="true"
           src={hero.src}
@@ -265,7 +273,7 @@ export default function HomeExperience() {
           preload="auto"
           aria-hidden
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/40 to-graphite/30" />
         <div
           data-copy
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
@@ -273,16 +281,16 @@ export default function HomeExperience() {
           <p className="mb-4 text-xs tracking-[0.35em] text-cyan md:text-sm">
             GXPORE
           </p>
-          <h1 className="max-w-3xl text-3xl font-semibold leading-tight md:text-5xl lg:text-6xl">
+          <h1 className="max-w-3xl text-3xl font-semibold leading-tight text-mist md:text-5xl lg:text-6xl">
             {hero.title}
           </h1>
-          <p className="mt-5 max-w-xl text-base text-mist/80 md:text-lg">
+          <p className="mt-5 max-w-xl text-base text-mist/85 md:text-lg">
             {hero.body}
           </p>
         </div>
       </section>
 
-      {/* 2. Company intro — light */}
+      {/* 2. Company intro */}
       <section
         data-fade-section
         className="relative flex min-h-screen items-center bg-mist px-6 py-24 text-ink md:px-12"
@@ -336,13 +344,18 @@ export default function HomeExperience() {
         </div>
       </section>
 
-      {/* 4–6. Product scrub videos */}
+      {/* 4–6. Product videos */}
       {VIDEO_BLOCKS.slice(1).map((block) => (
         <section
           key={block.id}
           data-video-section
           data-id={block.id}
-          className="relative h-screen overflow-hidden"
+          className="relative h-screen overflow-hidden bg-graphite"
+          style={{
+            backgroundImage: `url(${block.poster})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -353,7 +366,7 @@ export default function HomeExperience() {
             className="absolute inset-0 h-full w-full object-cover"
           />
           <video
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover opacity-0"
             data-src={block.src}
             poster={block.poster}
             muted
@@ -361,13 +374,13 @@ export default function HomeExperience() {
             preload="none"
             aria-hidden
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/60 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/45 to-transparent" />
           <div
             data-copy
             className="relative z-10 flex h-full flex-col items-center justify-end px-6 pb-24 text-center md:pb-32"
           >
-            <h2 className="text-3xl font-semibold md:text-5xl">{block.title}</h2>
-            <p className="mt-4 max-w-lg text-base text-mist/80 md:text-lg">
+            <h2 className="text-3xl font-semibold text-mist md:text-5xl">{block.title}</h2>
+            <p className="mt-4 max-w-lg text-base text-mist/85 md:text-lg">
               {block.body}
             </p>
           </div>
