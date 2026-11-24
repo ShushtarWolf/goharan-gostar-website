@@ -11,6 +11,7 @@ import { productsForHomeScene } from "@/content/products";
 import { href } from "@/lib/paths";
 import { t, type Locale } from "@/lib/i18n";
 import RelatedMagneticLink from "@/components/RelatedMagneticLink";
+import { wirePhotoEnter, wireTypoEnter } from "@/lib/typoReveal";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -242,36 +243,12 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         );
       });
 
-      root.querySelectorAll<HTMLElement>("[data-fade-section]").forEach((section) => {
-        const copy = section.querySelector<HTMLElement>("[data-copy]");
-        if (!copy) return;
-        const premium = section.dataset.premium === "true";
-        const targets = copy.querySelectorAll<HTMLElement>("[data-reveal]");
-        const els = targets.length ? Array.from(targets) : Array.from(copy.children);
-
-        gsap.fromTo(
-          els,
-          {
-            opacity: 0,
-            y: premium ? 56 : 32,
-            filter: premium ? "blur(12px)" : "blur(4px)",
-          },
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            stagger: premium ? 0.16 : 0.1,
-            duration: premium ? 1.25 : 0.85,
-            ease: "power3.out",
-            immediateRender: false,
-            scrollTrigger: {
-              trigger: section,
-              start: "top 78%",
-              toggleActions: "play none none reverse",
-            },
-          },
-        );
+      // OnScrollTypoAnimations index4 enter vibe for static sections + photos
+      root.querySelectorAll<HTMLElement>("[data-typo]").forEach((el) => {
+        wireTypoEnter(el);
       });
+      const photos = root.querySelectorAll<HTMLElement>("[data-photo]");
+      if (photos.length) wirePhotoEnter(Array.from(photos));
     },
     { scope: rootRef },
   );
@@ -310,24 +287,17 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* Intro — redesigned with premium load motion */}
-      <section
-        data-fade-section
-        data-premium="true"
-        className="relative overflow-hidden bg-mist px-6 py-28 text-ink md:px-12 md:py-36"
-      >
+      {/* Intro — index4 typo + photo load */}
+      <section className="relative overflow-hidden bg-mist px-6 py-28 text-ink md:px-12 md:py-36">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(10,61,122,0.08),transparent_55%)]" />
-        <div
-          data-copy
-          className="relative mx-auto grid max-w-6xl gap-16 lg:grid-cols-2 lg:items-center lg:gap-20"
-        >
+        <div className="relative mx-auto grid max-w-6xl gap-16 lg:grid-cols-2 lg:items-center lg:gap-20">
           <div className="order-2 lg:order-1">
             <div className="grid grid-cols-2 gap-3 md:gap-4">
               {INTRO_PHOTOS.map((src, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   key={src}
-                  data-reveal
+                  data-photo
                   src={src}
                   alt=""
                   loading={i === 0 ? "eager" : "lazy"}
@@ -343,19 +313,19 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
           </div>
           <div className="order-1 lg:order-2">
             <p
-              data-reveal
+              data-typo
               className="mb-5 text-[11px] font-medium tracking-[0.3em] text-navy md:text-xs"
             >
               {t(homeCopy.introEyebrow, locale)}
             </p>
             <h2
-              data-reveal
+              data-typo
               className="text-3xl font-medium leading-[1.25] tracking-tight md:text-5xl md:leading-[1.2]"
             >
               {t(homeCopy.introTitle, locale)}
             </h2>
             <p
-              data-reveal
+              data-typo
               className="mt-8 max-w-xl text-base leading-9 text-ink/70 md:text-lg md:leading-10"
             >
               {t(homeCopy.introBody, locale)}
@@ -364,19 +334,24 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section
-        data-fade-section
-        data-premium="true"
-        className="relative flex min-h-[80vh] items-center bg-graphite-soft px-6 py-24 md:px-12"
-      >
-        <div data-copy className="mx-auto max-w-3xl text-center">
-          <p className="mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs">
+      <section className="relative flex min-h-[80vh] items-center bg-graphite-soft px-6 py-24 md:px-12">
+        <div className="mx-auto max-w-3xl text-center">
+          <p
+            data-typo
+            className="mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
+          >
             {t(homeCopy.structureEyebrow, locale)}
           </p>
-          <h2 className="text-3xl font-medium tracking-tight md:text-5xl lg:text-6xl">
+          <h2
+            data-typo
+            className="text-3xl font-medium tracking-tight md:text-5xl lg:text-6xl"
+          >
             {t(homeCopy.structureTitle, locale)}
           </h2>
-          <p className="mt-8 text-base leading-9 text-mist/65 md:text-xl md:leading-10">
+          <p
+            data-typo
+            className="mt-8 text-base leading-9 text-mist/65 md:text-xl md:leading-10"
+          >
             {t(homeCopy.structureBody, locale)}
           </p>
         </div>
@@ -417,32 +392,34 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         );
       })}
 
-      <section
-        data-fade-section
-        data-premium="true"
-        className="relative flex min-h-[70vh] items-center bg-graphite px-6 py-24 md:px-12"
-      >
-        <div data-copy className="mx-auto max-w-3xl text-center">
-          <p className="mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs">
+      <section className="relative flex min-h-[70vh] items-center bg-graphite px-6 py-24 md:px-12">
+        <div className="mx-auto max-w-3xl text-center">
+          <p
+            data-typo
+            className="mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
+          >
             {t(homeCopy.performanceEyebrow, locale)}
           </p>
-          <h2 className="text-3xl font-medium leading-snug tracking-tight md:text-5xl">
+          <h2
+            data-typo
+            className="text-3xl font-medium leading-snug tracking-tight md:text-5xl"
+          >
             {t(homeCopy.performanceTitle, locale)}
           </h2>
         </div>
       </section>
 
-      <section
-        data-fade-section
-        data-premium="true"
-        className="relative flex min-h-[70vh] items-center justify-center bg-navy px-6 py-28"
-      >
-        <div data-copy className="max-w-2xl text-center">
-          <h2 className="text-3xl font-medium leading-snug tracking-tight md:text-5xl">
+      <section className="relative flex min-h-[70vh] items-center justify-center bg-navy px-6 py-28">
+        <div className="max-w-2xl text-center">
+          <h2
+            data-typo
+            className="text-3xl font-medium leading-snug tracking-tight md:text-5xl"
+          >
             {t(homeCopy.ctaTitle, locale)}
           </h2>
-          <div className="mt-10 flex flex-col items-center gap-4 text-base text-mist/85 md:text-lg">
+          <div className="mt-10 flex flex-col items-center gap-5 text-base text-mist/85 md:text-lg">
             <a
+              data-typo
               href={`tel:${ui.contact.phoneIran}`}
               className="transition hover:text-cyan"
               dir="ltr"
@@ -450,6 +427,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               {ui.contact.phoneIran}
             </a>
             <a
+              data-typo
               href={`tel:${ui.contact.phoneTurkey}`}
               className="transition hover:text-cyan"
               dir="ltr"
@@ -457,6 +435,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               {ui.contact.phoneTurkey}
             </a>
             <a
+              data-typo
               href={`mailto:${ui.contact.email}`}
               className="transition hover:text-cyan"
               dir="ltr"
@@ -464,8 +443,9 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               {ui.contact.email}
             </a>
             <a
+              data-typo
               href={href(locale, "contact")}
-              className="mt-4 text-sm tracking-[0.15em] text-cyan transition hover:text-mist"
+              className="mt-2 text-sm tracking-[0.15em] text-cyan transition hover:text-mist"
             >
               {t(ui.ctaContact, locale)}
             </a>
