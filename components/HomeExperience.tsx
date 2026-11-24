@@ -8,42 +8,39 @@ import { asset } from "@/lib/asset";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-type VideoBlock = {
+const FRAME_COUNT = 48;
+
+type Scene = {
   id: string;
-  src: string;
-  poster: string;
+  folder: string;
   title: string;
   body: string;
   eager?: boolean;
 };
 
-const VIDEO_BLOCKS: VideoBlock[] = [
+const SCENES: Scene[] = [
   {
     id: "hero",
-    src: asset("/videos/sUOZV.mp4"),
-    poster: asset("/posters/sUOZV.webp"),
+    folder: "sUOZV",
     title: "مهندسی آنچه دیده نمی‌شود",
     body: "ساختارهای میکروسکوپی که عملکرد محصولات واقعی را شکل می‌دهند",
     eager: true,
   },
   {
     id: "silencer",
-    src: asset("/videos/ggT4W.mp4"),
-    poster: asset("/posters/ggT4W.webp"),
+    folder: "ggT4W",
     title: "صداگیر پنوماتیک",
     body: "ساختار متخلخل جریان هوا را کنترل و صدای خروجی را کاهش می‌دهد",
   },
   {
     id: "pipette",
-    src: asset("/videos/T3KVy.mp4"),
-    poster: asset("/posters/T3KVy.webp"),
+    folder: "T3KVy",
     title: "فیلتر سرسمپلر",
     body: "حفاظت از نمونه‌ها در برابر آلودگی با فیلتراسیون دقیق در مقیاس میکرو",
   },
   {
     id: "medical",
-    src: asset("/videos/GcRW0.mp4"),
-    poster: asset("/posters/GcRW0.webp"),
+    folder: "GcRW0",
     title: "کاربرد پزشکی",
     body: "هوا عبور می‌کند؛ مایع متوقف می‌شود — حفاظت دقیق در لحظه‌ای که اهمیت دارد",
   },
@@ -55,68 +52,77 @@ const INTRO_PHOTOS = [
   asset("/photos/80969f47-178f-4997-93f5-cd0355fa0800.webp"),
 ];
 
-function ensureVideoSource(video: HTMLVideoElement) {
-  const src = video.dataset.src;
-  if (!src) return;
-  if (video.getAttribute("src") === src) return;
-  video.src = src;
-  video.load();
+function frameUrl(folder: string, index: number) {
+  return asset(`/frames/${folder}/${String(index).padStart(3, "0")}.webp`);
 }
 
-function whenMeta(video: HTMLVideoElement) {
-  return new Promise<void>((resolve) => {
-    if (video.readyState >= 1 && video.duration) {
-      resolve();
-      return;
-    }
-    const done = () => {
-      video.removeEventListener("loadedmetadata", done);
-      resolve();
-    };
-    video.addEventListener("loadedmetadata", done);
+function loadImage(src: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.decoding = "async";
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
   });
 }
 
-function revealVideoWhenReady(video: HTMLVideoElement) {
-  // Keep poster visible; video is opacity-0 until a real frame exists (avoids black flash).
-  gsap.set(video, { opacity: 0 });
-  const show = () => {
-    gsap.to(video, { opacity: 1, duration: 0.35, ease: "power1.out" });
+function wireFrameScrub(
+  section: HTMLElement,
+  canvas: HTMLCanvasElement,
+  copy: HTMLElement,
+  folder: string,
+  eager: boolean,
+) {
+  const ctx = canvas.getContext("2d", { alpha: false });
+  if (!ctx) return;
+
+  // Fixed-length slot list; missing frames fall back to nearest loaded.
+  const frames: (HTMLImageElement | null)[] = Array(FRAME_COUNT).fill(null);
+  let loadedCount = 0;
+
+  const pickFrame = (progress: number) => {
+    const i = Math.min(
+      FRAME_COUNT - 1,
+      Math.max(0, Math.round(progress * (FRAME_COUNT - 1))),
+    );
+    if (frames[i]) return frames[i]!;
+    for (let d = 1; d < FRAME_COUNT; d++) {
+      if (i - d >= 0 && frames[i - d]) return frames[i - d]!;
+      if (i + d < FRAME_COUNT && frames[i + d]) return frames[i + d]!;
+    }
+    return null;
   };
-  if (video.readyState >= 2) {
-    show();
-    return;
-  }
-  video.addEventListener("loadeddata", show, { once: true });
-}
 
-function wireHeroCopy(section: HTMLElement, copy: HTMLElement) {
-  // Never start at opacity 0 — that caused the empty/no-text screenshots.
-  gsap.set(copy, { opacity: 1, clearProps: "transform" });
-  gsap.set(copy.children, { opacity: 1, y: 0 });
+  const draw = (img: HTMLImageElement) => {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = section.clientWidth;
+    const h = section.clientHeight;
+    if (w < 1 || h < 1) return;
 
-  // Fade out only after the user has scrolled into the pin — not at load.
-  gsap.fromTo(
-    copy,
-    { opacity: 1 },
-    {
-      opacity: 0,
-      ease: "none",
-      immediateRender: false,
-      scrollTrigger: {
-        trigger: section,
-        start: "top+=10% top",
-        end: "+=55%",
-        scrub: true,
-      },
-    },
-  );
-}
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-function wireProductCopy(section: HTMLElement, copy: HTMLElement) {
+    const ir = img.naturalWidth / img.naturalHeight;
+    const cr = w / h;
+    let dw = w;
+    let dh = h;
+    let dx = 0;
+    let dy = 0;
+    if (ir > cr) {
+      dw = h * ir;
+      dx = (w - dw) / 2;
+    } else {
+      dh = w / ir;
+      dy = (h - dh) / 2;
+    }
+    ctx.drawImage(img, dx, dy, dw, dh);
+  };
+
   gsap.set(copy, { opacity: 1 });
   gsap.set(copy.children, { opacity: 1, y: 0 });
-
   gsap.fromTo(
     copy,
     { opacity: 1 },
@@ -126,71 +132,74 @@ function wireProductCopy(section: HTMLElement, copy: HTMLElement) {
       immediateRender: false,
       scrollTrigger: {
         trigger: section,
-        start: "center top",
-        end: "+=45%",
+        start: eager ? "top+=12% top" : "center top",
+        end: "+=50%",
         scrub: true,
       },
     },
   );
-}
 
-function wireScrubVideo(
-  section: HTMLElement,
-  video: HTMLVideoElement,
-  copy: HTMLElement,
-) {
-  const eager = video.dataset.eager === "true";
-
-  if (eager) wireHeroCopy(section, copy);
-  else wireProductCopy(section, copy);
-
-  const startScrub = async () => {
-    ensureVideoSource(video);
-    await whenMeta(video);
-    revealVideoWhenReady(video);
-
-    const duration = video.duration || 1;
-    video.pause();
-    try {
-      video.currentTime = 0;
-    } catch {
-      /* ignore seek errors before ready */
-    }
-
+  const attachScrub = () => {
     ScrollTrigger.create({
       trigger: section,
       start: "top top",
       end: "+=180%",
       pin: true,
-      scrub: 0.4,
+      scrub: 0.35,
       anticipatePin: 1,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
-        const t = self.progress * duration;
-        if (Number.isFinite(t)) {
-          try {
-            video.currentTime = t;
-          } catch {
-            /* ignore */
-          }
-        }
+        const img = pickFrame(self.progress);
+        if (img) draw(img);
+      },
+      onRefresh: (self) => {
+        const img = pickFrame(self.progress);
+        if (img) draw(img);
       },
     });
-
     ScrollTrigger.refresh();
   };
 
+  const boot = async () => {
+    // First frame only → instant paint + scrub can start.
+    const first = await loadImage(frameUrl(folder, 0));
+    frames[0] = first;
+    loadedCount = 1;
+    draw(first);
+    attachScrub();
+
+    // Load remaining in small batches so the network stays usable.
+    const BATCH = 6;
+    for (let start = 1; start < FRAME_COUNT; start += BATCH) {
+      const jobs = [];
+      for (let i = start; i < Math.min(start + BATCH, FRAME_COUNT); i++) {
+        const idx = i;
+        jobs.push(
+          loadImage(frameUrl(folder, idx))
+            .then((img) => {
+              frames[idx] = img;
+              loadedCount += 1;
+            })
+            .catch(() => {
+              /* keep nearest-frame fallback */
+            }),
+        );
+      }
+      await Promise.all(jobs);
+    }
+  };
+
   if (eager) {
-    startScrub();
+    boot();
     return;
   }
 
   ScrollTrigger.create({
     trigger: section,
-    start: "top bottom+=50%",
+    start: "top bottom+=60%",
     once: true,
     onEnter: () => {
-      startScrub();
+      boot();
     },
   });
 }
@@ -203,10 +212,18 @@ export default function HomeExperience() {
       const root = rootRef.current;
       if (!root) return;
 
-      root.querySelectorAll<HTMLElement>("[data-video-section]").forEach((section) => {
-        const video = section.querySelector("video");
+      root.querySelectorAll<HTMLElement>("[data-frame-section]").forEach((section) => {
+        const canvas = section.querySelector("canvas");
         const copy = section.querySelector<HTMLElement>("[data-copy]");
-        if (video && copy) wireScrubVideo(section, video, copy);
+        const folder = section.dataset.folder;
+        if (!canvas || !copy || !folder) return;
+        wireFrameScrub(
+          section,
+          canvas,
+          copy,
+          folder,
+          section.dataset.eager === "true",
+        );
       });
 
       root.querySelectorAll<HTMLElement>("[data-fade-section]").forEach((section) => {
@@ -214,7 +231,7 @@ export default function HomeExperience() {
         if (!copy) return;
         gsap.fromTo(
           copy.children,
-          { opacity: 0.35, y: 28 },
+          { opacity: 0.4, y: 24 },
           {
             opacity: 1,
             y: 0,
@@ -224,7 +241,7 @@ export default function HomeExperience() {
             scrollTrigger: {
               trigger: section,
               start: "top 80%",
-              end: "top 40%",
+              end: "top 45%",
               scrub: true,
             },
           },
@@ -234,7 +251,8 @@ export default function HomeExperience() {
     { scope: rootRef },
   );
 
-  const hero = VIDEO_BLOCKS[0];
+  const hero = SCENES[0];
+  const heroPoster = frameUrl(hero.folder, 0);
 
   return (
     <div ref={rootRef} className="relative bg-graphite text-mist">
@@ -247,46 +265,30 @@ export default function HomeExperience() {
         />
       </header>
 
-      {/* 1. Hero */}
+      {/* 1. Hero — WebP frame scrub */}
       <section
-        data-video-section
+        data-frame-section
+        data-folder={hero.folder}
+        data-eager="true"
         data-id="hero"
         className="relative h-screen overflow-hidden bg-graphite"
-        style={{ backgroundImage: `url(${hero.poster})`, backgroundSize: "cover", backgroundPosition: "center" }}
+        style={{
+          backgroundImage: `url(${heroPoster})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={hero.poster}
-          alt=""
-          fetchPriority="high"
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <video
-          className="absolute inset-0 h-full w-full object-cover opacity-0"
-          data-src={hero.src}
-          data-eager="true"
-          src={hero.src}
-          poster={hero.poster}
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/40 to-graphite/30" />
+        <canvas className="absolute inset-0 h-full w-full" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/40 to-graphite/25" />
         <div
           data-copy
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
         >
-          <p className="mb-4 text-xs tracking-[0.35em] text-cyan md:text-sm">
-            GXPORE
-          </p>
+          <p className="mb-4 text-xs tracking-[0.35em] text-cyan md:text-sm">GXPORE</p>
           <h1 className="max-w-3xl text-3xl font-semibold leading-tight text-mist md:text-5xl lg:text-6xl">
             {hero.title}
           </h1>
-          <p className="mt-5 max-w-xl text-base text-mist/85 md:text-lg">
-            {hero.body}
-          </p>
+          <p className="mt-5 max-w-xl text-base text-mist/85 md:text-lg">{hero.body}</p>
         </div>
       </section>
 
@@ -317,25 +319,21 @@ export default function HomeExperience() {
                 alt=""
                 loading={i === 0 ? "eager" : "lazy"}
                 decoding="async"
-                className={`h-40 w-full object-cover md:h-52 ${
-                  i === 0 ? "col-span-2" : ""
-                }`}
+                className={`h-40 w-full object-cover md:h-52 ${i === 0 ? "col-span-2" : ""}`}
               />
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3. From structure to product */}
+      {/* 3. Structure range */}
       <section
         data-fade-section
         className="relative flex min-h-[80vh] items-center bg-graphite-soft px-6 py-24 md:px-12"
       >
         <div data-copy className="mx-auto max-w-3xl text-center">
           <p className="mb-3 text-sm text-cyan">از ساختار تا محصول</p>
-          <h2 className="text-2xl font-semibold md:text-4xl">
-            منافذ از ۱ تا ۲۰۰ میکرون
-          </h2>
+          <h2 className="text-2xl font-semibold md:text-4xl">منافذ از ۱ تا ۲۰۰ میکرون</h2>
           <p className="mt-6 text-base leading-8 text-mist/75 md:text-lg">
             اندازه حفرات قابل تنظیم از ۱ تا ۲۰۰ میکرون، بنا به کاربرد و اندازه
             ناخالصی‌ها، با توزیع یکنواخت — ناخالصی‌ها را جدا می‌کند و جریانی پاک و
@@ -344,50 +342,33 @@ export default function HomeExperience() {
         </div>
       </section>
 
-      {/* 4–6. Product videos */}
-      {VIDEO_BLOCKS.slice(1).map((block) => (
+      {/* 4–6. Product frame scrubs */}
+      {SCENES.slice(1).map((scene) => (
         <section
-          key={block.id}
-          data-video-section
-          data-id={block.id}
+          key={scene.id}
+          data-frame-section
+          data-folder={scene.folder}
+          data-id={scene.id}
           className="relative h-screen overflow-hidden bg-graphite"
           style={{
-            backgroundImage: `url(${block.poster})`,
+            backgroundImage: `url(${frameUrl(scene.folder, 0)})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={block.poster}
-            alt=""
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-          <video
-            className="absolute inset-0 h-full w-full object-cover opacity-0"
-            data-src={block.src}
-            poster={block.poster}
-            muted
-            playsInline
-            preload="none"
-            aria-hidden
-          />
+          <canvas className="absolute inset-0 h-full w-full" aria-hidden />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/45 to-transparent" />
           <div
             data-copy
             className="relative z-10 flex h-full flex-col items-center justify-end px-6 pb-24 text-center md:pb-32"
           >
-            <h2 className="text-3xl font-semibold text-mist md:text-5xl">{block.title}</h2>
-            <p className="mt-4 max-w-lg text-base text-mist/85 md:text-lg">
-              {block.body}
-            </p>
+            <h2 className="text-3xl font-semibold text-mist md:text-5xl">{scene.title}</h2>
+            <p className="mt-4 max-w-lg text-base text-mist/85 md:text-lg">{scene.body}</p>
           </div>
         </section>
       ))}
 
-      {/* 7. Structure & performance */}
+      {/* 7 */}
       <section
         data-fade-section
         className="relative flex min-h-[70vh] items-center bg-graphite px-6 py-24 md:px-12"
@@ -400,7 +381,7 @@ export default function HomeExperience() {
         </div>
       </section>
 
-      {/* 8. CTA */}
+      {/* 8 */}
       <section
         data-fade-section
         className="relative flex min-h-[70vh] items-center justify-center bg-navy px-6 py-28"
