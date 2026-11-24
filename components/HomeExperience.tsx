@@ -99,6 +99,7 @@ function wireFrameScrub(
 
   gsap.set(copy, { opacity: 1 });
   gsap.set(copy.children, { opacity: 1, y: 0 });
+  // Keep product-scene copy readable through most of the scrub; fade late.
   gsap.fromTo(
     copy,
     { opacity: 1 },
@@ -108,8 +109,8 @@ function wireFrameScrub(
       immediateRender: false,
       scrollTrigger: {
         trigger: section,
-        start: eager ? "top+=12% top" : "center top",
-        end: "+=50%",
+        start: eager ? "top+=12% top" : "bottom-=35% top",
+        end: eager ? "+=50%" : "+=40%",
         scrub: true,
       },
     },
@@ -184,28 +185,33 @@ function RelatedStrip({
   const items = productsForHomeScene(scene);
   if (!items.length) return null;
   return (
-    <section className="border-y border-white/10 bg-graphite-soft px-6 py-14 md:px-12">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-4">
-        <h3 className="text-lg font-semibold text-mist md:text-xl">
+    <section className="bg-graphite-soft px-6 py-20 md:px-12">
+      <div className="mx-auto max-w-3xl text-center">
+        <p className="text-sm tracking-wide text-cyan">
           {t(homeCopy.related, locale)}
-        </h3>
-        <a href={href(locale, "products")} className="text-sm text-cyan hover:underline">
+        </p>
+        <div className="mt-10 flex flex-col items-center gap-10">
+          {items.map((p) => (
+            <a
+              key={p.slug}
+              href={href(locale, `products/${p.slug}`)}
+              className="group block max-w-xl transition"
+            >
+              <span className="block text-2xl font-semibold text-mist transition group-hover:text-cyan md:text-3xl">
+                {t(p.name, locale)}
+              </span>
+              <span className="mt-3 block text-base leading-7 text-mist/65 md:text-lg">
+                {t(p.intro, locale)}
+              </span>
+            </a>
+          ))}
+        </div>
+        <a
+          href={href(locale, "products")}
+          className="mt-12 inline-block text-sm text-cyan transition hover:text-mist"
+        >
           {t(homeCopy.viewAll, locale)}
         </a>
-      </div>
-      <div className="mx-auto mt-8 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((p) => (
-          <a
-            key={p.slug}
-            href={href(locale, `products/${p.slug}`)}
-            className="border border-white/10 bg-graphite px-5 py-6 transition hover:border-cyan/50"
-          >
-            <p className="text-base font-medium text-mist">{t(p.name, locale)}</p>
-            <p className="mt-2 line-clamp-2 text-sm text-mist/60">
-              {t(p.intro, locale)}
-            </p>
-          </a>
-        ))}
       </div>
     </section>
   );
@@ -236,20 +242,26 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       root.querySelectorAll<HTMLElement>("[data-fade-section]").forEach((section) => {
         const copy = section.querySelector<HTMLElement>("[data-copy]");
         if (!copy) return;
+        const premium = section.dataset.premium === "true";
         gsap.fromTo(
           copy.children,
-          { opacity: 0.4, y: 24 },
+          {
+            opacity: 0,
+            y: premium ? 48 : 28,
+            filter: premium ? "blur(8px)" : "blur(0px)",
+          },
           {
             opacity: 1,
             y: 0,
-            stagger: 0.08,
-            ease: "power2.out",
+            filter: "blur(0px)",
+            stagger: premium ? 0.14 : 0.08,
+            duration: premium ? 1.15 : 0.7,
+            ease: premium ? "power3.out" : "power2.out",
             immediateRender: false,
             scrollTrigger: {
               trigger: section,
-              start: "top 80%",
-              end: "top 45%",
-              scrub: true,
+              start: "top 75%",
+              toggleActions: "play none none reverse",
             },
           },
         );
@@ -324,14 +336,17 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
 
       <section
         data-fade-section
+        data-premium="true"
         className="relative flex min-h-[80vh] items-center bg-graphite-soft px-6 py-24 md:px-12"
       >
         <div data-copy className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 text-sm text-cyan">{t(homeCopy.structureEyebrow, locale)}</p>
-          <h2 className="text-2xl font-semibold md:text-4xl">
+          <p className="mb-3 text-sm tracking-[0.2em] text-cyan">
+            {t(homeCopy.structureEyebrow, locale)}
+          </p>
+          <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">
             {t(homeCopy.structureTitle, locale)}
           </h2>
-          <p className="mt-6 text-base leading-8 text-mist/75 md:text-lg">
+          <p className="mt-8 text-base leading-9 text-mist/75 md:text-xl md:leading-10">
             {t(homeCopy.structureBody, locale)}
           </p>
         </div>
@@ -357,12 +372,12 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/45 to-transparent" />
               <div
                 data-copy
-                className="relative z-10 flex h-full flex-col items-center justify-end px-6 pb-24 text-center md:pb-32"
+                className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
               >
-                <h2 className="text-3xl font-semibold text-mist md:text-5xl">
+                <h2 className="text-3xl font-semibold text-mist drop-shadow-lg md:text-5xl">
                   {t(sceneCopy.title, locale)}
                 </h2>
-                <p className="mt-4 max-w-lg text-base text-mist/85 md:text-lg">
+                <p className="mt-5 max-w-xl text-base leading-8 text-mist/90 drop-shadow md:text-lg md:leading-9">
                   {t(sceneCopy.body, locale)}
                 </p>
               </div>
@@ -374,13 +389,14 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
 
       <section
         data-fade-section
+        data-premium="true"
         className="relative flex min-h-[70vh] items-center bg-graphite px-6 py-24 md:px-12"
       >
         <div data-copy className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 text-sm text-cyan">
+          <p className="mb-3 text-sm tracking-[0.2em] text-cyan">
             {t(homeCopy.performanceEyebrow, locale)}
           </p>
-          <h2 className="text-2xl font-semibold leading-snug md:text-4xl">
+          <h2 className="text-3xl font-semibold leading-snug tracking-tight md:text-5xl">
             {t(homeCopy.performanceTitle, locale)}
           </h2>
         </div>
@@ -388,18 +404,42 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
 
       <section
         data-fade-section
+        data-premium="true"
         className="relative flex min-h-[70vh] items-center justify-center bg-navy px-6 py-28"
       >
         <div data-copy className="max-w-2xl text-center">
-          <h2 className="text-2xl font-semibold leading-snug md:text-4xl">
+          <h2 className="text-3xl font-semibold leading-snug tracking-tight md:text-5xl">
             {t(homeCopy.ctaTitle, locale)}
           </h2>
-          <a
-            href={href(locale, "contact")}
-            className="mt-8 inline-block border border-cyan/60 px-8 py-3 text-sm tracking-wide text-cyan"
-          >
-            {t(ui.ctaSoon, locale)}
-          </a>
+          <div className="mt-10 flex flex-col items-center gap-4 text-base text-mist/85 md:text-lg">
+            <a
+              href={`tel:${ui.contact.phoneIran}`}
+              className="transition hover:text-cyan"
+              dir="ltr"
+            >
+              {ui.contact.phoneIran}
+            </a>
+            <a
+              href={`tel:${ui.contact.phoneTurkey}`}
+              className="transition hover:text-cyan"
+              dir="ltr"
+            >
+              {ui.contact.phoneTurkey}
+            </a>
+            <a
+              href={`mailto:${ui.contact.email}`}
+              className="transition hover:text-cyan"
+              dir="ltr"
+            >
+              {ui.contact.email}
+            </a>
+            <a
+              href={href(locale, "contact")}
+              className="mt-4 text-sm tracking-wide text-cyan transition hover:text-mist"
+            >
+              {t(ui.ctaContact, locale)}
+            </a>
+          </div>
         </div>
       </section>
 

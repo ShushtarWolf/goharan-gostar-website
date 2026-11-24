@@ -51,10 +51,10 @@ export const ui = {
     phoneTurkey: "00905377067466",
     email: "info@goharangostar.com",
   },
-  ctaSoon: {
-    fa: "تماس — به‌زودی",
-    tr: "İletişim — yakında",
-    en: "Contact — coming soon",
+  ctaContact: {
+    fa: "تماس با ما",
+    tr: "Bize ulaşın",
+    en: "Contact us",
   },
   footer: {
     fa: "© گوهران گستر نادین · GXPORE",

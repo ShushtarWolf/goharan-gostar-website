@@ -20,11 +20,11 @@ export default async function ProductsPage({
         {t(ui.productsPage.title, locale)}
       </h1>
 
-      {/* Top chips only — no hamburger */}
-      <div className="mt-8 flex gap-2 overflow-x-auto pb-2">
+      {/* Top chips only — no hamburger, no borders */}
+      <div className="mt-8 flex gap-5 overflow-x-auto pb-2 text-sm">
         <a
           href={href(locale, "products")}
-          className="whitespace-nowrap border border-cyan bg-cyan/10 px-4 py-2 text-sm text-cyan"
+          className="whitespace-nowrap text-cyan"
         >
           {t(ui.productsPage.all, locale)}
         </a>
@@ -32,31 +32,33 @@ export default async function ProductsPage({
           <a
             key={c.id}
             href={`${href(locale, "products")}#${c.id}`}
-            className="whitespace-nowrap border border-white/15 px-4 py-2 text-sm text-mist/80 transition hover:border-cyan/50 hover:text-cyan"
+            className="whitespace-nowrap text-mist/70 transition hover:text-cyan"
           >
             {t(c.name, locale)}
           </a>
         ))}
       </div>
 
-      <div className="mt-12 space-y-14">
+      <div className="mt-14 space-y-16">
         {categories.map((c) => {
           const list = products.filter((p) => p.category === c.id);
           if (!list.length) return null;
           return (
             <section key={c.id} id={c.id}>
-              <h2 className="mb-5 text-xl font-medium text-cyan">{t(c.name, locale)}</h2>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <h2 className="mb-8 text-sm tracking-wide text-cyan">
+                {t(c.name, locale)}
+              </h2>
+              <div className="flex flex-col gap-8">
                 {list.map((p) => (
                   <a
                     key={p.slug}
                     href={href(locale, `products/${p.slug}`)}
-                    className="border border-white/10 bg-graphite-soft p-5 transition hover:border-cyan/40"
+                    className="group block max-w-2xl transition"
                   >
-                    <h3 className="text-base font-semibold text-mist">
+                    <h3 className="text-xl font-semibold text-mist transition group-hover:text-cyan md:text-2xl">
                       {t(p.name, locale)}
                     </h3>
-                    <p className="mt-2 line-clamp-3 text-sm leading-6 text-mist/65">
+                    <p className="mt-2 text-base leading-7 text-mist/65">
                       {t(p.intro, locale)}
                     </p>
                   </a>

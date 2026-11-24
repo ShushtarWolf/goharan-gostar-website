@@ -75,9 +75,9 @@ export const homeCopy = {
         en: "Pneumatic Silencer",
       } satisfies Localized<string>,
       body: {
-        fa: "ساختار متخلخل جریان هوا را کنترل و صدای خروجی را کاهش می‌دهد",
-        tr: "Gözenekli yapı hava akışını kontrol eder ve çıkış gürültüsünü azaltır",
-        en: "The porous structure controls airflow and reduces outlet noise",
+        fa: "هوای فشرده از مسیر پرپیچ‌وخم منافذ عبور می‌کند؛ فشار و شدت صدا کم می‌شود و جریان خروجی کنترل می‌گردد.",
+        tr: "Basınçlı hava kıvrımlı gözeneklerden geçerek basınç ve gürültüyü düşürür; çıkış akışı kontrol altına alınır.",
+        en: "Compressed air travels through tortuous pores — pressure and noise drop while outlet flow stays controlled.",
       } satisfies Localized<string>,
     },
     pipette: {
@@ -87,9 +87,9 @@ export const homeCopy = {
         en: "Pipette Tip Filter",
       } satisfies Localized<string>,
       body: {
-        fa: "حفاظت از نمونه‌ها در برابر آلودگی با فیلتراسیون دقیق در مقیاس میکرو",
-        tr: "Mikro ölçekte hassas filtrasyonla numuneleri kirlenmeden korur",
-        en: "Protects samples from contamination with precise micro-scale filtration",
+        fa: "ذرات و آلودگی در شبکه متخلخل گیر می‌افتند؛ نمونه از مسیر پاک عبور می‌کند و از انتقال متقابل جلوگیری می‌شود.",
+        tr: "Parçacıklar gözenekli ağda tutulur; numune temiz geçer ve çapraz bulaşma engellenir.",
+        en: "Particles lodge in the porous network while the sample passes clean — blocking cross-contamination.",
       } satisfies Localized<string>,
     },
     medical: {
@@ -99,9 +99,9 @@ export const homeCopy = {
         en: "Medical Application",
       } satisfies Localized<string>,
       body: {
-        fa: "هوا عبور می‌کند؛ مایع متوقف می‌شود — حفاظت دقیق در لحظه‌ای که اهمیت دارد",
-        tr: "Hava geçer, sıvı durur — kritik anda hassas koruma",
-        en: "Air passes; liquid stops — precise protection when it matters",
+        fa: "گاز از منافذ عبور می‌کند و مسیر پرپیچ‌وخم از جریان ناخواسته یا جرقه جلوگیری می‌کند؛ مایع در تماس، جریان را قطع می‌کند.",
+        tr: "Gaz gözeneklerden geçer; kıvrımlı yol istenmeyen akışı veya kıvılcımı engeller. Sıvı değince akış kesilir.",
+        en: "Gas vents through pores; the tortuous path blocks unwanted flow or sparks. On liquid contact, flow stops.",
       } satisfies Localized<string>,
     },
   },

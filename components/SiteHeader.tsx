@@ -14,8 +14,8 @@ const NAV = [
 export default function SiteHeader({ locale }: { locale: Locale }) {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-graphite/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-3 px-4 py-3 md:px-6">
-        <a href={href(locale)} className="shrink-0">
+      <div className="mx-auto flex h-14 max-w-6xl items-center gap-6 px-4 md:h-16 md:px-6">
+        <a href={href(locale)} className="flex shrink-0 items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={asset("/logo-fa.png")}
@@ -24,8 +24,8 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
           />
         </a>
 
-        {/* Always-visible top links — no hamburger */}
-        <nav className="flex min-w-0 flex-1 items-center gap-4 overflow-x-auto text-sm text-mist/85 md:gap-6">
+        {/* Always-visible top links — no hamburger, no borders */}
+        <nav className="flex min-w-0 flex-1 items-center justify-center gap-5 overflow-x-auto text-sm leading-none text-mist/85 md:gap-8">
           {NAV.map((item) => (
             <a
               key={item.key}
@@ -37,7 +37,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 text-xs tracking-wide">
+        <div className="flex shrink-0 items-center gap-3 text-xs leading-none tracking-wide">
           {locales.map((l) => (
             <a
               key={l}
