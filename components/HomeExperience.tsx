@@ -10,6 +10,7 @@ import { ui } from "@/content/ui";
 import { productsForHomeScene } from "@/content/products";
 import { href } from "@/lib/paths";
 import { t, type Locale } from "@/lib/i18n";
+import RelatedMagneticLink from "@/components/RelatedMagneticLink";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -195,35 +196,20 @@ function RelatedStrip({
   const items = productsForHomeScene(scene);
   if (!items.length) return null;
   return (
-    <section
-      data-fade-section
-      data-premium="true"
-      className="bg-graphite-soft px-6 py-24 md:px-12 md:py-32"
-    >
-      <div data-copy className="mx-auto max-w-3xl text-center">
-        <p
-          data-reveal
-          className="text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
-        >
+    <section className="bg-graphite-soft px-6 py-24 md:px-12 md:py-32">
+      <div className="mx-auto max-w-3xl text-center">
+        <p className="text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs">
           {t(homeCopy.related, locale)}
         </p>
         {items.map((p) => (
-          <a
+          <RelatedMagneticLink
             key={p.slug}
-            data-reveal
             href={href(locale, `products/${p.slug}`)}
-            className="group mt-12 block max-w-2xl md:mt-14"
-          >
-            <span className="block text-3xl font-medium leading-tight tracking-tight text-mist transition duration-300 group-hover:text-cyan md:text-5xl md:leading-[1.15]">
-              {t(p.name, locale)}
-            </span>
-            <span className="mt-5 block text-base leading-8 text-mist/55 md:text-lg md:leading-9">
-              {t(p.intro, locale)}
-            </span>
-          </a>
+            title={t(p.name, locale)}
+            body={t(p.intro, locale)}
+          />
         ))}
         <a
-          data-reveal
           href={href(locale, "products")}
           className="mt-16 inline-block text-sm tracking-[0.15em] text-cyan transition hover:text-mist"
         >
