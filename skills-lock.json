@@ -1,6 +1,13 @@
 {
   "version": 2,
   "skills": {
+    "frontend-atlas": {
+      "source": "flash-hero/GOATED-UI-SKILL",
+      "commit": "8c51536e2525797f0e5a0743bf68cf03b3bfaf61",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-atlas/SKILL.md",
+      "computedHash": "154285ee546b873bde0edcd0b1f850a09462506e156f0c74010faadb1f99ff4e"
+    },
     "gsap-core": {
       "source": "greensock/gsap-skills",
       "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
@@ -56,6 +63,13 @@
       "sourceType": "github",
       "skillPath": "skills/gsap-utils/SKILL.md",
       "computedHash": "d05b56284eea0118d481b8c673aff27cae66199282995bfe78315785f561002d"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "commit": "5a37a6329fbad3666c3207392a6a7c0110e92efb",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "5994e4cfd86144903d2ba750f862b9e36af15e3297aac983679e347b99f6cb71"
     }
   }
 }

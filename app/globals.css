@@ -23,6 +23,15 @@
 html {
   scroll-behavior: auto;
   background: var(--graphite);
+  overflow-x: clip;
+}
+
+/* Reduced motion: never leave split words invisible if JS partially ran. */
+@media (prefers-reduced-motion: reduce) {
+  .typo-word {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 body {

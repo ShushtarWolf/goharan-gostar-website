@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,18 +12,16 @@ import { href } from "@/lib/paths";
 import { t, type Locale } from "@/lib/i18n";
 import RelatedMagneticLink from "@/components/RelatedMagneticLink";
 import {
-  SCENE_PIN_END,
   wirePhotoEnter,
-  wireTypoPinExit,
-  wireTypoScenePin,
+  wireTypoFrameScrub,
   wireTypoScroll,
 } from "@/lib/typoReveal";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const FRAME_COUNT = 48;
-/** Keep pin short so frame scrub + text don't feel like sticky limbo. */
-const FRAME_PIN_END = "+=85%";
+/** Tall track ≈ 1.85× viewport; sticky stage is 100vh (no GSAP pin). */
+const FRAME_TRACK_CLASS = "relative h-[185vh] bg-graphite";
 
 type SceneId = "hero" | "silencer" | "pipette" | "medical";
 
@@ -60,12 +58,14 @@ function loadImage(src: string): Promise<HTMLImageElement> {
 }
 
 function wireFrameScrub(
-  section: HTMLElement,
+  track: HTMLElement,
   canvas: HTMLCanvasElement,
   copy: HTMLElement,
   folder: string,
   eager: boolean,
 ) {
+  const stage =
+    track.querySelector<HTMLElement>("[data-frame-stage]") ?? track;
   const ctx = canvas.getContext("2d", { alpha: false });
   if (!ctx) return;
 
@@ -86,8 +86,8 @@ function wireFrameScrub(
 
   const draw = (img: HTMLImageElement) => {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = section.clientWidth;
-    const h = section.clientHeight;
+    const w = stage.clientWidth;
+    const h = stage.clientHeight;
     if (w < 1 || h < 1) return;
 
     canvas.width = Math.round(w * dpr);
@@ -117,19 +117,20 @@ function wireFrameScrub(
     if (img) draw(img);
   };
 
-  const attachScrub = () => {
-    // Hero: visible at load. Later scenes: 3D enter then late fly-away.
-    wireTypoPinExit(copy, section, FRAME_PIN_END, onScrub, {
-      enterFromDepth: !eager,
-    });
-    ScrollTrigger.refresh();
-  };
+  // Create scrub ST immediately (DOM order) — do not wait on image load.
+  wireTypoFrameScrub(copy, track, onScrub, {
+    enterFromDepth: !eager,
+  });
 
-  const boot = async () => {
-    const first = await loadImage(frameUrl(folder, 0));
-    frames[0] = first;
-    draw(first);
-    attachScrub();
+  const loadFrames = async () => {
+    try {
+      const first = await loadImage(frameUrl(folder, 0));
+      frames[0] = first;
+      draw(first);
+      ScrollTrigger.refresh();
+    } catch {
+      /* poster CSS still shows */
+    }
 
     const BATCH = 6;
     for (let start = 1; start < FRAME_COUNT; start += BATCH) {
@@ -149,18 +150,55 @@ function wireFrameScrub(
   };
 
   if (eager) {
-    void boot();
+    void loadFrames();
     return;
   }
 
   ScrollTrigger.create({
-    trigger: section,
+    trigger: track,
     start: "top bottom+=60%",
     once: true,
     onEnter: () => {
-      void boot();
+      void loadFrames();
     },
   });
+}
+
+function FrameStage({
+  folder,
+  eager,
+  children,
+  id,
+}: {
+  folder: string;
+  eager?: boolean;
+  children: ReactNode;
+  id: string;
+}) {
+  const poster = frameUrl(folder, 0);
+  return (
+    <section
+      data-frame-section
+      data-folder={folder}
+      data-eager={eager ? "true" : undefined}
+      data-id={id}
+      className={FRAME_TRACK_CLASS}
+    >
+      <div
+        data-frame-stage
+        className="sticky top-0 h-screen overflow-hidden bg-graphite"
+        style={{
+          backgroundImage: `url(${poster})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <canvas className="absolute inset-0 h-full w-full" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25" />
+        {children}
+      </div>
+    </section>
+  );
 }
 
 function RelatedStrip({
@@ -220,56 +258,64 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
 
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      root.querySelectorAll<HTMLElement>("[data-frame-section]").forEach((section) => {
-        const canvas = section.querySelector("canvas");
-        const copy = section.querySelector<HTMLElement>("[data-copy]");
-        const folder = section.dataset.folder;
+      // Frames first, top→bottom, ST created sync (no async pin order bugs).
+      root.querySelectorAll<HTMLElement>("[data-frame-section]").forEach((track) => {
+        const canvas = track.querySelector("canvas");
+        const copy = track.querySelector<HTMLElement>("[data-copy]");
+        const folder = track.dataset.folder;
         if (!canvas || !copy || !folder) return;
         wireFrameScrub(
-          section,
+          track,
           canvas,
           copy,
           folder,
-          section.dataset.eager === "true",
+          track.dataset.eager === "true",
         );
       });
 
-      // Pinned text scenes — enter plays while the section sticks (nav stays over it).
+      // Text scenes: enter scrub only — no GSAP pin / pin-spacer.
       root.querySelectorAll<HTMLElement>("[data-typo-scene]").forEach((section) => {
-        const copy = section.querySelector<HTMLElement>("[data-copy]");
-        if (copy) wireTypoScenePin(section, copy, SCENE_PIN_END);
+        section.querySelectorAll<HTMLElement>("[data-typo]").forEach((el) => {
+          wireTypoScroll(el, {
+            trigger: section,
+            start: "top 90%",
+            end: "center center",
+          });
+        });
       });
 
-      // Index4 scrub for static copy — skip frame/scene-pinned copy.
+      // Intro mist copy: shared section trigger so words finish when section is centered.
+      const intro = root.querySelector<HTMLElement>("section.bg-mist");
+      if (intro) {
+        intro.querySelectorAll<HTMLElement>("[data-typo]").forEach((el) => {
+          wireTypoScroll(el, {
+            trigger: intro,
+            start: "top 85%",
+            end: "center center",
+          });
+        });
+      }
+
+      // Other static copy (related, footer) — skip frame/scene/intro.
       root.querySelectorAll<HTMLElement>("[data-typo]").forEach((el) => {
-        if (el.closest("[data-copy]")) return;
+        if (el.closest("[data-frame-section]")) return;
         if (el.closest("[data-typo-scene]")) return;
+        if (intro && intro.contains(el)) return;
         wireTypoScroll(el);
       });
       const photos = root.querySelectorAll<HTMLElement>("[data-photo]");
       if (photos.length) wirePhotoEnter(Array.from(photos));
+
+      const refresh = () => ScrollTrigger.refresh();
+      void document.fonts.ready.then(refresh);
+      requestAnimationFrame(refresh);
     },
     { scope: rootRef },
   );
 
-  const heroPoster = frameUrl("sUOZV", 0);
-
   return (
     <div ref={rootRef} className="relative bg-graphite text-mist">
-      <section
-        data-frame-section
-        data-folder="sUOZV"
-        data-eager="true"
-        data-id="hero"
-        className="relative h-screen overflow-hidden bg-graphite"
-        style={{
-          backgroundImage: `url(${heroPoster})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <canvas className="absolute inset-0 h-full w-full" aria-hidden />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/50 to-graphite/30" />
+      <FrameStage folder="sUOZV" eager id="hero">
         <div
           data-copy
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
@@ -293,7 +339,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
             {t(homeCopy.heroBody, locale)}
           </p>
         </div>
-      </section>
+      </FrameStage>
 
       <section className="relative overflow-hidden bg-mist px-6 py-28 text-ink md:px-12 md:py-36">
         <span
@@ -324,7 +370,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               ))}
             </div>
           </div>
-          <div className="order-1 lg:order-2">
+          <div className="order-1 overflow-hidden lg:order-2">
             <p
               data-typo
               className="font-display mb-5 text-[11px] font-medium tracking-[0.3em] text-navy md:text-xs"
@@ -349,7 +395,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
 
       <section
         data-typo-scene
-        className="relative flex h-screen items-center bg-graphite-soft px-6 md:px-12"
+        className="relative flex min-h-screen items-center bg-graphite-soft px-6 md:px-12"
       >
         <span
           data-goo-hold
@@ -358,7 +404,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         />
         <div
           data-copy
-          className="relative z-10 mx-auto max-w-3xl text-center"
+          className="relative z-10 mx-auto max-w-3xl overflow-hidden text-center"
         >
           <p
             data-typo
@@ -386,19 +432,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         const sceneCopy = homeCopy.scenes[copyKey];
         return (
           <div key={scene.id}>
-            <section
-              data-frame-section
-              data-folder={scene.folder}
-              data-id={scene.id}
-              className="relative h-screen overflow-hidden bg-graphite"
-              style={{
-                backgroundImage: `url(${frameUrl(scene.folder, 0)})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <canvas className="absolute inset-0 h-full w-full" aria-hidden />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25" />
+            <FrameStage folder={scene.folder} id={scene.id}>
               <div
                 data-copy
                 className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
@@ -421,7 +455,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
                   {t(sceneCopy.body, locale)}
                 </p>
               </div>
-            </section>
+            </FrameStage>
             <RelatedStrip locale={locale} scene={copyKey} />
           </div>
         );
@@ -429,7 +463,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
 
       <section
         data-typo-scene
-        className="relative flex h-screen items-center bg-graphite px-6 md:px-12"
+        className="relative flex min-h-screen items-center bg-graphite px-6 md:px-12"
       >
         <span
           data-goo-hold
@@ -438,7 +472,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         />
         <div
           data-copy
-          className="relative z-10 mx-auto max-w-3xl text-center"
+          className="relative z-10 mx-auto max-w-3xl overflow-hidden text-center"
         >
           <p
             data-typo
@@ -457,14 +491,14 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
 
       <section
         data-typo-scene
-        className="relative flex h-screen items-center justify-center bg-navy px-6"
+        className="relative flex min-h-screen items-center justify-center bg-navy px-6"
       >
         <span
           data-goo-hold
           aria-hidden
           className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
         />
-        <div data-copy className="relative z-10 max-w-2xl text-center">
+        <div data-copy className="relative z-10 max-w-2xl overflow-hidden text-center">
           <h2
             data-typo
             className="font-display text-3xl font-semibold leading-snug tracking-tight md:text-5xl"
