@@ -49,9 +49,9 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       const pictures = await waitForPictures();
       if (cancelled || !pictures.length) return;
       // Scene lean targets — not painted (see runGooey holds).
-      const holds = [
-        ...document.querySelectorAll<HTMLElement>("[data-goo-hold]"),
-      ];
+      const holds = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-goo-hold]"),
+      );
       const stop = await bootGooey({ canvas, menu, pictures, holds });
       if (cancelled) {
         stop();
