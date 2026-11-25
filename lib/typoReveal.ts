@@ -36,8 +36,8 @@ function wordSpin(i: number, n: number, sign = 1) {
 }
 
 /**
- * Codrops OnScrollTypoAnimations index4 — scrub-linked 3D word fly.
- * Enter as the line arrives, stay readable while in view, exit only as it leaves.
+ * Codrops index4 scrub — enter on arrival, stay readable while the line
+ * is still on screen, exit only as it leaves past the top.
  */
 export function wireTypoScroll(el: HTMLElement) {
   const words = splitIntoWords(el);
@@ -48,16 +48,20 @@ export function wireTypoScroll(el: HTMLElement) {
   gsap.set(words, {
     transformStyle: "preserve-3d",
     transformOrigin: "50% 50%",
+    opacity: 0,
+    z: -900,
   });
 
   gsap
     .timeline({
       scrollTrigger: {
         trigger: el,
-        // Full travel through the viewport so short lines don't vanish mid-read.
-        start: "top 92%",
-        end: "top 8%",
-        scrub: 0.55,
+        // Exit only when the line itself has left the viewport —
+        // old end:"top 8%" made short intro/CTA lines vanish while
+        // the section (and photos) were still fully on screen.
+        start: "top 88%",
+        end: "bottom top",
+        scrub: 0.5,
         invalidateOnRefresh: true,
       },
     })
@@ -76,53 +80,56 @@ export function wireTypoScroll(el: HTMLElement) {
         rotationX: 0,
         ease: "none",
         stagger: { each: 0.025, from: "center" },
-        duration: 0.28,
+        duration: 0.18,
       },
       0,
     )
-    // Hold fully readable through the middle of the scrub range.
-    .to({}, { duration: 0.44 })
-    .to(
-      words,
-      {
-        opacity: 0,
-        z: -900,
-        y: -16,
-        rotationX: (i: number) => wordSpin(i, n, -1),
-        ease: "none",
-        stagger: { each: 0.025, from: "center" },
-        duration: 0.28,
-      },
-    );
+    // Hold readable for most of the travel through the viewport.
+    .to({}, { duration: 0.64 })
+    .to(words, {
+      opacity: 0,
+      z: -900,
+      y: -16,
+      rotationX: (i: number) => wordSpin(i, n, -1),
+      ease: "none",
+      stagger: { each: 0.025, from: "center" },
+      duration: 0.18,
+    });
 }
 
 /**
- * Index4 exit inside an already-pinned frame scene.
- * Words start readable (hero/scene text visible on load), then scrub away late.
+ * Index4 inside a pinned frame scene.
+ * Hero (eager): text visible at load, late fly-away.
+ * Later scenes: 3D enter at pin start, hold, then fly-away.
  */
 export function wireTypoPinExit(
   copy: HTMLElement,
   trigger: HTMLElement,
   end: string,
   onScrub?: (progress: number) => void,
+  opts?: { enterFromDepth?: boolean },
 ) {
+  const enterFromDepth = opts?.enterFromDepth === true;
   const targets = Array.from(
     copy.querySelectorAll<HTMLElement>("[data-typo]"),
   );
   const words = targets.flatMap((el) => splitIntoWords(el));
   gsap.set(copy, { perspective: 1000, opacity: 1 });
+
+  const pinBase = {
+    trigger,
+    start: "top top",
+    end,
+    pin: true,
+    scrub: 0.35,
+    anticipatePin: 1,
+    invalidateOnRefresh: true,
+    onUpdate: (self: ScrollTrigger) => onScrub?.(self.progress),
+    onRefresh: (self: ScrollTrigger) => onScrub?.(self.progress),
+  };
+
   if (!words.length) {
-    ScrollTrigger.create({
-      trigger,
-      start: "top top",
-      end,
-      pin: true,
-      scrub: 0.35,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => onScrub?.(self.progress),
-      onRefresh: (self) => onScrub?.(self.progress),
-    });
+    ScrollTrigger.create(pinBase);
     return;
   }
 
@@ -130,28 +137,40 @@ export function wireTypoPinExit(
   gsap.set(words, {
     transformStyle: "preserve-3d",
     transformOrigin: "50% 50%",
-    opacity: 1,
-    z: 0,
-    y: 0,
+    opacity: enterFromDepth ? 0 : 1,
+    z: enterFromDepth ? -900 : 0,
+    y: enterFromDepth ? 24 : 0,
     rotationX: 0,
   });
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger,
-      start: "top top",
-      end,
-      pin: true,
-      scrub: 0.35,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => onScrub?.(self.progress),
-      onRefresh: (self) => onScrub?.(self.progress),
-    },
-  });
+  const tl = gsap.timeline({ scrollTrigger: pinBase });
 
-  // Hold readable through most of the pin (~72%), then index4 fly-away.
-  tl.to({}, { duration: 0.72 });
+  if (enterFromDepth) {
+    tl.fromTo(
+      words,
+      {
+        opacity: 0,
+        z: -900,
+        y: 24,
+        rotationX: (i: number) => wordSpin(i, n, 1),
+      },
+      {
+        opacity: 1,
+        z: 0,
+        y: 0,
+        rotationX: 0,
+        ease: "none",
+        stagger: { each: 0.02, from: "center" },
+        duration: 0.14,
+      },
+      0,
+    );
+    tl.to({}, { duration: 0.66 });
+  } else {
+    // Hero: readable from first paint; exit only late in the pin.
+    tl.to({}, { duration: 0.8 });
+  }
+
   tl.to(words, {
     opacity: 0,
     z: -1000,
@@ -159,11 +178,11 @@ export function wireTypoPinExit(
     rotationX: (i: number) => wordSpin(i, n, -1),
     ease: "none",
     stagger: { each: 0.02, from: "center" },
-    duration: 0.28,
+    duration: 0.2,
   });
 }
 
-/** Matching photo load: clip + lift, scrub cadence with nearby copy. */
+/** Matching photo load: clip + lift, scrub with nearby copy. */
 export function wirePhotoEnter(imgs: HTMLElement[]) {
   if (!imgs.length) return;
   gsap.set(imgs, {
@@ -182,7 +201,7 @@ export function wirePhotoEnter(imgs: HTMLElement[]) {
     scrollTrigger: {
       trigger: imgs[0]!.parentElement ?? imgs[0],
       start: "top 88%",
-      end: "top 45%",
+      end: "top 40%",
       scrub: 0.55,
       invalidateOnRefresh: true,
     },

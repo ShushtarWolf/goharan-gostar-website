@@ -116,9 +116,10 @@ function wireFrameScrub(
   };
 
   const attachScrub = () => {
-    // Index4 pin exit on copy — text starts VISIBLE, flies away on scrub.
-    // Frame draw shares the same ScrollTrigger via onUpdate.
-    wireTypoPinExit(copy, section, FRAME_PIN_END, onScrub);
+    // Hero: visible at load. Later scenes: 3D enter then late fly-away.
+    wireTypoPinExit(copy, section, FRAME_PIN_END, onScrub, {
+      enterFromDepth: !eager,
+    });
     ScrollTrigger.refresh();
   };
 
