@@ -67,7 +67,7 @@ export const products: Product[] = [
       en: "Pneumatic Silencer",
     },
     intro: {
-      fa: "صداگیر یا اگزوز پنوماتیک در مسیر خروجی هوا نصب می‌شود و با کاهش فشار و شدت هوای خروجی، صدا را کم کرده و از آسیب به افراد یا وسایل جلوگیری می‌کند. فیلتر متخلخل داخلی با حفرات پرپیچ‌وخم، نقش اصلی کاهش صدا را دارد.",
+      fa: "صداگیر یا اگزوز پنوماتیک در مسیر خروجی هوا نصب می‌شود و با کاهش فشار و شدت هوای خروجی، صدا را کم می‌کند و جلوی آسیب به افراد و وسایل را می‌گیرد. فیلتر متخلخل داخلی با حفره‌های پرپیچ‌وخم، کار اصلی کاهش صدا را انجام می‌دهد.",
       tr: "Pnömatik susturucu, hava çıkış hattına monte edilir; çıkış basıncı ve şiddetini düşürerek gürültüyü azaltır ve insanlara veya ekipmana zarar gelmesini önler. Gözenekli iç filtre, ses azaltmanın ana unsurudur.",
       en: "A pneumatic silencer is installed on the exhaust path of pneumatic devices. By reducing outlet pressure and intensity it lowers noise and protects people and equipment. The porous internal filter with tortuous pores does the primary silencing work.",
     },
@@ -139,7 +139,7 @@ export const products: Product[] = [
       en: "Pipette Tips Filter",
     },
     intro: {
-      fa: "فیلتر سرسمپلر با ساختار متخلخل و حفرات یکنواخت از آلودگی نمونه و انتقال متقابل جلوگیری می‌کند و نتایج آنالیز قابل‌اطمینان‌تری می‌سازد. ابعاد و اندازه حفرات قابل سفارشی‌سازی است.",
+      fa: "فیلتر سرسمپلر با ساختار متخلخل و حفره‌های یکنواخت از آلودگی نمونه و انتقال متقابل جلوگیری می‌کند و نتیجهٔ آنالیز قابل‌اطمینان‌تری می‌دهد. ابعاد و اندازهٔ حفره‌ها سفارشی‌پذیر است.",
       tr: "Pipet ucu filtresi, düzenli gözenek yapısıyla numune kirlenmesini ve çapraz bulaşmayı önler; daha güvenilir analiz sonuçları sağlar. Boyut ve gözenek çapı özelleştirilebilir.",
       en: "A pipette tip filter with uniform porous structure prevents sample contamination and cross-talk, supporting more reliable analysis. Dimensions and pore size are customizable.",
     },
@@ -250,7 +250,7 @@ export const products: Product[] = [
       en: "Stopper Valve Filter",
     },
     intro: {
-      fa: "فیلتر متخلخل گزینشی که هوا را عبور می‌دهد و با رسیدن مایع مسدود می‌شود؛ از پخش عفونت و آسیب به دستگاه مکش جلوگیری می‌کند و افت فشار را حداقل نگه می‌دارد.",
+      fa: "فیلتر متخلخل گزینشی که هوا را رد می‌کند و با رسیدن مایع مسدود می‌شود؛ جلوی پخش عفونت و آسیب به دستگاه مکش را می‌گیرد و افت فشار را پایین نگه می‌دارد.",
       tr: "Havayı geçirip sıvıya değince kapanan seçici gözenekli filtre; enfeksiyon yayılımını ve aspirasyon cihazı hasarını önler, basınç düşümünü en aza indirir.",
       en: "A selective porous filter that passes air/gas and blocks on liquid contact, preventing infection spread and suction-device damage while minimizing pressure drop.",
     },
@@ -331,7 +331,7 @@ export const products: Product[] = [
       en: "Dialysis Filter",
     },
     intro: {
-      fa: "فیلتر دیالیز نقش حیاتی در همودیالیز دارد و مواد سمی و ناخواسته خون را به‌صورت انتخابی جدا می‌کند. گوهران گستر از تولیدکنندگان تخصصی این فیلتر در ایران و خاورمیانه است.",
+      fa: "فیلتر دیالیز نقش حیاتی در همودیالیز دارد و مواد سمی و ناخواستهٔ خون را به‌صورت انتخابی جدا می‌کند. گوهران گستر از تولیدکنندگان تخصصی این فیلتر در ایران و خاورمیانه است.",
       tr: "Diyaliz filtresi hemodiyalizde kritik rol oynar; kandaki toksik ve istenmeyen maddeleri seçici biçimde ayırır. Goharan, İran ve Orta Doğu’da bu alanda uzman üreticilerdendir.",
       en: "A dialysis filter plays a vital role in hemodialysis by selectively removing toxic and unwanted substances from blood. Goharan is a specialized producer in Iran and the Middle East.",
     },
@@ -360,7 +360,7 @@ export const products: Product[] = [
       en: "Highlighter Nib",
     },
     intro: {
-      fa: "نوک هایلایتر متخلخل پلی‌اتیلنی با جریان جوهر یکنواخت، ضدلکه و قابل سفارشی‌سازی در شکل و اندازه.",
+      fa: "نوک هایلایتر متخلخل پلی‌اتیلنی با جریان جوهر یکنواخت، ضدلکه، و قابل سفارشی‌سازی در شکل و اندازه.",
       tr: "Düzgün mürekkep akışlı, leke bırakmayan ve şekil/boyutta özelleştirilebilir gözenekli polietilen fosforlu kalem ucu.",
       en: "Porous polyethylene highlighter nib with even ink flow, anti-bleed behavior, and customizable shape/size.",
     },
@@ -389,7 +389,7 @@ export const products: Product[] = [
       en: "Flame Arrestor",
     },
     intro: {
-      fa: "محیط متخلخل برای کنترل گازهای باتری، کاهش نشت الکترولیت و جلوگیری از رسیدن جرقه به داخل باتری.",
+      fa: "محیط متخلخل برای کنترل گازهای باتری، کم کردن نشت الکترولیت، و جلوگیری از رسیدن جرقه به داخل باتری.",
       tr: "Akü gazlarını kontrol eden, elektrolit sızıntısını azaltan ve kıvılcımın akü içine ulaşmasını engelleyen gözenekli ortam.",
       en: "Porous media to control battery gases, reduce electrolyte loss, and block external sparks from entering the battery.",
     },

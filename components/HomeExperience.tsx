@@ -10,11 +10,17 @@ import { ui } from "@/content/ui";
 import { productsForHomeScene } from "@/content/products";
 import { href } from "@/lib/paths";
 import { t, type Locale } from "@/lib/i18n";
-import { wirePhotoEnter, wireTypoEnter } from "@/lib/typoReveal";
+import {
+  wirePhotoEnter,
+  wireTypoPinExit,
+  wireTypoScroll,
+} from "@/lib/typoReveal";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const FRAME_COUNT = 48;
+/** Shorter pins = less weird scroll stretch vs old +=180%. */
+const FRAME_PIN_END = "+=110%";
 
 type SceneId = "hero" | "silencer" | "pipette" | "medical";
 
@@ -103,33 +109,15 @@ function wireFrameScrub(
     ctx.drawImage(img, dx, dy, dw, dh);
   };
 
-  // Copy opacity for scrub exit only — word enter is handled by data-typo (index4).
-  gsap.set(copy, { opacity: 1 });
+  const onScrub = (progress: number) => {
+    const img = pickFrame(progress);
+    if (img) draw(img);
+  };
 
   const attachScrub = () => {
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: "+=180%",
-      pin: true,
-      scrub: 0.35,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        const img = pickFrame(self.progress);
-        if (img) draw(img);
-        // Stay readable through most of the scrub; soft exit in last ~25%.
-        const fade =
-          self.progress < 0.72
-            ? 1
-            : Math.max(0, 1 - (self.progress - 0.72) / 0.28);
-        gsap.set(copy, { opacity: fade });
-      },
-      onRefresh: (self) => {
-        const img = pickFrame(self.progress);
-        if (img) draw(img);
-      },
-    });
+    // Index4 pin exit on copy — text starts VISIBLE, flies away on scrub.
+    // Frame draw shares the same ScrollTrigger via onUpdate.
+    wireTypoPinExit(copy, section, FRAME_PIN_END, onScrub);
     ScrollTrigger.refresh();
   };
 
@@ -157,7 +145,7 @@ function wireFrameScrub(
   };
 
   if (eager) {
-    boot();
+    void boot();
     return;
   }
 
@@ -166,7 +154,7 @@ function wireFrameScrub(
     start: "top bottom+=60%",
     once: true,
     onEnter: () => {
-      boot();
+      void boot();
     },
   });
 }
@@ -229,6 +217,8 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       const root = rootRef.current;
       if (!root) return;
 
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
       root.querySelectorAll<HTMLElement>("[data-frame-section]").forEach((section) => {
         const canvas = section.querySelector("canvas");
         const copy = section.querySelector<HTMLElement>("[data-copy]");
@@ -243,9 +233,10 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         );
       });
 
-      // OnScrollTypoAnimations index4 enter vibe for static sections + photos
+      // Index4 scrub for all static copy — skip frame copy (handled by pin exit).
       root.querySelectorAll<HTMLElement>("[data-typo]").forEach((el) => {
-        wireTypoEnter(el);
+        if (el.closest("[data-copy]")) return;
+        wireTypoScroll(el);
       });
       const photos = root.querySelectorAll<HTMLElement>("[data-photo]");
       if (photos.length) wirePhotoEnter(Array.from(photos));
@@ -303,7 +294,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* Intro — index4 typo + photo load */}
       <section className="relative overflow-hidden bg-mist px-6 py-28 text-ink md:px-12 md:py-36">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(10,61,122,0.08),transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-16 lg:grid-cols-2 lg:items-center lg:gap-20">

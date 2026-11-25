@@ -5,6 +5,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 /** Split element text into word spans (RTL-safe space split). */
 export function splitIntoWords(el: HTMLElement): HTMLElement[] {
+  if (el.dataset.typoSplit === "1") {
+    return Array.from(el.querySelectorAll<HTMLElement>(".typo-word"));
+  }
   const text = el.textContent ?? "";
   el.textContent = "";
   gsap.set(el, { fontKerning: "none" });
@@ -24,15 +27,19 @@ export function splitIntoWords(el: HTMLElement): HTMLElement[] {
     el.appendChild(span);
     wordEls.push(span);
   }
+  el.dataset.typoSplit = "1";
   return wordEls;
 }
 
+function wordSpin(i: number, n: number, sign = 1) {
+  return sign * Math.abs(i - (n - 1) / 2) * 14;
+}
+
 /**
- * OnScrollTypoAnimations index4 — enter version of the demo's 3D word fly:
- * words arrive from depth (z / rotationX from center) with back.out.
- * (Demo itself pins + scrubs words away; we use the same motion language on enter.)
+ * Codrops OnScrollTypoAnimations index4 — scrub-linked 3D word fly.
+ * Words arrive from depth as the line enters, then leave into depth — tied to scroll.
  */
-export function wireTypoEnter(el: HTMLElement) {
+export function wireTypoScroll(el: HTMLElement) {
   const words = splitIntoWords(el);
   if (!words.length) return;
 
@@ -41,49 +48,144 @@ export function wireTypoEnter(el: HTMLElement) {
   gsap.set(words, {
     transformStyle: "preserve-3d",
     transformOrigin: "50% 50%",
-    opacity: 0,
-    z: -1000,
-    rotationX: (i: number) => Math.abs(i - n / 2) * 15,
-    y: 24,
   });
 
-  gsap.to(words, {
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: el,
+        start: "top 90%",
+        end: "bottom 18%",
+        scrub: 0.55,
+        invalidateOnRefresh: true,
+      },
+    })
+    .fromTo(
+      words,
+      {
+        opacity: 0,
+        z: -900,
+        y: 28,
+        rotationX: (i: number) => wordSpin(i, n, 1),
+      },
+      {
+        opacity: 1,
+        z: 0,
+        y: 0,
+        rotationX: 0,
+        ease: "none",
+        stagger: { each: 0.025, from: "center" },
+        duration: 0.4,
+      },
+      0,
+    )
+    .to(
+      words,
+      {
+        opacity: 0,
+        z: -900,
+        y: -16,
+        rotationX: (i: number) => wordSpin(i, n, -1),
+        ease: "none",
+        stagger: { each: 0.025, from: "center" },
+        duration: 0.35,
+      },
+      0.62,
+    );
+}
+
+/**
+ * Index4 exit inside an already-pinned frame scene.
+ * Words start readable (hero/scene text visible on load), then scrub away in 3D.
+ */
+export function wireTypoPinExit(
+  copy: HTMLElement,
+  trigger: HTMLElement,
+  end: string,
+  onScrub?: (progress: number) => void,
+) {
+  const targets = Array.from(
+    copy.querySelectorAll<HTMLElement>("[data-typo]"),
+  );
+  const words = targets.flatMap((el) => splitIntoWords(el));
+  gsap.set(copy, { perspective: 1000, opacity: 1 });
+  if (!words.length) {
+    ScrollTrigger.create({
+      trigger,
+      start: "top top",
+      end,
+      pin: true,
+      scrub: 0.35,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => onScrub?.(self.progress),
+      onRefresh: (self) => onScrub?.(self.progress),
+    });
+    return;
+  }
+
+  const n = words.length;
+  gsap.set(words, {
+    transformStyle: "preserve-3d",
+    transformOrigin: "50% 50%",
     opacity: 1,
     z: 0,
-    rotationX: 0,
     y: 0,
-    duration: 1.2,
-    ease: "back.out(2)",
-    stagger: { each: 0.03, from: "center" },
+    rotationX: 0,
+  });
+
+  const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: el,
-      start: "top 85%",
-      toggleActions: "play none none reverse",
+      trigger,
+      start: "top top",
+      end,
+      pin: true,
+      scrub: 0.35,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => onScrub?.(self.progress),
+      onRefresh: (self) => onScrub?.(self.progress),
     },
+  });
+
+  // Hold readable through first ~55% of the pin, then index4 fly-away.
+  tl.to({}, { duration: 0.55 });
+  tl.to(words, {
+    opacity: 0,
+    z: -1000,
+    y: -12,
+    rotationX: (i: number) => wordSpin(i, n, -1),
+    ease: "none",
+    stagger: { each: 0.02, from: "center" },
+    duration: 0.45,
   });
 }
 
-/** Matching photo load: clip + lift, same scroll cadence. */
+/** Matching photo load: clip + lift, scrub cadence with nearby copy. */
 export function wirePhotoEnter(imgs: HTMLElement[]) {
   if (!imgs.length) return;
   gsap.set(imgs, {
     opacity: 0,
-    y: 56,
-    scale: 0.94,
-    clipPath: "inset(10% 8% 10% 8%)",
+    y: 48,
+    scale: 0.96,
+    clipPath: "inset(8% 6% 8% 6%)",
   });
   gsap.to(imgs, {
     opacity: 1,
     y: 0,
     scale: 1,
     clipPath: "inset(0% 0% 0% 0%)",
-    duration: 1.15,
-    ease: "power3.out",
-    stagger: 0.12,
+    ease: "none",
+    stagger: 0.08,
     scrollTrigger: {
       trigger: imgs[0]!.parentElement ?? imgs[0],
-      start: "top 85%",
-      toggleActions: "play none none reverse",
+      start: "top 88%",
+      end: "top 45%",
+      scrub: 0.55,
+      invalidateOnRefresh: true,
     },
   });
 }
+
+/** @deprecated use wireTypoScroll */
+export const wireTypoEnter = wireTypoScroll;
