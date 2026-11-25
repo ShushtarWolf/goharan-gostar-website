@@ -54,19 +54,4 @@ body {
   backdrop-filter: none !important;
 }
 
-/*
- * Tiny invisible hit boxes for goo strands near the bottom nav.
- * Kept small so WebGL (z-40) only paints a band above the menu —
- * never over centered page copy.
- */
-.goo-picture--anchor {
-  pointer-events: none;
-  position: absolute;
-  left: 50%;
-  bottom: 5.5rem;
-  width: min(14rem, 36%);
-  height: 4.5rem;
-  transform: translateX(-50%);
-  object-fit: cover;
-  opacity: 0;
-}
+/* Reserved: do NOT add hidden goo-picture anchors — WebGL paints them opaque. */

@@ -34,7 +34,8 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       new Promise<HTMLElement[]>((resolve) => {
         const tick = () => {
           if (cancelled) return;
-          // Intro photos + small --anchor targets further down the page.
+          // Only real on-page photos (intro grid). Never fake anchors —
+          // goo WebGL paints every .goo-picture as an opaque rect.
           const pics = [
             ...document.querySelectorAll<HTMLElement>(".goo-picture"),
           ];
