@@ -28,34 +28,36 @@ export function splitIntoWords(el: HTMLElement): HTMLElement[] {
 }
 
 /**
- * OnScrollTypoAnimations index4 vibe — inverted for *loading*:
- * words rise from rotationX / depth with center stagger (no pin).
+ * OnScrollTypoAnimations index4 — enter version of the demo's 3D word fly:
+ * words arrive from depth (z / rotationX from center) with back.out.
+ * (Demo itself pins + scrubs words away; we use the same motion language on enter.)
  */
 export function wireTypoEnter(el: HTMLElement) {
   const words = splitIntoWords(el);
   if (!words.length) return;
 
+  const n = words.length;
   gsap.set(el, { perspective: 1000 });
   gsap.set(words, {
     transformStyle: "preserve-3d",
     transformOrigin: "50% 50%",
     opacity: 0,
-    rotationX: 58,
-    z: -320,
-    y: 36,
+    z: -1000,
+    rotationX: (i: number) => Math.abs(i - n / 2) * 15,
+    y: 24,
   });
 
   gsap.to(words, {
     opacity: 1,
-    rotationX: 0,
     z: 0,
+    rotationX: 0,
     y: 0,
-    duration: 1.05,
-    ease: "back.out(1.5)",
-    stagger: { each: 0.035, from: "center" },
+    duration: 1.2,
+    ease: "back.out(2)",
+    stagger: { each: 0.03, from: "center" },
     scrollTrigger: {
       trigger: el,
-      start: "top 82%",
+      start: "top 85%",
       toggleActions: "play none none reverse",
     },
   });
