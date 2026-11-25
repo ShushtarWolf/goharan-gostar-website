@@ -1,11 +1,16 @@
 "use client";
 
 import type { AnchorHTMLAttributes, ReactNode } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { withViewTransition } from "@/lib/motion/viewTransition";
 import { routerPath } from "@/lib/paths";
 import { stripBasePathForRouter } from "@/lib/motion/routerHref";
 import type { Locale } from "@/lib/i18n";
+
+function normalizeTrailingSlash(p: string) {
+  if (p === "/") return p;
+  return p.endsWith("/") ? p : `${p}/`;
+}
 
 type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
@@ -24,10 +29,13 @@ export default function TransitionLink({
   ...rest
 }: Props) {
   const router = useRouter();
+  const pathname = usePathname() ?? "/";
   const internal =
     locale !== undefined
       ? routerPath(locale, path ?? "")
       : stripBasePathForRouter(href);
+  const internalPath = normalizeTrailingSlash(internal);
+  const currentPath = normalizeTrailingSlash(pathname);
 
   return (
     <a
@@ -46,8 +54,16 @@ export default function TransitionLink({
           return;
         }
         e.preventDefault();
+        if (internalPath === currentPath) {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
         withViewTransition(() => {
-          router.push(internal);
+          try {
+            router.push(internalPath);
+          } catch {
+            window.location.assign(href);
+          }
         });
       }}
     >

@@ -99,12 +99,19 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
           backdropFilter: "blur(18px) saturate(1.4)",
         }}
       >
-        <TransitionLink href={href(locale)} className="flex shrink-0 items-center">
+        <TransitionLink
+          href={href(locale)}
+          locale={locale}
+          path=""
+          aria-label={`${ui.brand} — ${t(ui.nav.home, locale)}`}
+          className="relative z-[1] flex shrink-0 touch-manipulation items-center rounded-md p-1 -m-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={asset("/logo-fa.png")}
-            alt={ui.brand}
-            className="h-6 w-auto sm:h-7 md:h-8"
+            alt=""
+            draggable={false}
+            className="pointer-events-none h-6 w-auto select-none sm:h-7 md:h-8"
           />
         </TransitionLink>
 
@@ -113,7 +120,9 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
             <TransitionLink
               key={item.key}
               href={href(locale, item.path)}
-              className="menu__link shrink-0 whitespace-nowrap px-0.5 transition hover:text-white"
+              locale={locale}
+              path={item.path}
+              className="menu__link relative z-[1] shrink-0 touch-manipulation whitespace-nowrap px-0.5 transition hover:text-white"
             >
               {t(ui.nav[item.key], locale)}
             </TransitionLink>

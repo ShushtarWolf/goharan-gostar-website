@@ -54,6 +54,14 @@ body {
   backdrop-filter: none !important;
 }
 
+/* Keep bottom-nav links clickable above the WebGL liquid layer */
+.menu.is-drawn a,
+.menu.is-drawn button {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+}
+
 /*
  * Invisible hit boxes for goo strands near the bottom nav.
  * Must NOT be full-bleed — WebGL redraws these on the z-40 canvas and
