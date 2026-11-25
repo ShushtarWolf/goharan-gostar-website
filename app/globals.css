@@ -55,17 +55,17 @@ body {
 }
 
 /*
- * Invisible hit boxes for goo strands near the bottom nav.
- * Must NOT be full-bleed — WebGL redraws these on the z-40 canvas and
- * would cover all page copy if the rect filled the viewport.
+ * Tiny invisible hit boxes for goo strands near the bottom nav.
+ * Kept small so WebGL (z-40) only paints a band above the menu —
+ * never over centered page copy.
  */
 .goo-picture--anchor {
   pointer-events: none;
   position: absolute;
   left: 50%;
-  bottom: 0;
-  width: min(28rem, 72%);
-  height: 28%;
+  bottom: 5.5rem;
+  width: min(14rem, 36%);
+  height: 4.5rem;
   transform: translateX(-50%);
   object-fit: cover;
   opacity: 0;

@@ -43,8 +43,31 @@ const INTRO_PHOTOS = [
   asset("/photos/80969f47-178f-4997-93f5-cd0355fa0800.webp"),
 ];
 
+/** Extra Alireza product shots used only as tiny goo strand anchors down-page. */
+const STRAND_PHOTOS = [
+  ...INTRO_PHOTOS,
+  asset("/photos/64f6677f-419b-4202-aa0b-af2e5cf83c08.png"),
+  asset("/photos/e2aeaa6b-5d8a-4547-a59b-1eaf0a903fdb.png"),
+  asset("/photos/35af50a7-c5cd-4acf-b7b8-67b6eeaca6ca.png"),
+];
+
 function frameUrl(folder: string, index: number) {
   return asset(`/frames/${folder}/${String(index).padStart(3, "0")}.webp`);
+}
+
+/** Invisible mini target so gooey strands keep gripping past the intro. */
+function GooStrandAnchor({ src }: { src: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      className="goo-picture goo-picture--anchor"
+      src={src}
+      alt=""
+      aria-hidden
+      decoding="async"
+      loading="lazy"
+    />
+  );
 }
 
 function loadImage(src: string): Promise<HTMLImageElement> {
@@ -170,9 +193,14 @@ function RelatedStrip({
 }) {
   const items = productsForHomeScene(scene);
   if (!items.length) return null;
+  const strand =
+    STRAND_PHOTOS[
+      scene === "silencer" ? 0 : scene === "pipette" ? 1 : 2
+    ]!;
   return (
-    <section className="bg-graphite-soft px-6 pb-36 pt-20 md:px-12 md:pb-44 md:pt-28">
-      <div className="mx-auto max-w-3xl text-center">
+    <section className="relative bg-graphite-soft px-6 pb-36 pt-20 md:px-12 md:pb-44 md:pt-28">
+      <GooStrandAnchor src={strand} />
+      <div className="relative z-10 mx-auto max-w-3xl text-center">
         <p
           data-typo
           className="text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
@@ -261,6 +289,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       >
         <canvas className="absolute inset-0 h-full w-full" aria-hidden />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/50 to-graphite/30" />
+        <GooStrandAnchor src={INTRO_PHOTOS[0]!} />
         <div
           data-copy
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
@@ -334,6 +363,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       </section>
 
       <section className="relative flex min-h-[80vh] items-center bg-graphite-soft px-6 py-24 md:px-12">
+        <GooStrandAnchor src={STRAND_PHOTOS[3]!} />
         <div className="relative z-10 mx-auto max-w-3xl text-center">
           <p
             data-typo
@@ -374,6 +404,17 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
             >
               <canvas className="absolute inset-0 h-full w-full" aria-hidden />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25" />
+              <GooStrandAnchor
+                src={
+                  STRAND_PHOTOS[
+                    scene.id === "silencer"
+                      ? 0
+                      : scene.id === "pipette"
+                        ? 1
+                        : 2
+                  ]!
+                }
+              />
               <div
                 data-copy
                 className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
@@ -398,6 +439,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       })}
 
       <section className="relative flex min-h-[70vh] items-center bg-graphite px-6 py-24 md:px-12">
+        <GooStrandAnchor src={STRAND_PHOTOS[4]!} />
         <div className="relative z-10 mx-auto max-w-3xl text-center">
           <p
             data-typo
@@ -415,6 +457,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       </section>
 
       <section className="relative flex min-h-[70vh] items-center justify-center bg-navy px-6 py-28">
+        <GooStrandAnchor src={STRAND_PHOTOS[5]!} />
         <div className="relative z-10 max-w-2xl text-center">
           <h2
             data-typo
