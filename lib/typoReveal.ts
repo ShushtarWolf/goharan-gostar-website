@@ -36,8 +36,10 @@ function wordSpin(i: number, n: number, sign = 1) {
 }
 
 /**
- * Codrops index4 scrub — enter on arrival, stay readable while the line
- * is still on screen, exit only as it leaves past the top.
+ * Codrops index4 enter on scroll — 3D fly-in, then stay readable.
+ * No exit scrub: an exit while the section is still on screen left
+ * intro/CTA/related copy blank (opacity 0) in the middle of the page.
+ * Scroll back up reverses the enter.
  */
 export function wireTypoScroll(el: HTMLElement) {
   const words = splitIntoWords(el);
@@ -52,49 +54,30 @@ export function wireTypoScroll(el: HTMLElement) {
     z: -900,
   });
 
-  gsap
-    .timeline({
+  gsap.fromTo(
+    words,
+    {
+      opacity: 0,
+      z: -900,
+      y: 28,
+      rotationX: (i: number) => wordSpin(i, n, 1),
+    },
+    {
+      opacity: 1,
+      z: 0,
+      y: 0,
+      rotationX: 0,
+      ease: "none",
+      stagger: { each: 0.025, from: "center" },
       scrollTrigger: {
         trigger: el,
-        // Exit only when the line itself has left the viewport —
-        // old end:"top 8%" made short intro/CTA lines vanish while
-        // the section (and photos) were still fully on screen.
-        start: "top 88%",
-        end: "bottom top",
+        start: "top 90%",
+        end: "top 55%",
         scrub: 0.5,
         invalidateOnRefresh: true,
       },
-    })
-    .fromTo(
-      words,
-      {
-        opacity: 0,
-        z: -900,
-        y: 28,
-        rotationX: (i: number) => wordSpin(i, n, 1),
-      },
-      {
-        opacity: 1,
-        z: 0,
-        y: 0,
-        rotationX: 0,
-        ease: "none",
-        stagger: { each: 0.025, from: "center" },
-        duration: 0.18,
-      },
-      0,
-    )
-    // Hold readable for most of the travel through the viewport.
-    .to({}, { duration: 0.64 })
-    .to(words, {
-      opacity: 0,
-      z: -900,
-      y: -16,
-      rotationX: (i: number) => wordSpin(i, n, -1),
-      ease: "none",
-      stagger: { each: 0.025, from: "center" },
-      duration: 0.18,
-    });
+    },
+  );
 }
 
 /**
