@@ -1,4 +1,5 @@
 import LocaleHtmlAttrs from "@/components/LocaleHtmlAttrs";
+import { MainChrome, OptionalSiteFooter } from "@/components/layout/LayoutChrome";
 import SiteHeader from "@/components/SiteHeader";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { locales } from "@/lib/i18n";
@@ -23,7 +24,8 @@ export default async function LocaleLayout({
     <>
       <LocaleHtmlAttrs locale={locale} />
       <SiteHeader locale={locale} />
-      <div className="pb-36 md:pb-40">{children}</div>
+      <MainChrome>{children}</MainChrome>
+      <OptionalSiteFooter locale={locale} />
     </>
   );
 }

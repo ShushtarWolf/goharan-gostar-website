@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
+import { useRouter } from "next/navigation";
 import gsap from "gsap";
+import { withViewTransition } from "@/lib/motion/viewTransition";
+import { stripBasePathForRouter } from "@/lib/motion/routerHref";
 
 const SCRAMBLE_LATIN =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*<>/+=";
@@ -35,6 +38,7 @@ type Props = {
  * Persian titles stay as one text node so letters keep joining.
  */
 export default function RelatedMagneticLink({ href, title, body }: Props) {
+  const router = useRouter();
   const rootRef = useRef<HTMLAnchorElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
   const titleRef = useRef<HTMLSpanElement>(null);
@@ -179,6 +183,21 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
       href={href}
       className="relative mx-auto block max-w-2xl will-change-transform"
       style={{ touchAction: "manipulation" }}
+      onClick={(e) => {
+        if (
+          e.metaKey ||
+          e.ctrlKey ||
+          e.shiftKey ||
+          e.altKey ||
+          e.button !== 0
+        ) {
+          return;
+        }
+        e.preventDefault();
+        withViewTransition(() => {
+          router.push(stripBasePathForRouter(href));
+        });
+      }}
     >
       <span className="sr-only">{title}</span>
       <span

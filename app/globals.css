@@ -59,6 +59,42 @@ body {
  * Must NOT be full-bleed — WebGL redraws these on the z-40 canvas and
  * would cover all page copy if the rect filled the viewport.
  */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(page-root) {
+    animation: vt-page-out 0.32s ease-out forwards;
+  }
+
+  ::view-transition-new(page-root) {
+    animation: vt-page-in 0.48s ease-out forwards;
+  }
+}
+
+@keyframes vt-page-out {
+  to {
+    opacity: 0;
+    transform: scale(0.988);
+  }
+}
+
+@keyframes vt-page-in {
+  from {
+    opacity: 0;
+    transform: scale(1.01);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 .goo-picture--anchor {
   pointer-events: none;
   position: absolute;

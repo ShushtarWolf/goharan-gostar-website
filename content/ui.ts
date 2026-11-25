@@ -14,6 +14,10 @@ export const ui = {
     about: { fa: "درباره ما", tr: "Hakkımızda", en: "About" },
     contact: { fa: "تماس", tr: "İletişim", en: "Contact" },
     catalogs: { fa: "کاتالوگ‌ها", tr: "Kataloglar", en: "Catalogs" },
+    faq: { fa: "سوالات متداول", tr: "SSS", en: "FAQ" },
+    career: { fa: "فرصت‌های شغلی", tr: "Kariyer", en: "Careers" },
+    responsibility: { fa: "مسئولیت ما", tr: "Sorumluluk", en: "Responsibility" },
+    material: { fa: "پلاستیک متخلخل", tr: "Gözenekli plastik", en: "Porous plastic" },
   } satisfies Record<string, Localized<string>>,
   productsPage: {
     title: { fa: "محصولات", tr: "Ürünler", en: "Products" },

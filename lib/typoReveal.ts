@@ -189,5 +189,32 @@ export function wirePhotoEnter(imgs: HTMLElement[]) {
   });
 }
 
+/** One-shot section reveal — opacity/transform only, matches homepage easing. */
+export function wireContentReveal(els: HTMLElement[]) {
+  if (!els.length) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gsap.set(els, { clearProps: "opacity,transform" });
+    return;
+  }
+  gsap.set(els, { opacity: 0, y: 28, willChange: "transform, opacity" });
+  els.forEach((el) => {
+    gsap.to(el, {
+      opacity: 1,
+      y: 0,
+      duration: 0.65,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 92%",
+        toggleActions: "play none none none",
+        once: true,
+      },
+      onComplete: () => {
+        gsap.set(el, { clearProps: "willChange" });
+      },
+    });
+  });
+}
+
 /** @deprecated use wireTypoScroll */
 export const wireTypoEnter = wireTypoScroll;

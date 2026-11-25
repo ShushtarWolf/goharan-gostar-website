@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { ui } from "@/content/ui";
 import { href } from "@/lib/paths";
 import { t, type Locale, locales } from "@/lib/i18n";
+import TransitionLink from "@/components/motion/TransitionLink";
 import { asset } from "@/lib/asset";
 
 const NAV = [
@@ -23,7 +24,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    const menu = menuRef.current;
+  const menu = menuRef.current;
     const canvas = canvasRef.current;
     if (!menu || !canvas) return;
 
@@ -66,6 +67,18 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
     };
   }, []);
 
+  useEffect(() => {
+    const menu = menuRef.current;
+    if (!menu || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    import("gsap").then(({ default: gsap }) => {
+      gsap.fromTo(
+        menu,
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.85, ease: "power3.out", delay: 0.15 },
+      );
+    });
+  }, []);
+
   return (
     <>
       <canvas
@@ -85,24 +98,24 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
           backdropFilter: "blur(18px) saturate(1.4)",
         }}
       >
-        <a href={href(locale)} className="flex shrink-0 items-center">
+        <TransitionLink href={href(locale)} className="flex shrink-0 items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={asset("/logo-fa.png")}
             alt={ui.brand}
             className="h-7 w-auto md:h-8"
           />
-        </a>
+        </TransitionLink>
 
         <div className="flex min-w-0 flex-1 items-center justify-center gap-2.5 overflow-x-auto text-[12px] leading-none text-white/80 md:gap-6 md:text-sm">
           {NAV.map((item) => (
-            <a
+            <TransitionLink
               key={item.key}
               href={href(locale, item.path)}
               className="menu__link shrink-0 whitespace-nowrap transition hover:text-white"
             >
               {t(ui.nav[item.key], locale)}
-            </a>
+            </TransitionLink>
           ))}
         </div>
 
