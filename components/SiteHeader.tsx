@@ -3,8 +3,9 @@
 import { useEffect, useRef } from "react";
 import { ui } from "@/content/ui";
 import { href } from "@/lib/paths";
-import { t, type Locale, locales } from "@/lib/i18n";
+import { t, type Locale } from "@/lib/i18n";
 import TransitionLink from "@/components/motion/TransitionLink";
+import LanguageMenu from "@/components/LanguageMenu";
 import { asset } from "@/lib/asset";
 
 const NAV = [
@@ -89,7 +90,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       <nav
         ref={menuRef}
         aria-label="Primary"
-        className="menu fixed bottom-6 left-1/2 z-50 flex h-14 w-[min(100%-1.5rem,44rem)] -translate-x-1/2 items-center gap-2 rounded-full px-3 md:bottom-8 md:h-16 md:gap-5 md:px-6"
+        className="menu fixed bottom-6 left-1/2 z-50 flex h-14 w-[min(100%-1rem,44rem)] max-w-[calc(100vw-1rem)] -translate-x-1/2 items-center gap-1.5 rounded-full px-2.5 sm:gap-2 md:bottom-8 md:h-16 md:gap-5 md:px-6"
         style={{
           background:
             "linear-gradient(180deg, rgba(30,40,55,0.45), rgba(12,14,18,0.55))",
@@ -103,38 +104,23 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
           <img
             src={asset("/logo-fa.png")}
             alt={ui.brand}
-            className="h-7 w-auto md:h-8"
+            className="h-6 w-auto sm:h-7 md:h-8"
           />
         </TransitionLink>
 
-        <div className="flex min-w-0 flex-1 items-center justify-center gap-2.5 overflow-x-auto text-[12px] leading-none text-white/80 md:gap-6 md:text-sm">
+        <div className="flex min-w-0 flex-1 items-center justify-center gap-1 overflow-x-auto text-[10px] leading-none text-white/80 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-2 sm:text-[11px] md:gap-6 md:text-sm [&::-webkit-scrollbar]:hidden">
           {NAV.map((item) => (
             <TransitionLink
               key={item.key}
               href={href(locale, item.path)}
-              className="menu__link shrink-0 whitespace-nowrap transition hover:text-white"
+              className="menu__link shrink-0 whitespace-nowrap px-0.5 transition hover:text-white"
             >
               {t(ui.nav[item.key], locale)}
             </TransitionLink>
           ))}
         </div>
 
-        <div className="flex shrink-0 items-center gap-2.5 text-[11px] leading-none tracking-wide md:gap-3 md:text-xs">
-          {locales.map((l) => (
-            <a
-              key={l}
-              href={href(l)}
-              className={
-                l === locale
-                  ? "text-cyan"
-                  : "text-white/45 transition hover:text-white"
-              }
-              hrefLang={l}
-            >
-              {l.toUpperCase()}
-            </a>
-          ))}
-        </div>
+        <LanguageMenu locale={locale} />
       </nav>
     </>
   );
