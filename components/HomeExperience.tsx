@@ -260,13 +260,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       >
         <canvas className="absolute inset-0 h-full w-full" aria-hidden />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/50 to-graphite/30" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="goo-picture goo-picture--anchor"
-          src={heroPoster}
-          alt=""
-          aria-hidden
-        />
         <div
           data-copy
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
@@ -340,13 +333,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       </section>
 
       <section className="relative flex min-h-[80vh] items-center bg-graphite-soft px-6 py-24 md:px-12">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="goo-picture goo-picture--anchor"
-          src={INTRO_PHOTOS[0]}
-          alt=""
-          aria-hidden
-        />
         <div className="relative z-10 mx-auto max-w-3xl text-center">
           <p
             data-typo
@@ -386,13 +372,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               }}
             >
               <canvas className="absolute inset-0 h-full w-full" aria-hidden />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className="goo-picture goo-picture--anchor"
-                src={frameUrl(scene.folder, 0)}
-                alt=""
-                aria-hidden
-              />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25" />
               <div
                 data-copy
@@ -418,13 +397,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       })}
 
       <section className="relative flex min-h-[70vh] items-center bg-graphite px-6 py-24 md:px-12">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="goo-picture goo-picture--anchor"
-          src={INTRO_PHOTOS[1]}
-          alt=""
-          aria-hidden
-        />
         <div className="relative z-10 mx-auto max-w-3xl text-center">
           <p
             data-typo
@@ -442,13 +414,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       </section>
 
       <section className="relative flex min-h-[70vh] items-center justify-center bg-navy px-6 py-28">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="goo-picture goo-picture--anchor"
-          src={INTRO_PHOTOS[2]}
-          alt=""
-          aria-hidden
-        />
         <div className="relative z-10 max-w-2xl text-center">
           <h2
             data-typo

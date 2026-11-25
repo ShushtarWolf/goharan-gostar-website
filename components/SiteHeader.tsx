@@ -34,8 +34,11 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       new Promise<HTMLElement[]>((resolve) => {
         const tick = () => {
           if (cancelled) return;
+          // Skip full-scene anchors — WebGL paints those rects and covers copy.
           const pics = [
-            ...document.querySelectorAll<HTMLElement>(".goo-picture"),
+            ...document.querySelectorAll<HTMLElement>(
+              ".goo-picture:not(.goo-picture--anchor)",
+            ),
           ];
           if (pics.length) resolve(pics);
           else requestAnimationFrame(tick);
