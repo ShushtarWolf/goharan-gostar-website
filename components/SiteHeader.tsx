@@ -103,9 +103,10 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
           href={href(locale)}
           locale={locale}
           path=""
-          aria-label={`${ui.brand} — ${t(ui.nav.home, locale)}`}
+          aria-label={ui.brand}
           className="relative z-[1] flex shrink-0 touch-manipulation items-center rounded-md p-1 -m-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
         >
+          <span className="sr-only">{t(ui.nav.home, locale)}</span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={asset("/logo-fa.png")}
