@@ -303,7 +303,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
                   alt=""
                   loading={i === 0 ? "eager" : "lazy"}
                   decoding="async"
-                  className={`w-full object-cover ${
+                  className={`goo-picture w-full object-cover ${
                     i === 0
                       ? "col-span-2 h-48 md:h-64"
                       : "h-36 md:h-44"

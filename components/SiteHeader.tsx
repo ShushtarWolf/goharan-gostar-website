@@ -1,11 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ui } from "@/content/ui";
 import { href } from "@/lib/paths";
 import { t, type Locale, locales } from "@/lib/i18n";
 import { asset } from "@/lib/asset";
-import GooeyCanvas from "@/components/GooeyCanvas";
 
 const NAV = [
   { key: "home" as const, path: "" },
@@ -16,19 +15,72 @@ const NAV = [
 ];
 
 /**
- * Codrops Gooey Sticky Menu placement: fixed bottom, glossy liquid drawn on canvas,
- * HTML links sit on top. Site colors only (cyan / graphite) — no red.
+ * Codrops GooeyStickyMenu WebGL (ported) — fixed bottom, gxpore cyan glass.
+ * Canvas draws the liquid; this nav is transparent once goo is live.
  */
 export default function SiteHeader({ locale }: { locale: Locale }) {
   const menuRef = useRef<HTMLElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const menu = menuRef.current;
+    const canvas = canvasRef.current;
+    if (!menu || !canvas) return;
+
+    let cleanup: (() => void) | undefined;
+    let cancelled = false;
+
+    const waitForPictures = () =>
+      new Promise<HTMLElement[]>((resolve) => {
+        const tick = () => {
+          if (cancelled) return;
+          const pics = [
+            ...document.querySelectorAll<HTMLElement>(".goo-picture"),
+          ];
+          if (pics.length) resolve(pics);
+          else requestAnimationFrame(tick);
+        };
+        tick();
+      });
+
+    const start = async () => {
+      const { bootGooey } = await import("@/lib/gooey/runGooey.js");
+      const pictures = await waitForPictures();
+      if (cancelled || !pictures.length) return;
+      const stop = await bootGooey({ canvas, menu, pictures });
+      if (cancelled) {
+        stop();
+        return;
+      }
+      cleanup = stop;
+    };
+
+    void start();
+
+    return () => {
+      cancelled = true;
+      cleanup?.();
+    };
+  }, []);
 
   return (
     <>
-      <GooeyCanvas menuRef={menuRef} />
+      <canvas
+        ref={canvasRef}
+        className="goo pointer-events-none fixed inset-0 z-40 h-full w-full"
+        aria-hidden
+      />
       <nav
         ref={menuRef}
         aria-label="Primary"
-        className="fixed bottom-6 left-1/2 z-50 flex h-14 w-[min(100%-1.5rem,42rem)] -translate-x-1/2 items-center gap-3 rounded-full bg-transparent px-4 md:bottom-8 md:h-16 md:gap-5 md:px-6"
+        className="menu fixed bottom-6 left-1/2 z-50 flex h-14 w-[min(100%-1.5rem,42rem)] -translate-x-1/2 items-center gap-3 rounded-full px-4 md:bottom-8 md:h-16 md:gap-5 md:px-6"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(30,40,55,0.88), rgba(12,14,18,0.92))",
+          boxShadow:
+            "0 12px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.14)",
+          backdropFilter: "blur(16px)",
+        }}
       >
         <a href={href(locale)} className="flex shrink-0 items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -44,7 +96,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
             <a
               key={item.key}
               href={href(locale, item.path)}
-              className="whitespace-nowrap transition hover:text-white"
+              className="menu__link whitespace-nowrap transition hover:text-white"
             >
               {t(ui.nav[item.key], locale)}
             </a>

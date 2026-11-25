@@ -46,3 +46,10 @@ body {
   white-space: nowrap;
   border: 0;
 }
+
+/* Codrops gooey: once WebGL draws the liquid, hide the CSS pill fill */
+.menu.is-drawn {
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
