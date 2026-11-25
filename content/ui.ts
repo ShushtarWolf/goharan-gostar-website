@@ -10,6 +10,7 @@ export const ui = {
   nav: {
     home: { fa: "خانه", tr: "Ana Sayfa", en: "Home" },
     products: { fa: "محصولات", tr: "Ürünler", en: "Products" },
+    industries: { fa: "صنایع", tr: "Sektörler", en: "Industries" },
     applications: { fa: "کاربردها", tr: "Uygulamalar", en: "Applications" },
     about: { fa: "درباره ما", tr: "Hakkımızda", en: "About" },
     contact: { fa: "تماس", tr: "İletişim", en: "Contact" },
@@ -19,6 +20,16 @@ export const ui = {
     responsibility: { fa: "مسئولیت ما", tr: "Sorumluluk", en: "Responsibility" },
     material: { fa: "پلاستیک متخلخل", tr: "Gözenekli plastik", en: "Porous plastic" },
   } satisfies Record<string, Localized<string>>,
+  industriesPage: {
+    title: { fa: "صنایع", tr: "Sektörler", en: "Industries" },
+    subtitle: {
+      fa: "ده حوزهٔ کاربرد از کاتالوگ رسمی GXPORE — بدون نمایش قیمت.",
+      tr: "GXPORE resmi kataloğundaki on uygulama alanı — fiyat gösterilmez.",
+      en: "Ten application fields from the official GXPORE catalog — prices are not shown.",
+    },
+    all: { fa: "همه صنایع", tr: "Tüm sektörler", en: "All industries" },
+    productCount: { fa: "محصول", tr: "ürün", en: "products" },
+  },
   productsPage: {
     title: { fa: "محصولات", tr: "Ürünler", en: "Products" },
     all: { fa: "همه", tr: "Tümü", en: "All" },

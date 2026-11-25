@@ -1,4 +1,5 @@
 import type { CategoryId } from "@/content/categories";
+import type { IndustryId } from "@/content/industries";
 import type { Localized } from "@/lib/i18n";
 
 export type SpecsStatus = "ok" | "partial" | "placeholder" | "none";
@@ -6,6 +7,7 @@ export type SpecsStatus = "ok" | "partial" | "placeholder" | "none";
 export type Product = {
   slug: string;
   category: CategoryId;
+  industries: IndustryId[];
   /** Homepage scene folder id, if this product group appears after a scrub scene */
   homeScene?: "silencer" | "pipette" | "medical";
   name: Localized<string>;

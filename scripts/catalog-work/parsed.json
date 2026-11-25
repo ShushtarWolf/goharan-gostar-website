@@ -1,0 +1,852 @@
+[
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "filters",
+    "nameFa": "فیلترهای شیر توقف",
+    "nameLatin": "Filters",
+    "descriptionEn": "ilters are made of hydrophobi aterials, play an important role i",
+    "descriptionFa": "ilters are made of hydrophobi aterials, play an important role i"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "transfusion",
+    "nameFa": "سیستم ایمن انتقال",
+    "nameLatin": "Transfusion",
+    "descriptionEn": "reventing the spread o educe risk of transfusio",
+    "descriptionFa": "reventing the spread o educe risk of transfusio"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "retention",
+    "nameFa": "فیلترهای محافظ",
+    "nameLatin": "Retention",
+    "descriptionEn": "esigned for depth filtratio fficiency, filters provide specifie ontainment of dialysis syste",
+    "descriptionFa": "esigned for depth filtratio fficiency, filters provide specifie ontainment of dialysis syste"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "filtration",
+    "nameFa": "فیلتراسیون خون",
+    "nameLatin": "Filtration",
+    "descriptionEn": "edia, such as those that utiliz oncentrated liquid sodiu t is a medical device for Sepsis Bloo xtracorporeal removal of Filtratio",
+    "descriptionFa": "edia, such as those that utiliz oncentrated liquid sodiu t is a medical device for Sepsis Bloo xtracorporeal removal of Filtratio"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "drug-delivery",
+    "nameFa": "مخازن دارورسانی",
+    "nameLatin": "Drug Delivery",
+    "descriptionEn": "ndotoxins during hemoperfusion Adsorber Sepsi rug delivery reservoirs can b oaded with pharmaceutical agents Drug Deliver",
+    "descriptionFa": "ndotoxins during hemoperfusion Adsorber Sepsi rug delivery reservoirs can b oaded with pharmaceutical agents Drug Deliver"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "reservoirs",
+    "nameFa": "",
+    "nameLatin": "Reservoirs",
+    "descriptionEn": "ncorporated into a drug delivery Reservoir",
+    "descriptionFa": "ncorporated into a drug delivery Reservoir"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "oral-inhaler",
+    "nameFa": "فیلترهای استنشاقی",
+    "nameLatin": "Oral Inhaler",
+    "descriptionEn": "nhaler filters are used in metere ose inhalers to deliver amounts of Oral Inhale",
+    "descriptionFa": "nhaler filters are used in metere ose inhalers to deliver amounts of Oral Inhale"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "spray",
+    "nameFa": "استنشاقی و اسپری",
+    "nameLatin": "Spray",
+    "descriptionEn": "harmaceutical agents to patients Filter ia oral-bronchial administratio eliver precise doses while Nasal Inhale inimizing contamination in nasal and Spra",
+    "descriptionFa": "harmaceutical agents to patients Filter ia oral-bronchial administratio eliver precise doses while Nasal Inhale inimizing contamination in nasal and Spra"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "filters-and",
+    "nameFa": "فیلترها و دریچه‌های",
+    "nameLatin": "Filters and",
+    "descriptionEn": "nhalers Pump Filter ebulizer filters and vents offer a old advantage when assembled Nebulize nto a nebulizer, a device that Filters and",
+    "descriptionFa": "nhalers Pump Filter ebulizer filters and vents offer a old advantage when assembled Nebulize nto a nebulizer, a device that Filters and"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "applicator",
+    "nameFa": "فیلترها و فتیلهها در",
+    "nameLatin": "Applicator",
+    "descriptionEn": "onverts liquid into an aerosol for Vents Nebulize nhalation of medicatio hey are designed for fluid-base pplication of sealing agents fo ound closure, such as surgical",
+    "descriptionFa": "onverts liquid into an aerosol for Vents Nebulize nhalation of medicatio hey are designed for fluid-base pplication of sealing agents fo ound closure, such as surgical"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "therapy-set",
+    "nameFa": "فیلترها و دریچه‌های",
+    "nameLatin": "Therapy Set",
+    "descriptionEn": "dhesive or drug delivery in denta hey provide the perfect balance of Infusio erformance and protection for Therapy Se",
+    "descriptionFa": "dhesive or drug delivery in denta hey provide the perfect balance of Infusio erformance and protection for Therapy Se"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical",
+      "laboratory"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "media-and",
+    "nameFa": "فیلترهای",
+    "nameLatin": "Media and",
+    "descriptionEn": "emoval or buffer exchange for reparation of macromolecule s a complete porous material olution, bioprocessing media Bioprocessin rovide critical functionalit",
+    "descriptionFa": "ptimal infusion therapy with Filters an educed risk of infection. Vent hey provide sample filtratio bsorption, particulate captur ebubbling, venting, flui"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "fume",
+    "nameFa": "جذبکنندههای گاز",
+    "nameLatin": "Fume",
+    "descriptionEn": "eparation for real- IV revent operating room infections Fum",
+    "descriptionFa": "eparation for real- IV revent operating room infections Fum"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "sample-pads",
+    "nameFa": "پدهای نمونه",
+    "nameLatin": "Sample Pads",
+    "descriptionEn": "y absorbing infectious fumes Absorber rom high volume urine pads fo regnancy tests, to lower volum asal swab samples for COVI ests, sample pads absorb a specific Sample Pad",
+    "descriptionFa": "y absorbing infectious fumes Absorber rom high volume urine pads fo regnancy tests, to lower volum asal swab samples for COVI ests, sample pads absorb a specific Sample Pad"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "conjugate",
+    "nameFa": "پدهای مزدوج",
+    "nameLatin": "Conjugate",
+    "descriptionEn": "olume at a controlled rate t romote uniform release onto th onjugate pad and membran ydrophilic conjugate pad onsistently and efficiently absorb Conjugat",
+    "descriptionFa": "olume at a controlled rate t romote uniform release onto th onjugate pad and membran ydrophilic conjugate pad onsistently and efficiently absorb Conjugat"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "absorbent",
+    "nameFa": "پدهای جاذب",
+    "nameLatin": "Absorbent",
+    "descriptionEn": "nd release conjugate to allow for Pad ccurate downstream detectio he absorbent pad must be able t",
+    "descriptionFa": "nd release conjugate to allow for Pad ccurate downstream detectio he absorbent pad must be able t"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "debubbling",
+    "nameFa": "حباب زدا",
+    "nameLatin": "Debubbling",
+    "descriptionEn": "bsorb all of the volume of th icrobubbles release and break o hey are a versatile function that Debubblin",
+    "descriptionFa": "bsorb all of the volume of th icrobubbles release and break o hey are a versatile function that Debubblin"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "sq-easy",
+    "nameFa": "پیش فیلتر",
+    "nameLatin": "SQ-EASY",
+    "descriptionEn": "amples of problematic gel an erum Filters Pre-Analyti implify sample preparation for SQ-EAS",
+    "descriptionFa": "amples of problematic gel an erum Filters Pre-Analyti implify sample preparation for SQ-EAS"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "intake",
+    "nameFa": "فیلتر معرف",
+    "nameLatin": "INTAKE",
+    "descriptionEn": "reater efficiency Prefilter SQ-EAS ncrease lab efficiency wit",
+    "descriptionFa": "reater efficiency Prefilter SQ-EAS ncrease lab efficiency wit"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "reagent-and",
+    "nameFa": "فیلتر معرف و",
+    "nameLatin": "Reagent and",
+    "descriptionEn": "eagent Filter INTAK rotects instruments by degassin nd trapping particles as small as",
+    "descriptionFa": "eagent Filter INTAK rotects instruments by degassin nd trapping particles as small as"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "container",
+    "nameFa": "استفاده مجدد ظروف",
+    "nameLatin": "Container",
+    "descriptionEn": "ost savings and convenience with Containe",
+    "descriptionFa": "ost savings and convenience with Containe"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "iv-catheter",
+    "nameFa": "دریچه‌های لوله ایمنی",
+    "nameLatin": "IV Catheter",
+    "descriptionEn": "eusable sterilizer filters Reusabl rotect healthcare workers from Safety I athogen exposure when using IV Catheter",
+    "descriptionFa": "eusable sterilizer filters Reusabl rotect healthcare workers from Safety I athogen exposure when using IV Catheter"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "arterial",
+    "nameFa": "دریچه‌های سرنگ",
+    "nameLatin": "Arterial",
+    "descriptionEn": "atheters Vents I rotect healthcare workers when Arteria",
+    "descriptionFa": "atheters Vents I rotect healthcare workers when Arteria"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "ostomy-bag",
+    "nameFa": "هواکشهای کیسه",
+    "nameLatin": "Ostomy Bag",
+    "descriptionEn": "ollecting blood samples Syringe Vent mprove patient lifestyle with Ostomy Ba",
+    "descriptionFa": "ollecting blood samples Syringe Vent mprove patient lifestyle with Ostomy Ba"
+  },
+  {
+    "industries": [
+      "medical-pharmaceutical"
+    ],
+    "industryId": "medical-pharmaceutical",
+    "slug": "urine-bag",
+    "nameFa": "دریچه‌های کیسه ادرار",
+    "nameLatin": "Urine Bag",
+    "descriptionEn": "ontinuous venting Vent revent fluid leakage in urin",
+    "descriptionFa": "ontinuous venting Vent revent fluid leakage in urin"
+  },
+  {
+    "industries": [
+      "oil-gas-petrochemical",
+      "water-wastewater"
+    ],
+    "industryId": "oil-gas-petrochemical",
+    "slug": "water",
+    "nameFa": "فیلتر محافظ",
+    "nameLatin": "Water",
+    "descriptionEn": "onfidence and reduce the amount Disinfectio f chemicals needed System dding a UVC system to the cap of Persona ersonal water bottles to insure the Wate",
+    "descriptionFa": "il separation media feature a uniqu onded fiber technology that ca"
+  },
+  {
+    "industries": [
+      "oil-gas-petrochemical"
+    ],
+    "industryId": "oil-gas-petrochemical",
+    "slug": "profile",
+    "nameFa": "فیلتر استوانهای",
+    "nameLatin": "Profile",
+    "descriptionEn": "erform the function of multiple layer f traditional filter media, efficientl eparating oil mist from the air strea sing to filter gases or liquids. Filter ave high capacity, low cost, and ar deal for applications such as amine loop",
+    "descriptionFa": "erform the function of multiple layer f traditional filter media, efficientl eparating oil mist from the air strea sing to filter gases or liquids. Filter ave high capacity, low cost, and ar deal for applications such as amine loop"
+  },
+  {
+    "industries": [
+      "oil-gas-petrochemical"
+    ],
+    "industryId": "oil-gas-petrochemical",
+    "slug": "profile-ii",
+    "nameFa": "فیلترهای غبارگیر",
+    "nameLatin": "Profile II",
+    "descriptionEn": "iltration, compressor protection, or fina eparation of Solids from Gase article Disposable Filter. Profile I",
+    "descriptionFa": "iltration, compressor protection, or fina eparation of Solids from Gase article Disposable Filter. Profile I"
+  },
+  {
+    "industries": [
+      "oil-gas-petrochemical"
+    ],
+    "industryId": "oil-gas-petrochemical",
+    "slug": "pps-filters-suitable-for",
+    "nameFa": "فیلتر دود روغن",
+    "nameLatin": "PPS Filters Suitable for",
+    "descriptionEn": "p, nylon or PPS Filter t removes approximately moke in the exhausted air - removal o",
+    "descriptionFa": "p, nylon or PPS Filter t removes approximately moke in the exhausted air - removal o"
+  },
+  {
+    "industries": [
+      "oil-gas-petrochemical"
+    ],
+    "industryId": "oil-gas-petrochemical",
+    "slug": "catalyst",
+    "nameFa": "پایه کاتالیست",
+    "nameLatin": "Catalyst",
+    "descriptionEn": "il mist from vacuum pump exhaus onsistent performance with minimal Catalys",
+    "descriptionFa": "il mist from vacuum pump exhaus onsistent performance with minimal Catalys"
+  },
+  {
+    "industries": [
+      "food-beverage"
+    ],
+    "industryId": "food-beverage",
+    "slug": "spargers",
+    "nameFa": "اسپارجرها",
+    "nameLatin": "Spargers",
+    "descriptionEn": "ilter sparging allows for a ven smaller bubble diamete hus increasing the surfac rea of the bubbles creating a Sparger",
+    "descriptionFa": "ilter sparging allows for a ven smaller bubble diamete hus increasing the surfac rea of the bubbles creating a Sparger"
+  },
+  {
+    "industries": [
+      "food-beverage"
+    ],
+    "industryId": "food-beverage",
+    "slug": "ore-efficient-spargin-pplicati",
+    "nameFa": "",
+    "nameLatin": "",
+    "descriptionEn": "ore efficient spargin pplication by decreasin",
+    "descriptionFa": "ore efficient spargin pplication by decreasin"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "pipette",
+    "nameFa": "فیلتر سر سمپلر",
+    "nameLatin": "Pipette",
+    "descriptionEn": "he pipette tip filters are mad rom pure ultra-high MW-PE vi intering, suitable for applications Pipette tip filte",
+    "descriptionFa": "he pipette tip filters are mad rom pure ultra-high MW-PE vi intering, suitable for applications Pipette tip filte"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "robotic-pipette",
+    "nameFa": "پیپت رباتیک",
+    "nameLatin": "Robotic Pipette",
+    "descriptionEn": "n automated liquid handlin ilters are customized to meet th it, air flow, and volume Automatio lacement of your specific robotic Robotic Pipette",
+    "descriptionFa": "n automated liquid handlin ilters are customized to meet th it, air flow, and volume Automatio lacement of your specific robotic Robotic Pipette"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "pipette-cone",
+    "nameFa": "فیلترهای",
+    "nameLatin": "Pipette Cone",
+    "descriptionEn": "nd automated liquid-handling Tip Filter ipette cone filters help preven",
+    "descriptionFa": "nd automated liquid-handling Tip Filter ipette cone filters help preven"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "serological",
+    "nameFa": "فیلترهای سمپلر",
+    "nameLatin": "Serological",
+    "descriptionEn": "rotect serological pipette ample from contamination, fas nintentional Serologica",
+    "descriptionFa": "rotect serological pipette ample from contamination, fas nintentional Serologica"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "erythrocyte-esr",
+    "nameFa": "فیلترهای",
+    "nameLatin": "Erythrocyte ESR",
+    "descriptionEn": "ample expulsion with a family of pipette Filter ustomizable aerosol barrie reate a protective barrier from ES ccidental overfilling of the (Erythrocyte ES",
+    "descriptionFa": "ample expulsion with a family of pipette Filter ustomizable aerosol barrie reate a protective barrier from ES ccidental overfilling of the (Erythrocyte ES"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "frits",
+    "nameFa": "و اتوماتیک",
+    "nameLatin": "Frits",
+    "descriptionEn": "ipette and blood spillage by Sedimentatio sing ESR Filters Rate) Filter hese filters commonly known a rits, for use in commercially SPE Frit vailable SPE columns, cartridges High SP r multi-well SPE plates to Throughpu",
+    "descriptionFa": "ipette and blood spillage by Sedimentatio sing ESR Filters Rate) Filter hese filters commonly known a rits, for use in commercially SPE Frit vailable SPE columns, cartridges High SP r multi-well SPE plates to Throughpu"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "precipitation",
+    "nameFa": "محیط رسوب",
+    "nameLatin": "Precipitation",
+    "descriptionEn": "acilitate column concentration to Automatio acuum manifold, needle or Filter emove contaminants from Protei rotein samples without plugging Precipitation",
+    "descriptionFa": "acilitate column concentration to Automatio acuum manifold, needle or Filter emove contaminants from Protei rotein samples without plugging Precipitation"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "affinity-filters",
+    "nameFa": "فیلترها و",
+    "nameLatin": "Affinity Filters",
+    "descriptionEn": "r breakthrough Medi hey are an innovative range o dvanced porous materials tha",
+    "descriptionFa": "r breakthrough Medi hey are an innovative range o dvanced porous materials tha"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "affinity",
+    "nameFa": "پشتیبانیهای",
+    "nameLatin": "Affinity",
+    "descriptionEn": "nhance functionality throug urface modification or sorbent Affinit",
+    "descriptionFa": "nhance functionality throug urface modification or sorbent Affinit"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "dissolution",
+    "nameFa": "فیلترها در کاربرد",
+    "nameLatin": "Dissolution",
+    "descriptionEn": "ilter out contaminants during the Dissolutio",
+    "descriptionFa": "ilter out contaminants during the Dissolutio"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "gel-filtration",
+    "nameFa": "محیط های آنالیز",
+    "nameLatin": "Gel Filtration",
+    "descriptionEn": "ange of porous material ther DN hey are used for the analysis o olecular size, separations o omponents in the mixture, salt",
+    "descriptionFa": "ange of porous material ther DN hey are used for the analysis o olecular size, separations o omponents in the mixture, salt"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "saliva-and-urine",
+    "nameFa": "نمونهبرداری بزاق",
+    "nameLatin": "Saliva and Urine",
+    "descriptionEn": "erformance in single-use Filter ioprocessing application ample collection medi icking and absorption properties Saliva and Urin",
+    "descriptionFa": "erformance in single-use Filter ioprocessing application ample collection medi icking and absorption properties Saliva and Urin"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "pregnancy-and",
+    "nameFa": "بارداری و",
+    "nameLatin": "Pregnancy and",
+    "descriptionEn": "nable the safe collection, Collectio bsorption and release of sampl s the industry standard for hom regnancy and ovulation testin round the world, they ar",
+    "descriptionFa": "nable the safe collection, Collectio bsorption and release of sampl s the industry standard for hom regnancy and ovulation testin round the world, they ar"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "wicks-for-drugs",
+    "nameFa": "سوء استعمال",
+    "nameLatin": "Wicks for Drugs",
+    "descriptionEn": "ptimized with precise capillar ction, high purity an roprietary color chang nsure safe collection, absorptio",
+    "descriptionFa": "ptimized with precise capillar ction, high purity an roprietary color chang nsure safe collection, absorptio"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "matrix-sampling",
+    "nameFa": "نمونهبرداری",
+    "nameLatin": "Matrix Sampling",
+    "descriptionEn": "nd release of samples with ou educe time and costs with ",
+    "descriptionFa": "nd release of samples with ou educe time and costs with"
+  },
+  {
+    "industries": [
+      "laboratory"
+    ],
+    "industryId": "laboratory",
+    "slug": "technology",
+    "nameFa": "ماتریسی",
+    "nameLatin": "Technology",
+    "descriptionEn": "omprehensive sample collectio ransport, and storage syste",
+    "descriptionFa": "omprehensive sample collectio ransport, and storage syste"
+  },
+  {
+    "industries": [
+      "electronics"
+    ],
+    "industryId": "electronics",
+    "slug": "fluid-reservoirs",
+    "nameFa": "نگهدارنده",
+    "nameLatin": "Fluid Reservoirs",
+    "descriptionEn": "ontrol and retain fluids within energy Fluid Reservoir",
+    "descriptionFa": "ontrol and retain fluids within energy Fluid Reservoir"
+  },
+  {
+    "industries": [
+      "electronics"
+    ],
+    "industryId": "electronics",
+    "slug": "enhance",
+    "nameFa": "لولههای دیفیوزر",
+    "nameLatin": "Enhance",
+    "descriptionEn": "torage devices and Wick nhance semiconductor processing wit",
+    "descriptionFa": "torage devices and Wick nhance semiconductor processing wit"
+  },
+  {
+    "industries": [
+      "electronics"
+    ],
+    "industryId": "electronics",
+    "slug": "porous-vacuum",
+    "nameFa": "رگوالتورهای",
+    "nameLatin": "Porous Vacuum",
+    "descriptionEn": "eliver precise flow rates an ngineered for tight pore size Porous Vacuu",
+    "descriptionFa": "eliver precise flow rates an ngineered for tight pore size Porous Vacuu"
+  },
+  {
+    "industries": [
+      "electronics"
+    ],
+    "industryId": "electronics",
+    "slug": "gas-absorption",
+    "nameFa": "مورد استفاده در",
+    "nameLatin": "Gas-Absorption",
+    "descriptionEn": "nd volume control. they used as Component as-absorbing filters target specifi ases that may cause a sensor to have a Gas-Absorptio",
+    "descriptionFa": "nd volume control. they used as Component as-absorbing filters target specifi ases that may cause a sensor to have a Gas-Absorptio"
+  },
+  {
+    "industries": [
+      "electronics"
+    ],
+    "industryId": "electronics",
+    "slug": "reservoirs-and",
+    "nameFa": "نگهدارندههای",
+    "nameLatin": "Reservoirs and",
+    "descriptionEn": "alse reading or cause premature Filter egradation of the cell itsel eeded to retain and deliver a",
+    "descriptionFa": "alse reading or cause premature Filter egradation of the cell itsel eeded to retain and deliver a"
+  },
+  {
+    "industries": [
+      "electronics"
+    ],
+    "industryId": "electronics",
+    "slug": "separators-and",
+    "nameFa": "عایقها و",
+    "nameLatin": "Separators and",
+    "descriptionEn": "acilitate the chemical reactio solate components within batteries and Separators an",
+    "descriptionFa": "acilitate the chemical reactio solate components within batteries and Separators an"
+  },
+  {
+    "industries": [
+      "electronics"
+    ],
+    "industryId": "electronics",
+    "slug": "vents-for",
+    "nameFa": "سنسورهای",
+    "nameLatin": "Vents for",
+    "descriptionEn": "uel cells Isolator o provide reliable pressure equalizatio rotection from outdoor condition",
+    "descriptionFa": "uel cells Isolator o provide reliable pressure equalizatio rotection from outdoor condition"
+  },
+  {
+    "industries": [
+      "electronics"
+    ],
+    "industryId": "electronics",
+    "slug": "stronger",
+    "nameFa": "روشنایی فضای",
+    "nameLatin": "Stronger",
+    "descriptionEn": "ents designed. It reduce pressur tronger protection and stabilization fo",
+    "descriptionFa": "ents designed. It reduce pressur tronger protection and stabilization fo"
+  },
+  {
+    "industries": [
+      "compressed-air-desiccant"
+    ],
+    "industryId": "compressed-air-desiccant",
+    "slug": "pneumatic-filters",
+    "nameFa": "فیلترهای",
+    "nameLatin": "Pneumatic Filters",
+    "descriptionEn": "elp safely vent pressurized ai or 1 piece Silence ncrease performance of you",
+    "descriptionFa": "elp safely vent pressurized ai or 1 piece Silence ncrease performance of you"
+  },
+  {
+    "industries": [
+      "compressed-air-desiccant"
+    ],
+    "industryId": "compressed-air-desiccant",
+    "slug": "electronic",
+    "nameFa": "محفظههای",
+    "nameLatin": "Electronic",
+    "descriptionEn": "hey use fans to force air in and Electroni",
+    "descriptionFa": "hey use fans to force air in and Electroni"
+  },
+  {
+    "industries": [
+      "compressed-air-desiccant"
+    ],
+    "industryId": "compressed-air-desiccant",
+    "slug": "fluid-reservoir",
+    "nameFa": "مخزن مایعات و",
+    "nameLatin": "Fluid Reservoir",
+    "descriptionEn": "ut of electronic enclosures Enclosure Vent rotect automotive fluid Fluid Reservoi",
+    "descriptionFa": "ut of electronic enclosures Enclosure Vent rotect automotive fluid Fluid Reservoi"
+  },
+  {
+    "industries": [
+      "health-environment"
+    ],
+    "industryId": "health-environment",
+    "slug": "plug-in",
+    "nameFa": "فتیله‌های حشرهکش",
+    "nameLatin": "Plug-in",
+    "descriptionEn": "nsecticide from the bottle o ontainer to the heater using",
+    "descriptionFa": "nsecticide from the bottle o ontainer to the heater using"
+  },
+  {
+    "industries": [
+      "health-environment"
+    ],
+    "industryId": "health-environment",
+    "slug": "scent",
+    "nameFa": "عطر بیولوژیکی",
+    "nameLatin": "Scent",
+    "descriptionEn": "apillary action, and then Plug-i iffusing the insecticide int he air at a high temperatur hese scent attraction wicks Biologica bsorb and hold biological Scen",
+    "descriptionFa": "apillary action, and then Plug-i iffusing the insecticide int he air at a high temperatur hese scent attraction wicks Biologica bsorb and hold biological Scen"
+  },
+  {
+    "industries": [
+      "health-environment"
+    ],
+    "industryId": "health-environment",
+    "slug": "deliver",
+    "nameFa": "فتیله‌های",
+    "nameLatin": "Deliver",
+    "descriptionEn": "cents to attract specific Attractio nsects Wick eliver fragrance reliabl",
+    "descriptionFa": "cents to attract specific Attractio nsects Wick eliver fragrance reliabl"
+  },
+  {
+    "industries": [
+      "health-environment"
+    ],
+    "industryId": "health-environment",
+    "slug": "ambient-air",
+    "nameFa": "خوشبوکننده هوا و",
+    "nameLatin": "Ambient Air",
+    "descriptionEn": "icks Plug-i y using porous fiber wick n an ambient air freshene",
+    "descriptionFa": "icks Plug-i y using porous fiber wick n an ambient air freshene"
+  },
+  {
+    "industries": [
+      "health-environment"
+    ],
+    "industryId": "health-environment",
+    "slug": "reed-diffuser",
+    "nameFa": "فتیله‌های نی",
+    "nameLatin": "Reed Diffuser",
+    "descriptionEn": "omeowners can experienc hey are available for use i ragrance diffuser product hey offer a surprising",
+    "descriptionFa": "omeowners can experienc hey are available for use i ragrance diffuser product hey offer a surprising"
+  },
+  {
+    "industries": [
+      "health-environment"
+    ],
+    "industryId": "health-environment",
+    "slug": "freshener",
+    "nameFa": "فتیله‌های",
+    "nameLatin": "Freshener",
+    "descriptionEn": "ffice, or personal spac oilet freshener is one o he best ways to ensur",
+    "descriptionFa": "ffice, or personal spac oilet freshener is one o he best ways to ensur"
+  },
+  {
+    "industries": [
+      "health-environment"
+    ],
+    "industryId": "health-environment",
+    "slug": "carbon-odor",
+    "nameFa": "از بین برنده بوی",
+    "nameLatin": "Carbon Odor",
+    "descriptionEn": "athrooms smell clean an dor eliminators can b oaded with carbon and othe unctional additives to",
+    "descriptionFa": "athrooms smell clean an dor eliminators can b oaded with carbon and othe unctional additives to"
+  },
+  {
+    "industries": [
+      "health-environment",
+      "water-wastewater"
+    ],
+    "industryId": "health-environment",
+    "slug": "membrane",
+    "nameFa": "فلیتراسیون غشایی",
+    "nameLatin": "Membrane",
+    "descriptionEn": "he aquarium Bubbler ilter industrial wastewater with Membran",
+    "descriptionFa": "embrane support media ar sed as substrates for fragil"
+  },
+  {
+    "industries": [
+      "water-wastewater"
+    ],
+    "industryId": "water-wastewater",
+    "slug": "carbon-block",
+    "nameFa": "پیش فیلترهای کربن",
+    "nameLatin": "Carbon Block",
+    "descriptionEn": "arbon block pre-filters, also calle eamless filters, offer advanced pre-",
+    "descriptionFa": "arbon block pre-filters, also calle eamless filters, offer advanced pre-"
+  },
+  {
+    "industries": [
+      "water-wastewater"
+    ],
+    "industryId": "water-wastewater",
+    "slug": "support",
+    "nameFa": "لولههای پشتیبان",
+    "nameLatin": "Support",
+    "descriptionEn": "edia support tubes, sleeves, oute ores improve filtratio",
+    "descriptionFa": "edia support tubes, sleeves, oute ores improve filtratio"
+  },
+  {
+    "industries": [
+      "water-wastewater"
+    ],
+    "industryId": "water-wastewater",
+    "slug": "media",
+    "nameFa": "دیسکهای پشتیبان",
+    "nameLatin": "Media",
+    "descriptionEn": "tructural integrity of wate edia support disks improve th iltration and structural integrity of",
+    "descriptionFa": "tructural integrity of wate edia support disks improve th iltration and structural integrity of"
+  },
+  {
+    "industries": [
+      "water-wastewater"
+    ],
+    "industryId": "water-wastewater",
+    "slug": "aquarium",
+    "nameFa": "حبابساز آکواریوم",
+    "nameLatin": "Aquarium",
+    "descriptionEn": "ater filtration cartridge ontrol gas streams and oxygen in Aquariu",
+    "descriptionFa": "ater filtration cartridge ontrol gas streams and oxygen in Aquariu"
+  },
+  {
+    "industries": [
+      "water-wastewater"
+    ],
+    "industryId": "water-wastewater",
+    "slug": "systems",
+    "nameFa": "عفونت",
+    "nameLatin": "Systems",
+    "descriptionEn": "eduction of possible pathogens that Disinfectio nfection. Systems",
+    "descriptionFa": "eduction of possible pathogens that Disinfectio nfection. Systems"
+  },
+  {
+    "industries": [
+      "water-wastewater"
+    ],
+    "industryId": "water-wastewater",
+    "slug": "sports-water",
+    "nameFa": "فیلتر بطری آب",
+    "nameLatin": "Sports Water",
+    "descriptionEn": "nhance taste through sustainable Sports Wate",
+    "descriptionFa": "nhance taste through sustainable Sports Wate"
+  },
+  {
+    "industries": [
+      "water-wastewater"
+    ],
+    "industryId": "water-wastewater",
+    "slug": "swimming",
+    "nameFa": "فیلترهای استخر",
+    "nameLatin": "Swimming",
+    "descriptionEn": "iltration Bottle Filter o extend the life of the filter, thes orous filters are backwashabl",
+    "descriptionFa": "iltration Bottle Filter o extend the life of the filter, thes orous filters are backwashabl"
+  },
+  {
+    "industries": [
+      "water-wastewater"
+    ],
+    "industryId": "water-wastewater",
+    "slug": "spa-and-hot",
+    "nameFa": "فیلترهای آبگرم و",
+    "nameLatin": "Spa and Hot",
+    "descriptionEn": "leanable, reusable and facilitat low to ensure optimal filtratio aximize filtration and product lif ith cleanable radial cartridge",
+    "descriptionFa": "leanable, reusable and facilitat low to ensure optimal filtratio aximize filtration and product lif ith cleanable radial cartridge"
+  },
+  {
+    "industries": [
+      "stationery"
+    ],
+    "industryId": "stationery",
+    "slug": "nibs-for",
+    "nameFa": "نوک برای هایالیترها",
+    "nameLatin": "Nibs for",
+    "descriptionEn": "wo distinct nib technologies for us",
+    "descriptionFa": "wo distinct nib technologies for us"
+  },
+  {
+    "industries": [
+      "stationery"
+    ],
+    "industryId": "stationery",
+    "slug": "highlighters",
+    "nameFa": "",
+    "nameLatin": "Highlighters",
+    "descriptionEn": "n highlighters depending on th pecific design needs of the marker",
+    "descriptionFa": "n highlighters depending on th pecific design needs of the marker"
+  }
+]

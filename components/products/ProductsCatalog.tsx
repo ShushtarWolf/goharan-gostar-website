@@ -16,6 +16,14 @@ export default function ProductsCatalog({ locale }: { locale: Locale }) {
         <TransitionLink href={href(locale, "products")} className={typo.linkCta}>
           {t(ui.productsPage.all, locale)}
         </TransitionLink>
+        <TransitionLink
+          href={href(locale, "industries")}
+          locale={locale}
+          path="industries"
+          className={`${typo.linkCta} text-mist/55 hover:text-cyan`}
+        >
+          {t(ui.nav.industries, locale)}
+        </TransitionLink>
         {categories.map((c) => (
           <a
             key={c.id}

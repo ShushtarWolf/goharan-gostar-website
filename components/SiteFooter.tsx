@@ -5,6 +5,7 @@ import TransitionLink from "@/components/motion/TransitionLink";
 
 const LINKS: { key: keyof typeof ui.nav; path: string }[] = [
   { key: "products", path: "products" },
+  { key: "industries", path: "industries" },
   { key: "applications", path: "applications" },
   { key: "about", path: "about" },
   { key: "faq", path: "faq" },

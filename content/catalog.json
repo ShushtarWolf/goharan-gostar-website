@@ -1,0 +1,906 @@
+{
+  "products": [
+    {
+      "slug": "stopper-valve-filter",
+      "nameFa": "فیلترهای شیر توقف (محفظه ساکشن)",
+      "nameLatin": "Suction Canister Filters (Stopper valve filter)",
+      "descriptionEn": "filters are made of hydrophobic materials and play an important role in preventing the spread of contaminated liquids.",
+      "descriptionFa": "فیلترهای شیر توقف (محفظه ساکشن)",
+      "image": "/catalog/catalog-001.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "blood-transfusion-safety-system",
+      "nameFa": "سیستم ایمن انتقال خون",
+      "nameLatin": "Blood Transfusion Safety System",
+      "descriptionEn": "Reduce risk of transfusion-transmitted infections.",
+      "descriptionFa": "سیستم ایمن انتقال خون",
+      "image": "/catalog/catalog-002.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "dialysis-filter",
+      "nameFa": "فیلترهای محافظ محیط دیالیز",
+      "nameLatin": "Dialysis Media Retention Filters",
+      "descriptionEn": "Designed for depth filtration efficiency; filters provide specified containment of dialysis system media such as concentrated liquid sodium bicarbonate.",
+      "descriptionFa": "فیلترهای محافظ محیط دیالیز",
+      "image": "/catalog/catalog-003.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "sepsis-blood-filtration-adsorber",
+      "nameFa": "دستگاه جذب فیلتراسیون خون برای حذف اندوتوکسین‌ها در همودیالیز.",
+      "nameLatin": "Sepsis Blood Filtration Adsorber",
+      "descriptionEn": "Sepsis Blood Filtration Adsorber porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "دستگاه جذب فیلتراسیون خون برای حذف اندوتوکسین‌ها در همودیالیز.",
+      "image": "/catalog/catalog-004.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "drug-delivery-reservoirs",
+      "nameFa": "مخازن دارورسانی برای بارگذاری دارو و ادغام در دستگاه تحویل دارو.",
+      "nameLatin": "Drug Delivery Reservoirs",
+      "descriptionEn": "Drug Delivery Reservoirs porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "مخازن دارورسانی برای بارگذاری دارو و ادغام در دستگاه تحویل دارو.",
+      "image": "/catalog/catalog-005.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "oral-inhaler-filters",
+      "nameFa": "فیلتر استنشاق دهانی برای تحویل دقیق دوز در اینهالر.",
+      "nameLatin": "Oral Inhaler Filters",
+      "descriptionEn": "Oral Inhaler Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر استنشاق دهانی برای تحویل دقیق دوز در اینهالر.",
+      "image": "/catalog/catalog-006.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "nasal-inhaler-spray-pump-filters",
+      "nameFa": "فیلتر پمپ استنشاق بینی برای کاهش آلودگی نمونه.",
+      "nameLatin": "Nasal Inhaler Spray Pump Filters",
+      "descriptionEn": "Nasal Inhaler Spray Pump Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر پمپ استنشاق بینی برای کاهش آلودگی نمونه.",
+      "image": "/catalog/catalog-007.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "nebulizer-filters-and-vents",
+      "nameFa": "فیلتر و دریچه نبولایزر برای تبدیل مایع به aerosol.",
+      "nameLatin": "Nebulizer Filters And Vents",
+      "descriptionEn": "Nebulizer Filters And Vents porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر و دریچه نبولایزر برای تبدیل مایع به aerosol.",
+      "image": "/catalog/catalog-008.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "topical-applicator-filters-wicks",
+      "nameFa": "فیلتر و فتیله برای کاربرد موضعی در بستن زخم و دندانپزشکی.",
+      "nameLatin": "Topical Applicator Filters Wicks",
+      "descriptionEn": "Topical Applicator Filters Wicks porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر و فتیله برای کاربرد موضعی در بستن زخم و دندانپزشکی.",
+      "image": "/catalog/catalog-009.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "infusion-therapy-set-filters-vents",
+      "nameFa": "فیلتر و دریچه انفوزیون برای کاهش ریسک عفونت.",
+      "nameLatin": "Infusion Therapy Set Filters Vents",
+      "descriptionEn": "Infusion Therapy Set Filters Vents porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر و دریچه انفوزیون برای کاهش ریسک عفونت.",
+      "image": "/catalog/catalog-010.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "ivd-microfluidic-media-filters",
+      "nameFa": "رسانه و فیلتر IVD و میکروفلویدیک برای تشخیص مولکولی.",
+      "nameLatin": "Ivd Microfluidic Media Filters",
+      "descriptionEn": "Ivd Microfluidic Media Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "رسانه و فیلتر IVD و میکروفلویدیک برای تشخیص مولکولی.",
+      "image": "/catalog/catalog-011.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "fume-absorbers",
+      "nameFa": "جذب‌کننده دود و بخار برای کاهش آلودگی اتاق عمل.",
+      "nameLatin": "Fume Absorbers",
+      "descriptionEn": "Fume Absorbers porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "جذب‌کننده دود و بخار برای کاهش آلودگی اتاق عمل.",
+      "image": "/catalog/catalog-012.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "sample-pads",
+      "nameFa": "پد نمونه‌برداری با جذب کنترل‌شده برای تشخیص.",
+      "nameLatin": "Sample Pads",
+      "descriptionEn": "Sample Pads porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "پد نمونه‌برداری با جذب کنترل‌شده برای تشخیص.",
+      "image": "/catalog/catalog-013.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "conjugate-pads",
+      "nameFa": "پد مزدوج برای جذب و آزادسازی یکنواخت کانژوگه.",
+      "nameLatin": "Conjugate Pads",
+      "descriptionEn": "Conjugate Pads porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "پد مزدوج برای جذب و آزادسازی یکنواخت کانژوگه.",
+      "image": "/catalog/catalog-014.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "absorbent-pads",
+      "nameFa": "پد جاذب برای جذب کامل حجم آزمایش.",
+      "nameLatin": "Absorbent Pads",
+      "descriptionEn": "Absorbent Pads porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "پد جاذب برای جذب کامل حجم آزمایش.",
+      "image": "/catalog/catalog-015.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "debubbling",
+      "nameFa": "حباب‌زدا برای دگاز و مدیریت جریان و فشار.",
+      "nameLatin": "Debubbling",
+      "descriptionEn": "Debubbling porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "حباب‌زدا برای دگاز و مدیریت جریان و فشار.",
+      "image": "/catalog/catalog-016.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "pre-analytic-serum-filters",
+      "nameFa": "فیلتر سرم برای نمونه‌های مشکل‌دار قبل از آنالیز.",
+      "nameLatin": "Pre Analytic Serum Filters",
+      "descriptionEn": "Pre Analytic Serum Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر سرم برای نمونه‌های مشکل‌دار قبل از آنالیز.",
+      "image": "/catalog/catalog-017.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "sq-easy-prefilter",
+      "nameFa": "پیش‌فیلتر SQ-EASY برای آماده‌سازی سریع‌تر نمونه.",
+      "nameLatin": "Sq Easy Prefilter",
+      "descriptionEn": "Sq Easy Prefilter porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "پیش‌فیلتر SQ-EASY برای آماده‌سازی سریع‌تر نمونه.",
+      "image": "/catalog/catalog-018.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "intake-reagent-filter",
+      "nameFa": "فیلتر معرف INTAKE برای افزایش بهره‌وری آزمایشگاه.",
+      "nameLatin": "Intake Reagent Filter",
+      "descriptionEn": "Intake Reagent Filter porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر معرف INTAKE برای افزایش بهره‌وری آزمایشگاه.",
+      "image": "/catalog/catalog-019.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "inline-reagent-degassing-filter",
+      "nameFa": "فیلتر معرف و گاززدایی INLINE برای محافظت از دستگاه.",
+      "nameLatin": "Inline Reagent Degassing Filter",
+      "descriptionEn": "Inline Reagent Degassing Filter porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر معرف و گاززدایی INLINE برای محافظت از دستگاه.",
+      "image": "/catalog/catalog-020.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "sterilization-container-reusable-filters",
+      "nameFa": "فیلتر قابل استفاده مجدد برای ظروف استریلیزاسیون.",
+      "nameLatin": "Sterilization Container Reusable Filters",
+      "descriptionEn": "Sterilization Container Reusable Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر قابل استفاده مجدد برای ظروف استریلیزاسیون.",
+      "image": "/catalog/catalog-021.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "safety-iv-catheter-vents",
+      "nameFa": "دریچه لوله IV ایمنی برای محافظت از پرسنل.",
+      "nameLatin": "Safety Iv Catheter Vents",
+      "descriptionEn": "Safety Iv Catheter Vents porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "دریچه لوله IV ایمنی برای محافظت از پرسنل.",
+      "image": "/catalog/catalog-022.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "arterial-syringe-vents",
+      "nameFa": "دریچه سرنگ شریانی برای نمونه‌گیری خون.",
+      "nameLatin": "Arterial Syringe Vents",
+      "descriptionEn": "Arterial Syringe Vents porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "دریچه سرنگ شریانی برای نمونه‌گیری خون.",
+      "image": "/catalog/catalog-023.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "ostomy-bag-vents",
+      "nameFa": "هواکش کیسه استومی برای تهویه مداوم.",
+      "nameLatin": "Ostomy Bag Vents",
+      "descriptionEn": "Ostomy Bag Vents porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "هواکش کیسه استومی برای تهویه مداوم.",
+      "image": "/catalog/catalog-024.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "urine-bag-vents",
+      "nameFa": "دریچه کیسه ادرار برای جلوگیری از نشت.",
+      "nameLatin": "Urine Bag Vents",
+      "descriptionEn": "Urine Bag Vents porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "دریچه کیسه ادرار برای جلوگیری از نشت.",
+      "image": "/catalog/catalog-025.webp",
+      "industries": [
+        "medical-pharmaceutical"
+      ]
+    },
+    {
+      "slug": "oil-fuel-water-separation-media",
+      "nameFa": "محیط جداسازی آب از روغن و نفت با حذف مه روغن.",
+      "nameLatin": "Oil Fuel Water Separation Media",
+      "descriptionEn": "Oil Fuel Water Separation Media porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "محیط جداسازی آب از روغن و نفت با حذف مه روغن.",
+      "image": "/catalog/catalog-026.webp",
+      "industries": [
+        "oil-gas-petrochemical"
+      ]
+    },
+    {
+      "slug": "sintered-filter-cartridge",
+      "nameFa": "فیلتر استوانه‌ای فیلتراسیون",
+      "nameLatin": "Profile Coreless Filters",
+      "descriptionEn": "High capacity filters for amine loop filtration, compressor protection, or final product filtration.",
+      "descriptionFa": "فیلتر استوانه‌ای فیلتراسیون",
+      "image": "/catalog/catalog-027.webp",
+      "industries": [
+        "oil-gas-petrochemical"
+      ]
+    },
+    {
+      "slug": "profile-ii-filters",
+      "nameFa": "فیلترهای غبارگیر",
+      "nameLatin": "Profile II Filters",
+      "descriptionEn": "Separation of solids from gases; suitable for corrosive and non-corrosive fluids.",
+      "descriptionFa": "فیلترهای غبارگیر",
+      "image": "/catalog/catalog-028.webp",
+      "industries": [
+        "oil-gas-petrochemical"
+      ]
+    },
+    {
+      "slug": "oil-mist-filter",
+      "nameFa": "فیلتر دود روغن برای خروجی پمپ وکیوم.",
+      "nameLatin": "Oil Mist Filter",
+      "descriptionEn": "Oil Mist Filter porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر دود روغن برای خروجی پمپ وکیوم.",
+      "image": "/catalog/catalog-029.webp",
+      "industries": [
+        "oil-gas-petrochemical"
+      ]
+    },
+    {
+      "slug": "catalyst-carriers",
+      "nameFa": "پایه کاتالیست با عملکرد پایدار و کم‌شارش.",
+      "nameLatin": "Catalyst Carriers",
+      "descriptionEn": "Catalyst Carriers porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "پایه کاتالیست با عملکرد پایدار و کم‌شارش.",
+      "image": "/catalog/catalog-030.webp",
+      "industries": [
+        "oil-gas-petrochemical"
+      ]
+    },
+    {
+      "slug": "fuel-filters-vents-small-engines",
+      "nameFa": "فیلتر و دریچه سوخت برای موتورهای کوچک.",
+      "nameLatin": "Fuel Filters Vents Small Engines",
+      "descriptionEn": "Fuel Filters Vents Small Engines porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر و دریچه سوخت برای موتورهای کوچک.",
+      "image": "/catalog/catalog-031.webp",
+      "industries": [
+        "industrial-tools"
+      ]
+    },
+    {
+      "slug": "cap-closure-vents-industrial-containers",
+      "nameFa": "درب و دریچه برای یکپارچگی ظروف صنعتی.",
+      "nameLatin": "Cap Closure Vents Industrial Containers",
+      "descriptionEn": "Cap Closure Vents Industrial Containers porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "درب و دریچه برای یکپارچگی ظروف صنعتی.",
+      "image": "/catalog/catalog-032.webp",
+      "industries": [
+        "industrial-tools"
+      ]
+    },
+    {
+      "slug": "vents-household-cleaning-supplies",
+      "nameFa": "واشر فوم درب برای شوینده‌های خانگی.",
+      "nameLatin": "Vents Household Cleaning Supplies",
+      "descriptionEn": "Vents Household Cleaning Supplies porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "واشر فوم درب برای شوینده‌های خانگی.",
+      "image": "/catalog/catalog-033.webp",
+      "industries": [
+        "industrial-tools"
+      ]
+    },
+    {
+      "slug": "spargers",
+      "nameFa": "اسپارجرها",
+      "nameLatin": "Spargers",
+      "descriptionEn": "Filter sparging allows a smaller bubble diameter, increasing bubble surface area for more efficient sparging and decreased process time.",
+      "descriptionFa": "اسپارجرها",
+      "image": "/catalog/catalog-034.webp",
+      "industries": [
+        "food-beverage"
+      ]
+    },
+    {
+      "slug": "pipette-tips-filter",
+      "nameFa": "فیلتر سر سمپلر",
+      "nameLatin": "Pipette tip filter",
+      "descriptionEn": "Pipette tip filters are made from pure ultra-high MW-PE via sintering, suitable for automated liquid handling systems.",
+      "descriptionFa": "فیلتر سر سمپلر",
+      "image": "/catalog/catalog-035.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "automation-robotic-pipette-tip-filters",
+      "nameFa": "فیلتر سر پیپت رباتیک با جریان هوا و حجم سفارشی.",
+      "nameLatin": "Automation Robotic Pipette Tip Filters",
+      "descriptionEn": "Automation Robotic Pipette Tip Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر سر پیپت رباتیک با جریان هوا و حجم سفارشی.",
+      "image": "/catalog/catalog-036.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "pipette-cone-filters",
+      "nameFa": "فیلتر مخروطی سمپلر برای جلوگیری از آلودگی.",
+      "nameLatin": "Pipette Cone Filters",
+      "descriptionEn": "Pipette Cone Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر مخروطی سمپلر برای جلوگیری از آلودگی.",
+      "image": "/catalog/catalog-037.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "serological-pipette-filters",
+      "nameFa": "فیلتر سمپلر سرولوژی با مانع aerosol.",
+      "nameLatin": "Serological Pipette Filters",
+      "descriptionEn": "Serological Pipette Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر سمپلر سرولوژی با مانع aerosol.",
+      "image": "/catalog/catalog-038.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "esr-filters",
+      "nameFa": "فیلتر ESR برای جلوگیری از سرریز خون.",
+      "nameLatin": "Esr Filters",
+      "descriptionEn": "Esr Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر ESR برای جلوگیری از سرریز خون.",
+      "image": "/catalog/catalog-039.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "hydrophilic-frits",
+      "nameFa": "Hydrophilic Frits porous component engineered for reliable filtration and fluid management.",
+      "nameLatin": "Hydrophilic Frits",
+      "descriptionEn": "Hydrophilic Frits porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "Hydrophilic Frits porous component engineered for reliable filtration and fluid management.",
+      "image": "/catalog/catalog-040.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "protein-precipitation-media",
+      "nameFa": "محیط رسوب پروتئین بدون مسدود شدن.",
+      "nameLatin": "Protein Precipitation Media",
+      "descriptionEn": "Protein Precipitation Media porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "محیط رسوب پروتئین بدون مسدود شدن.",
+      "image": "/catalog/catalog-041.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "affinity-filters-supports",
+      "nameFa": "فیلتر و پشتیبان affinity برای کارایی بیشتر.",
+      "nameLatin": "Affinity Filters Supports",
+      "descriptionEn": "Affinity Filters Supports porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر و پشتیبان affinity برای کارایی بیشتر.",
+      "image": "/catalog/catalog-042.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "dissolution-filters",
+      "nameFa": "فیلترها در کاربرد Dissolution",
+      "nameLatin": "Dissolution Filters",
+      "descriptionEn": "Filter out contaminants during the dissolution testing process.",
+      "descriptionFa": "فیلترها در کاربرد Dissolution",
+      "image": "/catalog/catalog-043.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "empty-gravity-flow-nucleic-acid-purification-columns",
+      "nameFa": "Empty Gravity Flow Nucleic Acid Purification Columns porous component engineered for reliable filtration and fluid management.",
+      "nameLatin": "Empty Gravity Flow Nucleic Acid Purification Columns",
+      "descriptionEn": "Empty Gravity Flow Nucleic Acid Purification Columns porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "Empty Gravity Flow Nucleic Acid Purification Columns porous component engineered for reliable filtration and fluid management.",
+      "image": "/catalog/catalog-044.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "gel-filtration-media-support",
+      "nameFa": "محیط آنالیز مولکولی و تبادل بافر.",
+      "nameLatin": "Gel Filtration Media Support",
+      "descriptionEn": "Gel Filtration Media Support porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "محیط آنالیز مولکولی و تبادل بافر.",
+      "image": "/catalog/catalog-045.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "bioprocessing-media-filters",
+      "nameFa": "رسانه و فیلتر بیوپروسس تک‌مصرف.",
+      "nameLatin": "Bioprocessing Media Filters",
+      "descriptionEn": "Bioprocessing Media Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "رسانه و فیلتر بیوپروسس تک‌مصرف.",
+      "image": "/catalog/catalog-046.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "saliva-urine-collection",
+      "nameFa": "دریچه کیسه ادرار برای جلوگیری از نشت.",
+      "nameLatin": "Saliva Urine Collection",
+      "descriptionEn": "Saliva Urine Collection porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "دریچه کیسه ادرار برای جلوگیری از نشت.",
+      "image": "/catalog/catalog-047.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "pregnancy-ovulation-wicks",
+      "nameFa": "فتیله تست بارداری و تخمک‌گذاری.",
+      "nameLatin": "Pregnancy Ovulation Wicks",
+      "descriptionEn": "Pregnancy Ovulation Wicks porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فتیله تست بارداری و تخمک‌گذاری.",
+      "image": "/catalog/catalog-048.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "wicks-drugs-of-abuse",
+      "nameFa": "فتیله تست سوءمصرف مواد مخدر.",
+      "nameLatin": "Wicks Drugs Of Abuse",
+      "descriptionEn": "Wicks Drugs Of Abuse porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فتیله تست سوءمصرف مواد مخدر.",
+      "image": "/catalog/catalog-049.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "matrix-sampling-technology",
+      "nameFa": "فناوری نمونه‌برداری ماتریسی یکپارچه.",
+      "nameLatin": "Matrix Sampling Technology",
+      "descriptionEn": "Matrix Sampling Technology porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فناوری نمونه‌برداری ماتریسی یکپارچه.",
+      "image": "/catalog/catalog-050.webp",
+      "industries": [
+        "laboratory"
+      ]
+    },
+    {
+      "slug": "fluid-reservoirs-and-wicks",
+      "nameFa": "نگهدارنده و فتیله مایعات",
+      "nameLatin": "Fluid Reservoirs and Wicks",
+      "descriptionEn": "Control and retain fluids within energy storage devices.",
+      "descriptionFa": "نگهدارنده و فتیله مایعات",
+      "image": "/catalog/catalog-051.webp",
+      "industries": [
+        "electronics"
+      ]
+    },
+    {
+      "slug": "diffusion-tubes",
+      "nameFa": "لوله‌های دیفیوزر",
+      "nameLatin": "Diffusion Tubes",
+      "descriptionEn": "Enhance semiconductor processing with pure materials; deliver precise flow rates with engineered pore size and volume control.",
+      "descriptionFa": "لوله‌های دیفیوزر",
+      "image": "/catalog/catalog-052.webp",
+      "industries": [
+        "electronics"
+      ]
+    },
+    {
+      "slug": "porous-vacuum-components",
+      "nameFa": "قطعه وکیوم متخلخل با کنترل دقیق تخلخل.",
+      "nameLatin": "Porous Vacuum Components",
+      "descriptionEn": "Porous Vacuum Components porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "قطعه وکیوم متخلخل با کنترل دقیق تخلخل.",
+      "image": "/catalog/catalog-053.webp",
+      "industries": [
+        "electronics"
+      ]
+    },
+    {
+      "slug": "gas-absorption-filters",
+      "nameFa": "فیلتر جذب گاز برای سنسورهای گازی.",
+      "nameLatin": "Gas Absorption Filters",
+      "descriptionEn": "Gas Absorption Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر جذب گاز برای سنسورهای گازی.",
+      "image": "/catalog/catalog-054.webp",
+      "industries": [
+        "electronics"
+      ]
+    },
+    {
+      "slug": "electrolyte-reservoirs-and-wicks",
+      "nameFa": "نگهدارنده‌های الکترولیت",
+      "nameLatin": "Electrolyte Reservoirs and Wicks",
+      "descriptionEn": "Retain and deliver electrolyte to facilitate electrochemical reactions.",
+      "descriptionFa": "نگهدارنده‌های الکترولیت",
+      "image": "/catalog/catalog-055.webp",
+      "industries": [
+        "electronics"
+      ]
+    },
+    {
+      "slug": "separators-and-isolators",
+      "nameFa": "جداکننده و عایق برای باتری و پیل سوختی.",
+      "nameLatin": "Separators And Isolators",
+      "descriptionEn": "Separators And Isolators porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "جداکننده و عایق برای باتری و پیل سوختی.",
+      "image": "/catalog/catalog-056.webp",
+      "industries": [
+        "electronics"
+      ]
+    },
+    {
+      "slug": "vents-housings-enclosures",
+      "nameFa": "دریچه محفظه الکترونیک برای تعادل فشار.",
+      "nameLatin": "Vents Housings Enclosures",
+      "descriptionEn": "Vents Housings Enclosures porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "دریچه محفظه الکترونیک برای تعادل فشار.",
+      "image": "/catalog/catalog-057.webp",
+      "industries": [
+        "electronics"
+      ]
+    },
+    {
+      "slug": "vents-outdoor-lighting",
+      "nameFa": "دریچه روشنایی فضای باز.",
+      "nameLatin": "Vents Outdoor Lighting",
+      "descriptionEn": "Vents Outdoor Lighting porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "دریچه روشنایی فضای باز.",
+      "image": "/catalog/catalog-058.webp",
+      "industries": [
+        "electronics"
+      ]
+    },
+    {
+      "slug": "pneumatic-silencer",
+      "nameFa": "سایلنسر پنوماتیک پلاستیکی",
+      "nameLatin": "Pneumatic Plastic Silencer",
+      "descriptionEn": "Pneumatic silencers help safely vent pressurized air into the atmosphere.",
+      "descriptionFa": "سایلنسر پنوماتیک پلاستیکی",
+      "image": "/catalog/catalog-059.webp",
+      "industries": [
+        "compressed-air-desiccant"
+      ]
+    },
+    {
+      "slug": "pneumatic-filters",
+      "nameFa": "فیلترهای پنوماتیک برای عملکرد بهتر سیستم.",
+      "nameLatin": "Pneumatic Filters",
+      "descriptionEn": "Pneumatic Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلترهای پنوماتیک برای عملکرد بهتر سیستم.",
+      "image": "/catalog/catalog-060.webp",
+      "industries": [
+        "compressed-air-desiccant"
+      ]
+    },
+    {
+      "slug": "electronic-enclosure-vents",
+      "nameFa": "دریچه محفظه الکترونیکی.",
+      "nameLatin": "Electronic Enclosure Vents",
+      "descriptionEn": "Electronic Enclosure Vents porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "دریچه محفظه الکترونیکی.",
+      "image": "/catalog/catalog-061.webp",
+      "industries": [
+        "compressed-air-desiccant"
+      ]
+    },
+    {
+      "slug": "fluid-reservoir-vents-filters",
+      "nameFa": "دریچه‌های مخزن مایعات و سوخت",
+      "nameLatin": "Fluid Reservoir Vents & Filters",
+      "descriptionEn": "Protect automotive fluid reservoirs with venting and filtration.",
+      "descriptionFa": "دریچه‌های مخزن مایعات و سوخت",
+      "image": "/catalog/catalog-062.webp",
+      "industries": [
+        "compressed-air-desiccant"
+      ]
+    },
+    {
+      "slug": "protection-vents-diffusion-layer",
+      "nameFa": "دریچه حفاظتی و لایه انتشار.",
+      "nameLatin": "Protection Vents Diffusion Layer",
+      "descriptionEn": "Protection Vents Diffusion Layer porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "دریچه حفاظتی و لایه انتشار.",
+      "image": "/catalog/catalog-063.webp",
+      "industries": [
+        "compressed-air-desiccant"
+      ]
+    },
+    {
+      "slug": "insecticide-wicks",
+      "nameFa": "فتیله‌های حشره‌کش Plug-in",
+      "nameLatin": "Plug-in Insecticide Wicks",
+      "descriptionEn": "Wicks deliver insecticide from the container to the heater via capillary action and diffuse it into the air.",
+      "descriptionFa": "فتیله‌های حشره‌کش Plug-in",
+      "image": "/catalog/catalog-064.webp",
+      "industries": [
+        "health-environment"
+      ]
+    },
+    {
+      "slug": "biological-scent-attraction-wicks",
+      "nameFa": "فتیله جذب عطر بیولوژیکی برای دام حشرات.",
+      "nameLatin": "Biological Scent Attraction Wicks",
+      "descriptionEn": "Biological Scent Attraction Wicks porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فتیله جذب عطر بیولوژیکی برای دام حشرات.",
+      "image": "/catalog/catalog-065.webp",
+      "industries": [
+        "health-environment"
+      ]
+    },
+    {
+      "slug": "plug-in-air-freshener-wicks",
+      "nameFa": "فتیله خوشبوکننده هوا plug-in.",
+      "nameLatin": "Plug In Air Freshener Wicks",
+      "descriptionEn": "Plug In Air Freshener Wicks porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فتیله خوشبوکننده هوا plug-in.",
+      "image": "/catalog/catalog-066.webp",
+      "industries": [
+        "health-environment"
+      ]
+    },
+    {
+      "slug": "perfume-wicks",
+      "nameFa": "فتیله‌های خوشبوکننده محیط",
+      "nameLatin": "Ambient Air Freshener Wicks",
+      "descriptionEn": "Porous fiber wicks in ambient air fresheners provide reliable diffusion.",
+      "descriptionFa": "فتیله‌های خوشبوکننده محیط",
+      "image": "/catalog/catalog-067.webp",
+      "industries": [
+        "health-environment"
+      ]
+    },
+    {
+      "slug": "reed-diffuser-wicks",
+      "nameFa": "فتیله نی پخش‌کننده عطر.",
+      "nameLatin": "Reed Diffuser Wicks",
+      "descriptionEn": "Reed Diffuser Wicks porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فتیله نی پخش‌کننده عطر.",
+      "image": "/catalog/catalog-068.webp",
+      "industries": [
+        "health-environment"
+      ]
+    },
+    {
+      "slug": "toilet-freshener-wicks",
+      "nameFa": "فتیله خوشبوکننده توالت.",
+      "nameLatin": "Toilet Freshener Wicks",
+      "descriptionEn": "Toilet Freshener Wicks porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فتیله خوشبوکننده توالت.",
+      "image": "/catalog/catalog-069.webp",
+      "industries": [
+        "health-environment"
+      ]
+    },
+    {
+      "slug": "carbon-odor-eliminators",
+      "nameFa": "حذف‌کننده بو با کربن فعال.",
+      "nameLatin": "Carbon Odor Eliminators",
+      "descriptionEn": "Carbon Odor Eliminators porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "حذف‌کننده بو با کربن فعال.",
+      "image": "/catalog/catalog-070.webp",
+      "industries": [
+        "health-environment"
+      ]
+    },
+    {
+      "slug": "membrane-support",
+      "nameFa": "ساپورت غشایی برای استحکام و عملکرد.",
+      "nameLatin": "Membrane Support",
+      "descriptionEn": "Membrane Support porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "ساپورت غشایی برای استحکام و عملکرد.",
+      "image": "/catalog/catalog-071.webp",
+      "industries": [
+        "health-environment"
+      ]
+    },
+    {
+      "slug": "carbon-block-pre-filters",
+      "nameFa": "پیش‌فیلترهای کربن بلوک",
+      "nameLatin": "Carbon Block Pre-Filters",
+      "descriptionEn": "Carbon block pre-filters offer advanced pre-filtration for drinking water applications.",
+      "descriptionFa": "پیش‌فیلترهای کربن بلوک",
+      "image": "/catalog/catalog-072.webp",
+      "industries": [
+        "water-wastewater"
+      ]
+    },
+    {
+      "slug": "media-support-tubes",
+      "nameFa": "لوله پشتیبان محیط فیلتراسیون آب.",
+      "nameLatin": "Media Support Tubes",
+      "descriptionEn": "Media Support Tubes porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "لوله پشتیبان محیط فیلتراسیون آب.",
+      "image": "/catalog/catalog-073.webp",
+      "industries": [
+        "water-wastewater"
+      ]
+    },
+    {
+      "slug": "media-support-disks",
+      "nameFa": "دیسک پشتیبان کارتریج آب.",
+      "nameLatin": "Media Support Disks",
+      "descriptionEn": "Media Support Disks porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "دیسک پشتیبان کارتریج آب.",
+      "image": "/catalog/catalog-074.webp",
+      "industries": [
+        "water-wastewater"
+      ]
+    },
+    {
+      "slug": "aquarium-diffuser",
+      "nameFa": "حبابساز آکواریوم",
+      "nameLatin": "Aquarium Bubblers",
+      "descriptionEn": "Control gas streams and oxygen in the aquarium.",
+      "descriptionFa": "حبابساز آکواریوم",
+      "image": "/catalog/catalog-075.webp",
+      "industries": [
+        "water-wastewater"
+      ]
+    },
+    {
+      "slug": "tubular-membrane-filtration",
+      "nameFa": "فیلتراسیون غشایی لوله‌ای برای پساب صنعتی.",
+      "nameLatin": "Tubular Membrane Filtration",
+      "descriptionEn": "Tubular Membrane Filtration porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتراسیون غشایی لوله‌ای برای پساب صنعتی.",
+      "image": "/catalog/catalog-076.webp",
+      "industries": [
+        "water-wastewater"
+      ]
+    },
+    {
+      "slug": "building-water-disinfection-systems",
+      "nameFa": "سیستم ضدعفونی آب ساختمانی.",
+      "nameLatin": "Building Water Disinfection Systems",
+      "descriptionEn": "Building Water Disinfection Systems porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "سیستم ضدعفونی آب ساختمانی.",
+      "image": "/catalog/catalog-077.webp",
+      "industries": [
+        "water-wastewater"
+      ]
+    },
+    {
+      "slug": "personal-water-disinfection-systems",
+      "nameFa": "فیلتر محافظ بطری شخصی.",
+      "nameLatin": "Personal Water Disinfection Systems",
+      "descriptionEn": "Personal Water Disinfection Systems porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر محافظ بطری شخصی.",
+      "image": "/catalog/catalog-078.webp",
+      "industries": [
+        "water-wastewater"
+      ]
+    },
+    {
+      "slug": "sports-water-bottle-filters",
+      "nameFa": "فیلتر بطری آب ورزشی",
+      "nameLatin": "Sports Water Bottle Filters",
+      "descriptionEn": "Enhance taste through sustainable filtration in personal bottles.",
+      "descriptionFa": "فیلتر بطری آب ورزشی",
+      "image": "/catalog/catalog-079.webp",
+      "industries": [
+        "water-wastewater"
+      ]
+    },
+    {
+      "slug": "swimming-pool-filters",
+      "nameFa": "فیلترهای استخر",
+      "nameLatin": "Swimming Pool Filters",
+      "descriptionEn": "Porous filters are backwashable and cleanable to extend filter life and ensure optimal filtration efficiency.",
+      "descriptionFa": "فیلترهای استخر",
+      "image": "/catalog/catalog-080.webp",
+      "industries": [
+        "water-wastewater"
+      ]
+    },
+    {
+      "slug": "spa-hot-tub-filters",
+      "nameFa": "فیلتر آبگرم و جکوزی قابل شستشو.",
+      "nameLatin": "Spa Hot Tub Filters",
+      "descriptionEn": "Spa Hot Tub Filters porous component engineered for reliable filtration and fluid management.",
+      "descriptionFa": "فیلتر آبگرم و جکوزی قابل شستشو.",
+      "image": "/catalog/catalog-081.webp",
+      "industries": [
+        "water-wastewater"
+      ]
+    },
+    {
+      "slug": "highlighter-nib",
+      "nameFa": "نوک برای هایلایترها",
+      "nameLatin": "Nibs for Highlighters",
+      "descriptionEn": "Two distinct nib technologies for highlighters depending on specific marker design needs.",
+      "descriptionFa": "نوک برای هایلایترها",
+      "image": "/catalog/catalog-082.webp",
+      "industries": [
+        "stationery"
+      ]
+    }
+  ]
+}
