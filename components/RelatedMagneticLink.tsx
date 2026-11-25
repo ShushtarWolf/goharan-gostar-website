@@ -148,7 +148,7 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
         ref={titleRef}
         data-typo
         aria-hidden
-        className="block text-2xl font-medium leading-snug tracking-tight text-mist md:text-4xl md:leading-[1.2]"
+        className="font-display block text-2xl font-semibold leading-snug tracking-tight text-mist md:text-4xl md:leading-[1.2]"
       >
         {title}
       </span>

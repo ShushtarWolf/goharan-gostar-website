@@ -17,6 +17,7 @@
   --color-mist: var(--mist);
   --color-ink: var(--ink);
   --font-sans: var(--font-vazirmatn);
+  --font-display: var(--font-plex-arabic);
 }
 
 html {
@@ -28,6 +29,10 @@ body {
   background: var(--graphite);
   color: var(--mist);
   font-family: var(--font-vazirmatn), sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-plex-arabic), var(--font-vazirmatn), sans-serif;
 }
 
 ::selection {

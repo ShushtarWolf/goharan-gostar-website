@@ -12,8 +12,10 @@ import { href } from "@/lib/paths";
 import { t, type Locale } from "@/lib/i18n";
 import RelatedMagneticLink from "@/components/RelatedMagneticLink";
 import {
+  SCENE_PIN_END,
   wirePhotoEnter,
   wireTypoPinExit,
+  wireTypoScenePin,
   wireTypoScroll,
 } from "@/lib/typoReveal";
 
@@ -232,9 +234,16 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         );
       });
 
-      // Index4 scrub for all static copy — skip frame copy (handled by pin exit).
+      // Pinned text scenes — enter plays while the section sticks (nav stays over it).
+      root.querySelectorAll<HTMLElement>("[data-typo-scene]").forEach((section) => {
+        const copy = section.querySelector<HTMLElement>("[data-copy]");
+        if (copy) wireTypoScenePin(section, copy, SCENE_PIN_END);
+      });
+
+      // Index4 scrub for static copy — skip frame/scene-pinned copy.
       root.querySelectorAll<HTMLElement>("[data-typo]").forEach((el) => {
         if (el.closest("[data-copy]")) return;
+        if (el.closest("[data-typo-scene]")) return;
         wireTypoScroll(el);
       });
       const photos = root.querySelectorAll<HTMLElement>("[data-photo]");
@@ -267,13 +276,13 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         >
           <p
             data-typo
-            className="mb-5 text-[11px] font-medium tracking-[0.4em] text-cyan md:text-xs"
+            className="font-display mb-5 text-[11px] font-medium tracking-[0.4em] text-cyan md:text-xs"
           >
             {t(homeCopy.heroEyebrow, locale)}
           </p>
           <h1
             data-typo
-            className="max-w-3xl text-4xl font-medium leading-[1.15] tracking-tight text-mist md:text-6xl lg:text-7xl"
+            className="font-display max-w-3xl text-4xl font-semibold leading-[1.15] tracking-tight text-mist md:text-6xl lg:text-7xl"
           >
             {t(homeCopy.heroTitle, locale)}
           </h1>
@@ -287,6 +296,11 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       </section>
 
       <section className="relative overflow-hidden bg-mist px-6 py-28 text-ink md:px-12 md:py-36">
+        <span
+          data-goo-hold
+          aria-hidden
+          className="pointer-events-none absolute bottom-24 left-1/2 h-2 w-28 -translate-x-1/2"
+        />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(10,61,122,0.08),transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-16 lg:grid-cols-2 lg:items-center lg:gap-20">
           <div className="order-2 lg:order-1">
@@ -313,13 +327,13 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
           <div className="order-1 lg:order-2">
             <p
               data-typo
-              className="mb-5 text-[11px] font-medium tracking-[0.3em] text-navy md:text-xs"
+              className="font-display mb-5 text-[11px] font-medium tracking-[0.3em] text-navy md:text-xs"
             >
               {t(homeCopy.introEyebrow, locale)}
             </p>
             <h2
               data-typo
-              className="text-3xl font-medium leading-[1.25] tracking-tight md:text-5xl md:leading-[1.2]"
+              className="font-display text-3xl font-semibold leading-[1.25] tracking-tight md:text-5xl md:leading-[1.2]"
             >
               {t(homeCopy.introTitle, locale)}
             </h2>
@@ -333,17 +347,28 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="relative flex min-h-[80vh] items-center bg-graphite-soft px-6 py-24 md:px-12">
-        <div className="relative z-10 mx-auto max-w-3xl text-center">
+      <section
+        data-typo-scene
+        className="relative flex h-screen items-center bg-graphite-soft px-6 md:px-12"
+      >
+        <span
+          data-goo-hold
+          aria-hidden
+          className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
+        />
+        <div
+          data-copy
+          className="relative z-10 mx-auto max-w-3xl text-center"
+        >
           <p
             data-typo
-            className="mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
+            className="font-display mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
           >
             {t(homeCopy.structureEyebrow, locale)}
           </p>
           <h2
             data-typo
-            className="text-3xl font-medium tracking-tight md:text-5xl lg:text-6xl"
+            className="font-display text-3xl font-semibold tracking-tight md:text-5xl lg:text-6xl"
           >
             {t(homeCopy.structureTitle, locale)}
           </h2>
@@ -378,9 +403,14 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
                 data-copy
                 className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
               >
+                <span
+                  data-goo-hold
+                  aria-hidden
+                  className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
+                />
                 <h2
                   data-typo
-                  className="max-w-3xl text-4xl font-medium leading-tight tracking-tight text-mist md:text-6xl"
+                  className="font-display max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-mist md:text-6xl"
                 >
                   {t(sceneCopy.title, locale)}
                 </h2>
@@ -397,34 +427,52 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         );
       })}
 
-      <section className="relative flex min-h-[70vh] items-center bg-graphite px-6 py-24 md:px-12">
-        <div className="relative z-10 mx-auto max-w-3xl text-center">
+      <section
+        data-typo-scene
+        className="relative flex h-screen items-center bg-graphite px-6 md:px-12"
+      >
+        <span
+          data-goo-hold
+          aria-hidden
+          className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
+        />
+        <div
+          data-copy
+          className="relative z-10 mx-auto max-w-3xl text-center"
+        >
           <p
             data-typo
-            className="mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
+            className="font-display mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
           >
             {t(homeCopy.performanceEyebrow, locale)}
           </p>
           <h2
             data-typo
-            className="text-3xl font-medium leading-snug tracking-tight md:text-5xl"
+            className="font-display text-3xl font-semibold leading-snug tracking-tight md:text-5xl"
           >
             {t(homeCopy.performanceTitle, locale)}
           </h2>
         </div>
       </section>
 
-      <section className="relative flex min-h-[70vh] items-center justify-center bg-navy px-6 py-28">
-        <div className="relative z-10 max-w-2xl text-center">
+      <section
+        data-typo-scene
+        className="relative flex h-screen items-center justify-center bg-navy px-6"
+      >
+        <span
+          data-goo-hold
+          aria-hidden
+          className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
+        />
+        <div data-copy className="relative z-10 max-w-2xl text-center">
           <h2
             data-typo
-            className="text-3xl font-medium leading-snug tracking-tight md:text-5xl"
+            className="font-display text-3xl font-semibold leading-snug tracking-tight md:text-5xl"
           >
             {t(homeCopy.ctaTitle, locale)}
           </h2>
           <div className="mt-10 flex flex-col items-center gap-5 text-base text-mist/85 md:text-lg">
             <a
-              data-typo
               href={`tel:${ui.contact.phoneIran}`}
               className="transition hover:text-cyan"
             >
@@ -434,7 +482,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               <span dir="ltr">{ui.contact.phoneIran}</span>
             </a>
             <a
-              data-typo
               href={`tel:${ui.contact.phoneTurkey}`}
               className="transition hover:text-cyan"
             >
@@ -444,7 +491,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               <span dir="ltr">{ui.contact.phoneTurkey}</span>
             </a>
             <a
-              data-typo
               href={`mailto:${ui.contact.email}`}
               className="transition hover:text-cyan"
               dir="ltr"
