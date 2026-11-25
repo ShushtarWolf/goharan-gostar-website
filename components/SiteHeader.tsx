@@ -76,10 +76,10 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
         className="menu fixed bottom-6 left-1/2 z-50 flex h-14 w-[min(100%-1.5rem,42rem)] -translate-x-1/2 items-center gap-3 rounded-full px-4 md:bottom-8 md:h-16 md:gap-5 md:px-6"
         style={{
           background:
-            "linear-gradient(180deg, rgba(30,40,55,0.88), rgba(12,14,18,0.92))",
+            "linear-gradient(180deg, rgba(30,40,55,0.45), rgba(12,14,18,0.55))",
           boxShadow:
-            "0 12px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.14)",
-          backdropFilter: "blur(16px)",
+            "0 12px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.2)",
+          backdropFilter: "blur(18px) saturate(1.4)",
         }}
       >
         <a href={href(locale)} className="flex shrink-0 items-center">

@@ -53,3 +53,14 @@ body {
   box-shadow: none !important;
   backdrop-filter: none !important;
 }
+
+/* Invisible hit boxes for goo strands (textures still load) */
+.goo-picture--anchor {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+}

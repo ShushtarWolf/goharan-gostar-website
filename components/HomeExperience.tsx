@@ -61,7 +61,6 @@ function wireFrameScrub(
   if (!ctx) return;
 
   const frames: (HTMLImageElement | null)[] = Array(FRAME_COUNT).fill(null);
-  const kids = Array.from(copy.children) as HTMLElement[];
 
   const pickFrame = (progress: number) => {
     const i = Math.min(
@@ -104,22 +103,8 @@ function wireFrameScrub(
     ctx.drawImage(img, dx, dy, dw, dh);
   };
 
-  // Entrance: text rises in as the scene arrives (before / at pin).
+  // Copy opacity for scrub exit only — word enter is handled by data-typo (index4).
   gsap.set(copy, { opacity: 1 });
-  gsap.set(kids, { opacity: 0, y: 36, filter: "blur(10px)" });
-  gsap.to(kids, {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    stagger: 0.12,
-    duration: 1.05,
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: section,
-      start: "top 70%",
-      toggleActions: "play none none reverse",
-    },
-  });
 
   const attachScrub = () => {
     ScrollTrigger.create({
@@ -286,17 +271,33 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       >
         <canvas className="absolute inset-0 h-full w-full" aria-hidden />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/50 to-graphite/30" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className="goo-picture goo-picture--anchor"
+          src={heroPoster}
+          alt=""
+          aria-hidden
+        />
         <div
           data-copy
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
         >
-          <p className="mb-5 text-[11px] font-medium tracking-[0.4em] text-cyan md:text-xs">
+          <p
+            data-typo
+            className="mb-5 text-[11px] font-medium tracking-[0.4em] text-cyan md:text-xs"
+          >
             {t(homeCopy.heroEyebrow, locale)}
           </p>
-          <h1 className="max-w-3xl text-4xl font-medium leading-[1.15] tracking-tight text-mist md:text-6xl lg:text-7xl">
+          <h1
+            data-typo
+            className="max-w-3xl text-4xl font-medium leading-[1.15] tracking-tight text-mist md:text-6xl lg:text-7xl"
+          >
             {t(homeCopy.heroTitle, locale)}
           </h1>
-          <p className="mt-6 max-w-lg text-base leading-8 text-mist/80 md:text-xl md:leading-9">
+          <p
+            data-typo
+            className="mt-6 max-w-lg text-base leading-8 text-mist/80 md:text-xl md:leading-9"
+          >
             {t(homeCopy.heroBody, locale)}
           </p>
         </div>
@@ -351,7 +352,14 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       </section>
 
       <section className="relative flex min-h-[80vh] items-center bg-graphite-soft px-6 py-24 md:px-12">
-        <div className="mx-auto max-w-3xl text-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className="goo-picture goo-picture--anchor"
+          src={INTRO_PHOTOS[0]}
+          alt=""
+          aria-hidden
+        />
+        <div className="relative z-10 mx-auto max-w-3xl text-center">
           <p
             data-typo
             className="mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
@@ -360,7 +368,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
           </p>
           <h2
             data-typo
-            data-goo-target
             className="text-3xl font-medium tracking-tight md:text-5xl lg:text-6xl"
           >
             {t(homeCopy.structureTitle, locale)}
@@ -383,7 +390,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               data-frame-section
               data-folder={scene.folder}
               data-id={scene.id}
-              data-goo-target
               className="relative h-screen overflow-hidden bg-graphite"
               style={{
                 backgroundImage: `url(${frameUrl(scene.folder, 0)})`,
@@ -392,15 +398,28 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               }}
             >
               <canvas className="absolute inset-0 h-full w-full" aria-hidden />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="goo-picture goo-picture--anchor"
+                src={frameUrl(scene.folder, 0)}
+                alt=""
+                aria-hidden
+              />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25" />
               <div
                 data-copy
                 className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
               >
-                <h2 className="max-w-3xl text-4xl font-medium leading-tight tracking-tight text-mist md:text-6xl">
+                <h2
+                  data-typo
+                  className="max-w-3xl text-4xl font-medium leading-tight tracking-tight text-mist md:text-6xl"
+                >
                   {t(sceneCopy.title, locale)}
                 </h2>
-                <p className="mt-6 max-w-xl text-base leading-8 text-mist/85 md:text-xl md:leading-9">
+                <p
+                  data-typo
+                  className="mt-6 max-w-xl text-base leading-8 text-mist/85 md:text-xl md:leading-9"
+                >
                   {t(sceneCopy.body, locale)}
                 </p>
               </div>
@@ -411,7 +430,14 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       })}
 
       <section className="relative flex min-h-[70vh] items-center bg-graphite px-6 py-24 md:px-12">
-        <div className="mx-auto max-w-3xl text-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className="goo-picture goo-picture--anchor"
+          src={INTRO_PHOTOS[1]}
+          alt=""
+          aria-hidden
+        />
+        <div className="relative z-10 mx-auto max-w-3xl text-center">
           <p
             data-typo
             className="mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
@@ -420,7 +446,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
           </p>
           <h2
             data-typo
-            data-goo-target
             className="text-3xl font-medium leading-snug tracking-tight md:text-5xl"
           >
             {t(homeCopy.performanceTitle, locale)}
@@ -429,7 +454,14 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       </section>
 
       <section className="relative flex min-h-[70vh] items-center justify-center bg-navy px-6 py-28">
-        <div className="max-w-2xl text-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className="goo-picture goo-picture--anchor"
+          src={INTRO_PHOTOS[2]}
+          alt=""
+          aria-hidden
+        />
+        <div className="relative z-10 max-w-2xl text-center">
           <h2
             data-typo
             className="text-3xl font-medium leading-snug tracking-tight md:text-5xl"
@@ -473,7 +505,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       </section>
 
       <footer className="border-t border-white/10 bg-graphite px-6 pb-28 pt-8 text-center text-xs text-mist/45 md:pb-32">
-        {t(ui.footer, locale)}
+        <p data-typo>{t(ui.footer, locale)}</p>
       </footer>
     </div>
   );
