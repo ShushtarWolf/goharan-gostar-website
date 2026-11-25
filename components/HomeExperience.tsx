@@ -298,6 +298,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
                 <img
                   key={src}
                   data-photo
+                  data-goo-target
                   src={src}
                   alt=""
                   loading={i === 0 ? "eager" : "lazy"}
@@ -344,6 +345,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
           </p>
           <h2
             data-typo
+            data-goo-target
             className="text-3xl font-medium tracking-tight md:text-5xl lg:text-6xl"
           >
             {t(homeCopy.structureTitle, locale)}
@@ -366,6 +368,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               data-frame-section
               data-folder={scene.folder}
               data-id={scene.id}
+              data-goo-target
               className="relative h-screen overflow-hidden bg-graphite"
               style={{
                 backgroundImage: `url(${frameUrl(scene.folder, 0)})`,
@@ -402,6 +405,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
           </p>
           <h2
             data-typo
+            data-goo-target
             className="text-3xl font-medium leading-snug tracking-tight md:text-5xl"
           >
             {t(homeCopy.performanceTitle, locale)}
@@ -453,7 +457,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 bg-graphite px-6 py-8 text-center text-xs text-mist/45">
+      <footer className="border-t border-white/10 bg-graphite px-6 pb-28 pt-8 text-center text-xs text-mist/45 md:pb-32">
         {t(ui.footer, locale)}
       </footer>
     </div>
