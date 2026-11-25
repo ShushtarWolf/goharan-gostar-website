@@ -10,6 +10,7 @@ import { ui } from "@/content/ui";
 import { productsForHomeScene } from "@/content/products";
 import { href } from "@/lib/paths";
 import { t, type Locale } from "@/lib/i18n";
+import RelatedMagneticLink from "@/components/RelatedMagneticLink";
 import {
   wirePhotoEnter,
   wireTypoPinExit,
@@ -19,8 +20,8 @@ import {
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const FRAME_COUNT = 48;
-/** Shorter pins = less weird scroll stretch vs old +=180%. */
-const FRAME_PIN_END = "+=110%";
+/** Keep pin short so frame scrub + text don't feel like sticky limbo. */
+const FRAME_PIN_END = "+=85%";
 
 type SceneId = "hero" | "silencer" | "pipette" | "medical";
 
@@ -169,7 +170,7 @@ function RelatedStrip({
   const items = productsForHomeScene(scene);
   if (!items.length) return null;
   return (
-    <section className="bg-graphite-soft px-6 py-24 md:px-12 md:py-32">
+    <section className="bg-graphite-soft px-6 pb-36 pt-20 md:px-12 md:pb-44 md:pt-28">
       <div className="mx-auto max-w-3xl text-center">
         <p
           data-typo
@@ -177,30 +178,27 @@ function RelatedStrip({
         >
           {t(homeCopy.related, locale)}
         </p>
-        {items.map((p) => (
-          <a
-            key={p.slug}
-            href={href(locale, `products/${p.slug}`)}
-            className="mx-auto mt-12 block max-w-2xl md:mt-14"
-          >
-            <span
-              data-typo
-              className="block text-3xl font-medium leading-tight tracking-tight text-mist md:text-5xl md:leading-[1.15]"
-            >
-              {t(p.name, locale)}
-            </span>
-            <span
-              data-typo
-              className="mt-5 block text-base leading-8 text-mist/55 md:text-lg md:leading-9"
-            >
-              {t(p.intro, locale)}
-            </span>
-          </a>
-        ))}
+        <div className="mt-10 space-y-8 md:mt-12 md:space-y-10">
+          {items.map((p) => {
+            const intro = t(p.intro, locale);
+            const short =
+              intro.length > 140
+                ? `${intro.slice(0, 137).replace(/\s+\S*$/, "")}…`
+                : intro;
+            return (
+              <RelatedMagneticLink
+                key={p.slug}
+                href={href(locale, `products/${p.slug}`)}
+                title={t(p.name, locale)}
+                body={short}
+              />
+            );
+          })}
+        </div>
         <a
           data-typo
           href={href(locale, "products")}
-          className="mt-16 inline-block text-sm tracking-[0.15em] text-cyan transition hover:text-mist"
+          className="mt-14 inline-block text-sm tracking-[0.15em] text-cyan transition hover:text-mist md:mt-16"
         >
           {t(homeCopy.viewAll, locale)}
         </a>
@@ -463,17 +461,21 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               data-typo
               href={`tel:${ui.contact.phoneIran}`}
               className="transition hover:text-cyan"
-              dir="ltr"
             >
-              {ui.contact.phoneIran}
+              <span className="me-2 text-mist/45">
+                {locale === "fa" ? "ایران" : locale === "tr" ? "İran" : "Iran"}
+              </span>
+              <span dir="ltr">{ui.contact.phoneIran}</span>
             </a>
             <a
               data-typo
               href={`tel:${ui.contact.phoneTurkey}`}
               className="transition hover:text-cyan"
-              dir="ltr"
             >
-              {ui.contact.phoneTurkey}
+              <span className="me-2 text-mist/45">
+                {locale === "fa" ? "ترکیه" : locale === "tr" ? "Türkiye" : "Turkey"}
+              </span>
+              <span dir="ltr">{ui.contact.phoneTurkey}</span>
             </a>
             <a
               data-typo
@@ -494,7 +496,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 bg-graphite px-6 pb-28 pt-8 text-center text-xs text-mist/45 md:pb-32">
+      <footer className="border-t border-white/10 bg-graphite px-6 pb-8 pt-8 text-center text-xs text-mist/45">
         <p data-typo>{t(ui.footer, locale)}</p>
       </footer>
     </div>

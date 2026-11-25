@@ -37,7 +37,7 @@ function wordSpin(i: number, n: number, sign = 1) {
 
 /**
  * Codrops OnScrollTypoAnimations index4 — scrub-linked 3D word fly.
- * Words arrive from depth as the line enters, then leave into depth — tied to scroll.
+ * Enter as the line arrives, stay readable while in view, exit only as it leaves.
  */
 export function wireTypoScroll(el: HTMLElement) {
   const words = splitIntoWords(el);
@@ -54,8 +54,9 @@ export function wireTypoScroll(el: HTMLElement) {
     .timeline({
       scrollTrigger: {
         trigger: el,
-        start: "top 90%",
-        end: "bottom 18%",
+        // Full travel through the viewport so short lines don't vanish mid-read.
+        start: "top 92%",
+        end: "top 8%",
         scrub: 0.55,
         invalidateOnRefresh: true,
       },
@@ -75,10 +76,12 @@ export function wireTypoScroll(el: HTMLElement) {
         rotationX: 0,
         ease: "none",
         stagger: { each: 0.025, from: "center" },
-        duration: 0.4,
+        duration: 0.28,
       },
       0,
     )
+    // Hold fully readable through the middle of the scrub range.
+    .to({}, { duration: 0.44 })
     .to(
       words,
       {
@@ -88,15 +91,14 @@ export function wireTypoScroll(el: HTMLElement) {
         rotationX: (i: number) => wordSpin(i, n, -1),
         ease: "none",
         stagger: { each: 0.025, from: "center" },
-        duration: 0.35,
+        duration: 0.28,
       },
-      0.62,
     );
 }
 
 /**
  * Index4 exit inside an already-pinned frame scene.
- * Words start readable (hero/scene text visible on load), then scrub away in 3D.
+ * Words start readable (hero/scene text visible on load), then scrub away late.
  */
 export function wireTypoPinExit(
   copy: HTMLElement,
@@ -148,8 +150,8 @@ export function wireTypoPinExit(
     },
   });
 
-  // Hold readable through first ~55% of the pin, then index4 fly-away.
-  tl.to({}, { duration: 0.55 });
+  // Hold readable through most of the pin (~72%), then index4 fly-away.
+  tl.to({}, { duration: 0.72 });
   tl.to(words, {
     opacity: 0,
     z: -1000,
@@ -157,7 +159,7 @@ export function wireTypoPinExit(
     rotationX: (i: number) => wordSpin(i, n, -1),
     ease: "none",
     stagger: { each: 0.02, from: "center" },
-    duration: 0.45,
+    duration: 0.28,
   });
 }
 

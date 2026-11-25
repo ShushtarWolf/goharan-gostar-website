@@ -23,7 +23,7 @@ export default async function LocaleLayout({
     <>
       <LocaleHtmlAttrs locale={locale} />
       <SiteHeader locale={locale} />
-      <div className="pb-24 md:pb-28">{children}</div>
+      <div className="pb-36 md:pb-40">{children}</div>
     </>
   );
 }

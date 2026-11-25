@@ -3,12 +3,15 @@
 import { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 
-const SCRAMBLE =
+const SCRAMBLE_LATIN =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*<>/+=";
+const SCRAMBLE_FA =
+  "ابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی۱۲۳۴۵۶۷۸۹";
 const COLORS = ["#00a8e8", "#5ec8f0", "#e8eef5", "#7dd3fc"];
 
-function scramblePool() {
-  return SCRAMBLE[Math.floor(Math.random() * SCRAMBLE.length)]!;
+function scramblePool(forFa: boolean) {
+  const pool = forFa ? SCRAMBLE_FA : SCRAMBLE_LATIN;
+  return pool[Math.floor(Math.random() * pool.length)]!;
 }
 
 type Props = {
@@ -28,6 +31,7 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
   const charRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   const chars = useMemo(() => Array.from(title), [title]);
+  const isFa = useMemo(() => /[\u0600-\u06FF]/.test(title), [title]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -59,7 +63,7 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
       scrambleTimer?.kill();
       spans.forEach((span, i) => {
         const original = chars[i]!;
-        if (original === " ") return;
+        if (original === " " || original === "\u200c") return;
         gsap.killTweensOf(span);
         gsap.fromTo(
           span,
@@ -72,7 +76,7 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
             repeatRefresh: true,
             delay: i * 0.028,
             onRepeat: () => {
-              span.textContent = scramblePool();
+              span.textContent = scramblePool(isFa);
               span.style.color =
                 COLORS[Math.floor(Math.random() * COLORS.length)]!;
             },
@@ -120,19 +124,19 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
       spans.forEach((s) => gsap.killTweensOf(s));
       gsap.set(root, { clearProps: "transform" });
     };
-  }, [chars]);
+  }, [chars, isFa]);
 
   return (
     <a
       ref={rootRef}
       href={href}
-      className="relative mx-auto mt-12 block max-w-2xl will-change-transform md:mt-14"
+      className="relative mx-auto block max-w-2xl will-change-transform"
       style={{ touchAction: "manipulation" }}
     >
       <span className="sr-only">{title}</span>
       <span
         aria-hidden
-        className="block text-3xl font-medium leading-tight tracking-tight text-mist md:text-5xl md:leading-[1.15]"
+        className="block text-2xl font-medium leading-snug tracking-tight text-mist md:text-4xl md:leading-[1.2]"
       >
         {chars.map((ch, i) => (
           <span
@@ -151,7 +155,7 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
         aria-hidden
         className="mt-3 block h-px origin-center scale-x-0 bg-gradient-to-r from-transparent via-cyan to-transparent"
       />
-      <span className="mt-5 block text-base leading-8 text-mist/55 md:text-lg md:leading-9">
+      <span className="mt-3 block text-sm leading-7 text-mist/55 md:mt-4 md:text-base md:leading-8">
         {body}
       </span>
     </a>

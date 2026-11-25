@@ -73,7 +73,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       <nav
         ref={menuRef}
         aria-label="Primary"
-        className="menu fixed bottom-6 left-1/2 z-50 flex h-14 w-[min(100%-1.5rem,42rem)] -translate-x-1/2 items-center gap-3 rounded-full px-4 md:bottom-8 md:h-16 md:gap-5 md:px-6"
+        className="menu fixed bottom-6 left-1/2 z-50 flex h-14 w-[min(100%-1.5rem,44rem)] -translate-x-1/2 items-center gap-2 rounded-full px-3 md:bottom-8 md:h-16 md:gap-5 md:px-6"
         style={{
           background:
             "linear-gradient(180deg, rgba(30,40,55,0.45), rgba(12,14,18,0.55))",
@@ -91,12 +91,12 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
           />
         </a>
 
-        <div className="flex min-w-0 flex-1 items-center justify-center gap-3 overflow-x-auto text-sm leading-none text-white/80 md:gap-6">
+        <div className="flex min-w-0 flex-1 items-center justify-center gap-2.5 overflow-x-auto text-[12px] leading-none text-white/80 md:gap-6 md:text-sm">
           {NAV.map((item) => (
             <a
               key={item.key}
               href={href(locale, item.path)}
-              className="menu__link whitespace-nowrap transition hover:text-white"
+              className="menu__link shrink-0 whitespace-nowrap transition hover:text-white"
             >
               {t(ui.nav[item.key], locale)}
             </a>

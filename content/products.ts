@@ -490,7 +490,21 @@ export const products: Product[] = [
   stub("fluid-reservoir-vents-filters", "industrial", { fa: "فیلتر و دریچه مخزن مایع", tr: "Sıvı Rezervuar Havalandırma Filtreleri", en: "Fluid Reservoir Vents Filters" }, { fa: "محتوای کامل از وب‌سایت فعلی منتقل می‌شود.", tr: "Mevcut sitedeki tam içerik aktarılacaktır.", en: "Full copy will be migrated from the current website." }),
   stub("fluid-reservoirs-and-wicks", "industrial", { fa: "مخزن و فتیله سیال", tr: "Akışkan Rezervuar ve Fitilleri", en: "Fluid Reservoirs and Wicks" }, { fa: "محتوای کامل از وب‌سایت فعلی منتقل می‌شود.", tr: "Mevcut sitedeki tam içerik aktarılacaktır.", en: "Full copy will be migrated from the current website." }),
   stub("profile-ii-filters", "industrial", { fa: "فیلترهای پروفایل", tr: "Profil Filtreler", en: "Profile II Filters" }, { fa: "محتوای کامل از وب‌سایت فعلی منتقل می‌شود.", tr: "Mevcut sitedeki tam içerik aktarılacaktır.", en: "Full copy will be migrated from the current website." }),
-  stub("oxygen-humidifier-bottle-filter", "medical-devices", { fa: "فیلتر بطری رطوبت‌ساز اکسیژن", tr: "Oksijen Nemlendirici Şişe Filtresi", en: "Oxygen Humidifier Bottle Filter" }, { fa: "محتوای کامل از وب‌سایت فعلی منتقل می‌شود.", tr: "Mevcut sitedeki tam içerik aktarılacaktır.", en: "Full copy will be migrated from the current website." }, { homeScene: "medical" }),
+  stub(
+    "oxygen-humidifier-bottle-filter",
+    "medical-devices",
+    {
+      fa: "فیلتر بطری رطوبت‌ساز اکسیژن",
+      tr: "Oksijen Nemlendirici Şişe Filtresi",
+      en: "Oxygen Humidifier Bottle Filter",
+    },
+    {
+      fa: "فیلتر متخلخل روی بطری رطوبت‌ساز، ذرات و آلودگی را از مسیر اکسیژن جدا می‌کند و جریان یکنواخت و ایمن برای بیمار نگه می‌دارد.",
+      tr: "Nemlendirici şişedeki gözenekli filtre, oksijen yolundaki partikül ve kirleticileri ayırır; hasta için düzgün ve güvenli akış sağlar.",
+      en: "A porous filter on the humidifier bottle separates particles from the oxygen path and keeps flow even and safe for the patient.",
+    },
+    { homeScene: "medical" },
+  ),
   stub("perfume-wicks", "air-care", { fa: "فتیله عطر", tr: "Parfüm Fitili", en: "Perfume Wicks" }, { fa: "محتوای کامل از وب‌سایت فعلی منتقل می‌شود.", tr: "Mevcut sitedeki tam içerik aktarılacaktır.", en: "Full copy will be migrated from the current website." }),
   stub("insecticide-wicks", "air-care", { fa: "فتیله حشره‌کش", tr: "Böcek İlacı Fitili", en: "Insecticide Wicks" }, { fa: "محتوای کامل از وب‌سایت فعلی منتقل می‌شود.", tr: "Mevcut sitedeki tam içerik aktarılacaktır.", en: "Full copy will be migrated from the current website." }),
   stub("aquarium-diffuser", "water-filtration", { fa: "دیفیوزر آکواریوم", tr: "Akvaryum Difüzörü", en: "Aquarium Diffuser" }, { fa: "محتوای کامل از وب‌سایت فعلی منتقل می‌شود.", tr: "Mevcut sitedeki tam içerik aktarılacaktır.", en: "Full copy will be migrated from the current website." }),
@@ -518,6 +532,12 @@ export function productsByCategory(category: CategoryId | "all") {
   return products.filter((p) => p.category === category);
 }
 
+const HOME_STUB_INTRO =
+  "محتوای کامل از وب‌سایت فعلی منتقل می‌شود.";
+
+/** Related products under a home scrub scene — skip unfinished stubs. */
 export function productsForHomeScene(scene: NonNullable<Product["homeScene"]>) {
-  return products.filter((p) => p.homeScene === scene);
+  return products.filter(
+    (p) => p.homeScene === scene && p.intro.fa !== HOME_STUB_INTRO,
+  );
 }
