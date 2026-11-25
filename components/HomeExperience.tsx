@@ -269,7 +269,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         />
         <div
           data-copy
-          className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
+          className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
         >
           <p
             data-typo
@@ -396,7 +396,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25" />
               <div
                 data-copy
-                className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
+                className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
               >
                 <h2
                   data-typo
