@@ -118,7 +118,7 @@ export default function LanguageMenu({ locale }: Props) {
       <button
         ref={btnRef}
         type="button"
-        className="flex h-8 min-w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 px-2.5 text-[11px] font-medium tracking-wide text-cyan transition hover:border-cyan/40 hover:bg-white/10 hover:text-white md:min-w-12 md:text-xs"
+        className="flex h-8 min-w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 px-2 text-[11px] font-semibold tracking-wide text-cyan transition hover:border-cyan/40 hover:bg-white/10 hover:text-white sm:min-w-11 md:min-w-12 md:text-xs"
         aria-expanded={open}
         aria-haspopup="listbox"
         aria-controls={menuId}
