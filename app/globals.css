@@ -68,4 +68,48 @@ body {
   backdrop-filter: none !important;
 }
 
+/* Keep bottom-nav links clickable above the WebGL liquid layer */
+.menu.is-drawn a,
+.menu.is-drawn button {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(page-root) {
+    animation: vt-page-out 0.32s ease-out forwards;
+  }
+
+  ::view-transition-new(page-root) {
+    animation: vt-page-in 0.48s ease-out forwards;
+  }
+}
+
+@keyframes vt-page-out {
+  to {
+    opacity: 0;
+    transform: scale(0.988);
+  }
+}
+
+@keyframes vt-page-in {
+  from {
+    opacity: 0;
+    transform: scale(1.01);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 /* Reserved: do NOT add hidden goo-picture anchors — WebGL paints them opaque. */

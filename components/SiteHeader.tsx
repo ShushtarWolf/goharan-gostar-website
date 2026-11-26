@@ -3,11 +3,12 @@
 import { useEffect, useRef } from "react";
 import { ui } from "@/content/ui";
 import { href } from "@/lib/paths";
-import { t, type Locale, locales } from "@/lib/i18n";
+import { t, type Locale } from "@/lib/i18n";
+import TransitionLink from "@/components/motion/TransitionLink";
+import LanguageMenu from "@/components/LanguageMenu";
 import { asset } from "@/lib/asset";
 
 const NAV = [
-  { key: "home" as const, path: "" },
   { key: "products" as const, path: "products" },
   { key: "applications" as const, path: "applications" },
   { key: "about" as const, path: "about" },
@@ -23,7 +24,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    const menu = menuRef.current;
+  const menu = menuRef.current;
     const canvas = canvasRef.current;
     if (!menu || !canvas) return;
 
@@ -68,6 +69,18 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
     };
   }, []);
 
+  useEffect(() => {
+    const menu = menuRef.current;
+    if (!menu || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    import("gsap").then(({ default: gsap }) => {
+      gsap.fromTo(
+        menu,
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.85, ease: "power3.out", delay: 0.15 },
+      );
+    });
+  }, []);
+
   return (
     <>
       <canvas
@@ -78,7 +91,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       <nav
         ref={menuRef}
         aria-label="Primary"
-        className="menu fixed bottom-6 left-1/2 z-50 flex h-14 w-[min(100%-1.5rem,44rem)] -translate-x-1/2 items-center gap-2 rounded-full px-3 md:bottom-8 md:h-16 md:gap-5 md:px-6"
+        className="menu fixed bottom-6 left-1/2 z-50 flex h-14 w-[min(100%-1rem,44rem)] max-w-[calc(100vw-1rem)] -translate-x-1/2 items-center gap-1.5 rounded-full px-2.5 sm:gap-2 md:bottom-8 md:h-16 md:gap-5 md:px-6"
         style={{
           background:
             "linear-gradient(180deg, rgba(30,40,55,0.45), rgba(12,14,18,0.55))",
@@ -87,43 +100,38 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
           backdropFilter: "blur(18px) saturate(1.4)",
         }}
       >
-        <a href={href(locale)} className="flex shrink-0 items-center">
+        <TransitionLink
+          href={href(locale)}
+          locale={locale}
+          path=""
+          aria-label={ui.brand}
+          className="relative z-[1] flex shrink-0 touch-manipulation items-center rounded-md p-1 -m-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+        >
+          <span className="sr-only">{t(ui.nav.home, locale)}</span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={asset("/logo-fa.png")}
-            alt={ui.brand}
-            className="h-7 w-auto md:h-8"
+            alt=""
+            draggable={false}
+            className="pointer-events-none h-6 w-auto select-none sm:h-7 md:h-8"
           />
-        </a>
+        </TransitionLink>
 
-        <div className="flex min-w-0 flex-1 items-center justify-center gap-2.5 overflow-x-auto text-[12px] leading-none text-white/80 md:gap-6 md:text-sm">
+        <div className="flex min-w-0 flex-1 items-center justify-center gap-1 overflow-x-auto text-[10px] leading-none text-white/80 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-2 sm:text-[11px] md:gap-6 md:text-sm [&::-webkit-scrollbar]:hidden">
           {NAV.map((item) => (
-            <a
+            <TransitionLink
               key={item.key}
               href={href(locale, item.path)}
-              className="menu__link shrink-0 whitespace-nowrap transition hover:text-white"
+              locale={locale}
+              path={item.path}
+              className="menu__link relative z-[1] shrink-0 touch-manipulation whitespace-nowrap px-0.5 transition hover:text-white"
             >
               {t(ui.nav[item.key], locale)}
-            </a>
+            </TransitionLink>
           ))}
         </div>
 
-        <div className="flex shrink-0 items-center gap-2.5 text-[11px] leading-none tracking-wide md:gap-3 md:text-xs">
-          {locales.map((l) => (
-            <a
-              key={l}
-              href={href(l)}
-              className={
-                l === locale
-                  ? "text-cyan"
-                  : "text-white/45 transition hover:text-white"
-              }
-              hrefLang={l}
-            >
-              {l.toUpperCase()}
-            </a>
-          ))}
-        </div>
+        <LanguageMenu locale={locale} />
       </nav>
     </>
   );
