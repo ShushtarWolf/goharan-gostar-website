@@ -17,15 +17,6 @@ function scramblePool(forFa: boolean) {
   return pool[Math.floor(Math.random() * pool.length)]!;
 }
 
-/** Keep spaces/ZWNJ so layout doesn't jump during scramble. */
-function scrambledLike(source: string, forFa: boolean) {
-  return Array.from(source)
-    .map((ch) =>
-      ch === " " || ch === "\u200c" ? ch : scramblePool(forFa),
-    )
-    .join("");
-}
-
 type Props = {
   href: string;
   title: string;
@@ -33,100 +24,73 @@ type Props = {
 };
 
 /**
- * Combo: Codrops MagneticButtons index5 (magnetic pull)
- * + LineTextHoverAnimations (char scramble + underline line).
- * Persian titles stay as one text node so letters keep joining.
+ * Magnetic pull + underline + scramble on hover.
+ * Title/body use data-typo so homepage index4 enter matches the rest of the page.
  */
 export default function RelatedMagneticLink({ href, title, body }: Props) {
   const router = useRouter();
   const rootRef = useRef<HTMLAnchorElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
   const titleRef = useRef<HTMLSpanElement>(null);
-  const charRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
-  const chars = useMemo(() => Array.from(title), [title]);
   const isFa = useMemo(() => /[\u0600-\u06FF]/.test(title), [title]);
 
   useEffect(() => {
     const root = rootRef.current;
     const lineEl = lineRef.current;
-    if (!root || !lineEl) return;
+    const titleEl = titleRef.current;
+    if (!root || !lineEl || !titleEl) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
 
-    const titleEl = titleRef.current;
-    const spans = charRefs.current.filter(Boolean) as HTMLSpanElement[];
     const xTo = gsap.quickTo(root, "x", { duration: 0.55, ease: "power3.out" });
     const yTo = gsap.quickTo(root, "y", { duration: 0.55, ease: "power3.out" });
     const pull = 0.28;
     let scrambling = false;
     let scrambleTimer: gsap.core.Tween | null = null;
 
+    const wordSpans = () =>
+      Array.from(titleEl.querySelectorAll<HTMLElement>(".typo-word"));
+
+    const ensureOrig = (span: HTMLElement) => {
+      if (!span.dataset.orig) span.dataset.orig = span.textContent ?? "";
+      return span.dataset.orig;
+    };
+
     const restore = () => {
-      if (isFa && titleEl) {
-        gsap.killTweensOf(titleEl);
-        titleEl.textContent = title;
-        titleEl.style.color = "";
-      } else {
-        spans.forEach((span, i) => {
-          gsap.killTweensOf(span);
-          span.textContent = chars[i]!;
-          span.style.color = "";
-        });
-      }
+      wordSpans().forEach((span) => {
+        gsap.killTweensOf(span);
+        span.textContent = ensureOrig(span);
+        span.style.color = "";
+      });
       scrambling = false;
     };
 
     const runScramble = () => {
       if (scrambling) return;
+      const spans = wordSpans();
+      if (!spans.length) return;
       scrambling = true;
       scrambleTimer?.kill();
-
-      if (isFa && titleEl) {
-        gsap.killTweensOf(titleEl);
-        gsap.fromTo(
-          titleEl,
-          { opacity: 0.55 },
-          {
-            duration: 0.04,
-            opacity: 1,
-            ease: "none",
-            repeat: 8,
-            repeatRefresh: true,
-            onRepeat: () => {
-              titleEl.textContent = scrambledLike(title, true);
-              titleEl.style.color =
-                COLORS[Math.floor(Math.random() * COLORS.length)]!;
-            },
-            onComplete: () => {
-              titleEl.textContent = title;
-              titleEl.style.color = "";
-            },
-          },
-        );
-        scrambleTimer = gsap.delayedCall(0.45, () => {
-          scrambling = false;
-        });
-        return;
-      }
-
       spans.forEach((span, i) => {
-        const original = chars[i]!;
-        if (original === " " || original === "\u200c") return;
+        const original = ensureOrig(span);
+        if (!original || /^\s+$/.test(original)) return;
         gsap.killTweensOf(span);
         gsap.fromTo(
           span,
-          { opacity: 0.4 },
+          { opacity: 0.45 },
           {
             duration: 0.035,
             opacity: 1,
             ease: "none",
             repeat: 3,
             repeatRefresh: true,
-            delay: i * 0.028,
+            delay: i * 0.03,
             onRepeat: () => {
-              span.textContent = scramblePool(false);
+              span.textContent = isFa
+                ? scrambledWord(original, true)
+                : scramblePool(false);
               span.style.color =
                 COLORS[Math.floor(Math.random() * COLORS.length)]!;
             },
@@ -137,7 +101,7 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
           },
         );
       });
-      scrambleTimer = gsap.delayedCall(0.028 * spans.length + 0.3, () => {
+      scrambleTimer = gsap.delayedCall(0.03 * spans.length + 0.35, () => {
         scrambling = false;
       });
     };
@@ -171,11 +135,10 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
       scrambleTimer?.kill();
       gsap.killTweensOf(root);
       gsap.killTweensOf(lineEl);
-      if (titleEl) gsap.killTweensOf(titleEl);
-      spans.forEach((s) => gsap.killTweensOf(s));
+      wordSpans().forEach((s) => gsap.killTweensOf(s));
       gsap.set(root, { clearProps: "transform" });
     };
-  }, [chars, isFa, title]);
+  }, [isFa, title]);
 
   return (
     <a
@@ -201,33 +164,32 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
     >
       <span className="sr-only">{title}</span>
       <span
+        ref={titleRef}
+        data-typo
         aria-hidden
-        className="block text-2xl font-medium leading-snug tracking-tight text-mist md:text-4xl md:leading-[1.2]"
+        className="font-display block text-2xl font-semibold leading-snug tracking-tight text-mist md:text-4xl md:leading-[1.2]"
       >
-        {isFa ? (
-          <span ref={titleRef}>{title}</span>
-        ) : (
-          chars.map((ch, i) => (
-            <span
-              key={`${ch}-${i}`}
-              ref={(el) => {
-                charRefs.current[i] = el;
-              }}
-              className={ch === " " ? "inline-block w-[0.35em]" : "inline-block"}
-            >
-              {ch}
-            </span>
-          ))
-        )}
+        {title}
       </span>
       <span
         ref={lineRef}
         aria-hidden
         className="mt-3 block h-px origin-center scale-x-0 bg-gradient-to-r from-transparent via-cyan to-transparent"
       />
-      <span className="mt-3 block text-sm leading-7 text-mist/55 md:mt-4 md:text-base md:leading-8">
+      <span
+        data-typo
+        className="mt-3 block text-sm leading-7 text-mist/55 md:mt-4 md:text-base md:leading-8"
+      >
         {body}
       </span>
     </a>
   );
+}
+
+function scrambledWord(source: string, forFa: boolean) {
+  return Array.from(source)
+    .map((ch) =>
+      ch === " " || ch === "\u200c" ? ch : scramblePool(forFa),
+    )
+    .join("");
 }

@@ -17,17 +17,31 @@
   --color-mist: var(--mist);
   --color-ink: var(--ink);
   --font-sans: var(--font-vazirmatn);
+  --font-display: var(--font-plex-arabic);
 }
 
 html {
   scroll-behavior: auto;
   background: var(--graphite);
+  overflow-x: clip;
+}
+
+/* Reduced motion: never leave split words invisible if JS partially ran. */
+@media (prefers-reduced-motion: reduce) {
+  .typo-word {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 body {
   background: var(--graphite);
   color: var(--mist);
   font-family: var(--font-vazirmatn), sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-plex-arabic), var(--font-vazirmatn), sans-serif;
 }
 
 ::selection {
@@ -62,11 +76,6 @@ body {
   pointer-events: auto;
 }
 
-/*
- * Invisible hit boxes for goo strands near the bottom nav.
- * Must NOT be full-bleed — WebGL redraws these on the z-40 canvas and
- * would cover all page copy if the rect filled the viewport.
- */
 @media (prefers-reduced-motion: no-preference) {
   @view-transition {
     navigation: auto;
@@ -103,14 +112,4 @@ body {
   }
 }
 
-.goo-picture--anchor {
-  pointer-events: none;
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: min(28rem, 72%);
-  height: 28%;
-  transform: translateX(-50%);
-  object-fit: cover;
-  opacity: 0;
-}
+/* Reserved: do NOT add hidden goo-picture anchors — WebGL paints them opaque. */

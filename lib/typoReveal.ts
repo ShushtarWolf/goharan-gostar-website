@@ -32,41 +32,111 @@ export function splitIntoWords(el: HTMLElement): HTMLElement[] {
 }
 
 function wordSpin(i: number, n: number, sign = 1) {
-  return sign * Math.abs(i - (n - 1) / 2) * 14;
+  return sign * Math.abs(i - (n - 1) / 2) * 18;
 }
 
+type ScrollOpts = {
+  trigger?: Element;
+  start?: string;
+  end?: string;
+};
+
 /**
- * Codrops OnScrollTypoAnimations index4 — scrub-linked 3D word fly.
- * Enter as the line arrives, stay readable while in view, exit only as it leaves.
+ * Codrops index4 enter on scroll — long scrub so motion is visible
+ * while the block is still on screen. Stays readable after enter.
+ * Scroll back up reverses. No GSAP pin (prefer CSS sticky where needed).
  */
-export function wireTypoScroll(el: HTMLElement) {
+export function wireTypoScroll(el: HTMLElement, opts?: ScrollOpts) {
   const words = splitIntoWords(el);
   if (!words.length) return;
 
   const n = words.length;
-  gsap.set(el, { perspective: 1000 });
+  gsap.set(el, { perspective: 1200 });
   gsap.set(words, {
     transformStyle: "preserve-3d",
     transformOrigin: "50% 50%",
+    opacity: 0,
+    z: -1100,
   });
 
-  gsap
-    .timeline({
+  gsap.fromTo(
+    words,
+    {
+      opacity: 0,
+      z: -1100,
+      y: 48,
+      rotationX: (i: number) => wordSpin(i, n, 1),
+    },
+    {
+      opacity: 1,
+      z: 0,
+      y: 0,
+      rotationX: 0,
+      ease: "none",
+      stagger: { each: 0.04, from: "center" },
       scrollTrigger: {
-        trigger: el,
-        // Full travel through the viewport so short lines don't vanish mid-read.
-        start: "top 92%",
-        end: "top 8%",
-        scrub: 0.55,
+        trigger: opts?.trigger ?? el,
+        start: opts?.start ?? "top 92%",
+        end: opts?.end ?? "top 28%",
+        scrub: 0.65,
         invalidateOnRefresh: true,
       },
-    })
-    .fromTo(
+    },
+  );
+}
+
+/**
+ * Frame track scrub — CSS sticky stage holds the canvas; NO GSAP pin.
+ * Text enters early (or already visible), stays readable until a late exit.
+ */
+export function wireTypoFrameScrub(
+  copy: HTMLElement,
+  track: HTMLElement,
+  onScrub?: (progress: number) => void,
+  opts?: { enterFromDepth?: boolean },
+) {
+  const enterFromDepth = opts?.enterFromDepth === true;
+  const targets = Array.from(
+    copy.querySelectorAll<HTMLElement>("[data-typo]"),
+  );
+  const words = targets.flatMap((el) => splitIntoWords(el));
+  gsap.set(copy, { perspective: 1200, opacity: 1 });
+
+  const scrubBase = {
+    trigger: track,
+    start: "top top",
+    end: "bottom bottom",
+    scrub: 0.35,
+    invalidateOnRefresh: true,
+    onUpdate: (self: ScrollTrigger) => onScrub?.(self.progress),
+    onRefresh: (self: ScrollTrigger) => onScrub?.(self.progress),
+  };
+
+  if (!words.length) {
+    ScrollTrigger.create(scrubBase);
+    return;
+  }
+
+  const n = words.length;
+  gsap.set(words, {
+    transformStyle: "preserve-3d",
+    transformOrigin: "50% 50%",
+    opacity: enterFromDepth ? 0 : 1,
+    z: enterFromDepth ? -1100 : 0,
+    y: enterFromDepth ? 36 : 0,
+    rotationX: 0,
+  });
+
+  const tl = gsap.timeline({ scrollTrigger: scrubBase });
+
+  if (enterFromDepth) {
+    // First ~12% of track — readable once the sticky stage fills the view.
+    tl.fromTo(
       words,
       {
         opacity: 0,
-        z: -900,
-        y: 28,
+        z: -1100,
+        y: 36,
         rotationX: (i: number) => wordSpin(i, n, 1),
       },
       {
@@ -76,82 +146,17 @@ export function wireTypoScroll(el: HTMLElement) {
         rotationX: 0,
         ease: "none",
         stagger: { each: 0.025, from: "center" },
-        duration: 0.28,
+        duration: 0.12,
       },
       0,
-    )
-    // Hold fully readable through the middle of the scrub range.
-    .to({}, { duration: 0.44 })
-    .to(
-      words,
-      {
-        opacity: 0,
-        z: -900,
-        y: -16,
-        rotationX: (i: number) => wordSpin(i, n, -1),
-        ease: "none",
-        stagger: { each: 0.025, from: "center" },
-        duration: 0.28,
-      },
     );
-}
-
-/**
- * Index4 exit inside an already-pinned frame scene.
- * Words start readable (hero/scene text visible on load), then scrub away late.
- */
-export function wireTypoPinExit(
-  copy: HTMLElement,
-  trigger: HTMLElement,
-  end: string,
-  onScrub?: (progress: number) => void,
-) {
-  const targets = Array.from(
-    copy.querySelectorAll<HTMLElement>("[data-typo]"),
-  );
-  const words = targets.flatMap((el) => splitIntoWords(el));
-  gsap.set(copy, { perspective: 1000, opacity: 1 });
-  if (!words.length) {
-    ScrollTrigger.create({
-      trigger,
-      start: "top top",
-      end,
-      pin: true,
-      scrub: 0.35,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => onScrub?.(self.progress),
-      onRefresh: (self) => onScrub?.(self.progress),
-    });
-    return;
+    tl.to({}, { duration: 0.8 });
+  } else {
+    // Hero: visible for nearly the whole scrub.
+    tl.to({}, { duration: 0.92 });
   }
 
-  const n = words.length;
-  gsap.set(words, {
-    transformStyle: "preserve-3d",
-    transformOrigin: "50% 50%",
-    opacity: 1,
-    z: 0,
-    y: 0,
-    rotationX: 0,
-  });
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger,
-      start: "top top",
-      end,
-      pin: true,
-      scrub: 0.35,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => onScrub?.(self.progress),
-      onRefresh: (self) => onScrub?.(self.progress),
-    },
-  });
-
-  // Hold readable through most of the pin (~72%), then index4 fly-away.
-  tl.to({}, { duration: 0.72 });
+  // Late fly-away only — never blank while the stage owns the viewport.
   tl.to(words, {
     opacity: 0,
     z: -1000,
@@ -159,18 +164,18 @@ export function wireTypoPinExit(
     rotationX: (i: number) => wordSpin(i, n, -1),
     ease: "none",
     stagger: { each: 0.02, from: "center" },
-    duration: 0.28,
+    duration: 0.08,
   });
 }
 
-/** Matching photo load: clip + lift, scrub cadence with nearby copy. */
+/** Matching photo load: clip + lift, scrub with nearby copy. */
 export function wirePhotoEnter(imgs: HTMLElement[]) {
   if (!imgs.length) return;
   gsap.set(imgs, {
     opacity: 0,
-    y: 48,
-    scale: 0.96,
-    clipPath: "inset(8% 6% 8% 6%)",
+    y: 56,
+    scale: 0.94,
+    clipPath: "inset(10% 8% 10% 8%)",
   });
   gsap.to(imgs, {
     opacity: 1,
@@ -178,12 +183,12 @@ export function wirePhotoEnter(imgs: HTMLElement[]) {
     scale: 1,
     clipPath: "inset(0% 0% 0% 0%)",
     ease: "none",
-    stagger: 0.08,
+    stagger: 0.1,
     scrollTrigger: {
       trigger: imgs[0]!.parentElement ?? imgs[0],
-      start: "top 88%",
-      end: "top 45%",
-      scrub: 0.55,
+      start: "top 90%",
+      end: "top 35%",
+      scrub: 0.6,
       invalidateOnRefresh: true,
     },
   });
@@ -218,3 +223,6 @@ export function wireContentReveal(els: HTMLElement[]) {
 
 /** @deprecated use wireTypoScroll */
 export const wireTypoEnter = wireTypoScroll;
+
+/** @deprecated use wireTypoFrameScrub (sticky track, no pin) */
+export const wireTypoPinExit = wireTypoFrameScrub;

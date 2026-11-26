@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Vazirmatn } from "next/font/google";
+import { IBM_Plex_Sans_Arabic, Vazirmatn } from "next/font/google";
 import { asset } from "@/lib/asset";
 import "./globals.css";
 
 const vazirmatn = Vazirmatn({
   variable: "--font-vazirmatn",
   subsets: ["arabic", "latin"],
+  display: "swap",
+});
+
+/** Industrial display — distinct from body Vazirmatn. */
+const plexArabic = IBM_Plex_Sans_Arabic({
+  variable: "--font-plex-arabic",
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -17,7 +25,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fa" dir="rtl" className={`${vazirmatn.variable} h-full antialiased`}>
+    <html
+      lang="fa"
+      dir="rtl"
+      className={`${vazirmatn.variable} ${plexArabic.variable} h-full antialiased`}
+    >
       <head>
         <link
           rel="preload"

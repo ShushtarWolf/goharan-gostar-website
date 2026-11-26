@@ -36,11 +36,9 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       new Promise<HTMLElement[]>((resolve) => {
         const tick = () => {
           if (cancelled) return;
-          // Skip full-scene anchors — WebGL paints those rects and covers copy.
+          // Only real intro photos. Never paint holds as .goo-picture.
           const pics = [
-            ...document.querySelectorAll<HTMLElement>(
-              ".goo-picture:not(.goo-picture--anchor)",
-            ),
+            ...document.querySelectorAll<HTMLElement>(".goo-picture"),
           ];
           if (pics.length) resolve(pics);
           else requestAnimationFrame(tick);
@@ -52,7 +50,11 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       const { bootGooey } = await import("@/lib/gooey/runGooey.js");
       const pictures = await waitForPictures();
       if (cancelled || !pictures.length) return;
-      const stop = await bootGooey({ canvas, menu, pictures });
+      // Scene lean targets — not painted (see runGooey holds).
+      const holds = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-goo-hold]"),
+      );
+      const stop = await bootGooey({ canvas, menu, pictures, holds });
       if (cancelled) {
         stop();
         return;

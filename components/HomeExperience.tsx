@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,15 +13,15 @@ import { t, type Locale } from "@/lib/i18n";
 import RelatedMagneticLink from "@/components/RelatedMagneticLink";
 import {
   wirePhotoEnter,
-  wireTypoPinExit,
+  wireTypoFrameScrub,
   wireTypoScroll,
 } from "@/lib/typoReveal";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const FRAME_COUNT = 48;
-/** Keep pin short so frame scrub + text don't feel like sticky limbo. */
-const FRAME_PIN_END = "+=85%";
+/** Tall track ≈ 1.85× viewport; sticky stage is 100vh (no GSAP pin). */
+const FRAME_TRACK_CLASS = "relative h-[185vh] bg-graphite";
 
 type SceneId = "hero" | "silencer" | "pipette" | "medical";
 
@@ -58,12 +58,14 @@ function loadImage(src: string): Promise<HTMLImageElement> {
 }
 
 function wireFrameScrub(
-  section: HTMLElement,
+  track: HTMLElement,
   canvas: HTMLCanvasElement,
   copy: HTMLElement,
   folder: string,
   eager: boolean,
 ) {
+  const stage =
+    track.querySelector<HTMLElement>("[data-frame-stage]") ?? track;
   const ctx = canvas.getContext("2d", { alpha: false });
   if (!ctx) return;
 
@@ -84,8 +86,8 @@ function wireFrameScrub(
 
   const draw = (img: HTMLImageElement) => {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = section.clientWidth;
-    const h = section.clientHeight;
+    const w = stage.clientWidth;
+    const h = stage.clientHeight;
     if (w < 1 || h < 1) return;
 
     canvas.width = Math.round(w * dpr);
@@ -115,18 +117,20 @@ function wireFrameScrub(
     if (img) draw(img);
   };
 
-  const attachScrub = () => {
-    // Index4 pin exit on copy — text starts VISIBLE, flies away on scrub.
-    // Frame draw shares the same ScrollTrigger via onUpdate.
-    wireTypoPinExit(copy, section, FRAME_PIN_END, onScrub);
-    ScrollTrigger.refresh();
-  };
+  // Create scrub ST immediately (DOM order) — do not wait on image load.
+  wireTypoFrameScrub(copy, track, onScrub, {
+    enterFromDepth: !eager,
+  });
 
-  const boot = async () => {
-    const first = await loadImage(frameUrl(folder, 0));
-    frames[0] = first;
-    draw(first);
-    attachScrub();
+  const loadFrames = async () => {
+    try {
+      const first = await loadImage(frameUrl(folder, 0));
+      frames[0] = first;
+      draw(first);
+      ScrollTrigger.refresh();
+    } catch {
+      /* poster CSS still shows */
+    }
 
     const BATCH = 6;
     for (let start = 1; start < FRAME_COUNT; start += BATCH) {
@@ -146,18 +150,55 @@ function wireFrameScrub(
   };
 
   if (eager) {
-    void boot();
+    void loadFrames();
     return;
   }
 
   ScrollTrigger.create({
-    trigger: section,
+    trigger: track,
     start: "top bottom+=60%",
     once: true,
     onEnter: () => {
-      void boot();
+      void loadFrames();
     },
   });
+}
+
+function FrameStage({
+  folder,
+  eager,
+  children,
+  id,
+}: {
+  folder: string;
+  eager?: boolean;
+  children: ReactNode;
+  id: string;
+}) {
+  const poster = frameUrl(folder, 0);
+  return (
+    <section
+      data-frame-section
+      data-folder={folder}
+      data-eager={eager ? "true" : undefined}
+      data-id={id}
+      className={FRAME_TRACK_CLASS}
+    >
+      <div
+        data-frame-stage
+        className="sticky top-0 h-screen overflow-hidden bg-graphite"
+        style={{
+          backgroundImage: `url(${poster})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <canvas className="absolute inset-0 h-full w-full" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25" />
+        {children}
+      </div>
+    </section>
+  );
 }
 
 function RelatedStrip({
@@ -217,62 +258,77 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
 
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      root.querySelectorAll<HTMLElement>("[data-frame-section]").forEach((section) => {
-        const canvas = section.querySelector("canvas");
-        const copy = section.querySelector<HTMLElement>("[data-copy]");
-        const folder = section.dataset.folder;
+      // Frames first, top→bottom, ST created sync (no async pin order bugs).
+      root.querySelectorAll<HTMLElement>("[data-frame-section]").forEach((track) => {
+        const canvas = track.querySelector("canvas");
+        const copy = track.querySelector<HTMLElement>("[data-copy]");
+        const folder = track.dataset.folder;
         if (!canvas || !copy || !folder) return;
         wireFrameScrub(
-          section,
+          track,
           canvas,
           copy,
           folder,
-          section.dataset.eager === "true",
+          track.dataset.eager === "true",
         );
       });
 
-      // Index4 scrub for all static copy — skip frame copy (handled by pin exit).
+      // Text scenes: enter scrub only — no GSAP pin / pin-spacer.
+      root.querySelectorAll<HTMLElement>("[data-typo-scene]").forEach((section) => {
+        section.querySelectorAll<HTMLElement>("[data-typo]").forEach((el) => {
+          wireTypoScroll(el, {
+            trigger: section,
+            start: "top 90%",
+            end: "center center",
+          });
+        });
+      });
+
+      // Intro mist copy: shared section trigger so words finish when section is centered.
+      const intro = root.querySelector<HTMLElement>("section.bg-mist");
+      if (intro) {
+        intro.querySelectorAll<HTMLElement>("[data-typo]").forEach((el) => {
+          wireTypoScroll(el, {
+            trigger: intro,
+            start: "top 85%",
+            end: "center center",
+          });
+        });
+      }
+
+      // Other static copy (related, footer) — skip frame/scene/intro.
       root.querySelectorAll<HTMLElement>("[data-typo]").forEach((el) => {
-        if (el.closest("[data-copy]")) return;
+        if (el.closest("[data-frame-section]")) return;
+        if (el.closest("[data-typo-scene]")) return;
+        if (intro && intro.contains(el)) return;
         wireTypoScroll(el);
       });
       const photos = root.querySelectorAll<HTMLElement>("[data-photo]");
       if (photos.length) wirePhotoEnter(Array.from(photos));
+
+      const refresh = () => ScrollTrigger.refresh();
+      void document.fonts.ready.then(refresh);
+      requestAnimationFrame(refresh);
     },
     { scope: rootRef },
   );
 
-  const heroPoster = frameUrl("sUOZV", 0);
-
   return (
     <div ref={rootRef} className="relative bg-graphite text-mist">
-      <section
-        data-frame-section
-        data-folder="sUOZV"
-        data-eager="true"
-        data-id="hero"
-        className="relative h-screen overflow-hidden bg-graphite"
-        style={{
-          backgroundImage: `url(${heroPoster})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <canvas className="absolute inset-0 h-full w-full" aria-hidden />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/50 to-graphite/30" />
+      <FrameStage folder="sUOZV" eager id="hero">
         <div
           data-copy
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
         >
           <p
             data-typo
-            className="mb-5 text-[11px] font-medium tracking-[0.4em] text-cyan md:text-xs"
+            className="font-display mb-5 text-[11px] font-medium tracking-[0.4em] text-cyan md:text-xs"
           >
             {t(homeCopy.heroEyebrow, locale)}
           </p>
           <h1
             data-typo
-            className="max-w-3xl text-4xl font-medium leading-[1.15] tracking-tight text-mist md:text-6xl lg:text-7xl"
+            className="font-display max-w-3xl text-4xl font-semibold leading-[1.15] tracking-tight text-mist md:text-6xl lg:text-7xl"
           >
             {t(homeCopy.heroTitle, locale)}
           </h1>
@@ -283,9 +339,14 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
             {t(homeCopy.heroBody, locale)}
           </p>
         </div>
-      </section>
+      </FrameStage>
 
       <section className="relative overflow-hidden bg-mist px-6 py-28 text-ink md:px-12 md:py-36">
+        <span
+          data-goo-hold
+          aria-hidden
+          className="pointer-events-none absolute bottom-24 left-1/2 h-2 w-28 -translate-x-1/2"
+        />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(10,61,122,0.08),transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-16 lg:grid-cols-2 lg:items-center lg:gap-20">
           <div className="order-2 lg:order-1">
@@ -309,16 +370,16 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               ))}
             </div>
           </div>
-          <div className="order-1 lg:order-2">
+          <div className="order-1 overflow-hidden lg:order-2">
             <p
               data-typo
-              className="mb-5 text-[11px] font-medium tracking-[0.3em] text-navy md:text-xs"
+              className="font-display mb-5 text-[11px] font-medium tracking-[0.3em] text-navy md:text-xs"
             >
               {t(homeCopy.introEyebrow, locale)}
             </p>
             <h2
               data-typo
-              className="text-3xl font-medium leading-[1.25] tracking-tight md:text-5xl md:leading-[1.2]"
+              className="font-display text-3xl font-semibold leading-[1.25] tracking-tight md:text-5xl md:leading-[1.2]"
             >
               {t(homeCopy.introTitle, locale)}
             </h2>
@@ -332,17 +393,28 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="relative flex min-h-[80vh] items-center bg-graphite-soft px-6 py-24 md:px-12">
-        <div className="relative z-10 mx-auto max-w-3xl text-center">
+      <section
+        data-typo-scene
+        className="relative flex min-h-screen items-center bg-graphite-soft px-6 md:px-12"
+      >
+        <span
+          data-goo-hold
+          aria-hidden
+          className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
+        />
+        <div
+          data-copy
+          className="relative z-10 mx-auto max-w-3xl overflow-hidden text-center"
+        >
           <p
             data-typo
-            className="mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
+            className="font-display mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
           >
             {t(homeCopy.structureEyebrow, locale)}
           </p>
           <h2
             data-typo
-            className="text-3xl font-medium tracking-tight md:text-5xl lg:text-6xl"
+            className="font-display text-3xl font-semibold tracking-tight md:text-5xl lg:text-6xl"
           >
             {t(homeCopy.structureTitle, locale)}
           </h2>
@@ -360,26 +432,19 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         const sceneCopy = homeCopy.scenes[copyKey];
         return (
           <div key={scene.id}>
-            <section
-              data-frame-section
-              data-folder={scene.folder}
-              data-id={scene.id}
-              className="relative h-screen overflow-hidden bg-graphite"
-              style={{
-                backgroundImage: `url(${frameUrl(scene.folder, 0)})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <canvas className="absolute inset-0 h-full w-full" aria-hidden />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25" />
+            <FrameStage folder={scene.folder} id={scene.id}>
               <div
                 data-copy
                 className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
               >
+                <span
+                  data-goo-hold
+                  aria-hidden
+                  className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
+                />
                 <h2
                   data-typo
-                  className="max-w-3xl text-4xl font-medium leading-tight tracking-tight text-mist md:text-6xl"
+                  className="font-display max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-mist md:text-6xl"
                 >
                   {t(sceneCopy.title, locale)}
                 </h2>
@@ -390,40 +455,58 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
                   {t(sceneCopy.body, locale)}
                 </p>
               </div>
-            </section>
+            </FrameStage>
             <RelatedStrip locale={locale} scene={copyKey} />
           </div>
         );
       })}
 
-      <section className="relative flex min-h-[70vh] items-center bg-graphite px-6 py-24 md:px-12">
-        <div className="relative z-10 mx-auto max-w-3xl text-center">
+      <section
+        data-typo-scene
+        className="relative flex min-h-screen items-center bg-graphite px-6 md:px-12"
+      >
+        <span
+          data-goo-hold
+          aria-hidden
+          className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
+        />
+        <div
+          data-copy
+          className="relative z-10 mx-auto max-w-3xl overflow-hidden text-center"
+        >
           <p
             data-typo
-            className="mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
+            className="font-display mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
           >
             {t(homeCopy.performanceEyebrow, locale)}
           </p>
           <h2
             data-typo
-            className="text-3xl font-medium leading-snug tracking-tight md:text-5xl"
+            className="font-display text-3xl font-semibold leading-snug tracking-tight md:text-5xl"
           >
             {t(homeCopy.performanceTitle, locale)}
           </h2>
         </div>
       </section>
 
-      <section className="relative flex min-h-[70vh] items-center justify-center bg-navy px-6 py-28">
-        <div className="relative z-10 max-w-2xl text-center">
+      <section
+        data-typo-scene
+        className="relative flex min-h-screen items-center justify-center bg-navy px-6"
+      >
+        <span
+          data-goo-hold
+          aria-hidden
+          className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
+        />
+        <div data-copy className="relative z-10 max-w-2xl overflow-hidden text-center">
           <h2
             data-typo
-            className="text-3xl font-medium leading-snug tracking-tight md:text-5xl"
+            className="font-display text-3xl font-semibold leading-snug tracking-tight md:text-5xl"
           >
             {t(homeCopy.ctaTitle, locale)}
           </h2>
           <div className="mt-10 flex flex-col items-center gap-5 text-base text-mist/85 md:text-lg">
             <a
-              data-typo
               href={`tel:${ui.contact.phoneIran}`}
               className="transition hover:text-cyan"
             >
@@ -433,7 +516,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               <span dir="ltr">{ui.contact.phoneIran}</span>
             </a>
             <a
-              data-typo
               href={`tel:${ui.contact.phoneTurkey}`}
               className="transition hover:text-cyan"
             >
@@ -443,7 +525,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
               <span dir="ltr">{ui.contact.phoneTurkey}</span>
             </a>
             <a
-              data-typo
               href={`mailto:${ui.contact.email}`}
               className="transition hover:text-cyan"
               dir="ltr"
