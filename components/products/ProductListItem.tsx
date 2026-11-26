@@ -35,7 +35,7 @@ export default function ProductListItem({
           alt=""
           loading="lazy"
           decoding="async"
-          className="goo-picture mx-auto block h-40 w-full max-w-md object-contain p-4 opacity-90"
+          className="product-feather-img goo-picture mx-auto block h-52 w-full max-w-lg object-contain p-3 opacity-95 sm:h-56"
           style={{ viewTransitionName: vtName }}
         />
       ) : null}

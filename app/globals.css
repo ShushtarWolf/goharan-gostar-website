@@ -113,3 +113,16 @@ body {
 }
 
 /* Reserved: do NOT add hidden goo-picture anchors — WebGL paints them opaque. */
+
+.product-feather-img {
+  -webkit-mask-image: radial-gradient(
+    ellipse 92% 88% at 50% 46%,
+    #000 52%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 92% 88% at 50% 46%,
+    #000 52%,
+    transparent 100%
+  );
+}
