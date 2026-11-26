@@ -9,7 +9,6 @@ import LanguageMenu from "@/components/LanguageMenu";
 import { asset } from "@/lib/asset";
 
 const NAV = [
-  { key: "home" as const, path: "" },
   { key: "products" as const, path: "products" },
   { key: "applications" as const, path: "applications" },
   { key: "about" as const, path: "about" },
