@@ -101,7 +101,7 @@ export const porousPlasticSections: {
   {
     title: { fa: "معرفی", en: "Introduction", tr: "Giriş" },
     body: {
-      fa: "[TODO: ترجمه رسمی از صفحه Sintered Porous Plastic] مواد پلیمری متخلخل با ساختار منافذ به‌هم‌پیوسته در فیلتراسیون، تجهیزات پزشکی و سامانه‌های صنعتی کاربرد گسترده دارند.",
+      fa: "مواد پلیمری متخلخل با ساختار منافذ به‌هم‌پیوسته، در فیلتراسیون، تجهیزات پزشکی و سامانه‌های صنعتی کاربرد گسترده دارند.",
       en: "Porous plastic, a remarkable class of materials, have garnered attention for their distinctive characteristics and multifaceted applications. Engineered with a porous structure comprising interconnected voids, these materials possess properties that render them invaluable across diverse industries.",
       tr: "Gözenekli plastikler, birbirine bağlı boşluklardan oluşan yapılarıyla çeşitli endüstrilerde değerli malzemelerdir.",
     },
@@ -109,7 +109,7 @@ export const porousPlasticSections: {
   {
     title: { fa: "تخلخل و منافذ", en: "Porosity and pores", tr: "Gözeneklilik" },
     body: {
-      fa: "[TODO] اندازه، توزیع و هندسه منافذ عملکرد نهایی را تعیین می‌کند.",
+      fa: "اندازه، توزیع و هندسهٔ منافذ عملکرد نهایی ماده را تعیین می‌کند؛ تخلخل درصد فضای خالی است و اندازه و پراکندگی حفره‌ها مشخص می‌کند چه چیزی از ماده عبور کند.",
       en: "Porosity denotes the volume percentage of void spaces within the material. Pore size dictates what can permeate the material; pore distribution affects uniformity in fluid flow.",
       tr: "Gözenek boyutu ve dağılımı akışkan davranışını belirler.",
     },

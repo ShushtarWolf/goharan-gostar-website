@@ -20,6 +20,12 @@ export const ui = {
     responsibility: { fa: "مسئولیت ما", tr: "Sorumluluk", en: "Responsibility" },
     material: { fa: "پلاستیک متخلخل", tr: "Gözenekli plastik", en: "Porous plastic" },
   } satisfies Record<string, Localized<string>>,
+  navShort: {
+    products: { fa: "محصولات", tr: "Ürünler", en: "Products" },
+    applications: { fa: "کاربردها", tr: "Uygulama", en: "Uses" },
+    about: { fa: "درباره", tr: "Hakkında", en: "About" },
+    contact: { fa: "تماس", tr: "İletişim", en: "Contact" },
+  } satisfies Record<string, Localized<string>>,
   industriesPage: {
     title: { fa: "صنایع", tr: "Sektörler", en: "Industries" },
     subtitle: {

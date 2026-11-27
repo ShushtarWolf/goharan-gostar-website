@@ -3,46 +3,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/** default = current 3D word stagger. start/center are clip-fill preview modes. */
-export type TypoMotionMode = "default" | "start" | "center";
-
-/** Split element text into word spans (RTL-safe space split). */
-export function splitIntoWords(el: HTMLElement): HTMLElement[] {
-  if (el.dataset.typoSplit === "1") {
-    return Array.from(el.querySelectorAll<HTMLElement>(".typo-word"));
-  }
-  const text = el.textContent ?? "";
-  el.textContent = "";
-  gsap.set(el, { fontKerning: "none" });
-
-  const wordEls: HTMLElement[] = [];
-  for (const part of text.split(/(\s+)/)) {
-    if (!part) continue;
-    if (/^\s+$/.test(part)) {
-      el.appendChild(document.createTextNode(part));
-      continue;
-    }
-    const span = document.createElement("span");
-    span.className = "typo-word";
-    span.style.display = "inline-block";
-    span.style.willChange = "transform, opacity";
-    span.textContent = part;
-    el.appendChild(span);
-    wordEls.push(span);
-  }
-  el.dataset.typoSplit = "1";
-  return wordEls;
-}
-
-function wordSpin(i: number, n: number, sign = 1) {
-  return sign * Math.abs(i - (n - 1) / 2) * 18;
-}
-
 type ScrollOpts = {
   trigger?: Element;
   start?: string;
   end?: string;
-  mode?: TypoMotionMode;
 };
 
 function reducedMotion(): boolean {
@@ -53,21 +17,24 @@ function isRtl(el: HTMLElement): boolean {
   return getComputedStyle(el).direction === "rtl";
 }
 
-function fillKind(el: HTMLElement, mode: "start" | "center"): string {
-  if (mode === "center") return "center";
+function fillKind(el: HTMLElement): "start-rtl" | "start-ltr" {
   return isRtl(el) ? "start-rtl" : "start-ltr";
 }
 
-function startClip(kind: string): string {
-  // Keep horizontal units as % so GSAP interpolates a visible sweep.
-  if (kind === "center") return "inset(-0.2em 50% -0.2em 50%)";
-  if (kind === "start-ltr") return "inset(-0.2em 100% -0.2em 0%)";
-  return "inset(-0.2em 0% -0.2em 100%)";
+const FILL_DURATION = 1.2;
+const LINE_STAGGER = 0.2;
+const SIBLING_STAGGER = 0.18;
+
+function afterFonts(fn: () => void) {
+  const run = () => requestAnimationFrame(() => requestAnimationFrame(fn));
+  if (typeof document === "undefined") return;
+  if (document.fonts && document.fonts.status !== "loaded") {
+    void document.fonts.ready.then(run);
+    return;
+  }
+  run();
 }
 
-/** Preview fills are time-based (~1.2s). Scrub ranges were too short to see. */
-const FILL_DURATION = 1.2;
-const FILL_STAGGER = 0.22;
 function typoSiblingIndex(el: HTMLElement, trigger?: Element): number {
   const root = trigger ?? el.parentElement;
   if (!root) return 0;
@@ -76,26 +43,20 @@ function typoSiblingIndex(el: HTMLElement, trigger?: Element): number {
   return i < 0 ? 0 : i;
 }
 
-function fillAnimationName(kind: string): string {
-  if (kind === "center") return "typo-fill-center";
-  if (kind === "start-ltr") return "typo-fill-start-ltr";
-  return "typo-fill-start-rtl";
-}
-
-/** CSS keyframe fill — survives a blocked GSAP ticker and late layout. */
-function animateFill(ink: HTMLElement, kind: string, delay = 0) {
-  gsap.killTweensOf(ink);
-  ink.style.animation = "none";
-  ink.style.clipPath = startClip(kind);
-  // Force a reflow so the animation can restart on enter-back.
-  void ink.offsetWidth;
-  ink.style.clipPath = "";
-  ink.style.animation = `${fillAnimationName(kind)} ${FILL_DURATION}s ${delay}s linear both`;
-}
-
 function elementInView(el: Element, viewportRatio = 0.8): boolean {
   const r = el.getBoundingClientRect();
   return r.top < window.innerHeight * viewportRatio && r.bottom > 0;
+}
+
+/** CSS --typo-fill animation; survives a blocked GSAP ticker and late layout. */
+function animateFill(host: HTMLElement, delay = 0) {
+  host.classList.remove("is-revealing");
+  host.style.animation = "none";
+  host.style.setProperty("--typo-fill", "0%");
+  void host.offsetWidth;
+  host.style.animation = "";
+  host.style.animationDelay = `${delay}s`;
+  host.classList.add("is-revealing");
 }
 
 /**
@@ -134,25 +95,84 @@ function playWhenInView(el: Element, play: () => void) {
   window.addEventListener("load", tryPlay, { once: true });
 }
 
-/** Shrink-wrapped ghost + ink overlay so the clip follows the glyphs, not the box. */
-function prepareLineFill(
-  el: HTMLElement,
-  mode: "start" | "center",
-): HTMLElement | null {
-  if (el.dataset.typoFill === "1") {
-    return el.querySelector<HTMLElement>(".typo-fill-ink");
+/** Group laid-out words into visual lines, each a shrink-wrapped fill host. */
+function wrapVisualLines(el: HTMLElement): HTMLElement[] {
+  if (el.dataset.typoFillLines === "1") {
+    return Array.from(el.querySelectorAll<HTMLElement>(":scope > .typo-fill-host"));
   }
   const text = el.textContent ?? "";
+  if (!text.trim()) return [];
+
+  el.textContent = "";
+  for (const part of text.split(/(\s+)/)) {
+    if (!part) continue;
+    if (/^\s+$/.test(part)) {
+      el.appendChild(document.createTextNode(part));
+      continue;
+    }
+    const span = document.createElement("span");
+    span.className = "typo-measure-word";
+    span.textContent = part;
+    el.appendChild(span);
+  }
+
+  const lines: string[] = [];
+  let lineText = "";
+  let lineTop: number | null = null;
+  const flush = () => {
+    const trimmed = lineText.replace(/\s+$/u, "").replace(/^\s+/u, "");
+    if (trimmed) lines.push(trimmed);
+    lineText = "";
+  };
+
+  for (const node of Array.from(el.childNodes)) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      lineText += node.textContent ?? "";
+      continue;
+    }
+    if (!(node instanceof HTMLElement)) continue;
+    const top = Math.round(node.offsetTop);
+    if (lineTop !== null && top !== lineTop) flush();
+    lineTop = top;
+    lineText += node.textContent ?? "";
+  }
+  flush();
+
+  if (!lines.length) lines.push(text.trim());
+
+  el.textContent = "";
+  el.dataset.typoFillLines = "1";
+  const align = getComputedStyle(el).textAlign;
+  const hosts: HTMLElement[] = [];
+  for (const line of lines) {
+    const host = document.createElement("span");
+    host.className = "typo-fill-host";
+    host.dataset.fill = fillKind(el);
+    host.textContent = line;
+    if (align === "center" || align === "-webkit-center") {
+      host.style.marginInline = "auto";
+    } else if (align === "right" || align === "end") {
+      host.style.marginInlineStart = "auto";
+    } else if (align === "left" || align === "start") {
+      host.style.marginInlineEnd = "auto";
+    }
+    el.appendChild(host);
+    hosts.push(host);
+  }
+  return hosts;
+}
+
+function prepareLineFill(host: HTMLElement): HTMLElement | null {
+  if (host.dataset.typoFill === "1") {
+    return host.querySelector<HTMLElement>(".typo-fill-ink");
+  }
+  const text = host.textContent ?? "";
   if (!text.trim()) return null;
 
-  const kind = fillKind(el, mode);
-  const existingMax = getComputedStyle(el).maxWidth;
-  el.textContent = "";
-  el.classList.add("typo-fill-host");
-  // Keep Tailwind max-w-* (e.g. hero max-w-3xl). Only cap at the parent when none is set.
-  if (!existingMax || existingMax === "none") {
-    el.style.maxWidth = "100%";
-  }
+  const kind = (host.dataset.fill as "start-rtl" | "start-ltr") || fillKind(host);
+  host.textContent = "";
+  host.classList.add("typo-fill-host");
+  host.dataset.fill = kind;
 
   const ghost = document.createElement("span");
   ghost.className = "typo-fill-ghost";
@@ -163,48 +183,41 @@ function prepareLineFill(
   ink.dataset.fill = kind;
   ink.setAttribute("aria-hidden", "true");
   ink.textContent = text;
-  ink.style.clipPath = startClip(kind);
 
-  el.append(ghost, ink);
-  el.dataset.typoFill = "1";
+  const glow = document.createElement("span");
+  glow.className = "typo-fill-glow";
+  glow.dataset.fill = kind;
+  glow.setAttribute("aria-hidden", "true");
+  glow.textContent = text;
+
+  host.append(ghost, ink, glow);
+  host.dataset.typoFill = "1";
   return ink;
 }
 
-function wireFillScroll(
-  el: HTMLElement,
-  mode: "start" | "center",
-  opts?: ScrollOpts,
-) {
-  const ink = prepareLineFill(el, mode);
-  if (!ink) return;
-  const kind = ink.dataset.fill || fillKind(el, mode);
-  ink.style.clipPath = startClip(kind);
+function prepareTypoElement(el: HTMLElement): HTMLElement[] {
+  const hosts = wrapVisualLines(el);
+  return hosts.filter((host) => prepareLineFill(host));
+}
+
+function wireFillScroll(el: HTMLElement, opts?: ScrollOpts) {
+  const hosts = prepareTypoElement(el);
+  if (!hosts.length) return;
   const trigger = opts?.trigger ?? el;
-  const delay = typoSiblingIndex(el, opts?.trigger) * FILL_STAGGER;
-  const play = () => animateFill(ink, kind, delay);
+  const base = typoSiblingIndex(el, opts?.trigger) * SIBLING_STAGGER;
+  const play = () => {
+    hosts.forEach((host, i) => animateFill(host, base + i * LINE_STAGGER));
+  };
   playWhenInView(trigger, play);
 }
 
 function wireFillFrameScrub(
   copy: HTMLElement,
   track: HTMLElement,
-  mode: "start" | "center",
   onScrub?: (progress: number) => void,
 ) {
-  const targets = Array.from(
-    copy.querySelectorAll<HTMLElement>("[data-typo]"),
-  );
-  const inks = targets
-    .map((el) => prepareLineFill(el, mode))
-    .filter((el): el is HTMLElement => !!el);
-
   gsap.set(copy, { opacity: 1 });
-  inks.forEach((ink) => {
-    const kind = ink.dataset.fill || fillKind(copy, mode);
-    ink.style.clipPath = startClip(kind);
-  });
 
-  // Frame-sequence scrub is independent of typography fill.
   ScrollTrigger.create({
     trigger: track,
     start: "top top",
@@ -215,169 +228,60 @@ function wireFillFrameScrub(
     onRefresh: (self: ScrollTrigger) => onScrub?.(self.progress),
   });
 
-  if (!inks.length) return;
+  afterFonts(() => {
+    const targets = Array.from(
+      copy.querySelectorAll<HTMLElement>("[data-typo]"),
+    );
+    const groups = targets.map((el) => prepareTypoElement(el));
+    const hosts = groups.flat();
+    if (!hosts.length) return;
 
-  const play = () => {
-    inks.forEach((ink, i) => {
-      const kind = ink.dataset.fill || fillKind(copy, mode);
-      // Small lead delay so the clipped first paint is visible on load.
-      animateFill(ink, kind, 0.15 + i * FILL_STAGGER);
-    });
-  };
+    const play = () => {
+      // Lead delay so the clipped first paint is visible on load.
+      let cursor = 0;
+      groups.forEach((group) => {
+        group.forEach((host, i) => {
+          animateFill(host, 0.15 + cursor + i * LINE_STAGGER);
+        });
+        cursor += SIBLING_STAGGER + Math.max(0, group.length - 1) * LINE_STAGGER;
+      });
+    };
 
-  playWhenInView(copy, play);
+    playWhenInView(copy, play);
+  });
 }
 
 /**
- * Codrops index4 enter on scroll — long scrub so motion is visible
- * while the block is still on screen. Stays readable after enter.
- * Scroll back up reverses. No GSAP pin (prefer CSS sticky where needed).
+ * Start-of-line typography fill (RTL: right-to-left, LTR: left-to-right).
+ * Multi-line headings fill one line after another.
  */
 export function wireTypoScroll(el: HTMLElement, opts?: ScrollOpts) {
-  const mode = opts?.mode ?? "default";
-  if (mode === "start" || mode === "center") {
-    if (reducedMotion()) return;
-    wireFillScroll(el, mode, opts);
-    return;
-  }
-
-  const words = splitIntoWords(el);
-  if (!words.length) return;
-
-  const n = words.length;
-  gsap.set(el, { perspective: 1200 });
-  gsap.set(words, {
-    transformStyle: "preserve-3d",
-    transformOrigin: "50% 50%",
-    opacity: 0,
-    z: -1100,
-  });
-
-  gsap.fromTo(
-    words,
-    {
-      opacity: 0,
-      z: -1100,
-      y: 48,
-      rotationX: (i: number) => wordSpin(i, n, 1),
-    },
-    {
-      opacity: 1,
-      z: 0,
-      y: 0,
-      rotationX: 0,
-      ease: "none",
-      stagger: { each: 0.04, from: "center" },
-      scrollTrigger: {
-        trigger: opts?.trigger ?? el,
-        start: opts?.start ?? "top 92%",
-        end: opts?.end ?? "top 28%",
-        scrub: 0.65,
-        invalidateOnRefresh: true,
-      },
-    },
-  );
+  if (reducedMotion()) return;
+  afterFonts(() => wireFillScroll(el, opts));
 }
 
 /**
  * Frame track scrub — CSS sticky stage holds the canvas; NO GSAP pin.
- * Text enters early (or already visible), stays readable until a late exit.
+ * Typography uses the same start-of-line fill as the rest of the site.
  */
 export function wireTypoFrameScrub(
   copy: HTMLElement,
   track: HTMLElement,
   onScrub?: (progress: number) => void,
-  opts?: { enterFromDepth?: boolean; mode?: TypoMotionMode },
 ) {
-  const mode = opts?.mode ?? "default";
-  if (mode === "start" || mode === "center") {
-    if (reducedMotion()) {
-      ScrollTrigger.create({
-        trigger: track,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.35,
-        invalidateOnRefresh: true,
-        onUpdate: (self: ScrollTrigger) => onScrub?.(self.progress),
-        onRefresh: (self: ScrollTrigger) => onScrub?.(self.progress),
-      });
-      return;
-    }
-    wireFillFrameScrub(copy, track, mode, onScrub);
+  if (reducedMotion()) {
+    ScrollTrigger.create({
+      trigger: track,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.35,
+      invalidateOnRefresh: true,
+      onUpdate: (self: ScrollTrigger) => onScrub?.(self.progress),
+      onRefresh: (self: ScrollTrigger) => onScrub?.(self.progress),
+    });
     return;
   }
-
-  const enterFromDepth = opts?.enterFromDepth === true;
-  const targets = Array.from(
-    copy.querySelectorAll<HTMLElement>("[data-typo]"),
-  );
-  const words = targets.flatMap((el) => splitIntoWords(el));
-  gsap.set(copy, { perspective: 1200, opacity: 1 });
-
-  const scrubBase = {
-    trigger: track,
-    start: "top top",
-    end: "bottom bottom",
-    scrub: 0.35,
-    invalidateOnRefresh: true,
-    onUpdate: (self: ScrollTrigger) => onScrub?.(self.progress),
-    onRefresh: (self: ScrollTrigger) => onScrub?.(self.progress),
-  };
-
-  if (!words.length) {
-    ScrollTrigger.create(scrubBase);
-    return;
-  }
-
-  const n = words.length;
-  gsap.set(words, {
-    transformStyle: "preserve-3d",
-    transformOrigin: "50% 50%",
-    opacity: enterFromDepth ? 0 : 1,
-    z: enterFromDepth ? -1100 : 0,
-    y: enterFromDepth ? 36 : 0,
-    rotationX: 0,
-  });
-
-  const tl = gsap.timeline({ scrollTrigger: scrubBase });
-
-  if (enterFromDepth) {
-    // First ~12% of track — readable once the sticky stage fills the view.
-    tl.fromTo(
-      words,
-      {
-        opacity: 0,
-        z: -1100,
-        y: 36,
-        rotationX: (i: number) => wordSpin(i, n, 1),
-      },
-      {
-        opacity: 1,
-        z: 0,
-        y: 0,
-        rotationX: 0,
-        ease: "none",
-        stagger: { each: 0.025, from: "center" },
-        duration: 0.12,
-      },
-      0,
-    );
-    tl.to({}, { duration: 0.8 });
-  } else {
-    // Hero: visible for nearly the whole scrub.
-    tl.to({}, { duration: 0.92 });
-  }
-
-  // Late fly-away only — never blank while the stage owns the viewport.
-  tl.to(words, {
-    opacity: 0,
-    z: -1000,
-    y: -12,
-    rotationX: (i: number) => wordSpin(i, n, -1),
-    ease: "none",
-    stagger: { each: 0.02, from: "center" },
-    duration: 0.08,
-  });
+  wireFillFrameScrub(copy, track, onScrub);
 }
 
 /** Matching photo load: clip + lift, scrub with nearby copy. */

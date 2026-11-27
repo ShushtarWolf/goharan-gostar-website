@@ -4,6 +4,7 @@ import {
   industryToCategory,
   type IndustryId,
 } from "@/content/industries";
+import { faCopyOverrides } from "@/content/fa-copy-overrides";
 import { productSpecOverrides } from "@/content/product-spec-overrides";
 import type { Product, SpecsStatus } from "@/content/products.types";
 import type { Localized } from "@/lib/i18n";
@@ -116,6 +117,17 @@ function categoryFromIndustries(industries: IndustryId[]): CategoryId {
   return "industrial";
 }
 
+function looksPersian(s?: string): boolean {
+  if (!s) return false;
+  const fa = (s.match(/[\u0600-\u06FF]/g) ?? []).length;
+  const latin = (s.match(/[A-Za-z]/g) ?? []).length;
+  return fa >= 3 && fa >= latin;
+}
+
+function firstPersian(...candidates: (string | undefined)[]): string | undefined {
+  return candidates.find(looksPersian);
+}
+
 function buildProduct(slug: string): Product | null {
   const meta = productMeta.find((p) => p.slug === slug);
   const sync = (wpSync.products as Record<string, WpProduct>)[slug];
@@ -129,11 +141,15 @@ function buildProduct(slug: string): Product | null {
 
   const override = productSpecOverrides[slug];
 
+  const faOver = faCopyOverrides[slug];
   const name: Localized<string> = {
     fa:
-      sync?.fa?.title ??
-      catalog?.nameFa ??
-      meta?.titleFa ??
+      firstPersian(
+        faOver?.name,
+        sync?.fa?.title,
+        catalog?.nameFa,
+        meta?.titleFa,
+      ) ??
       catalog?.nameLatin ??
       slug,
     en: sync?.en?.title ?? catalog?.nameLatin ?? meta?.titleFa ?? slug,
@@ -141,9 +157,13 @@ function buildProduct(slug: string): Product | null {
   };
 
   const introFa =
-    joinIntro(sync?.fa) ||
-    catalog?.descriptionFa?.slice(0, 420) ||
-    meta?.excerpt?.slice(0, 280) ||
+    firstPersian(
+      faOver?.intro,
+      joinIntro(sync?.fa),
+      catalog?.descriptionFa?.slice(0, 420),
+    ) ??
+    (looksPersian(meta?.excerpt) ? meta?.excerpt?.slice(0, 280) : "") ??
+    faOver?.intro ??
     "";
   const introEn =
     joinIntro(sync?.en) ||

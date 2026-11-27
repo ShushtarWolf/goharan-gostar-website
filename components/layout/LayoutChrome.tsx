@@ -16,8 +16,7 @@ function pathAfterLocale(pathname: string, locale: Locale): string[] {
 export function OptionalSiteFooter({ locale }: { locale: Locale }) {
   const pathname = usePathname() ?? "";
   const rest = pathAfterLocale(pathname, locale);
-  // Motion previews reuse the homepage chrome.
-  if (rest.length === 0 || rest[0] === "preview") return null;
+  if (rest.length === 0) return null;
   return <SiteFooter locale={locale} />;
 }
 

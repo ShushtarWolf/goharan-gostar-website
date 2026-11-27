@@ -15,8 +15,8 @@ import {
   wirePhotoEnter,
   wireTypoFrameScrub,
   wireTypoScroll,
-  type TypoMotionMode,
 } from "@/lib/typoReveal";
+import { typo } from "@/components/layout/typography";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -64,7 +64,6 @@ function wireFrameScrub(
   copy: HTMLElement,
   folder: string,
   eager: boolean,
-  motionMode: TypoMotionMode = "default",
 ) {
   const stage =
     track.querySelector<HTMLElement>("[data-frame-stage]") ?? track;
@@ -120,10 +119,7 @@ function wireFrameScrub(
   };
 
   // Create scrub ST immediately (DOM order) — do not wait on image load.
-  wireTypoFrameScrub(copy, track, onScrub, {
-    enterFromDepth: !eager,
-    mode: motionMode,
-  });
+  wireTypoFrameScrub(copy, track, onScrub);
 
   const loadFrames = async () => {
     try {
@@ -214,15 +210,15 @@ function RelatedStrip({
   const items = productsForHomeScene(scene);
   if (!items.length) return null;
   return (
-    <section className="bg-graphite-soft px-6 pb-36 pt-20 md:px-12 md:pb-44 md:pt-28">
+    <section className={`bg-graphite-soft pb-36 pt-20 md:pb-44 md:pt-28 ${typo.sectionX}`}>
       <div className="mx-auto max-w-3xl text-center">
         <p
           data-typo
-          className="text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
+          className={typo.eyebrowCyan}
         >
           {t(homeCopy.related, locale)}
         </p>
-        <div className="mt-10 space-y-8 md:mt-12 md:space-y-10">
+        <div className={`${typo.stackXl} space-y-8 md:space-y-10`}>
           {items.map((p) => {
             const intro = t(p.intro, locale);
             const short =
@@ -242,7 +238,7 @@ function RelatedStrip({
         <a
           data-typo
           href={href(locale, "products")}
-          className="mt-14 inline-block text-sm tracking-[0.15em] text-cyan transition hover:text-mist md:mt-16"
+          className={`mt-14 inline-block md:mt-16 ${typo.linkCta}`}
         >
           {t(homeCopy.viewAll, locale)}
         </a>
@@ -253,10 +249,8 @@ function RelatedStrip({
 
 export default function HomeExperience({
   locale,
-  motionMode = "default",
 }: {
   locale: Locale;
-  motionMode?: TypoMotionMode;
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -279,7 +273,6 @@ export default function HomeExperience({
           copy,
           folder,
           track.dataset.eager === "true",
-          motionMode,
         );
       });
 
@@ -290,7 +283,6 @@ export default function HomeExperience({
             trigger: section,
             start: "top 90%",
             end: "center center",
-            mode: motionMode,
           });
         });
       });
@@ -303,7 +295,6 @@ export default function HomeExperience({
             trigger: intro,
             start: "top 85%",
             end: "center center",
-            mode: motionMode,
           });
         });
       }
@@ -313,7 +304,7 @@ export default function HomeExperience({
         if (el.closest("[data-frame-section]")) return;
         if (el.closest("[data-typo-scene]")) return;
         if (intro && intro.contains(el)) return;
-        wireTypoScroll(el, { mode: motionMode });
+        wireTypoScroll(el);
       });
       const photos = root.querySelectorAll<HTMLElement>("[data-photo]");
       if (photos.length) wirePhotoEnter(Array.from(photos));
@@ -322,7 +313,7 @@ export default function HomeExperience({
       void document.fonts.ready.then(refresh);
       requestAnimationFrame(refresh);
     },
-    { scope: rootRef, dependencies: [motionMode] },
+    { scope: rootRef, dependencies: [] },
   );
 
   return (
@@ -332,28 +323,23 @@ export default function HomeExperience({
           data-copy
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
         >
-          <p
-            data-typo
-            className="font-display mb-5 text-[11px] font-medium tracking-[0.4em] text-cyan md:text-xs"
-          >
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[24rem] w-[min(100%,46rem)] -translate-x-1/2 -translate-y-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(6,8,12,0.8)_0%,rgba(6,8,12,0.42)_48%,transparent_74%)]"
+          />
+          <p data-typo className={`relative mb-5 ${typo.eyebrowCyan}`}>
             {t(homeCopy.heroEyebrow, locale)}
           </p>
-          <h1
-            data-typo
-            className="font-display max-w-3xl text-4xl font-semibold leading-[1.15] tracking-tight text-mist md:text-6xl lg:text-7xl"
-          >
+          <h1 data-typo className={`relative max-w-3xl ${typo.heroTitle}`}>
             {t(homeCopy.heroTitle, locale)}
           </h1>
-          <p
-            data-typo
-            className="mt-6 max-w-lg text-base leading-8 text-mist/80 md:text-xl md:leading-9"
-          >
+          <p data-typo className={`relative max-w-lg ${typo.stackMd} ${typo.bodyOnDarkSm}`}>
             {t(homeCopy.heroBody, locale)}
           </p>
         </div>
       </FrameStage>
 
-      <section className="relative overflow-hidden bg-mist px-6 py-28 text-ink md:px-12 md:py-36">
+      <section className={`relative overflow-hidden bg-mist text-ink ${typo.sectionX} ${typo.sectionYLg}`}>
         <span
           data-goo-hold
           aria-hidden
@@ -383,21 +369,15 @@ export default function HomeExperience({
             </div>
           </div>
           <div className="order-1 overflow-hidden lg:order-2">
-            <p
-              data-typo
-              className="font-display mb-5 text-[11px] font-medium tracking-[0.3em] text-navy md:text-xs"
-            >
+            <p data-typo className={`mb-5 ${typo.eyebrowNavy}`}>
               {t(homeCopy.introEyebrow, locale)}
             </p>
-            <h2
-              data-typo
-              className="font-display text-3xl font-semibold leading-[1.25] tracking-tight md:text-5xl md:leading-[1.2]"
-            >
+            <h2 data-typo className={`${typo.sectionTitle} !text-ink`}>
               {t(homeCopy.introTitle, locale)}
             </h2>
             <p
               data-typo
-              className="mt-8 max-w-xl text-base leading-9 text-ink/70 md:text-lg md:leading-10"
+              className={`${typo.stackLg} max-w-xl text-base leading-9 text-ink/70 md:text-lg md:leading-10`}
             >
               {t(homeCopy.introBody, locale)}
             </p>
@@ -407,7 +387,7 @@ export default function HomeExperience({
 
       <section
         data-typo-scene
-        className="relative flex min-h-screen items-center bg-graphite-soft px-6 md:px-12"
+        className={`relative flex min-h-screen items-center bg-graphite-soft ${typo.sectionX}`}
       >
         <span
           data-goo-hold
@@ -418,22 +398,13 @@ export default function HomeExperience({
           data-copy
           className="relative z-10 mx-auto max-w-3xl overflow-hidden text-center"
         >
-          <p
-            data-typo
-            className="font-display mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
-          >
+          <p data-typo className={`mb-4 ${typo.eyebrowCyan}`}>
             {t(homeCopy.structureEyebrow, locale)}
           </p>
-          <h2
-            data-typo
-            className="font-display text-3xl font-semibold tracking-tight md:text-5xl lg:text-6xl"
-          >
+          <h2 data-typo className={typo.sectionTitle}>
             {t(homeCopy.structureTitle, locale)}
           </h2>
-          <p
-            data-typo
-            className="mt-8 text-base leading-9 text-mist/65 md:text-xl md:leading-10"
-          >
+          <p data-typo className={`${typo.stackLg} ${typo.bodyOnDark} md:text-xl md:leading-10`}>
             {t(homeCopy.structureBody, locale)}
           </p>
         </div>
@@ -454,16 +425,10 @@ export default function HomeExperience({
                   aria-hidden
                   className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
                 />
-                <h2
-                  data-typo
-                  className="font-display max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-mist md:text-6xl"
-                >
+                <h2 data-typo className={`max-w-3xl ${typo.heroTitle} md:text-6xl lg:text-6xl`}>
                   {t(sceneCopy.title, locale)}
                 </h2>
-                <p
-                  data-typo
-                  className="mt-6 max-w-xl text-base leading-8 text-mist/85 md:text-xl md:leading-9"
-                >
+                <p data-typo className={`max-w-xl ${typo.stackMd} ${typo.bodyOnDarkSm}`}>
                   {t(sceneCopy.body, locale)}
                 </p>
               </div>
@@ -475,7 +440,7 @@ export default function HomeExperience({
 
       <section
         data-typo-scene
-        className="relative flex min-h-screen items-center bg-graphite px-6 md:px-12"
+        className={`relative flex min-h-screen items-center bg-graphite ${typo.sectionX}`}
       >
         <span
           data-goo-hold
@@ -486,16 +451,10 @@ export default function HomeExperience({
           data-copy
           className="relative z-10 mx-auto max-w-3xl overflow-hidden text-center"
         >
-          <p
-            data-typo
-            className="font-display mb-4 text-[11px] font-medium tracking-[0.35em] text-cyan md:text-xs"
-          >
+          <p data-typo className={`mb-4 ${typo.eyebrowCyan}`}>
             {t(homeCopy.performanceEyebrow, locale)}
           </p>
-          <h2
-            data-typo
-            className="font-display text-3xl font-semibold leading-snug tracking-tight md:text-5xl"
-          >
+          <h2 data-typo className={typo.sectionTitle}>
             {t(homeCopy.performanceTitle, locale)}
           </h2>
         </div>
@@ -503,7 +462,7 @@ export default function HomeExperience({
 
       <section
         data-typo-scene
-        className="relative flex min-h-screen items-center justify-center bg-navy px-6"
+        className={`relative flex min-h-screen items-center justify-center bg-navy ${typo.sectionX}`}
       >
         <span
           data-goo-hold
@@ -511,13 +470,10 @@ export default function HomeExperience({
           className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
         />
         <div data-copy className="relative z-10 max-w-2xl overflow-hidden text-center">
-          <h2
-            data-typo
-            className="font-display text-3xl font-semibold leading-snug tracking-tight md:text-5xl"
-          >
+          <h2 data-typo className={typo.sectionTitle}>
             {t(homeCopy.ctaTitle, locale)}
           </h2>
-          <div className="mt-10 flex flex-col items-center gap-5 text-base text-mist/85 md:text-lg">
+          <div className={`${typo.stackXl} flex flex-col items-center gap-5 text-base text-mist/85 md:text-lg`}>
             <a
               href={`tel:${ui.contact.phoneIran}`}
               className="transition hover:text-cyan"

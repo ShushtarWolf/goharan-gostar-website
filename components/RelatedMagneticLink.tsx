@@ -50,8 +50,16 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
     let scrambling = false;
     let scrambleTimer: gsap.core.Tween | null = null;
 
-    const wordSpans = () =>
-      Array.from(titleEl.querySelectorAll<HTMLElement>(".typo-word"));
+    const textLayers = () => {
+      const layers = Array.from(
+        titleEl.querySelectorAll<HTMLElement>(
+          ".typo-fill-ghost, .typo-fill-ink, .typo-fill-glow",
+        ),
+      );
+      if (layers.length) return layers;
+      const words = Array.from(titleEl.querySelectorAll<HTMLElement>(".typo-word"));
+      return words.length ? words : [titleEl];
+    };
 
     const ensureOrig = (span: HTMLElement) => {
       if (!span.dataset.orig) span.dataset.orig = span.textContent ?? "";
@@ -59,7 +67,7 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
     };
 
     const restore = () => {
-      wordSpans().forEach((span) => {
+      textLayers().forEach((span) => {
         gsap.killTweensOf(span);
         span.textContent = ensureOrig(span);
         span.style.color = "";
@@ -69,39 +77,45 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
 
     const runScramble = () => {
       if (scrambling) return;
-      const spans = wordSpans();
+      const spans = textLayers();
       if (!spans.length) return;
       scrambling = true;
       scrambleTimer?.kill();
-      spans.forEach((span, i) => {
-        const original = ensureOrig(span);
-        if (!original || /^\s+$/.test(original)) return;
-        gsap.killTweensOf(span);
-        gsap.fromTo(
-          span,
-          { opacity: 0.45 },
-          {
-            duration: 0.035,
-            opacity: 1,
-            ease: "none",
-            repeat: 3,
-            repeatRefresh: true,
-            delay: i * 0.03,
-            onRepeat: () => {
-              span.textContent = isFa
-                ? scrambledWord(original, true)
-                : scramblePool(false);
-              span.style.color =
-                COLORS[Math.floor(Math.random() * COLORS.length)]!;
-            },
-            onComplete: () => {
-              span.textContent = original;
-              span.style.color = "";
-            },
-          },
-        );
+      const original = ensureOrig(spans[0]!);
+      spans.forEach((span) => {
+        ensureOrig(span);
+        if (!span.dataset.orig) span.dataset.orig = original;
       });
-      scrambleTimer = gsap.delayedCall(0.03 * spans.length + 0.35, () => {
+      if (!original || /^\s+$/.test(original)) {
+        scrambling = false;
+        return;
+      }
+      const proxy = { n: 0 };
+      gsap.fromTo(
+        proxy,
+        { n: 0 },
+        {
+          n: 1,
+          duration: 0.035,
+          ease: "none",
+          repeat: 4,
+          onRepeat: () => {
+            const next = isFa ? scrambledWord(original, true) : scramblePool(false);
+            const color = COLORS[Math.floor(Math.random() * COLORS.length)]!;
+            spans.forEach((span) => {
+              span.textContent = next;
+              if (!span.classList.contains("typo-fill-glow")) span.style.color = color;
+            });
+          },
+          onComplete: () => {
+            spans.forEach((span) => {
+              span.textContent = span.dataset.orig || original;
+              span.style.color = "";
+            });
+          },
+        },
+      );
+      scrambleTimer = gsap.delayedCall(0.45, () => {
         scrambling = false;
       });
     };
@@ -135,7 +149,7 @@ export default function RelatedMagneticLink({ href, title, body }: Props) {
       scrambleTimer?.kill();
       gsap.killTweensOf(root);
       gsap.killTweensOf(lineEl);
-      wordSpans().forEach((s) => gsap.killTweensOf(s));
+      textLayers().forEach((s) => gsap.killTweensOf(s));
       gsap.set(root, { clearProps: "transform" });
     };
   }, [isFa, title]);

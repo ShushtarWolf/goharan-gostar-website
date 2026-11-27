@@ -15,8 +15,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 type Props = { children: ReactNode };
 
 /**
- * Inner-page motion root — same GSAP typo scrub + photo enter language as HomeExperience,
- * without altering the homepage itself.
+ * Inner-page motion root — same start-of-line typography fill and photo enter as the homepage.
  */
 export default function PageShell({ children }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
