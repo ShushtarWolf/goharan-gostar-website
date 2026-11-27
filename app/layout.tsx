@@ -1,21 +1,7 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Arabic, Vazirmatn } from "next/font/google";
 import { asset } from "@/lib/asset";
+import { inter, kalameh } from "@/lib/fonts";
 import "./globals.css";
-
-const vazirmatn = Vazirmatn({
-  variable: "--font-vazirmatn",
-  subsets: ["arabic", "latin"],
-  display: "swap",
-});
-
-/** Industrial display — distinct from body Vazirmatn. */
-const plexArabic = IBM_Plex_Sans_Arabic({
-  variable: "--font-plex-arabic",
-  subsets: ["arabic", "latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "گوهران گستر نادین | GXPORE",
@@ -28,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="fa"
       dir="rtl"
-      className={`${vazirmatn.variable} ${plexArabic.variable} h-full antialiased`}
+      className={`${kalameh.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
         <link

@@ -34,6 +34,10 @@ export default function PageShell({ children }: Props) {
       if (photos.length) wirePhotoEnter(Array.from(photos));
       const reveals = root.querySelectorAll<HTMLElement>("[data-reveal]");
       if (reveals.length) wireContentReveal(Array.from(reveals));
+
+      const refresh = () => ScrollTrigger.refresh();
+      void document.fonts.ready.then(refresh);
+      requestAnimationFrame(refresh);
     },
     { scope: rootRef, dependencies: [] },
   );

@@ -16,8 +16,8 @@
   --color-graphite-soft: var(--graphite-soft);
   --color-mist: var(--mist);
   --color-ink: var(--ink);
-  --font-sans: var(--font-vazirmatn);
-  --font-display: var(--font-plex-arabic);
+  --font-sans: var(--font-kalameh), var(--font-latin);
+  --font-display: var(--font-kalameh), var(--font-latin);
 }
 
 html {
@@ -32,16 +32,46 @@ html {
     opacity: 1 !important;
     transform: none !important;
   }
+  .typo-fill-ink {
+    clip-path: inset(-0.2em 0 -0.2em 0) !important;
+  }
+  .typo-fill-ghost {
+    opacity: 0 !important;
+  }
 }
 
 body {
   background: var(--graphite);
   color: var(--mist);
-  font-family: var(--font-vazirmatn), sans-serif;
+  font-family: var(--font-kalameh), var(--font-latin), Tahoma, sans-serif;
 }
 
 .font-display {
-  font-family: var(--font-plex-arabic), var(--font-vazirmatn), sans-serif;
+  font-family: var(--font-kalameh), var(--font-latin), Tahoma, sans-serif;
+}
+
+/* /en/ and /tr/: Inter first so Latin digits stay Latin (Kalameh is FaNum). */
+.font-locale-latin,
+.font-locale-latin .font-display {
+  font-family: var(--font-latin), Tahoma, sans-serif;
+}
+
+.typo-fill-host {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.typo-fill-ghost {
+  color: inherit;
+  opacity: 0.22;
+}
+
+.typo-fill-ink {
+  position: absolute;
+  inset: 0;
+  color: inherit;
+  pointer-events: none;
 }
 
 ::selection {

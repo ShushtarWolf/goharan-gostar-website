@@ -19,13 +19,14 @@ export default async function LocaleLayout({
   const { locale: raw } = await params;
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
+  const fontClass = locale === "fa" ? "font-locale-fa" : "font-locale-latin";
 
   return (
-    <>
+    <div className={fontClass}>
       <LocaleHtmlAttrs locale={locale} />
       <SiteHeader locale={locale} />
       <MainChrome>{children}</MainChrome>
       <OptionalSiteFooter locale={locale} />
-    </>
+    </div>
   );
 }
