@@ -78,8 +78,13 @@ function prepareLineFill(
   if (!text.trim()) return null;
 
   const kind = fillKind(el, mode);
+  const existingMax = getComputedStyle(el).maxWidth;
   el.textContent = "";
   el.classList.add("typo-fill-host");
+  // Keep Tailwind max-w-* (e.g. hero max-w-3xl). Only cap at the parent when none is set.
+  if (!existingMax || existingMax === "none") {
+    el.style.maxWidth = "100%";
+  }
 
   const ghost = document.createElement("span");
   ghost.className = "typo-fill-ghost";

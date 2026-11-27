@@ -59,7 +59,6 @@ body {
 .typo-fill-host {
   position: relative;
   display: inline-block;
-  max-width: 100%;
 }
 
 .typo-fill-ghost {
