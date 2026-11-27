@@ -59,12 +59,46 @@ function fillKind(el: HTMLElement, mode: "start" | "center"): string {
 }
 
 function startClip(kind: string): string {
+  // Keep horizontal units as % so GSAP interpolates a visible sweep.
   if (kind === "center") return "inset(-0.2em 50% -0.2em 50%)";
-  if (kind === "start-ltr") return "inset(-0.2em 100% -0.2em 0)";
-  return "inset(-0.2em 0 -0.2em 100%)";
+  if (kind === "start-ltr") return "inset(-0.2em 100% -0.2em 0%)";
+  return "inset(-0.2em 0% -0.2em 100%)";
 }
 
-const END_CLIP = "inset(-0.2em 0 -0.2em 0)";
+const END_CLIP = "inset(-0.2em 0% -0.2em 0%)";
+
+/** Preview fills are time-based (~1.2s). Scrub ranges were too short to see. */
+const FILL_DURATION = 1.2;
+const FILL_STAGGER = 0.22;
+const FILL_EASE = "none";
+
+function typoSiblingIndex(el: HTMLElement, trigger?: Element): number {
+  const root = trigger ?? el.parentElement;
+  if (!root) return 0;
+  const all = Array.from(root.querySelectorAll<HTMLElement>("[data-typo]"));
+  const i = all.indexOf(el);
+  return i < 0 ? 0 : i;
+}
+
+function animateFill(ink: HTMLElement, kind: string, delay = 0) {
+  gsap.killTweensOf(ink);
+  gsap.fromTo(
+    ink,
+    { clipPath: startClip(kind) },
+    {
+      clipPath: END_CLIP,
+      duration: FILL_DURATION,
+      delay,
+      ease: FILL_EASE,
+      overwrite: true,
+    },
+  );
+}
+
+function elementInView(el: Element, viewportRatio = 0.8): boolean {
+  const r = el.getBoundingClientRect();
+  return r.top < window.innerHeight * viewportRatio && r.bottom > 0;
+}
 
 /** Shrink-wrapped ghost + ink overlay so the clip follows the glyphs, not the box. */
 function prepareLineFill(
@@ -110,22 +144,19 @@ function wireFillScroll(
   const ink = prepareLineFill(el, mode);
   if (!ink) return;
   const kind = ink.dataset.fill || fillKind(el, mode);
+  gsap.set(ink, { clipPath: startClip(kind) });
+  const trigger = opts?.trigger ?? el;
+  const delay = typoSiblingIndex(el, opts?.trigger) * FILL_STAGGER;
+  const play = () => animateFill(ink, kind, delay);
 
-  gsap.fromTo(
-    ink,
-    { clipPath: startClip(kind) },
-    {
-      clipPath: END_CLIP,
-      ease: "none",
-      scrollTrigger: {
-        trigger: opts?.trigger ?? el,
-        start: opts?.start ?? "top 92%",
-        end: opts?.end ?? "top 28%",
-        scrub: 0.65,
-        invalidateOnRefresh: true,
-      },
-    },
-  );
+  ScrollTrigger.create({
+    trigger,
+    start: "top 78%",
+    onEnter: play,
+    onEnterBack: play,
+  });
+
+  if (elementInView(trigger, 0.78)) play();
 }
 
 function wireFillFrameScrub(
@@ -142,8 +173,13 @@ function wireFillFrameScrub(
     .filter((el): el is HTMLElement => !!el);
 
   gsap.set(copy, { opacity: 1 });
+  inks.forEach((ink) => {
+    const kind = ink.dataset.fill || fillKind(copy, mode);
+    gsap.set(ink, { clipPath: startClip(kind) });
+  });
 
-  const scrubBase = {
+  // Frame-sequence scrub is independent of typography fill.
+  ScrollTrigger.create({
     trigger: track,
     start: "top top",
     end: "bottom bottom",
@@ -151,41 +187,28 @@ function wireFillFrameScrub(
     invalidateOnRefresh: true,
     onUpdate: (self: ScrollTrigger) => onScrub?.(self.progress),
     onRefresh: (self: ScrollTrigger) => onScrub?.(self.progress),
+  });
+
+  if (!inks.length) return;
+
+  const play = () => {
+    inks.forEach((ink, i) => {
+      const kind = ink.dataset.fill || fillKind(copy, mode);
+      animateFill(ink, kind, i * FILL_STAGGER);
+    });
   };
 
-  if (!inks.length) {
-    ScrollTrigger.create(scrubBase);
+  // Hero is already on screen: first paint stays clipped, then play on load.
+  if (elementInView(track, 0.9)) {
+    gsap.delayedCall(0.2, play);
     return;
   }
 
-  const tl = gsap.timeline({ scrollTrigger: scrubBase });
-
-  // Enter while the sticky stage fills the view, then hold, then unfill.
-  inks.forEach((ink, i) => {
-    const kind = ink.dataset.fill || "start-rtl";
-    tl.fromTo(
-      ink,
-      { clipPath: startClip(kind) },
-      {
-        clipPath: END_CLIP,
-        ease: "none",
-        duration: 0.16,
-      },
-      i * 0.03,
-    );
-  });
-  tl.to({}, { duration: 0.68 });
-  inks.forEach((ink, i) => {
-    const kind = ink.dataset.fill || "start-rtl";
-    tl.to(
-      ink,
-      {
-        clipPath: startClip(kind),
-        ease: "none",
-        duration: 0.1,
-      },
-      0.9 + i * 0.02,
-    );
+  ScrollTrigger.create({
+    trigger: track,
+    start: "top 80%",
+    onEnter: play,
+    onEnterBack: play,
   });
 }
 
