@@ -65,13 +65,9 @@ function startClip(kind: string): string {
   return "inset(-0.2em 0% -0.2em 100%)";
 }
 
-const END_CLIP = "inset(-0.2em 0% -0.2em 0%)";
-
 /** Preview fills are time-based (~1.2s). Scrub ranges were too short to see. */
 const FILL_DURATION = 1.2;
 const FILL_STAGGER = 0.22;
-const FILL_EASE = "none";
-
 function typoSiblingIndex(el: HTMLElement, trigger?: Element): number {
   const root = trigger ?? el.parentElement;
   if (!root) return 0;
@@ -80,24 +76,62 @@ function typoSiblingIndex(el: HTMLElement, trigger?: Element): number {
   return i < 0 ? 0 : i;
 }
 
+function fillAnimationName(kind: string): string {
+  if (kind === "center") return "typo-fill-center";
+  if (kind === "start-ltr") return "typo-fill-start-ltr";
+  return "typo-fill-start-rtl";
+}
+
+/** CSS keyframe fill — survives a blocked GSAP ticker and late layout. */
 function animateFill(ink: HTMLElement, kind: string, delay = 0) {
   gsap.killTweensOf(ink);
-  gsap.fromTo(
-    ink,
-    { clipPath: startClip(kind) },
-    {
-      clipPath: END_CLIP,
-      duration: FILL_DURATION,
-      delay,
-      ease: FILL_EASE,
-      overwrite: true,
-    },
-  );
+  ink.style.animation = "none";
+  ink.style.clipPath = startClip(kind);
+  // Force a reflow so the animation can restart on enter-back.
+  void ink.offsetWidth;
+  ink.style.clipPath = "";
+  ink.style.animation = `${fillAnimationName(kind)} ${FILL_DURATION}s ${delay}s linear both`;
 }
 
 function elementInView(el: Element, viewportRatio = 0.8): boolean {
   const r = el.getBoundingClientRect();
   return r.top < window.innerHeight * viewportRatio && r.bottom > 0;
+}
+
+/**
+ * Play when the element is (or becomes) in view. IntersectionObserver plus
+ * delayed layout / font kicks — a one-shot getBoundingClientRect at wire
+ * time often missed the hero on the production page.
+ */
+function playWhenInView(el: Element, play: () => void) {
+  let visible = false;
+  const tryPlay = () => {
+    if (visible) return;
+    if (!elementInView(el, 0.92)) return;
+    visible = true;
+    play();
+  };
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting && !visible) {
+          visible = true;
+          play();
+        } else if (!entry.isIntersecting) {
+          visible = false;
+        }
+      }
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+  );
+  io.observe(el);
+  requestAnimationFrame(() => requestAnimationFrame(tryPlay));
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(() => {
+      requestAnimationFrame(tryPlay);
+    });
+  }
+  window.addEventListener("load", tryPlay, { once: true });
 }
 
 /** Shrink-wrapped ghost + ink overlay so the clip follows the glyphs, not the box. */
@@ -144,19 +178,11 @@ function wireFillScroll(
   const ink = prepareLineFill(el, mode);
   if (!ink) return;
   const kind = ink.dataset.fill || fillKind(el, mode);
-  gsap.set(ink, { clipPath: startClip(kind) });
+  ink.style.clipPath = startClip(kind);
   const trigger = opts?.trigger ?? el;
   const delay = typoSiblingIndex(el, opts?.trigger) * FILL_STAGGER;
   const play = () => animateFill(ink, kind, delay);
-
-  ScrollTrigger.create({
-    trigger,
-    start: "top 78%",
-    onEnter: play,
-    onEnterBack: play,
-  });
-
-  if (elementInView(trigger, 0.78)) play();
+  playWhenInView(trigger, play);
 }
 
 function wireFillFrameScrub(
@@ -175,7 +201,7 @@ function wireFillFrameScrub(
   gsap.set(copy, { opacity: 1 });
   inks.forEach((ink) => {
     const kind = ink.dataset.fill || fillKind(copy, mode);
-    gsap.set(ink, { clipPath: startClip(kind) });
+    ink.style.clipPath = startClip(kind);
   });
 
   // Frame-sequence scrub is independent of typography fill.
@@ -194,22 +220,12 @@ function wireFillFrameScrub(
   const play = () => {
     inks.forEach((ink, i) => {
       const kind = ink.dataset.fill || fillKind(copy, mode);
-      animateFill(ink, kind, i * FILL_STAGGER);
+      // Small lead delay so the clipped first paint is visible on load.
+      animateFill(ink, kind, 0.15 + i * FILL_STAGGER);
     });
   };
 
-  // Hero is already on screen: first paint stays clipped, then play on load.
-  if (elementInView(track, 0.9)) {
-    gsap.delayedCall(0.2, play);
-    return;
-  }
-
-  ScrollTrigger.create({
-    trigger: track,
-    start: "top 80%",
-    onEnter: play,
-    onEnterBack: play,
-  });
+  playWhenInView(copy, play);
 }
 
 /**

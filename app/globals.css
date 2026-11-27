@@ -73,6 +73,30 @@ body {
   pointer-events: none;
 }
 
+/* Preview typography fills: CSS keyframes so the sweep is visible even if the GSAP ticker stalls. */
+.typo-fill-ink[data-fill="start-rtl"] {
+  clip-path: inset(-0.2em 0% -0.2em 100%);
+}
+.typo-fill-ink[data-fill="start-ltr"] {
+  clip-path: inset(-0.2em 100% -0.2em 0%);
+}
+.typo-fill-ink[data-fill="center"] {
+  clip-path: inset(-0.2em 50% -0.2em 50%);
+}
+
+@keyframes typo-fill-start-rtl {
+  from { clip-path: inset(-0.2em 0% -0.2em 100%); }
+  to { clip-path: inset(-0.2em 0% -0.2em 0%); }
+}
+@keyframes typo-fill-start-ltr {
+  from { clip-path: inset(-0.2em 100% -0.2em 0%); }
+  to { clip-path: inset(-0.2em 0% -0.2em 0%); }
+}
+@keyframes typo-fill-center {
+  from { clip-path: inset(-0.2em 50% -0.2em 50%); }
+  to { clip-path: inset(-0.2em 0% -0.2em 0%); }
+}
+
 ::selection {
   background: color-mix(in srgb, var(--cyan) 40%, transparent);
   color: white;
