@@ -15,6 +15,7 @@ import {
   wirePhotoEnter,
   wireTypoFrameScrub,
   wireTypoScroll,
+  type TypoMotionMode,
 } from "@/lib/typoReveal";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -63,6 +64,7 @@ function wireFrameScrub(
   copy: HTMLElement,
   folder: string,
   eager: boolean,
+  motionMode: TypoMotionMode = "default",
 ) {
   const stage =
     track.querySelector<HTMLElement>("[data-frame-stage]") ?? track;
@@ -120,6 +122,7 @@ function wireFrameScrub(
   // Create scrub ST immediately (DOM order) — do not wait on image load.
   wireTypoFrameScrub(copy, track, onScrub, {
     enterFromDepth: !eager,
+    mode: motionMode,
   });
 
   const loadFrames = async () => {
@@ -248,7 +251,13 @@ function RelatedStrip({
   );
 }
 
-export default function HomeExperience({ locale }: { locale: Locale }) {
+export default function HomeExperience({
+  locale,
+  motionMode = "default",
+}: {
+  locale: Locale;
+  motionMode?: TypoMotionMode;
+}) {
   const rootRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -270,6 +279,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
           copy,
           folder,
           track.dataset.eager === "true",
+          motionMode,
         );
       });
 
@@ -280,6 +290,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
             trigger: section,
             start: "top 90%",
             end: "center center",
+            mode: motionMode,
           });
         });
       });
@@ -292,6 +303,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
             trigger: intro,
             start: "top 85%",
             end: "center center",
+            mode: motionMode,
           });
         });
       }
@@ -301,7 +313,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         if (el.closest("[data-frame-section]")) return;
         if (el.closest("[data-typo-scene]")) return;
         if (intro && intro.contains(el)) return;
-        wireTypoScroll(el);
+        wireTypoScroll(el, { mode: motionMode });
       });
       const photos = root.querySelectorAll<HTMLElement>("[data-photo]");
       if (photos.length) wirePhotoEnter(Array.from(photos));
@@ -310,7 +322,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       void document.fonts.ready.then(refresh);
       requestAnimationFrame(refresh);
     },
-    { scope: rootRef },
+    { scope: rootRef, dependencies: [motionMode] },
   );
 
   return (

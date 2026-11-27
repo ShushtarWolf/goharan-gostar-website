@@ -1,17 +1,23 @@
 "use client";
 
 import SiteFooter from "@/components/SiteFooter";
-import { href } from "@/lib/paths";
 import type { Locale } from "@/lib/i18n";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
+/** Path after the locale segment, ignoring optional GitHub Pages basePath. */
+function pathAfterLocale(pathname: string, locale: Locale): string[] {
+  const parts = (pathname || "/").replace(/\/$/, "").split("/").filter(Boolean);
+  const idx = parts.indexOf(locale);
+  return idx >= 0 ? parts.slice(idx + 1) : parts;
+}
+
 /** Hides duplicate footer on homepage (HomeExperience renders its own). */
 export function OptionalSiteFooter({ locale }: { locale: Locale }) {
   const pathname = usePathname() ?? "";
-  const home = href(locale).replace(/\/$/, "");
-  const path = pathname.replace(/\/$/, "");
-  if (path === home) return null;
+  const rest = pathAfterLocale(pathname, locale);
+  // Motion previews reuse the homepage chrome.
+  if (rest.length === 0 || rest[0] === "preview") return null;
   return <SiteFooter locale={locale} />;
 }
 
