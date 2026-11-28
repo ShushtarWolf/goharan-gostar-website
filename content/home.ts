@@ -8,7 +8,7 @@ export const homeCopy = {
     en: "Engineering what cannot be seen",
   } satisfies Localized<string>,
   heroBody: {
-    fa: "ساختارهای میکروسکوپی که عملکرد واقعی محصول را می‌سازند",
+    fa: "دقت در مقیاس میکرون، اطمینان در عملکرد",
     tr: "Gerçek ürün performansını şekillendiren mikroskobik yapılar",
     en: "Microscopic structures that shape real product performance",
   } satisfies Localized<string>,
