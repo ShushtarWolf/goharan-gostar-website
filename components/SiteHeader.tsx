@@ -61,7 +61,12 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       cleanup = stop;
     };
 
-    void start();
+    start().catch((err) => {
+      // Surfaced on the page only with ?gooeydebug=1
+      void import("@/lib/gooey/debug.js").then(({ gooeyDebug }) =>
+        gooeyDebug("error", "boot: " + String(err?.message ?? err).slice(0, 300)),
+      );
+    });
 
     return () => {
       cancelled = true;
