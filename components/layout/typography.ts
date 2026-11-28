@@ -28,4 +28,10 @@ export const typo = {
   stackMd: "mt-6 md:mt-8",
   stackLg: "mt-8 md:mt-10",
   stackXl: "mt-10 md:mt-12",
+  /** Home-only spacing. Do not use on other pages. */
+  homeYLg: "py-40 md:py-56",
+  homeRelatedY: "pb-40 pt-24 md:pb-52 md:pt-32",
+  /** Home mission lead: large, quiet type (not a shouty heading). */
+  homeMission:
+    "typo-section font-display text-2xl font-normal leading-[1.55] tracking-normal text-mist/80 md:text-4xl md:leading-[1.5]",
 } as const;

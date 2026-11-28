@@ -251,7 +251,7 @@ function RelatedStrip({
   const items = productsForHomeScene(scene);
   if (!items.length) return null;
   return (
-    <section className={`bg-graphite-soft pb-36 pt-20 md:pb-44 md:pt-28 ${typo.sectionX}`}>
+    <section className={`bg-graphite-soft ${typo.homeRelatedY} ${typo.sectionX}`}>
       <div className="mx-auto max-w-3xl text-center">
         <p
           data-typo
@@ -380,13 +380,13 @@ export default function HomeExperience({
         </div>
       </FrameStage>
 
-      <section className={`relative overflow-hidden bg-mist text-ink ${typo.sectionX} ${typo.sectionYLg}`}>
+      <section className={`relative overflow-hidden bg-mist text-ink ${typo.sectionX} ${typo.homeYLg}`}>
         <span
           data-goo-hold
           aria-hidden
           className="pointer-events-none absolute bottom-24 left-1/2 h-2 w-28 -translate-x-1/2"
         />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(10,61,122,0.08),transparent_55%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(12,14,18,0.05),transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-16 lg:grid-cols-2 lg:items-center lg:gap-20">
           <div className="order-2 lg:order-1">
             <div className="grid grid-cols-2 gap-3 md:gap-4">
@@ -410,7 +410,7 @@ export default function HomeExperience({
             </div>
           </div>
           <div className="order-1 overflow-hidden lg:order-2">
-            <p data-typo className={`mb-5 ${typo.eyebrowNavy}`}>
+            <p data-typo className={`mb-5 ${typo.eyebrowCyan}`}>
               {t(homeCopy.introEyebrow, locale)}
             </p>
             <h2 data-typo className={`${typo.sectionTitle} !text-ink`}>
@@ -421,6 +421,41 @@ export default function HomeExperience({
               className={`${typo.stackLg} max-w-xl text-base leading-9 text-ink/70 md:text-lg md:leading-10`}
             >
               {t(homeCopy.introBody, locale)}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        data-typo-scene
+        className={`relative bg-graphite ${typo.sectionX} ${typo.homeYLg}`}
+      >
+        <div className="relative mx-auto max-w-5xl overflow-hidden">
+          <p data-typo className={`mb-5 ${typo.eyebrowCyan}`}>
+            {t(homeCopy.missionLabel, locale)}
+          </p>
+          <h2 data-typo className={`max-w-4xl ${typo.homeMission}`}>
+            {t(homeCopy.mission, locale)}
+          </h2>
+          <ul className={`${typo.stackXl} grid gap-8 sm:grid-cols-3 sm:gap-10 md:gap-14`}>
+            {homeCopy.missionHighlights.map((item) => (
+              <li
+                key={item.en}
+                className="border-t border-cyan/40 pt-5 text-sm leading-7 text-mist/70 md:text-base md:leading-8"
+              >
+                {t(item, locale)}
+              </li>
+            ))}
+          </ul>
+          <div className={`${typo.stackXl} max-w-3xl pt-6 md:pt-10`}>
+            <h3 data-typo className={`mb-4 ${typo.eyebrowCyan}`}>
+              {t(homeCopy.visionLabel, locale)}
+            </h3>
+            <p className={typo.bodyOnDark}>
+              {t(homeCopy.vision, locale)}
+            </p>
+            <p className="mt-5 text-sm tracking-[0.15em] text-cyan">
+              {t(homeCopy.visionNext, locale)}
             </p>
           </div>
         </div>
@@ -503,7 +538,7 @@ export default function HomeExperience({
 
       <section
         data-typo-scene
-        className={`relative flex min-h-screen items-center justify-center bg-navy ${typo.sectionX}`}
+        className={`relative flex min-h-screen items-center justify-center bg-graphite ${typo.sectionX}`}
       >
         <span
           data-goo-hold

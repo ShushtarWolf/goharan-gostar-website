@@ -27,6 +27,48 @@ export const homeCopy = {
     tr: "Uluslararası GXPORE markasıyla Goharan Gostar Nadin, İran ve Orta Doğu’da polimer gözenekli parçaların uzman üreticisidir. Filtrasyon, tıbbi cihazlar ve endüstriyel sistemlerde güvenilir performans için malzeme yapısını mühendislikle tasarlarız.",
     en: "Goharan Gostar Nadin, with the international GXPORE brand, is a specialized producer of porous polymer parts in Iran and the Middle East. We engineer material structure for precise, reliable performance in filtration, medical devices, and industrial systems.",
   } satisfies Localized<string>,
+  missionLabel: {
+    fa: "رسالت ما",
+    tr: "Misyonumuz",
+    en: "Our mission",
+  } satisfies Localized<string>,
+  mission: {
+    fa: "«رسالت ما مهندسی دقیق ساختار ماده در مقیاس میکروسکوپی است تا با تولید قطعات متخلخل پلیمری با منافذی از ۱ تا ۲۰۰ میکرون و توزیعی یکنواخت، راهکارهای قابل‌اطمینان برای فیلتراسیون، تجهیزات پزشکی (مانند فیلتر دیالیز) و سامانه‌های صنعتی ارائه دهیم و با تکیه بر دانش روز و بهبود مستمر، ارزشی ماندگار برای مشتریان و کشور ایجاد کنیم.»",
+    tr: "“Misyonumuz, maddenin yapısını mikroskobik ölçekte hassas biçimde mühendislikle tasarlayarak, 1 ila 200 mikron gözenekli ve düzgün dağılımlı polimer gözenekli parçalar üretmek suretiyle filtrasyon, tıbbi ekipman (örneğin diyaliz filtreleri) ve endüstriyel sistemler için güvenilir çözümler sunmak ve güncel bilgiye ve sürekli iyileştirmeye dayanarak müşterilerimiz ve ülkemiz için kalıcı bir değer yaratmaktır.”",
+    en: "“Our mission is to precisely engineer the structure of matter at the microscopic scale, so that by producing porous polymer parts with pores from 1 to 200 microns and a uniform distribution, we provide reliable solutions for filtration, medical equipment (such as dialysis filters), and industrial systems, and, relying on up-to-date knowledge and continuous improvement, create lasting value for our customers and the country.”",
+  } satisfies Localized<string>,
+  missionHighlights: [
+    {
+      fa: "منافذ از ۱ تا ۲۰۰ میکرون",
+      tr: "1–200 µm gözenekler",
+      en: "Pores from 1–200 µm",
+    },
+    {
+      fa: "توزیعی یکنواخت",
+      tr: "Düzgün dağılım",
+      en: "Uniform distribution",
+    },
+    {
+      fa: "فیلتراسیون، تجهیزات پزشکی (مانند فیلتر دیالیز) و سامانه‌های صنعتی",
+      tr: "Filtrasyon, tıbbi (örneğin diyaliz filtreleri) ve endüstriyel",
+      en: "Filtration, medical (such as dialysis filters), and industrial",
+    },
+  ] satisfies Localized<string>[],
+  visionLabel: {
+    fa: "چشم‌انداز ما",
+    tr: "Vizyonumuz",
+    en: "Our vision",
+  } satisfies Localized<string>,
+  vision: {
+    fa: "«چشم‌انداز ما تثبیت جایگاه پیشرو در فناوری تولید محصولات متخلخل در خاورمیانه و گسترش سبد محصولات به سمت راهکارهای دوست‌دار محیط زیست، از جمله تولید فیلم‌های PVA به‌عنوان یک نیاز راهبردی کشور است تا هم‌زمان با پاسخ به نیازهای صنعت و سلامت، گامی مؤثر در کاهش اثرات زیست‌محیطی برداریم.»",
+    tr: "“Vizyonumuz, Orta Doğu’da gözenekli ürün üretim teknolojisinde öncü konumu pekiştirmek ve ürün yelpazesini çevre dostu çözümlere — ülke için stratejik bir ihtiyaç olan PVA filmlerin üretimini de kapsayacak biçimde — genişletmektir; böylece sanayi ve sağlığın ihtiyaçlarını karşılarken çevresel etkilerin azaltılmasına da etkili bir adım atmış oluruz.”",
+    en: "“Our vision is to establish a leading position in porous-product manufacturing technology in the Middle East and to expand our portfolio toward environmentally friendly solutions, including the production of PVA films as a strategic need of the country, so that while meeting the needs of industry and health, we also take an effective step in reducing environmental impact.”",
+  } satisfies Localized<string>,
+  visionNext: {
+    fa: "فیلم‌های PVA، در ادامه",
+    tr: "PVA filmleri, sırada",
+    en: "PVA films, next",
+  } satisfies Localized<string>,
   structureEyebrow: {
     fa: "از ساختار تا محصول",
     tr: "Yapıdan ürüne",
