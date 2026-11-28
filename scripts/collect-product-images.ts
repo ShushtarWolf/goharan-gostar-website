@@ -1,20 +1,24 @@
 import { products } from "@/content/products";
 import catalogDoc from "@/content/catalog.json";
+import hqExpanded from "@/content/hq-expanded-products.json";
 import productMeta from "@/content/products.json";
 import wpSync from "@/content/wp-sync.json";
 import { mergeProductImagesRaw } from "@/lib/mergeProductImages";
 
 type CatalogProduct = { slug: string; image?: string };
 
-const catalogBySlug = new Map(
-  (catalogDoc.products as CatalogProduct[]).map((p) => [p.slug, p]),
-);
+const catalogProducts = [
+  ...(catalogDoc.products as CatalogProduct[]),
+  ...(hqExpanded.products as CatalogProduct[]),
+];
+
+const catalogBySlug = new Map(catalogProducts.map((p) => [p.slug, p]));
 
 const SLUGS = [
   ...new Set([
     ...productMeta.map((p: { slug: string }) => p.slug),
     ...Object.keys(wpSync.products as object),
-    ...(catalogDoc.products as CatalogProduct[]).map((p) => p.slug),
+    ...catalogProducts.map((p) => p.slug),
   ]),
 ];
 

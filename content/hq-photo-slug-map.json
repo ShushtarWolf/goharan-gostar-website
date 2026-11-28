@@ -1,10 +1,10 @@
 {
-  "01-pva-film-blowing-granules": null,
-  "02-pva-extrusion-granules": null,
-  "03-detergent-packaging-film": null,
-  "05-shrink-wrap-film": null,
-  "06-soluble-seed-tape": null,
-  "07-embroidery-soluble-film": null,
+  "01-pva-film-blowing-granules": "pva-film-blowing-granules",
+  "02-pva-extrusion-granules": "pva-extrusion-granules",
+  "03-detergent-packaging-film": "detergent-packaging-pva-film",
+  "05-shrink-wrap-film": "pva-shrink-wrap-film",
+  "06-soluble-seed-tape": "soluble-seed-tape",
+  "07-embroidery-soluble-film": "embroidery-soluble-film",
   "08-dialysis-hollow-fiber": { "slug": "dialysis-filter", "role": "gallery" },
   "09-humidifier-filter": "oxygen-humidifier-bottle-filter",
   "10-dialysis-filter": { "slug": "dialysis-filter", "role": "primary" },
@@ -27,6 +27,6 @@
   "28-sintered-metal-filter-cartridge": "sintered-filter-cartridge",
   "29-metal-filter-disc-20-micron": "sintered-porous-metal-filter-disc-20-micron",
   "30-highlighter-nib": "highlighter-nib",
-  "31-nonalcoholic-beverage-filtration": null,
-  "32-juice-filtration": null
+  "31-nonalcoholic-beverage-filtration": "nonalcoholic-beverage-filtration",
+  "32-juice-filtration": "juice-filtration"
 }

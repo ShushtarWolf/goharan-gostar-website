@@ -1069,6 +1069,16 @@
     "method": "rembg",
     "source": "../../../cursor/stores/self/goharan-photos/hq/25-carbon-block-filter.jpg"
   },
+  "/products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-960.webp": {
+    "default": "/products/studio/9fc46765beac/hero-960.webp",
+    "srcSet": "/products/studio/9fc46765beac/hero-480.webp 480w, /products/studio/9fc46765beac/hero-960.webp 960w, /products/studio/9fc46765beac/hero-1600.webp 1600w",
+    "avifSrcSet": "/products/studio/9fc46765beac/hero-480.avif 480w, /products/studio/9fc46765beac/hero-960.avif 960w, /products/studio/9fc46765beac/hero-1600.avif 1600w",
+    "sizes": "(max-width: 640px) 44vw, (max-width: 1024px) 28vw, 320px",
+    "width": 960,
+    "height": 960,
+    "method": "feather-fallback",
+    "source": "../../../cursor/stores/self/goharan-photos/hq/03-detergent-packaging-film.jpg"
+  },
   "/products/hq/dialysis-filter--08-dialysis-hollow-fiber-960.webp": {
     "default": "/products/studio/b4b3e8fa767d/hero-960.webp",
     "srcSet": "/products/studio/b4b3e8fa767d/hero-480.webp 480w, /products/studio/b4b3e8fa767d/hero-960.webp 960w, /products/studio/b4b3e8fa767d/hero-1600.webp 1600w",
@@ -1118,6 +1128,16 @@
     "height": 480,
     "method": "rembg",
     "source": "../../../cursor/stores/self/goharan-photos/hq/23-electrolyte-wick.png"
+  },
+  "/products/hq/embroidery-soluble-film--07-embroidery-soluble-film-480.webp": {
+    "default": "/products/studio/53a2689f6715/hero-480.webp",
+    "srcSet": "/products/studio/53a2689f6715/hero-480.webp 480w",
+    "avifSrcSet": "/products/studio/53a2689f6715/hero-480.avif 480w",
+    "sizes": "(max-width: 640px) 44vw, (max-width: 1024px) 28vw, 320px",
+    "width": 480,
+    "height": 480,
+    "method": "rembg",
+    "source": "../../../cursor/stores/self/goharan-photos/hq/07-embroidery-soluble-film.jpg"
   },
   "/products/hq/empty-gravity-flow-nucleic-acid-purification-columns--13-nucleic-acid-filter-960.webp": {
     "default": "/products/studio/493dd6a825e4/hero-480.webp",
@@ -1169,6 +1189,26 @@
     "method": "rembg",
     "source": "../../../cursor/stores/self/goharan-photos/hq/16-insecticide-wick.jpg"
   },
+  "/products/hq/juice-filtration--32-juice-filtration-960.webp": {
+    "default": "/products/studio/b8b4915a23d8/hero-960.webp",
+    "srcSet": "/products/studio/b8b4915a23d8/hero-480.webp 480w, /products/studio/b8b4915a23d8/hero-960.webp 960w, /products/studio/b8b4915a23d8/hero-1600.webp 1600w",
+    "avifSrcSet": "/products/studio/b8b4915a23d8/hero-480.avif 480w, /products/studio/b8b4915a23d8/hero-960.avif 960w, /products/studio/b8b4915a23d8/hero-1600.avif 1600w",
+    "sizes": "(max-width: 640px) 44vw, (max-width: 1024px) 28vw, 320px",
+    "width": 960,
+    "height": 960,
+    "method": "rembg",
+    "source": "../../../cursor/stores/self/goharan-photos/hq/32-juice-filtration.jpg"
+  },
+  "/products/hq/nonalcoholic-beverage-filtration--31-nonalcoholic-beverage-filtration-480.webp": {
+    "default": "/products/studio/7b4debc862f4/hero-480.webp",
+    "srcSet": "/products/studio/7b4debc862f4/hero-480.webp 480w",
+    "avifSrcSet": "/products/studio/7b4debc862f4/hero-480.avif 480w",
+    "sizes": "(max-width: 640px) 44vw, (max-width: 1024px) 28vw, 320px",
+    "width": 480,
+    "height": 480,
+    "method": "rembg",
+    "source": "../../../cursor/stores/self/goharan-photos/hq/31-nonalcoholic-beverage-filtration.jpg"
+  },
   "/products/hq/oxygen-humidifier-bottle-filter--09-humidifier-filter-960.webp": {
     "default": "/products/studio/68ff9effc36f/hero-960.webp",
     "srcSet": "/products/studio/68ff9effc36f/hero-480.webp 480w, /products/studio/68ff9effc36f/hero-960.webp 960w",
@@ -1219,6 +1259,36 @@
     "method": "rembg",
     "source": "../../../cursor/stores/self/goharan-photos/hq/17-dust-collector-filter.jpg"
   },
+  "/products/hq/pva-extrusion-granules--02-pva-extrusion-granules-960.webp": {
+    "default": "/products/studio/9e0504967bf1/hero-960.webp",
+    "srcSet": "/products/studio/9e0504967bf1/hero-480.webp 480w, /products/studio/9e0504967bf1/hero-960.webp 960w, /products/studio/9e0504967bf1/hero-1600.webp 1600w",
+    "avifSrcSet": "/products/studio/9e0504967bf1/hero-480.avif 480w, /products/studio/9e0504967bf1/hero-960.avif 960w, /products/studio/9e0504967bf1/hero-1600.avif 1600w",
+    "sizes": "(max-width: 640px) 44vw, (max-width: 1024px) 28vw, 320px",
+    "width": 960,
+    "height": 960,
+    "method": "rembg",
+    "source": "../../../cursor/stores/self/goharan-photos/hq/02-pva-extrusion-granules.jpg"
+  },
+  "/products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-960.webp": {
+    "default": "/products/studio/17fcd53b3314/hero-960.webp",
+    "srcSet": "/products/studio/17fcd53b3314/hero-480.webp 480w, /products/studio/17fcd53b3314/hero-960.webp 960w, /products/studio/17fcd53b3314/hero-1600.webp 1600w",
+    "avifSrcSet": "/products/studio/17fcd53b3314/hero-480.avif 480w, /products/studio/17fcd53b3314/hero-960.avif 960w, /products/studio/17fcd53b3314/hero-1600.avif 1600w",
+    "sizes": "(max-width: 640px) 44vw, (max-width: 1024px) 28vw, 320px",
+    "width": 960,
+    "height": 960,
+    "method": "rembg",
+    "source": "../../../cursor/stores/self/goharan-photos/hq/01-pva-film-blowing-granules.jpg"
+  },
+  "/products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-960.webp": {
+    "default": "/products/studio/dc0a12c499e1/hero-960.webp",
+    "srcSet": "/products/studio/dc0a12c499e1/hero-480.webp 480w, /products/studio/dc0a12c499e1/hero-960.webp 960w",
+    "avifSrcSet": "/products/studio/dc0a12c499e1/hero-480.avif 480w, /products/studio/dc0a12c499e1/hero-960.avif 960w",
+    "sizes": "(max-width: 640px) 44vw, (max-width: 1024px) 28vw, 320px",
+    "width": 960,
+    "height": 960,
+    "method": "rembg",
+    "source": "../../../cursor/stores/self/goharan-photos/hq/05-shrink-wrap-film.jpg"
+  },
   "/products/hq/separators-and-isolators--24-battery-separator-480.webp": {
     "default": "/products/studio/0f6aa22f3982/hero-480.webp",
     "srcSet": "/products/studio/0f6aa22f3982/hero-480.webp 480w",
@@ -1248,6 +1318,16 @@
     "height": 480,
     "method": "feather-fallback",
     "source": "../../../cursor/stores/self/goharan-photos/hq/29-metal-filter-disc-20-micron.jpg"
+  },
+  "/products/hq/soluble-seed-tape--06-soluble-seed-tape-960.webp": {
+    "default": "/products/studio/9f55450fd676/hero-960.webp",
+    "srcSet": "/products/studio/9f55450fd676/hero-480.webp 480w, /products/studio/9f55450fd676/hero-960.webp 960w, /products/studio/9f55450fd676/hero-1600.webp 1600w",
+    "avifSrcSet": "/products/studio/9f55450fd676/hero-480.avif 480w, /products/studio/9f55450fd676/hero-960.avif 960w, /products/studio/9f55450fd676/hero-1600.avif 1600w",
+    "sizes": "(max-width: 640px) 44vw, (max-width: 1024px) 28vw, 320px",
+    "width": 960,
+    "height": 960,
+    "method": "feather-fallback",
+    "source": "../../../cursor/stores/self/goharan-photos/hq/06-soluble-seed-tape.jpg"
   },
   "/products/hq/stopper-valve-filter--11-suction-bag-flow-stop-filter-862.webp": {
     "default": "/products/studio/b716f53620ad/hero-480.webp",
@@ -1368,6 +1448,16 @@
     "height": 480,
     "method": "rembg",
     "source": "public/products/pipette-tips-filter-1.png"
+  },
+  "/products/placeholders/agricultural-pva-packaging-film.png": {
+    "default": "/products/studio/b508f00ed67d/hero-480.webp",
+    "srcSet": "/products/studio/b508f00ed67d/hero-480.webp 480w",
+    "avifSrcSet": "/products/studio/b508f00ed67d/hero-480.avif 480w",
+    "sizes": "(max-width: 640px) 44vw, (max-width: 1024px) 28vw, 320px",
+    "width": 480,
+    "height": 480,
+    "method": "feather-fallback",
+    "source": "public/products/placeholders/agricultural-pva-packaging-film.png"
   },
   "/products/pneumatic-silencer-0.jpg": {
     "default": "/products/studio/4a8091ce8f71/hero-480.webp",

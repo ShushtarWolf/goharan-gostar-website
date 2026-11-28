@@ -1,6 +1,42 @@
 {
   "applied": [
     {
+      "file": "01-pva-film-blowing-granules.jpg",
+      "slug": "pva-film-blowing-granules",
+      "role": "primary",
+      "default": "/products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-960.webp"
+    },
+    {
+      "file": "02-pva-extrusion-granules.jpg",
+      "slug": "pva-extrusion-granules",
+      "role": "primary",
+      "default": "/products/hq/pva-extrusion-granules--02-pva-extrusion-granules-960.webp"
+    },
+    {
+      "file": "03-detergent-packaging-film.jpg",
+      "slug": "detergent-packaging-pva-film",
+      "role": "primary",
+      "default": "/products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-960.webp"
+    },
+    {
+      "file": "05-shrink-wrap-film.jpg",
+      "slug": "pva-shrink-wrap-film",
+      "role": "primary",
+      "default": "/products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-960.webp"
+    },
+    {
+      "file": "06-soluble-seed-tape.jpg",
+      "slug": "soluble-seed-tape",
+      "role": "primary",
+      "default": "/products/hq/soluble-seed-tape--06-soluble-seed-tape-960.webp"
+    },
+    {
+      "file": "07-embroidery-soluble-film.jpg",
+      "slug": "embroidery-soluble-film",
+      "role": "primary",
+      "default": "/products/hq/embroidery-soluble-film--07-embroidery-soluble-film-480.webp"
+    },
+    {
       "file": "08-dialysis-hollow-fiber.jpg",
       "slug": "dialysis-filter",
       "role": "gallery",
@@ -131,17 +167,20 @@
       "slug": "highlighter-nib",
       "role": "primary",
       "default": "/products/hq/highlighter-nib--30-highlighter-nib-960.webp"
+    },
+    {
+      "file": "31-nonalcoholic-beverage-filtration.jpg",
+      "slug": "nonalcoholic-beverage-filtration",
+      "role": "primary",
+      "default": "/products/hq/nonalcoholic-beverage-filtration--31-nonalcoholic-beverage-filtration-480.webp"
+    },
+    {
+      "file": "32-juice-filtration.jpg",
+      "slug": "juice-filtration",
+      "role": "primary",
+      "default": "/products/hq/juice-filtration--32-juice-filtration-960.webp"
     }
   ],
   "skipped": [],
-  "unmatched": [
-    "01-pva-film-blowing-granules.jpg",
-    "02-pva-extrusion-granules.jpg",
-    "03-detergent-packaging-film.jpg",
-    "05-shrink-wrap-film.jpg",
-    "06-soluble-seed-tape.jpg",
-    "07-embroidery-soluble-film.jpg",
-    "31-nonalcoholic-beverage-filtration.jpg",
-    "32-juice-filtration.jpg"
-  ]
+  "unmatched": []
 }

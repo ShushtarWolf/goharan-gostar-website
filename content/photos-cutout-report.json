@@ -1,7 +1,7 @@
 {
-  "processed": 160,
-  "total": 160,
-  "rembgOk": 143,
+  "processed": 169,
+  "total": 169,
+  "rembgOk": 149,
   "fallbackFeather": [
     {
       "webPath": "/catalog/catalog-002.webp",
@@ -64,8 +64,20 @@
       "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-080.webp"
     },
     {
+      "webPath": "/products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-960.webp",
+      "source": "/cursor/stores/self/goharan-photos/hq/03-detergent-packaging-film.jpg"
+    },
+    {
       "webPath": "/products/hq/sintered-porous-metal-filter-disc-20-micron--29-metal-filter-disc-20-micron-480.webp",
       "source": "/cursor/stores/self/goharan-photos/hq/29-metal-filter-disc-20-micron.jpg"
+    },
+    {
+      "webPath": "/products/hq/soluble-seed-tape--06-soluble-seed-tape-960.webp",
+      "source": "/cursor/stores/self/goharan-photos/hq/06-soluble-seed-tape.jpg"
+    },
+    {
+      "webPath": "/products/placeholders/agricultural-pva-packaging-film.png",
+      "source": "/agent/repos/goharan-gostar-website/public/products/placeholders/agricultural-pva-packaging-film.png"
     },
     {
       "webPath": "/products/swimming-pool-filters-1.png",

@@ -1,5 +1,7 @@
 import type { CategoryId } from "@/content/categories";
 import catalogDoc from "@/content/catalog.json";
+import hqExpanded from "@/content/hq-expanded-products.json";
+import { productCategoryOverrides } from "@/content/product-category-overrides";
 import {
   industryToCategory,
   type IndustryId,
@@ -22,9 +24,12 @@ type CatalogProduct = {
   industries: IndustryId[];
 };
 
-const catalogBySlug = new Map(
-  (catalogDoc.products as CatalogProduct[]).map((p) => [p.slug, p]),
-);
+const catalogProducts = [
+  ...(catalogDoc.products as CatalogProduct[]),
+  ...(hqExpanded.products as CatalogProduct[]),
+];
+
+const catalogBySlug = new Map(catalogProducts.map((p) => [p.slug, p]));
 
 type WpLocaleBlock = {
   title?: string;
@@ -137,6 +142,7 @@ function buildProduct(slug: string): Product | null {
 
   const industries = catalog?.industries ?? [];
   const category =
+    productCategoryOverrides[slug] ??
     GROUP_TO_CATEGORY[meta?.group ?? ""] ??
     categoryFromIndustries(industries);
 
@@ -247,7 +253,7 @@ const SLUGS = [
   ...new Set([
     ...productMeta.map((p) => p.slug),
     ...Object.keys(wpSync.products as object),
-    ...(catalogDoc.products as CatalogProduct[]).map((p) => p.slug),
+    ...catalogProducts.map((p) => p.slug),
   ]),
 ].sort();
 

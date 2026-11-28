@@ -8,7 +8,8 @@ export type CategoryId =
   | "air-care"
   | "water-filtration"
   | "food-and-beverage"
-  | "oil-gas";
+  | "oil-gas"
+  | "pva-biodegradable";
 
 export type Category = {
   id: CategoryId;
@@ -47,5 +48,13 @@ export const categories: Category[] = [
   {
     id: "oil-gas",
     name: { fa: "نفت و گاز", tr: "Petrol ve Gaz", en: "Oil & Gas" },
+  },
+  {
+    id: "pva-biodegradable",
+    name: {
+      fa: "PVA و زیست‌تخریب‌پذیر",
+      tr: "PVA ve biyobozunur",
+      en: "PVA & Biodegradable",
+    },
   },
 ];

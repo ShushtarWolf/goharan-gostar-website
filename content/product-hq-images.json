@@ -1,4 +1,128 @@
 {
+  "pva-film-blowing-granules": {
+    "primary": {
+      "slug": "pva-film-blowing-granules",
+      "role": "primary",
+      "sourceFile": "01-pva-film-blowing-granules.jpg",
+      "width": 3002,
+      "height": 4076,
+      "default": "/products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-960.webp",
+      "srcSet": "/products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-480.webp 480w, /products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-960.webp 960w, /products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-480.avif 480w, /products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-960.avif 960w, /products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC BY-SA 3.0 — LHcheM (Wikimedia Commons)",
+        "en": "CC BY-SA 3.0 — LHcheM (Wikimedia Commons)",
+        "tr": "CC BY-SA 3.0 — LHcheM (Wikimedia Commons)"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  },
+  "pva-extrusion-granules": {
+    "primary": {
+      "slug": "pva-extrusion-granules",
+      "role": "primary",
+      "sourceFile": "02-pva-extrusion-granules.jpg",
+      "width": 3002,
+      "height": 4076,
+      "default": "/products/hq/pva-extrusion-granules--02-pva-extrusion-granules-960.webp",
+      "srcSet": "/products/hq/pva-extrusion-granules--02-pva-extrusion-granules-480.webp 480w, /products/hq/pva-extrusion-granules--02-pva-extrusion-granules-960.webp 960w, /products/hq/pva-extrusion-granules--02-pva-extrusion-granules-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/pva-extrusion-granules--02-pva-extrusion-granules-480.avif 480w, /products/hq/pva-extrusion-granules--02-pva-extrusion-granules-960.avif 960w, /products/hq/pva-extrusion-granules--02-pva-extrusion-granules-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC BY-SA 3.0 — LHcheM (Wikimedia Commons)",
+        "en": "CC BY-SA 3.0 — LHcheM (Wikimedia Commons)",
+        "tr": "CC BY-SA 3.0 — LHcheM (Wikimedia Commons)"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  },
+  "detergent-packaging-pva-film": {
+    "primary": {
+      "slug": "detergent-packaging-pva-film",
+      "role": "primary",
+      "sourceFile": "03-detergent-packaging-film.jpg",
+      "width": 4000,
+      "height": 2667,
+      "default": "/products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-960.webp",
+      "srcSet": "/products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-480.webp 480w, /products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-960.webp 960w, /products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-480.avif 480w, /products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-960.avif 960w, /products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC0 — ajcespedes (Wikimedia Commons)",
+        "en": "CC0 — ajcespedes (Wikimedia Commons)",
+        "tr": "CC0 — ajcespedes (Wikimedia Commons)"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  },
+  "pva-shrink-wrap-film": {
+    "primary": {
+      "slug": "pva-shrink-wrap-film",
+      "role": "primary",
+      "sourceFile": "05-shrink-wrap-film.jpg",
+      "width": 1000,
+      "height": 998,
+      "default": "/products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-960.webp",
+      "srcSet": "/products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-480.webp 480w, /products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-960.webp 960w",
+      "avifSrcSet": "/products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-480.avif 480w, /products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-960.avif 960w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 960
+    },
+    "gallery": []
+  },
+  "soluble-seed-tape": {
+    "primary": {
+      "slug": "soluble-seed-tape",
+      "role": "primary",
+      "sourceFile": "06-soluble-seed-tape.jpg",
+      "width": 5152,
+      "height": 3864,
+      "default": "/products/hq/soluble-seed-tape--06-soluble-seed-tape-960.webp",
+      "srcSet": "/products/hq/soluble-seed-tape--06-soluble-seed-tape-480.webp 480w, /products/hq/soluble-seed-tape--06-soluble-seed-tape-960.webp 960w, /products/hq/soluble-seed-tape--06-soluble-seed-tape-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/soluble-seed-tape--06-soluble-seed-tape-480.avif 480w, /products/hq/soluble-seed-tape--06-soluble-seed-tape-960.avif 960w, /products/hq/soluble-seed-tape--06-soluble-seed-tape-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC BY-SA 4.0 — Wargo (Wikimedia Commons)",
+        "en": "CC BY-SA 4.0 — Wargo (Wikimedia Commons)",
+        "tr": "CC BY-SA 4.0 — Wargo (Wikimedia Commons)"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  },
+  "embroidery-soluble-film": {
+    "primary": {
+      "slug": "embroidery-soluble-film",
+      "role": "primary",
+      "sourceFile": "07-embroidery-soluble-film.jpg",
+      "width": 800,
+      "height": 800,
+      "default": "/products/hq/embroidery-soluble-film--07-embroidery-soluble-film-480.webp",
+      "srcSet": "/products/hq/embroidery-soluble-film--07-embroidery-soluble-film-480.webp 480w",
+      "avifSrcSet": "/products/hq/embroidery-soluble-film--07-embroidery-soluble-film-480.avif 480w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 480
+    },
+    "gallery": []
+  },
   "dialysis-filter": {
     "primary": {
       "slug": "dialysis-filter",
@@ -413,6 +537,46 @@
       "placeholder": false,
       "licenseClass": "رسمی (official)",
       "largestVariant": 1575
+    },
+    "gallery": []
+  },
+  "nonalcoholic-beverage-filtration": {
+    "primary": {
+      "slug": "nonalcoholic-beverage-filtration",
+      "role": "primary",
+      "sourceFile": "31-nonalcoholic-beverage-filtration.jpg",
+      "width": 800,
+      "height": 800,
+      "default": "/products/hq/nonalcoholic-beverage-filtration--31-nonalcoholic-beverage-filtration-480.webp",
+      "srcSet": "/products/hq/nonalcoholic-beverage-filtration--31-nonalcoholic-beverage-filtration-480.webp 480w",
+      "avifSrcSet": "/products/hq/nonalcoholic-beverage-filtration--31-nonalcoholic-beverage-filtration-480.avif 480w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 480
+    },
+    "gallery": []
+  },
+  "juice-filtration": {
+    "primary": {
+      "slug": "juice-filtration",
+      "role": "primary",
+      "sourceFile": "32-juice-filtration.jpg",
+      "width": 1936,
+      "height": 2592,
+      "default": "/products/hq/juice-filtration--32-juice-filtration-960.webp",
+      "srcSet": "/products/hq/juice-filtration--32-juice-filtration-480.webp 480w, /products/hq/juice-filtration--32-juice-filtration-960.webp 960w, /products/hq/juice-filtration--32-juice-filtration-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/juice-filtration--32-juice-filtration-480.avif 480w, /products/hq/juice-filtration--32-juice-filtration-960.avif 960w, /products/hq/juice-filtration--32-juice-filtration-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC BY-SA 3.0 — Agne27 (Wikimedia Commons)",
+        "en": "CC BY-SA 3.0 — Agne27 (Wikimedia Commons)",
+        "tr": "CC BY-SA 3.0 — Agne27 (Wikimedia Commons)"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
     },
     "gallery": []
   }

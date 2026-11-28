@@ -1,0 +1,77 @@
+{
+  "products": [
+    {
+      "slug": "pva-film-blowing-granules",
+      "nameFa": "گرانول PVA Film Blowing",
+      "nameLatin": "PVA Film Blowing Granules",
+      "descriptionFa": "گرانول پلی‌وینیل الکل برای فیلم‌دمیدن و تولید فیلم‌های محلول در آب؛ بخشی از خط فیلم‌های PVA گوهران‌گستر برای بسته‌بندی و کاربردهای دوست‌دار محیط‌زیست.",
+      "descriptionEn": "Polyvinyl alcohol granules for blown-film processing and water-soluble film production—part of Goharan Gostar’s PVA film portfolio for packaging and environmentally conscious applications.",
+      "industries": ["pva-biodegradable"]
+    },
+    {
+      "slug": "pva-extrusion-granules",
+      "nameFa": "گرانول PVA extrusion",
+      "nameLatin": "PVA Extrusion Granules",
+      "descriptionFa": "گرانول PVA برای اکستروژن و تبدیل به فیلم یا ورق محلول در آب؛ مناسب خطوط تولید فیلم PVA با خواص یکنواخت و قابل‌تنظیم.",
+      "descriptionEn": "PVA granules for extrusion into water-soluble film or sheet—suited to PVA film lines requiring consistent, tunable processing behavior.",
+      "industries": ["pva-biodegradable"]
+    },
+    {
+      "slug": "detergent-packaging-pva-film",
+      "nameFa": "فیلم بسته‌بندی شوینده",
+      "nameLatin": "Detergent Packaging PVA Film",
+      "descriptionFa": "فیلم PVA محلول در آب برای بسته‌بندی واحدهای شوینده (پاد/کیسه) که در تماس با آب حل می‌شوند و از تماس مستقیم با محصول جلوگیری می‌کنند.",
+      "descriptionEn": "Water-soluble PVA film for unit-dose detergent packaging—pods or sachets that dissolve on contact with water while protecting the product until use.",
+      "industries": ["pva-biodegradable", "industrial-tools"]
+    },
+    {
+      "slug": "agricultural-pva-packaging-film",
+      "nameFa": "فیلم بسته‌بندی کشاورزی",
+      "nameLatin": "Agricultural PVA Packaging Film",
+      "descriptionFa": "فیلم و کیسه‌های PVA محلول در آب برای بسته‌بندی فرآورده‌های کشاورزی و سموم قابل‌حل؛ پس از استفاده در محیط طبیعی تجزیه می‌شوند و نیاز به بازیافت جداگانه ندارند.",
+      "descriptionEn": "Water-soluble PVA film and bags for agricultural inputs—designed to dissolve after use in the field, reducing separate packaging waste.",
+      "image": "/products/placeholders/agricultural-pva-packaging-film.png",
+      "industries": ["pva-biodegradable"]
+    },
+    {
+      "slug": "pva-shrink-wrap-film",
+      "nameFa": "فیلم شرینک رپ",
+      "nameLatin": "PVA Shrink Wrap Film",
+      "descriptionFa": "فیلم محلول در آب برای بسته‌بندی و شرینک محصولاتی که نیاز به روکش محافظ یکبارمصرف دارند و پس از استفاده قابل حل‌یافتن در آب هستند.",
+      "descriptionEn": "Water-soluble film for wrap and shrink applications where a protective single-use layer should dissolve in water after use.",
+      "industries": ["pva-biodegradable", "industrial-tools"]
+    },
+    {
+      "slug": "soluble-seed-tape",
+      "nameFa": "نوار بذر محلول",
+      "nameLatin": "Soluble Seed Tape",
+      "descriptionFa": "نوار بذر با پوشش یا بستر محلول‌پذیر برای کاشت منظم بذر در کشاورزی و باغبانی؛ نوار پس از خیس‌شدن در خاک تجزیه می‌شود.",
+      "descriptionEn": "Seed tape with a water-dispersible carrier for even sowing in agriculture and horticulture—the tape breaks down after wetting in soil.",
+      "industries": ["pva-biodegradable"]
+    },
+    {
+      "slug": "embroidery-soluble-film",
+      "nameFa": "فیلم‌های محلول گلدوزی",
+      "nameLatin": "Embroidery Water-Soluble Film",
+      "descriptionFa": "فیلم پشتیبان محلول در آب برای گلدوزی و تکمیل دوخت؛ پس از شست‌وشو بدون باقیمانده فیزیکی از کار جدا می‌شود.",
+      "descriptionEn": "Water-soluble backing film for embroidery and stitching support—washes away after processing without leaving a physical residue on the textile.",
+      "industries": ["pva-biodegradable", "industrial-tools"]
+    },
+    {
+      "slug": "nonalcoholic-beverage-filtration",
+      "nameFa": "فیلتراسیون نوشیدنی غیر الکلی",
+      "nameLatin": "Non-Alcoholic Beverage Filtration",
+      "descriptionFa": "کارتریج و رسانه‌های فیلتراسیون متخلخل برای تصفیه و یکنواخت‌سازی نوشیدنی‌های غیرالکلی در خط تولید—همراه با سایر راهکارهای فیلتراسیون غذایی گوهران‌گستر.",
+      "descriptionEn": "Porous filtration cartridges and media for clarifying and conditioning non-alcoholic beverages on the production line—alongside Goharan Gostar’s broader food-and-beverage filtration solutions.",
+      "industries": ["food-beverage"]
+    },
+    {
+      "slug": "juice-filtration",
+      "nameFa": "فیلتراسیون آبمیوه",
+      "nameLatin": "Juice Filtration",
+      "descriptionFa": "فیلتراسیون عمقی و ممبرانی برای آبمیوه و نوشیدنی‌های میوه‌ای؛ حذف ذرات و آماده‌سازی محصول قبل از بسته‌بندی.",
+      "descriptionEn": "Depth and membrane filtration for juices and fruit beverages—particle removal and finishing before packaging.",
+      "industries": ["food-beverage"]
+    }
+  ]
+}

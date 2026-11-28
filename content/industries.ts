@@ -11,7 +11,8 @@ export type IndustryId =
   | "compressed-air-desiccant"
   | "health-environment"
   | "water-wastewater"
-  | "stationery";
+  | "stationery"
+  | "pva-biodegradable";
 
 export type Industry = {
   id: IndustryId;
@@ -146,6 +147,20 @@ export const industries: Industry[] = [
       fa: "پیش‌فیلتر کربن، فیلتر استخر، بطری ورزشی و فیلتراسیون غشایی.",
       tr: "Karbon ön filtre, havuz filtreleri ve membran filtrasyon.",
       en: "Carbon pre-filtration, pool and bottle filters, and membrane systems.",
+    },
+  },
+  {
+    id: "pva-biodegradable",
+    categoryId: "pva-biodegradable",
+    name: {
+      fa: "فیلم‌های PVA و بسته‌بندی زیست‌تخریب‌پذیر",
+      tr: "PVA filmler ve biyobozunur ambalaj",
+      en: "PVA films & biodegradable packaging",
+    },
+    intro: {
+      fa: "گرانول، فیلم و نوار محلول در آب برای بسته‌بندی شوینده، کشاورزی، نساجی و کاربردهای دوست‌دار محیط‌زیست.",
+      tr: "Deterjan, tarım ve tekstil için suda çözünen PVA granül, film ve şeritler.",
+      en: "Water-soluble PVA granules, films, and tapes for detergent, agriculture, textile, and eco-friendly packaging.",
     },
   },
   {
