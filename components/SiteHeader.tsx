@@ -122,14 +122,20 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
           />
         </TransitionLink>
 
-        <div className="flex min-w-0 flex-1 items-center justify-evenly gap-1.5 text-[12px] font-medium leading-tight tracking-wide text-white sm:justify-center sm:gap-2 sm:text-[14px] md:gap-6 md:text-[15px] md:tracking-normal">
+        <div
+          className={
+            locale === "fa"
+              ? "menu__links flex min-w-0 flex-1 items-center justify-evenly gap-1 text-[11px] font-medium leading-tight tracking-wide text-white sm:justify-center sm:gap-2 sm:text-[14px] md:gap-6 md:text-[15px] md:tracking-normal"
+              : "menu__links menu__links--latin flex min-w-0 flex-1 items-center justify-evenly gap-0.5 text-[10px] font-medium leading-tight tracking-tight text-white sm:justify-center sm:gap-2 sm:text-[14px] sm:tracking-wide md:gap-6 md:text-[15px] md:tracking-normal"
+          }
+        >
           {NAV.map((item) => (
             <TransitionLink
               key={item.key}
               href={href(locale, item.path)}
               locale={locale}
               path={item.path}
-              className="menu__link relative z-[1] shrink-0 touch-manipulation whitespace-nowrap px-1.5 [text-shadow:0_1px_8px_rgba(0,0,0,0.85),0_0_2px_rgba(0,0,0,1)] transition hover:text-cyan sm:px-2 md:px-0.5"
+              className="menu__link relative z-[1] min-w-0 touch-manipulation whitespace-nowrap px-0.5 [text-shadow:0_1px_8px_rgba(0,0,0,0.85),0_0_2px_rgba(0,0,0,1)] transition hover:text-cyan sm:px-2 md:px-0.5"
             >
               {t(ui.nav[item.key], locale)}
             </TransitionLink>
