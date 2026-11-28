@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 /**
  * Background removal + normalized square studio assets for all product images.
- * Writes content/product-studio-images.json
+ * Writes content/product-studio-images.json and content/photos-cutout-report.json
+ *
+ * Prereq (once per machine):
+ *   pip install "rembg[cpu,cli]" onnxruntime
+ *   export PATH="$HOME/.local/bin:$PATH"
  */
 import crypto from "node:crypto";
 import fs from "node:fs";
