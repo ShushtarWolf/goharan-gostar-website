@@ -85,7 +85,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
     <>
       <canvas
         ref={canvasRef}
-        className="goo pointer-events-none fixed inset-0 z-40 h-full w-full"
+        className="goo pointer-events-none fixed inset-0 z-40 h-full w-full [transform:translateZ(0)]"
         aria-hidden
       />
       <nav
@@ -124,7 +124,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
               href={href(locale, item.path)}
               locale={locale}
               path={item.path}
-              className="menu__link relative z-[1] shrink-0 touch-manipulation whitespace-nowrap px-1.5 [text-shadow:0_1px_10px_rgba(0,0,0,0.65),0_0_1px_rgba(0,0,0,0.9)] transition hover:text-cyan sm:px-2 md:px-0.5"
+              className="menu__link relative z-[1] shrink-0 touch-manipulation whitespace-nowrap px-1.5 [text-shadow:0_1px_8px_rgba(0,0,0,0.85),0_0_2px_rgba(0,0,0,1)] transition hover:text-cyan sm:px-2 md:px-0.5"
             >
               {t(ui.nav[item.key], locale)}
             </TransitionLink>
