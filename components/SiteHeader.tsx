@@ -37,10 +37,11 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
           if (cancelled) return;
           // Only real intro photos. Never paint holds as .goo-picture.
           const pics = [
-            ...document.querySelectorAll<HTMLElement>(".goo-picture"),
-          ];
-          if (pics.length) resolve(pics);
-          else requestAnimationFrame(tick);
+            ...document.querySelectorAll<HTMLElement>(".goo-picture[data-goo-target]"),
+          ].slice(0, 8); // textures only for the intro photos; other images are strand shapes
+          // Every page block can hold a strand now, so pages without
+          // intro photos boot too (photos, when present, get textures).
+          resolve(pics);
         };
         tick();
       });
@@ -48,7 +49,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
     const start = async () => {
       const { bootGooey } = await import("@/lib/gooey/runGooey.js");
       const pictures = await waitForPictures();
-      if (cancelled || !pictures.length) return;
+      if (cancelled) return;
       // Scene lean targets — not painted (see runGooey holds).
       const holds = Array.from(
         document.querySelectorAll<HTMLElement>("[data-goo-hold]"),
