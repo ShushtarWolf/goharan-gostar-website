@@ -15,53 +15,6 @@ const NAV = [
   { key: "contact" as const, path: "contact" },
 ];
 
-function NavIcon({ name }: { name: (typeof NAV)[number]["key"] }) {
-  const common = {
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.7,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    className: "h-5 w-5 shrink-0 md:hidden",
-    "aria-hidden": true,
-  };
-  if (name === "products") {
-    return (
-      <svg {...common}>
-        <rect x="4" y="4" width="7" height="7" rx="1.2" />
-        <rect x="13" y="4" width="7" height="7" rx="1.2" />
-        <rect x="4" y="13" width="7" height="7" rx="1.2" />
-        <rect x="13" y="13" width="7" height="7" rx="1.2" />
-      </svg>
-    );
-  }
-  if (name === "applications") {
-    return (
-      <svg {...common}>
-        <circle cx="8" cy="8" r="2.4" />
-        <circle cx="16" cy="8" r="2.4" />
-        <circle cx="8" cy="16" r="2.4" />
-        <circle cx="16" cy="16" r="2.4" />
-      </svg>
-    );
-  }
-  if (name === "about") {
-    return (
-      <svg {...common}>
-        <circle cx="12" cy="8" r="3" />
-        <path d="M5.5 19a6.5 6.5 0 0 1 13 0" />
-      </svg>
-    );
-  }
-  return (
-    <svg {...common}>
-      <path d="M5 6.5h14v11H5z" />
-      <path d="m5 7 7 6 7-6" />
-    </svg>
-  );
-}
-
 /**
  * Codrops GooeyStickyMenu WebGL (ported) — fixed bottom, gxpore cyan glass.
  * Canvas draws the liquid; this nav is transparent once goo is live.
@@ -138,7 +91,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       <nav
         ref={menuRef}
         aria-label="Primary"
-        className="menu fixed bottom-[max(0.85rem,env(safe-area-inset-bottom))] left-1/2 z-50 flex h-[4.35rem] w-[min(100%-1rem,44rem)] max-w-[calc(100vw-1rem)] -translate-x-1/2 items-center gap-1.5 rounded-full px-2.5 sm:h-[4.5rem] sm:gap-2 sm:px-3 md:bottom-8 md:h-16 md:gap-5 md:px-6"
+        className="menu fixed bottom-6 left-1/2 z-50 flex h-[3.75rem] w-[min(100%-0.75rem,44rem)] max-w-[calc(100vw-0.75rem)] -translate-x-1/2 items-center gap-1.5 rounded-full px-2.5 sm:h-14 sm:gap-2 sm:px-3 md:bottom-8 md:h-16 md:gap-5 md:px-6"
         style={{
           background:
             "linear-gradient(180deg, rgba(30,40,55,0.45), rgba(12,14,18,0.55))",
@@ -164,18 +117,16 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
           />
         </TransitionLink>
 
-        <div className="flex min-w-0 flex-1 items-center justify-evenly gap-0 text-[11px] font-medium leading-tight text-white md:justify-center md:gap-6 md:text-[15px]">
+        <div className="flex min-w-0 flex-1 items-center justify-evenly gap-1.5 text-[12px] font-medium leading-tight tracking-wide text-white sm:justify-center sm:gap-2 sm:text-[14px] md:gap-6 md:text-[15px] md:tracking-normal">
           {NAV.map((item) => (
             <TransitionLink
               key={item.key}
               href={href(locale, item.path)}
               locale={locale}
               path={item.path}
-              className="menu__link relative z-[1] flex min-w-[3.4rem] shrink-0 touch-manipulation flex-col items-center gap-1 px-1 py-1 [text-shadow:0_1px_10px_rgba(0,0,0,0.65),0_0_1px_rgba(0,0,0,0.9)] transition hover:text-cyan md:min-w-0 md:flex-row md:gap-0 md:px-0.5 md:py-0"
+              className="menu__link relative z-[1] shrink-0 touch-manipulation whitespace-nowrap px-1.5 [text-shadow:0_1px_10px_rgba(0,0,0,0.65),0_0_1px_rgba(0,0,0,0.9)] transition hover:text-cyan sm:px-2 md:px-0.5"
             >
-              <NavIcon name={item.key} />
-              <span className="md:hidden">{t(ui.navShort[item.key], locale)}</span>
-              <span className="hidden md:inline">{t(ui.nav[item.key], locale)}</span>
+              {t(ui.nav[item.key], locale)}
             </TransitionLink>
           ))}
         </div>
