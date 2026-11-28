@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { homeCopy } from "@/content/home";
 import { productsForHomeScene } from "@/content/products";
 import { href } from "@/lib/paths";
@@ -16,6 +16,20 @@ type TabId = "departments" | "applications";
  */
 export default function HomeSolutions({ locale }: { locale: Locale }) {
   const [tab, setTab] = useState<TabId>("departments");
+  useEffect(() => {
+    const apply = () => {
+      const h = window.location.hash.replace("#", "");
+      if (h !== "solutions" && h !== "solutions-applications") return;
+      setTab(h === "solutions-applications" ? "applications" : "departments");
+      window.setTimeout(() => {
+        document.getElementById("solutions")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 350);
+    };
+    apply();
+    window.addEventListener("hashchange", apply);
+    return () => window.removeEventListener("hashchange", apply);
+  }, []);
+
   const medicalProducts = productsForHomeScene("medical");
 
   const tabs: { id: TabId; label: string }[] = [

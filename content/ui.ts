@@ -20,6 +20,41 @@ export const ui = {
     responsibility: { fa: "مسئولیت ما", tr: "Sorumluluk", en: "Responsibility" },
     material: { fa: "پلاستیک متخلخل", tr: "Gözenekli plastik", en: "Porous plastic" },
   } satisfies Record<string, Localized<string>>,
+  navMain: {
+    about: { fa: "درباره ما", tr: "Hakkımızda", en: "About us" },
+    departments: { fa: "دپارتمان‌ها", tr: "Bölümler", en: "Departments" },
+    applications: { fa: "کاربردها", tr: "Uygulamalar", en: "Applications" },
+    knowledge: { fa: "پایگاه دانش", tr: "Bilgi merkezi", en: "Knowledge base" },
+    contact: { fa: "تماس با ما", tr: "Bize ulaşın", en: "Contact us" },
+  } satisfies Record<string, Localized<string>>,
+  navMainShort: {
+    about: { fa: "درباره ما", tr: "Hakkımızda", en: "About" },
+    departments: { fa: "دپارتمان‌ها", tr: "Bölümler", en: "Depts." },
+    applications: { fa: "کاربردها", tr: "Uygulama", en: "Uses" },
+    knowledge: { fa: "پایگاه دانش", tr: "Bilgi", en: "Knowledge" },
+    contact: { fa: "تماس با ما", tr: "İletişim", en: "Contact" },
+  } satisfies Record<string, Localized<string>>,
+  footerNav: {
+    news: { fa: "اخبار", tr: "Haberler", en: "News" },
+    knowledge: { fa: "پایگاه دانش", tr: "Bilgi merkezi", en: "Knowledge base" },
+    products: { fa: "محصولات", tr: "Ürünler", en: "Products" },
+    departments: { fa: "دپارتمان‌ها", tr: "Bölümler", en: "Departments" },
+    careers: { fa: "فرصت‌های شغلی", tr: "Kariyer", en: "Careers" },
+  } satisfies Record<string, Localized<string>>,
+  footerContact: {
+    heading: { fa: "تماس با ما", tr: "İletişim", en: "Contact" },
+    headOffice: {
+      fa: "دفتر مرکزی: تهران، خیابان آزادی، خیابان حبیب‌اللهی، خیابان قاسمی، پلاک ۳۱، طبقه دوم",
+      tr: "Genel merkez: 2. Kat, no. 31, Qasemi sk., Habibullah sk., Azadi Cd., Tahran",
+      en: "Head office: 2nd Floor, no. 31, Qasemi St., Habibollah St., Azadi St., Tehran",
+    },
+    turkey: {
+      fa: "دفتر ترکیه: استانبول",
+      tr: "Türkiye ofisi: İstanbul",
+      en: "Turkey office: Istanbul",
+    },
+    phonesIran: ["+989108108966", "+989129309178", "+982191309167"],
+  },
   navShort: {
     products: { fa: "محصولات", tr: "Ürünler", en: "Products" },
     applications: { fa: "کاربردها", tr: "Uygulama", en: "Uses" },

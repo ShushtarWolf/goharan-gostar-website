@@ -10,6 +10,8 @@ import { ui } from "@/content/ui";
 import { href } from "@/lib/paths";
 import { t, type Locale } from "@/lib/i18n";
 import HomeSolutions from "@/components/HomeSolutions";
+import HomeCollabArticlesAbadis from "@/components/HomeCollabArticlesAbadis";
+import SiteFooter from "@/components/SiteFooter";
 import HomeCustomersTeam from "@/components/HomeCustomersTeam";
 import {
   wirePhotoEnter,
@@ -393,9 +395,6 @@ export default function HomeExperience({
             <p className={typo.bodyOnDark}>
               {t(homeCopy.vision, locale)}
             </p>
-            <p className="mt-5 text-sm tracking-[0.15em] text-cyan">
-              {t(homeCopy.visionNext, locale)}
-            </p>
           </div>
         </div>
       </section>
@@ -426,6 +425,7 @@ export default function HomeExperience({
       </section>
 
       <HomeSolutions locale={locale} />
+      <HomeCollabArticlesAbadis locale={locale} />
 
       <HomeCustomersTeam locale={locale} />
 
@@ -501,9 +501,7 @@ export default function HomeExperience({
         </div>
       </section>
 
-      <footer className="border-t border-white/10 bg-graphite px-6 pb-8 pt-8 text-center text-xs text-mist/45">
-        <p data-typo>{t(ui.footer, locale)}</p>
-      </footer>
+      <SiteFooter locale={locale} />
     </div>
   );
 }
