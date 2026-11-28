@@ -23,9 +23,9 @@ export const homeCopy = {
     en: "Leading porous-parts producer in Iran and the Middle East",
   } satisfies Localized<string>,
   introBody: {
-    fa: "گوهران گستر نادین با برند بین‌المللی GXPORE، نخستین تولیدکنندهٔ تخصصی قطعات متخلخل پلیمری در ایران و خاورمیانه است. ساختار ماده را طوری مهندسی می‌کنیم که در فیلتراسیون، تجهیزات پزشکی و سامانه‌های صنعتی، عملکردی دقیق و قابل‌اطمینان داشته باشد.",
-    tr: "Uluslararası GXPORE markasıyla Goharan Gostar Nadin, İran ve Orta Doğu’da polimer gözenekli parçaların uzman üreticisidir. Filtrasyon, tıbbi cihazlar ve endüstriyel sistemlerde güvenilir performans için malzeme yapısını mühendislikle tasarlarız.",
-    en: "Goharan Gostar Nadin, with the international GXPORE brand, is a specialized producer of porous polymer parts in Iran and the Middle East. We engineer material structure for precise, reliable performance in filtration, medical devices, and industrial systems.",
+    fa: "شرکت دانش‌بنیان گوهران گستر نادین، با برند بین‌المللی GXPORE، نخستین تولیدکنندهٔ تخصصی قطعات متخلخل پلیمری در ایران و خاورمیانه است. این شرکت ساختار این قطعات را برای عملکرد دقیق و قابل‌اطمینان در فیلتراسیون، تجهیزات پزشکی و سامانه‌های صنعتی مهندسی می‌کند. گوهران گستر نادین همچنین فیلم‌های محلول در آب بر پایهٔ پلی‌وینیل الکل (PVA) تولید می‌کند و ضخامت و سرعت انحلال آن‌ها را متناسب با نیاز هر کاربرد تنظیم می‌کند",
+    tr: "Bilgi tabanlı bir şirket olan Goharan Gostar Nadin, uluslararası GXPORE markasıyla İran ve Orta Doğu’da polimer gözenekli parçaların ilk uzman üreticisidir. Şirket, bu parçaların yapısını filtrasyon, tıbbi cihazlar ve endüstriyel sistemlerde hassas ve güvenilir performans için mühendislikle tasarlar. Goharan Gostar Nadin ayrıca polivinil alkol (PVA) bazlı suda çözünen filmler üretir ve bunların kalınlığını ile çözünme hızını her uygulamanın ihtiyacına göre ayarlar.",
+    en: "Goharan Gostar Nadin, a knowledge-based company with the international GXPORE brand, is the first specialized producer of porous polymer parts in Iran and the Middle East. The company engineers the structure of these parts for precise, reliable performance in filtration, medical devices, and industrial systems. Goharan Gostar Nadin also produces water-soluble films based on polyvinyl alcohol (PVA), tuning their thickness and dissolution speed to the needs of each application.",
   } satisfies Localized<string>,
   missionLabel: {
     fa: "رسالت ما",
@@ -75,15 +75,56 @@ export const homeCopy = {
     en: "From structure to product",
   } satisfies Localized<string>,
   structureTitle: {
-    fa: "منافذ از ۱ تا ۲۰۰ میکرون",
+    fa: "منافذ ۱ تا ۲۰۰ میکرون",
     tr: "1 ila 200 mikron gözenekler",
     en: "Pores from 1 to 200 microns",
   } satisfies Localized<string>,
   structureBody: {
-    fa: "اندازهٔ حفره‌ها از ۱ تا ۲۰۰ میکرون، متناسب با کاربرد و اندازهٔ ناخالصی‌ها، با توزیعی یکنواخت تنظیم می‌شود؛ ناخالصی‌ها جدا می‌شوند و جریان پاک و قابل‌اطمینان می‌ماند.",
-    tr: "Uygulamaya göre 1–200 µm ayarlanabilir gözenek boyutu ve düzgün dağılım; kirleticileri ayırır, temiz ve güvenilir akış sağlar.",
-    en: "Tunable pore size from 1–200 µm with uniform distribution — separating impurities and delivering clean, reliable flow.",
+    fa: "با مهندسی اندازهٔ حفره‌ها در بازهٔ ۱ تا ۲۰۰ میکرون، قطعات متخلخلی تولید می‌کنیم که متناسب با نیاز محصولات و کاربردهای مختلف، امکان عبور گزینشی و جداسازی ناخالصی‌ها را فراهم می‌کنند.",
+    tr: "Gözenek boyutunu 1 ila 200 mikron aralığında mühendislikle tasarlayarak, farklı ürün ve uygulamaların ihtiyacına uygun biçimde seçici geçişe ve safsızlıkların ayrılmasına imkân tanıyan gözenekli parçalar üretiyoruz.",
+    en: "By engineering pore size in the range of 1 to 200 microns, we produce porous parts that suit the needs of different products and applications, enabling selective passage and the separation of impurities.",
   } satisfies Localized<string>,
+  solutionsTitle: {
+    fa: "راهکارهای ما",
+    tr: "Çözümlerimiz",
+    en: "Our solutions",
+  } satisfies Localized<string>,
+  solutionsTabs: {
+    departments: { fa: "دپارتمان", tr: "Bölümler", en: "Departments" } satisfies Localized<string>,
+    applications: { fa: "کاربردها", tr: "Uygulamalar", en: "Applications" } satisfies Localized<string>,
+  },
+  solutionsDepartments: [
+    {
+      id: "porous-membranes",
+      path: "products",
+      title: {
+        fa: "محصولات غشاهای متخلخل",
+        tr: "Gözenekli membran ürünleri",
+        en: "Porous membrane products",
+      } satisfies Localized<string>,
+    },
+    {
+      id: "pva-biodegradable",
+      path: "products",
+      hash: "pva-biodegradable",
+      title: {
+        fa: "محصولات زیست‌تخریب‌پذیر (PVA)",
+        tr: "Biyobozunur ürünler (PVA)",
+        en: "Biodegradable products (PVA)",
+      } satisfies Localized<string>,
+    },
+  ],
+  /** Headings follow the Persian wording of the products list sent by the client (msg 251). */
+  solutionsApplications: [
+    { id: "medical-devices", title: { fa: "تجهیزات پزشکی", tr: "Tıbbi Cihazlar", en: "Medical equipment" } satisfies Localized<string> },
+    { id: "laboratory-filtration", title: { fa: "فیلتر های آزمایشگاهی", tr: "Laboratuvar filtreleri", en: "Lab filters" } satisfies Localized<string> },
+    { id: "air-care", title: { fa: "مراقبت از هوا", tr: "Hava bakımı", en: "Air care" } satisfies Localized<string> },
+    { id: "industrial", title: { fa: "صنعتی", tr: "Endüstriyel", en: "Industrial" } satisfies Localized<string> },
+    { id: "water-filtration", title: { fa: "فیلترهای آب", tr: "Su filtreleri", en: "Water filters" } satisfies Localized<string> },
+    { id: "oil-gas", title: { fa: "نفت و گاز", tr: "Petrol ve gaz", en: "Oil & gas" } satisfies Localized<string> },
+    { id: "writing-instruments", title: { fa: "لوازم تحریر", tr: "Kırtasiye", en: "Writing instruments" } satisfies Localized<string> },
+    { id: "food-and-beverage", title: { fa: "غذا و نوشیدنی", tr: "Gıda ve içecek", en: "Food & beverage" } satisfies Localized<string> },
+  ],
   related: {
     fa: "محصولات مرتبط",
     tr: "İlgili ürünler",
@@ -212,42 +253,4 @@ export const homeCopy = {
       } satisfies Localized<string>,
     },
   ],
-  scenes: {
-    silencer: {
-      title: {
-        fa: "صداگیر پنوماتیک",
-        tr: "Pnömatik Susturucu",
-        en: "Pneumatic Silencer",
-      } satisfies Localized<string>,
-      body: {
-        fa: "هوای فشرده از مسیر پرپیچ‌وخم منافذ می‌گذرد؛ فشار و شدت صدا کم می‌شود و جریان خروجی تحت کنترل می‌ماند.",
-        tr: "Basınçlı hava kıvrımlı gözeneklerden geçerek basınç ve gürültüyü düşürür; çıkış akışı kontrol altına alınır.",
-        en: "Compressed air travels through tortuous pores — pressure and noise drop while outlet flow stays controlled.",
-      } satisfies Localized<string>,
-    },
-    pipette: {
-      title: {
-        fa: "فیلتر سرسمپلر",
-        tr: "Pipet Ucu Filtresi",
-        en: "Pipette Tip Filter",
-      } satisfies Localized<string>,
-      body: {
-        fa: "ذرات و آلودگی در شبکهٔ متخلخل گیر می‌افتند؛ نمونه از مسیر پاک می‌گذرد و جلوی آلودگی متقابل گرفته می‌شود.",
-        tr: "Parçacıklar gözenekli ağda tutulur; numune temiz geçer ve çapraz bulaşma engellenir.",
-        en: "Particles lodge in the porous network while the sample passes clean — blocking cross-contamination.",
-      } satisfies Localized<string>,
-    },
-    medical: {
-      title: {
-        fa: "کاربرد پزشکی",
-        tr: "Tıbbi Uygulama",
-        en: "Medical Application",
-      } satisfies Localized<string>,
-      body: {
-        fa: "گاز از منافذ می‌گذرد و مسیر پرپیچ‌وخم جلوی جریان ناخواسته یا جرقه را می‌گیرد؛ با رسیدن مایع، جریان قطع می‌شود.",
-        tr: "Gaz gözeneklerden geçer; kıvrımlı yol istenmeyen akışı veya kıvılcımı engeller. Sıvı değince akış kesilir.",
-        en: "Gas vents through pores; the tortuous path blocks unwanted flow or sparks. On liquid contact, flow stops.",
-      } satisfies Localized<string>,
-    },
-  },
 };
