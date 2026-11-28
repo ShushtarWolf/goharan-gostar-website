@@ -44,9 +44,14 @@ export const ui = {
   footerContact: {
     heading: { fa: "تماس با ما", tr: "İletişim", en: "Contact" },
     headOffice: {
-      fa: "دفتر مرکزی: تهران، خیابان آزادی، خیابان حبیب‌اللهی، خیابان قاسمی، پلاک ۳۱، طبقه دوم",
-      tr: "Genel merkez: 2. Kat, no. 31, Qasemi sk., Habibullah sk., Azadi Cd., Tahran",
-      en: "Head office: 2nd Floor, no. 31, Qasemi St., Habibollah St., Azadi St., Tehran",
+      fa: "دفتر مرکزی: قیطریه، بلوار اندرزگو، پلاک ۱۰۴، واحد ۲",
+      tr: "Genel merkez: Gheytarieh, Andarzgoo Bulvarı, no. 104, birim 2",
+      en: "Head office: Gheytarieh, Andarzgoo Blvd., No. 104, Unit 2",
+    },
+    factory: {
+      fa: "کارخانه: شهرک صنعتی شمس‌آباد، بلوار خیام، کنارگذر اتوماتیک یاران، خیابان اول، پلاک ۱۵",
+      tr: "Fabrika: Şemsabad Sanayi Bölgesi, Hayyam Bulvarı, Yaran Otomatik Yan Yol, 1. Sokak, no. 15",
+      en: "Factory: Shamsabad Industrial Town, Khayyam Blvd., Yaran Automatic Bypass, 1st Street, No. 15",
     },
     turkey: {
       fa: "دفتر ترکیه: استانبول",
@@ -54,6 +59,10 @@ export const ui = {
       en: "Turkey office: Istanbul",
     },
     phonesIran: ["+989108108966", "+989129309178", "+982191309167"],
+    linkedin: {
+      url: "https://www.linkedin.com/company/goharan-gostar-nadin/",
+      label: { fa: "لینکدین", tr: "LinkedIn", en: "LinkedIn" },
+    },
   },
   navShort: {
     products: { fa: "محصولات", tr: "Ürünler", en: "Products" },
@@ -99,9 +108,9 @@ export const ui = {
   contact: {
     title: { fa: "تماس با ما", tr: "İletişim", en: "Contact Us" },
     iran: {
-      fa: "دفتر ایران: تهران، خیابان آزادی، خیابان حبیب‌اللهی، خیابان قاسمی، پلاک ۳۱، طبقه دوم",
-      tr: "İran Ofisi: 2. Kat, no. 31, Qasemi sk., Habibullah sk., Azadi Cd., Tahran",
-      en: "Iran Office: 2nd Floor, no. 31, Qasemi St., Habibollah St., Azadi St., Tehran",
+      fa: "دفتر ایران: قیطریه، بلوار اندرزگو، پلاک ۱۰۴، واحد ۲",
+      tr: "İran Ofisi: Gheytarieh, Andarzgoo Bulvarı, no. 104, birim 2",
+      en: "Iran Office: Gheytarieh, Andarzgoo Blvd., No. 104, Unit 2",
     },
     turkey: {
       fa: "دفتر ترکیه: استانبول",

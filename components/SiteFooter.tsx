@@ -50,6 +50,7 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
             {t(fc.heading, locale)}
           </p>
           <p>{t(fc.headOffice, locale)}</p>
+          <p>{t(fc.factory, locale)}</p>
           <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
             {fc.phonesIran.map((phone) => (
               <li key={phone}>
@@ -68,6 +69,16 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
           <p className="mt-4">
             <a href={`mailto:${c.email}`} dir="ltr" className="transition hover:text-cyan">
               {c.email}
+            </a>
+          </p>
+          <p className="mt-4">
+            <a
+              href={fc.linkedin.url}
+              target="_blank"
+              rel="noopener"
+              className="transition hover:text-cyan"
+            >
+              {t(fc.linkedin.label, locale)}
             </a>
           </p>
         </div>
