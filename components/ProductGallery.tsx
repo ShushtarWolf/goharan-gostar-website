@@ -30,7 +30,7 @@ export default function ProductGallery({
                 slug={slug}
                 hero={isHero}
                 loading={isHero ? "eager" : "lazy"}
-                className={`product-feather-img h-auto w-full object-contain ${
+                className={`product-studio-img h-auto w-full object-contain ${
                   isHero
                     ? "max-h-96 p-2 sm:max-h-[28rem]"
                     : "max-h-80 p-3 sm:max-w-md"

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "catalog:build": "node scripts/build-catalog.mjs",
-    "photos:ingest": "node scripts/ingest-hq-photos.mjs"
+    "photos:ingest": "node scripts/ingest-hq-photos.mjs",
+    "photos:cutout": "node scripts/photos-cutout.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

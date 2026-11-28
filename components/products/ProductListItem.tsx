@@ -40,7 +40,7 @@ export default function ProductListItem({
             slug={slug}
             hero
             loading="lazy"
-            className="product-feather-img goo-picture mx-auto block h-52 w-full max-w-lg object-contain p-3 opacity-95 sm:h-56"
+            className="product-studio-img goo-picture mx-auto block h-52 w-full max-w-lg object-contain p-3 opacity-95 sm:h-56"
           />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
@@ -50,7 +50,7 @@ export default function ProductListItem({
             alt=""
             loading="lazy"
             decoding="async"
-            className="product-feather-img goo-picture mx-auto block h-52 w-full max-w-lg object-contain p-3 opacity-95 sm:h-56"
+            className="product-studio-img goo-picture mx-auto block h-52 w-full max-w-lg object-contain p-3 opacity-95 sm:h-56"
             style={{ viewTransitionName: vtName }}
           />
         )

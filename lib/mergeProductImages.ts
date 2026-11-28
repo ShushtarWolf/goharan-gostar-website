@@ -1,5 +1,6 @@
 import hqManifest from "@/content/product-hq-images.json";
 import type { ProductMedia } from "@/content/products.types";
+import { applyStudioToMedia } from "@/lib/applyStudioImages";
 
 type HqEntry = {
   default: string;
@@ -32,7 +33,8 @@ function entryToMedia(e: HqEntry): ProductMedia {
   };
 }
 
-export function mergeProductImages(
+/** HQ + catalog paths before studio cutout mapping */
+export function mergeProductImagesRaw(
   slug: string,
   baseImages: string[],
 ): { images: string[]; media: ProductMedia[] } {
@@ -55,5 +57,17 @@ export function mergeProductImages(
   return {
     images: [...lead.map((m) => m.src), ...tail],
     media: [...lead, ...tail.map((src) => ({ src }))],
+  };
+}
+
+export function mergeProductImages(
+  slug: string,
+  baseImages: string[],
+): { images: string[]; media: ProductMedia[] } {
+  const raw = mergeProductImagesRaw(slug, baseImages);
+  const media = applyStudioToMedia(raw.media);
+  return {
+    images: media.map((m) => m.src),
+    media,
   };
 }

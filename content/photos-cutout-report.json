@@ -1,0 +1,78 @@
+{
+  "processed": 160,
+  "total": 160,
+  "rembgOk": 143,
+  "fallbackFeather": [
+    {
+      "webPath": "/catalog/catalog-002.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-002.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-013.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-013.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-016.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-016.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-018.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-018.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-021.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-021.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-035.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-035.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-038.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-038.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-041.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-041.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-043.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-043.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-044.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-044.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-052.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-052.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-058.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-058.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-062.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-062.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-077.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-077.webp"
+    },
+    {
+      "webPath": "/catalog/catalog-080.webp",
+      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-080.webp"
+    },
+    {
+      "webPath": "/products/hq/sintered-porous-metal-filter-disc-20-micron--29-metal-filter-disc-20-micron-480.webp",
+      "source": "/cursor/stores/self/goharan-photos/hq/29-metal-filter-disc-20-micron.jpg"
+    },
+    {
+      "webPath": "/products/swimming-pool-filters-1.png",
+      "source": "/agent/repos/goharan-gostar-website/public/products/swimming-pool-filters-1.png"
+    }
+  ],
+  "missingSource": [],
+  "failed": [],
+  "reused": 0
+}
