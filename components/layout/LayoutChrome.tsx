@@ -12,10 +12,10 @@ function pathAfterLocale(pathname: string, locale: Locale): string[] {
   return idx >= 0 ? parts.slice(idx + 1) : parts;
 }
 
-/** Hides duplicate footer on homepage (HomeExperience renders its own). */
 export function OptionalSiteFooter({ locale }: { locale: Locale }) {
   const pathname = usePathname() ?? "";
   const rest = pathAfterLocale(pathname, locale);
+  // The homepage renders the footer itself, inside its scroll container.
   if (rest.length === 0) return null;
   return <SiteFooter locale={locale} />;
 }

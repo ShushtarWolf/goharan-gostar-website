@@ -28,30 +28,30 @@ export const homeCopy = {
     en: "Goharan Gostar Nadin, a knowledge-based company with the international GXPORE brand, is the first specialized producer of porous polymer parts in Iran and the Middle East. The company engineers the structure of these parts for precise, reliable performance in filtration, medical devices, and industrial systems. Goharan Gostar Nadin also produces water-soluble films based on polyvinyl alcohol (PVA), tuning their thickness and dissolution speed to the needs of each application.",
   } satisfies Localized<string>,
   missionLabel: {
-    fa: "رسالت ما",
+    fa: "مأموریت ما",
     tr: "Misyonumuz",
     en: "Our mission",
   } satisfies Localized<string>,
   mission: {
-    fa: "«رسالت ما مهندسی دقیق ساختار ماده در مقیاس میکروسکوپی است تا با تولید قطعات متخلخل پلیمری با منافذی از ۱ تا ۲۰۰ میکرون و توزیعی یکنواخت، راهکارهای قابل‌اطمینان برای فیلتراسیون، تجهیزات پزشکی (مانند فیلتر دیالیز) و سامانه‌های صنعتی ارائه دهیم و با تکیه بر دانش روز و بهبود مستمر، ارزشی ماندگار برای مشتریان و کشور ایجاد کنیم.»",
-    tr: "“Misyonumuz, maddenin yapısını mikroskobik ölçekte hassas biçimde mühendislikle tasarlayarak, 1 ila 200 mikron gözenekli ve düzgün dağılımlı polimer gözenekli parçalar üretmek suretiyle filtrasyon, tıbbi ekipman (örneğin diyaliz filtreleri) ve endüstriyel sistemler için güvenilir çözümler sunmak ve güncel bilgiye ve sürekli iyileştirmeye dayanarak müşterilerimiz ve ülkemiz için kalıcı bir değer yaratmaktır.”",
-    en: "“Our mission is to precisely engineer the structure of matter at the microscopic scale, so that by producing porous polymer parts with pores from 1 to 200 microns and a uniform distribution, we provide reliable solutions for filtration, medical equipment (such as dialysis filters), and industrial systems, and, relying on up-to-date knowledge and continuous improvement, create lasting value for our customers and the country.”",
+    fa: "مأموریت GXPORE توسعه و تولید فیلترها، قطعات پلیمری متخلخل و فیلم‌های محلول در آب متناسب با نیاز صنایع است. تیم GXPORE از شناخت مسئله و طراحی محصول تا ارزیابی عملکرد آن در شرایط واقعی، در کنار مشتری می‌ماند تا زمینهٔ همکاری بلندمدت شکل بگیرد.",
+    tr: "GXPORE’un misyonu, sanayinin ihtiyaçlarına uygun filtreler, gözenekli polimer parçalar ve suda çözünen filmler geliştirmek ve üretmektir. GXPORE ekibi, sorunun anlaşılmasından ürün tasarımına ve ürünün gerçek koşullardaki performansının değerlendirilmesine kadar müşterinin yanında kalır; böylece uzun vadeli iş birliğinin zemini oluşur.",
+    en: "GXPORE’s mission is to develop and produce filters, porous polymer parts, and water-soluble films that suit the needs of industry. From understanding the problem and designing the product to evaluating its performance in real conditions, the GXPORE team stays alongside the customer so that the ground for long-term cooperation is formed.",
   } satisfies Localized<string>,
   missionHighlights: [
     {
-      fa: "منافذ از ۱ تا ۲۰۰ میکرون",
-      tr: "1–200 µm gözenekler",
-      en: "Pores from 1–200 µm",
+      fa: "فیلترها و قطعات پلیمری متخلخل",
+      tr: "Filtreler ve gözenekli polimer parçalar",
+      en: "Filters and porous polymer parts",
     },
     {
-      fa: "توزیعی یکنواخت",
-      tr: "Düzgün dağılım",
-      en: "Uniform distribution",
+      fa: "فیلم‌های محلول در آب",
+      tr: "Suda çözünen filmler",
+      en: "Water-soluble films",
     },
     {
-      fa: "فیلتراسیون، تجهیزات پزشکی (مانند فیلتر دیالیز) و سامانه‌های صنعتی",
-      tr: "Filtrasyon, tıbbi (örneğin diyaliz filtreleri) ve endüstriyel",
-      en: "Filtration, medical (such as dialysis filters), and industrial",
+      fa: "همکاری بلندمدت با مشتری",
+      tr: "Müşteriyle uzun vadeli iş birliği",
+      en: "Long-term cooperation with the customer",
     },
   ] satisfies Localized<string>[],
   visionLabel: {
@@ -60,14 +60,9 @@ export const homeCopy = {
     en: "Our vision",
   } satisfies Localized<string>,
   vision: {
-    fa: "«چشم‌انداز ما تثبیت جایگاه پیشرو در فناوری تولید محصولات متخلخل در خاورمیانه و گسترش سبد محصولات به سمت راهکارهای دوست‌دار محیط زیست، از جمله تولید فیلم‌های PVA به‌عنوان یک نیاز راهبردی کشور است تا هم‌زمان با پاسخ به نیازهای صنعت و سلامت، گامی مؤثر در کاهش اثرات زیست‌محیطی برداریم.»",
-    tr: "“Vizyonumuz, Orta Doğu’da gözenekli ürün üretim teknolojisinde öncü konumu pekiştirmek ve ürün yelpazesini çevre dostu çözümlere — ülke için stratejik bir ihtiyaç olan PVA filmlerin üretimini de kapsayacak biçimde — genişletmektir; böylece sanayi ve sağlığın ihtiyaçlarını karşılarken çevresel etkilerin azaltılmasına da etkili bir adım atmış oluruz.”",
-    en: "“Our vision is to establish a leading position in porous-product manufacturing technology in the Middle East and to expand our portfolio toward environmentally friendly solutions, including the production of PVA films as a strategic need of the country, so that while meeting the needs of industry and health, we also take an effective step in reducing environmental impact.”",
-  } satisfies Localized<string>,
-  visionNext: {
-    fa: "فیلم‌های PVA، در ادامه",
-    tr: "PVA filmleri, sırada",
-    en: "PVA films, next",
+    fa: "GXPORE در پی آن است که به یکی از مراجع توسعهٔ فناوری مواد پلیمری متخلخل و فیلم‌های محلول در آب در غرب آسیا و تأمین‌کننده‌ای قابل‌اتکا در بازارهای بین‌المللی تبدیل شود. حرکت در لبهٔ فناوری و تبدیل دستاوردهای تحقیق‌وتوسعه به محصولاتی با کیفیت پایدار در مقیاس صنعتی، مسیر دستیابی به این چشم‌انداز است.",
+    tr: "GXPORE, Batı Asya’da gözenekli polimer malzemeler ve suda çözünen filmler teknolojisinin gelişiminde başvuru kaynaklarından biri ve uluslararası pazarlarda güvenilir bir tedarikçi olmayı hedefler. Teknolojinin sınırında ilerlemek ve Ar-Ge çıktılarını endüstriyel ölçekte kalıcı kaliteye sahip ürünlere dönüştürmek, bu vizyona giden yoldur.",
+    en: "GXPORE aims to become one of the reference points for the development of porous polymer material and water-soluble film technology in West Asia and a dependable supplier in international markets. Moving at the edge of technology and turning R&D achievements into products of consistent quality at industrial scale is the path to this vision.",
   } satisfies Localized<string>,
   structureEyebrow: {
     fa: "از ساختار تا محصول",
