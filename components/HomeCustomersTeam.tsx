@@ -51,13 +51,7 @@ export default function HomeCustomersTeam({ locale }: { locale: Locale }) {
               key={member.name.en}
               className="flex flex-col items-center px-1 text-center max-md:last:col-span-2 md:col-span-2 md:[&:nth-child(4)]:col-start-2 lg:col-span-1 lg:[&:nth-child(4)]:col-start-auto"
             >
-              <span
-                aria-hidden
-                className="flex h-14 w-14 items-center justify-center rounded-full border border-ink/15 font-display text-sm tracking-wide text-cyan md:h-16 md:w-16 md:text-base"
-              >
-                {t(member.monogram, locale)}
-              </span>
-              <p className="mt-4 font-display text-base font-medium leading-snug text-ink text-balance md:text-lg">
+              <p className="font-display text-base font-medium leading-snug text-ink text-balance md:text-lg">
                 {t(member.name, locale)}
               </p>
               <p className="mt-1.5 text-sm leading-6 text-ink/55">
