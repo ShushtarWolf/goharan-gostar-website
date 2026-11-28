@@ -380,7 +380,7 @@ export default function HomeExperience({
         </div>
       </FrameStage>
 
-      <section className={`relative overflow-hidden bg-mist text-ink ${typo.sectionX} ${typo.homeYLg}`}>
+      <section className={`relative overflow-hidden bg-mist text-ink ${typo.sectionX} pt-40 pb-20 md:pt-56 md:pb-24`}>
         <span
           data-goo-hold
           aria-hidden
@@ -428,7 +428,7 @@ export default function HomeExperience({
 
       <section
         data-typo-scene
-        className={`relative bg-graphite ${typo.sectionX} ${typo.homeYLg}`}
+        className={`relative bg-graphite ${typo.sectionX} pt-20 pb-40 md:pt-24 md:pb-56`}
       >
         <div className="relative mx-auto max-w-5xl overflow-hidden">
           <p data-typo className={`mb-5 ${typo.eyebrowCyan}`}>
@@ -463,12 +463,12 @@ export default function HomeExperience({
 
       <section
         data-typo-scene
-        className={`relative flex min-h-screen items-center bg-graphite-soft ${typo.sectionX}`}
+        className={`relative bg-graphite-soft ${typo.sectionX} py-24 md:py-32`}
       >
         <span
           data-goo-hold
           aria-hidden
-          className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
+          className="pointer-events-none absolute bottom-16 left-1/2 h-2 w-28 -translate-x-1/2"
         />
         <div
           data-copy
@@ -516,12 +516,12 @@ export default function HomeExperience({
 
       <section
         data-typo-scene
-        className={`relative flex min-h-screen items-center bg-graphite ${typo.sectionX}`}
+        className={`relative bg-graphite ${typo.sectionX} pt-24 pb-10 md:pt-32 md:pb-12`}
       >
         <span
           data-goo-hold
           aria-hidden
-          className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
+          className="pointer-events-none absolute bottom-16 left-1/2 h-2 w-28 -translate-x-1/2"
         />
         <div
           data-copy
@@ -538,7 +538,7 @@ export default function HomeExperience({
 
       <section
         data-typo-scene
-        className={`relative flex min-h-screen items-center justify-center bg-graphite ${typo.sectionX}`}
+        className={`relative bg-graphite ${typo.sectionX} pt-10 pb-32 md:pt-12 md:pb-40`}
       >
         <span
           data-goo-hold
