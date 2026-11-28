@@ -16,15 +16,19 @@ const NAV = [
 ];
 
 /**
- * Codrops GooeyStickyMenu WebGL (ported) — fixed bottom, gxpore cyan glass.
- * Canvas draws the liquid; this nav is transparent once goo is live.
+ * Fixed bottom nav. The glossy glass look is pure CSS on .menu.
+ * The Codrops gooey WebGL path is kept but off (GOOEY_ENABLED); turn that
+ * on to boot the liquid canvas again without restoring deleted code.
  */
+const GOOEY_ENABLED = false;
+
 export default function SiteHeader({ locale }: { locale: Locale }) {
   const menuRef = useRef<HTMLElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-  const menu = menuRef.current;
+    if (!GOOEY_ENABLED) return;
+    const menu = menuRef.current;
     const canvas = canvasRef.current;
     if (!menu || !canvas) return;
 
@@ -89,22 +93,17 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <canvas
-        ref={canvasRef}
-        className="goo pointer-events-none fixed inset-0 z-40 h-full w-full [transform:translateZ(0)]"
-        aria-hidden
-      />
+      {GOOEY_ENABLED ? (
+        <canvas
+          ref={canvasRef}
+          className="goo pointer-events-none fixed inset-0 z-40 h-full w-full [transform:translateZ(0)]"
+          aria-hidden
+        />
+      ) : null}
       <nav
         ref={menuRef}
         aria-label="Primary"
         className="menu fixed bottom-6 left-1/2 z-50 flex h-[3.75rem] w-[min(100%-0.75rem,44rem)] max-w-[calc(100vw-0.75rem)] -translate-x-1/2 items-center gap-1.5 rounded-full px-2.5 sm:h-14 sm:gap-2 sm:px-3 md:bottom-8 md:h-16 md:gap-5 md:px-6"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(30,40,55,0.45), rgba(12,14,18,0.55))",
-          boxShadow:
-            "0 12px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.2)",
-          backdropFilter: "blur(18px) saturate(1.4)",
-        }}
       >
         <TransitionLink
           href={href(locale)}
