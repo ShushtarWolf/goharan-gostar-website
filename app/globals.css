@@ -212,23 +212,6 @@ body {
   backdrop-filter: none !important;
 }
 
-/* On small screens keep a frosted-glass pill even after the WebGL menu boots. */
-@media (max-width: 767px) {
-  .menu,
-  .menu.is-drawn {
-    background: linear-gradient(
-      180deg,
-      rgba(22, 28, 38, 0.72),
-      rgba(10, 12, 16, 0.82)
-    ) !important;
-    box-shadow:
-      0 12px 40px rgba(0, 0, 0, 0.32),
-      inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
-    -webkit-backdrop-filter: blur(22px) saturate(1.5) !important;
-    backdrop-filter: blur(22px) saturate(1.5) !important;
-  }
-}
-
 /* Keep bottom-nav links clickable above the WebGL liquid layer */
 .menu.is-drawn a,
 .menu.is-drawn button {

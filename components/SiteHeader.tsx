@@ -93,8 +93,6 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       });
 
     const start = async () => {
-      // Keep the frosted-glass icon dock crisp on small screens.
-      if (matchMedia("(max-width: 767px)").matches) return;
       const { bootGooey } = await import("@/lib/gooey/runGooey.js");
       const pictures = await waitForPictures();
       if (cancelled || !pictures.length) return;
@@ -143,11 +141,10 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
         className="menu fixed bottom-[max(0.85rem,env(safe-area-inset-bottom))] left-1/2 z-50 flex h-[4.35rem] w-[min(100%-1rem,44rem)] max-w-[calc(100vw-1rem)] -translate-x-1/2 items-center gap-1.5 rounded-full px-2.5 sm:h-[4.5rem] sm:gap-2 sm:px-3 md:bottom-8 md:h-16 md:gap-5 md:px-6"
         style={{
           background:
-            "linear-gradient(180deg, rgba(30,40,55,0.62), rgba(12,14,18,0.72))",
+            "linear-gradient(180deg, rgba(30,40,55,0.45), rgba(12,14,18,0.55))",
           boxShadow:
             "0 12px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.2)",
-          backdropFilter: "blur(22px) saturate(1.5)",
-          WebkitBackdropFilter: "blur(22px) saturate(1.5)",
+          backdropFilter: "blur(18px) saturate(1.4)",
         }}
       >
         <TransitionLink
