@@ -1,87 +1,166 @@
 {
+  "pipeline": "studio-uniform-v3",
   "processed": 169,
   "total": 169,
-  "rembgOk": 149,
+  "rembgOk": 165,
   "fallbackFeather": [
-    {
-      "webPath": "/catalog/catalog-002.webp",
-      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-002.webp"
-    },
-    {
-      "webPath": "/catalog/catalog-013.webp",
-      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-013.webp"
-    },
-    {
-      "webPath": "/catalog/catalog-016.webp",
-      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-016.webp"
-    },
-    {
-      "webPath": "/catalog/catalog-018.webp",
-      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-018.webp"
-    },
-    {
-      "webPath": "/catalog/catalog-021.webp",
-      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-021.webp"
-    },
     {
       "webPath": "/catalog/catalog-035.webp",
       "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-035.webp"
-    },
-    {
-      "webPath": "/catalog/catalog-038.webp",
-      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-038.webp"
-    },
-    {
-      "webPath": "/catalog/catalog-041.webp",
-      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-041.webp"
-    },
-    {
-      "webPath": "/catalog/catalog-043.webp",
-      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-043.webp"
     },
     {
       "webPath": "/catalog/catalog-044.webp",
       "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-044.webp"
     },
     {
-      "webPath": "/catalog/catalog-052.webp",
-      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-052.webp"
-    },
-    {
-      "webPath": "/catalog/catalog-058.webp",
-      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-058.webp"
-    },
-    {
-      "webPath": "/catalog/catalog-062.webp",
-      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-062.webp"
-    },
-    {
       "webPath": "/catalog/catalog-077.webp",
       "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-077.webp"
     },
     {
-      "webPath": "/catalog/catalog-080.webp",
-      "source": "/agent/repos/goharan-gostar-website/public/catalog/catalog-080.webp"
-    },
-    {
-      "webPath": "/products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-960.webp",
-      "source": "/cursor/stores/self/goharan-photos/hq/03-detergent-packaging-film.jpg"
-    },
-    {
-      "webPath": "/products/hq/sintered-porous-metal-filter-disc-20-micron--29-metal-filter-disc-20-micron-480.webp",
-      "source": "/cursor/stores/self/goharan-photos/hq/29-metal-filter-disc-20-micron.jpg"
-    },
-    {
-      "webPath": "/products/hq/soluble-seed-tape--06-soluble-seed-tape-960.webp",
-      "source": "/cursor/stores/self/goharan-photos/hq/06-soluble-seed-tape.jpg"
-    },
-    {
       "webPath": "/products/placeholders/agricultural-pva-packaging-film.png",
       "source": "/agent/repos/goharan-gostar-website/public/products/placeholders/agricultural-pva-packaging-film.png"
+    }
+  ],
+  "outliers": [
+    {
+      "webPath": "/catalog/catalog-002.webp",
+      "fill": 0.24322222222222223,
+      "method": "rembg-birefnet-general"
     },
     {
-      "webPath": "/products/swimming-pool-filters-1.png",
-      "source": "/agent/repos/goharan-gostar-website/public/products/swimming-pool-filters-1.png"
+      "webPath": "/catalog/catalog-007.webp",
+      "fill": 0.20594722222222223,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-010.webp",
+      "fill": 0.24123472222222223,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-015.webp",
+      "fill": 0.22921111111111112,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-019.webp",
+      "fill": 0.18493333333333334,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-026.webp",
+      "fill": 0.23333333333333334,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-032.webp",
+      "fill": 0.25210208333333334,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-034.webp",
+      "fill": 0.21816666666666668,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-039.webp",
+      "fill": 0.22989375,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-047.webp",
+      "fill": 0.12381527777777777,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-049.webp",
+      "fill": 0.22698541666666666,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-064.webp",
+      "fill": 0.13971527777777779,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-068.webp",
+      "fill": 0.24505555555555555,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-074.webp",
+      "fill": 0.11855555555555555,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/carbon-block-pre-filters--25-carbon-block-filter-960.webp",
+      "fill": 0.23894444444444443,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/dialysis-filter--10-dialysis-filter-960.webp",
+      "fill": 0.16038541666666667,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/diffusion-tubes--20-diffuser-tubes-900.webp",
+      "fill": 0.23527777777777778,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/empty-gravity-flow-nucleic-acid-purification-columns--13-nucleic-acid-filter-960.webp",
+      "fill": 0.20744166666666666,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/highlighter-nib--30-highlighter-nib-960.webp",
+      "fill": 0.1645,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/juice-filtration--32-juice-filtration-960.webp",
+      "fill": 0.15888888888888889,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/pva-extrusion-granules--02-pva-extrusion-granules-960.webp",
+      "fill": 0.22587222222222222,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-960.webp",
+      "fill": 0.22587222222222222,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/perfume-wicks-0.png",
+      "fill": 0.17294444444444446,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/perfume-wicks-1.png",
+      "fill": 0.17233333333333334,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/pipette-tips-filter-0.png",
+      "fill": 0.2591986111111111,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/steam-filter-0.jpg",
+      "fill": 0.19045,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/syringe-filters-0.png",
+      "fill": 0.11475833333333334,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/syringe-filters-1.png",
+      "fill": 0.12161111111111111,
+      "method": "rembg-isnet-general-use"
     }
   ],
   "missingSource": [],

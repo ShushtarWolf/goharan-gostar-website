@@ -1,0 +1,1048 @@
+{
+  "summary": {
+    "count": 169,
+    "fillMin": 0.115,
+    "fillMax": 0.406,
+    "fillMean": 0.33551479289940833,
+    "low": [
+      {
+        "webPath": "/catalog/catalog-002.webp",
+        "fill": 0.243,
+        "method": "rembg-birefnet-general"
+      },
+      {
+        "webPath": "/catalog/catalog-007.webp",
+        "fill": 0.206,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-010.webp",
+        "fill": 0.241,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-015.webp",
+        "fill": 0.229,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-017.webp",
+        "fill": 0.278,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-019.webp",
+        "fill": 0.185,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-025.webp",
+        "fill": 0.276,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-026.webp",
+        "fill": 0.233,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-027.webp",
+        "fill": 0.277,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-032.webp",
+        "fill": 0.252,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-034.webp",
+        "fill": 0.218,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-039.webp",
+        "fill": 0.23,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-041.webp",
+        "fill": 0.26,
+        "method": "rembg-birefnet-general"
+      },
+      {
+        "webPath": "/catalog/catalog-047.webp",
+        "fill": 0.124,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-049.webp",
+        "fill": 0.227,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-057.webp",
+        "fill": 0.265,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-064.webp",
+        "fill": 0.14,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-066.webp",
+        "fill": 0.27,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-068.webp",
+        "fill": 0.245,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/catalog/catalog-074.webp",
+        "fill": 0.119,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/hq/carbon-block-pre-filters--25-carbon-block-filter-960.webp",
+        "fill": 0.239,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/hq/dialysis-filter--10-dialysis-filter-960.webp",
+        "fill": 0.16,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/hq/diffusion-tubes--20-diffuser-tubes-900.webp",
+        "fill": 0.235,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/hq/empty-gravity-flow-nucleic-acid-purification-columns--13-nucleic-acid-filter-960.webp",
+        "fill": 0.207,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/hq/highlighter-nib--30-highlighter-nib-960.webp",
+        "fill": 0.165,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/hq/juice-filtration--32-juice-filtration-960.webp",
+        "fill": 0.159,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/hq/pipette-tips-filter--12-pipette-tip-filter-950.webp",
+        "fill": 0.26,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/hq/pva-extrusion-granules--02-pva-extrusion-granules-960.webp",
+        "fill": 0.226,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-960.webp",
+        "fill": 0.226,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/oxygen-humidifier-bottle-filter-0.png",
+        "fill": 0.273,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/oxygen-humidifier-bottle-filter-1.png",
+        "fill": 0.272,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/perfume-wicks-0.png",
+        "fill": 0.173,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/perfume-wicks-1.png",
+        "fill": 0.172,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/pipette-tips-filter-0.png",
+        "fill": 0.259,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/pipette-tips-filter-1.png",
+        "fill": 0.271,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/steam-filter-0.jpg",
+        "fill": 0.19,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/syringe-filters-0.png",
+        "fill": 0.115,
+        "method": "rembg-isnet-general-use"
+      },
+      {
+        "webPath": "/products/syringe-filters-1.png",
+        "fill": 0.122,
+        "method": "rembg-isnet-general-use"
+      }
+    ],
+    "high": []
+  },
+  "stats": [
+    {
+      "webPath": "/catalog/catalog-001.webp",
+      "fill": 0.392,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-002.webp",
+      "fill": 0.243,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-003.webp",
+      "fill": 0.302,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-004.webp",
+      "fill": 0.377,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-005.webp",
+      "fill": 0.406,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-006.webp",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-007.webp",
+      "fill": 0.206,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-008.webp",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-009.webp",
+      "fill": 0.396,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-010.webp",
+      "fill": 0.241,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-011.webp",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-012.webp",
+      "fill": 0.356,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-013.webp",
+      "fill": 0.398,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-014.webp",
+      "fill": 0.367,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-015.webp",
+      "fill": 0.229,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-016.webp",
+      "fill": 0.284,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-017.webp",
+      "fill": 0.278,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-018.webp",
+      "fill": 0.398,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-019.webp",
+      "fill": 0.185,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-020.webp",
+      "fill": 0.336,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-021.webp",
+      "fill": 0.398,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-022.webp",
+      "fill": 0.391,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-023.webp",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-024.webp",
+      "fill": 0.296,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-025.webp",
+      "fill": 0.276,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-026.webp",
+      "fill": 0.233,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-027.webp",
+      "fill": 0.277,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-028.webp",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-029.webp",
+      "fill": 0.399,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-030.webp",
+      "fill": 0.386,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-031.webp",
+      "fill": 0.329,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-032.webp",
+      "fill": 0.252,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-033.webp",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-034.webp",
+      "fill": 0.218,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-035.webp",
+      "fill": 0.389,
+      "method": "feather-fallback"
+    },
+    {
+      "webPath": "/catalog/catalog-036.webp",
+      "fill": 0.281,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-037.webp",
+      "fill": 0.396,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-038.webp",
+      "fill": 0.399,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-039.webp",
+      "fill": 0.23,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-040.webp",
+      "fill": 0.354,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-041.webp",
+      "fill": 0.26,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-042.webp",
+      "fill": 0.321,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-043.webp",
+      "fill": 0.397,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-044.webp",
+      "fill": 0.39,
+      "method": "feather-fallback"
+    },
+    {
+      "webPath": "/catalog/catalog-045.webp",
+      "fill": 0.382,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-046.webp",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-047.webp",
+      "fill": 0.124,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-048.webp",
+      "fill": 0.331,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-049.webp",
+      "fill": 0.227,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-050.webp",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-051.webp",
+      "fill": 0.383,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-052.webp",
+      "fill": 0.399,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-053.webp",
+      "fill": 0.398,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-054.webp",
+      "fill": 0.328,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-055.webp",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-056.webp",
+      "fill": 0.361,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-057.webp",
+      "fill": 0.265,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-058.webp",
+      "fill": 0.397,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-059.webp",
+      "fill": 0.327,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-060.webp",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-061.webp",
+      "fill": 0.328,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-062.webp",
+      "fill": 0.399,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-063.webp",
+      "fill": 0.396,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-064.webp",
+      "fill": 0.14,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-065.webp",
+      "fill": 0.337,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-066.webp",
+      "fill": 0.27,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-067.webp",
+      "fill": 0.287,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-068.webp",
+      "fill": 0.245,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-069.webp",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-070.webp",
+      "fill": 0.369,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-071.webp",
+      "fill": 0.393,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-072.webp",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-073.webp",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-074.webp",
+      "fill": 0.119,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-075.webp",
+      "fill": 0.393,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-076.webp",
+      "fill": 0.399,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-077.webp",
+      "fill": 0.389,
+      "method": "feather-fallback"
+    },
+    {
+      "webPath": "/catalog/catalog-078.webp",
+      "fill": 0.395,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-079.webp",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-080.webp",
+      "fill": 0.397,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/catalog/catalog-081.webp",
+      "fill": 0.378,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/catalog/catalog-082.webp",
+      "fill": 0.358,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/photos/7f84af14-4ce0-4bcb-8ec7-a0d98287dcd4.webp",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/photos/ead0bbd7-a967-487d-be1c-817c241baab5.webp",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/aquarium-diffuser-0.png",
+      "fill": 0.399,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/aquarium-diffuser-1.png",
+      "fill": 0.396,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/carbon-block-pre-filters-0.png",
+      "fill": 0.381,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/carbon-block-pre-filters-1.png",
+      "fill": 0.381,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/dialysis-filter-0.png",
+      "fill": 0.331,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/dialysis-filter-1.png",
+      "fill": 0.326,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/diffusion-tubes-0.png",
+      "fill": 0.394,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/diffusion-tubes-1.png",
+      "fill": 0.393,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/dissolution-filters-0.png",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/dissolution-filters-1.png",
+      "fill": 0.399,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/electrolyte-reservoirs-and-wicks-0.png",
+      "fill": 0.324,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/electrolyte-reservoirs-and-wicks-1.png",
+      "fill": 0.328,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/empty-gravity-flow-nucleic-acid-purification-columns-0.png",
+      "fill": 0.309,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/empty-gravity-flow-nucleic-acid-purification-columns-1.png",
+      "fill": 0.311,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/flame-arrestor-0.jpg",
+      "fill": 0.383,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/fluid-reservoir-vents-filters-0.png",
+      "fill": 0.324,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/fluid-reservoir-vents-filters-1.png",
+      "fill": 0.328,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/fluid-reservoirs-and-wicks-0.png",
+      "fill": 0.295,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/fluid-reservoirs-and-wicks-1.png",
+      "fill": 0.309,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/highlighter-nib-0.png",
+      "fill": 0.311,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/highlighter-nib-1.png",
+      "fill": 0.315,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/aquarium-diffuser--26-aquarium-diffuser-960.webp",
+      "fill": 0.323,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/carbon-block-pre-filters--25-carbon-block-filter-960.webp",
+      "fill": 0.239,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-960.webp",
+      "fill": 0.337,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/products/hq/dialysis-filter--08-dialysis-hollow-fiber-960.webp",
+      "fill": 0.391,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/dialysis-filter--10-dialysis-filter-960.webp",
+      "fill": 0.16,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/diffusion-tubes--20-diffuser-tubes-900.webp",
+      "fill": 0.235,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/dissolution-filters--21-dissolution-filter-480.webp",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/electrolyte-reservoirs-and-wicks--23-electrolyte-wick-480.webp",
+      "fill": 0.333,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/embroidery-soluble-film--07-embroidery-soluble-film-480.webp",
+      "fill": 0.399,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/empty-gravity-flow-nucleic-acid-purification-columns--13-nucleic-acid-filter-960.webp",
+      "fill": 0.207,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/flame-arrestor--19-battery-flame-arrestor-480.webp",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/fluid-reservoir-vents-filters--22-tank-vent-filter-valve-480.webp",
+      "fill": 0.295,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/highlighter-nib--30-highlighter-nib-960.webp",
+      "fill": 0.165,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/insecticide-wicks--16-insecticide-wick-960.webp",
+      "fill": 0.379,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/juice-filtration--32-juice-filtration-960.webp",
+      "fill": 0.159,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/nonalcoholic-beverage-filtration--31-nonalcoholic-beverage-filtration-480.webp",
+      "fill": 0.388,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/oxygen-humidifier-bottle-filter--09-humidifier-filter-960.webp",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/perfume-wicks--15-fragrance-wick-960.webp",
+      "fill": 0.382,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/pipette-tips-filter--12-pipette-tip-filter-950.webp",
+      "fill": 0.26,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/pneumatic-silencer--18-pneumatic-silencer-840.webp",
+      "fill": 0.308,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/profile-ii-filters--17-dust-collector-filter-960.webp",
+      "fill": 0.318,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/pva-extrusion-granules--02-pva-extrusion-granules-960.webp",
+      "fill": 0.226,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-960.webp",
+      "fill": 0.226,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-960.webp",
+      "fill": 0.334,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/separators-and-isolators--24-battery-separator-480.webp",
+      "fill": 0.396,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/sintered-filter-cartridge--28-sintered-metal-filter-cartridge-960.webp",
+      "fill": 0.346,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/sintered-porous-metal-filter-disc-20-micron--29-metal-filter-disc-20-micron-480.webp",
+      "fill": 0.399,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/products/hq/soluble-seed-tape--06-soluble-seed-tape-960.webp",
+      "fill": 0.398,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/products/hq/stopper-valve-filter--11-suction-bag-flow-stop-filter-862.webp",
+      "fill": 0.291,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hq/syringe-filters--14-syringe-filter-960.webp",
+      "fill": 0.396,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hydrophilic-frits-0.png",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hydrophilic-frits-1.png",
+      "fill": 0.399,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hydrophobic-frits-0.png",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/hydrophobic-frits-1.png",
+      "fill": 0.399,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/oxygen-humidifier-bottle-filter-0.png",
+      "fill": 0.273,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/oxygen-humidifier-bottle-filter-1.png",
+      "fill": 0.272,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/perfume-wicks-0.png",
+      "fill": 0.173,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/perfume-wicks-1.png",
+      "fill": 0.172,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/pipette-tips-filter-0.png",
+      "fill": 0.259,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/pipette-tips-filter-1.png",
+      "fill": 0.271,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/placeholders/agricultural-pva-packaging-film.png",
+      "fill": 0.34,
+      "method": "feather-fallback"
+    },
+    {
+      "webPath": "/products/pneumatic-silencer-0.jpg",
+      "fill": 0.31,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/pneumatic-silencer-1.png",
+      "fill": 0.356,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/polypropylene-fiber-frits-0.png",
+      "fill": 0.363,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/polypropylene-fiber-frits-1.png",
+      "fill": 0.364,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/profile-ii-filters-0.png",
+      "fill": 0.395,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/profile-ii-filters-1.png",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/sintered-filter-cartridge-0.jpg",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/sintered-filter-cartridge-1.jpg",
+      "fill": 0.399,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/sintered-micron-stainless-steel-porous-metal-filter-cylinder-0.jpg",
+      "fill": 0.396,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/sintered-micron-stainless-steel-porous-metal-filter-cylinder-1.jpg",
+      "fill": 0.397,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/sintered-porous-metal-filter-disc-20-micron-0.jpg",
+      "fill": 0.356,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/sintered-porous-metal-filter-disc-20-micron-1.jpg",
+      "fill": 0.356,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/sintered-stainless-steel-filter-cartridge-0.jpg",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/sintered-stainless-steel-filter-cartridge-1.jpg",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/steam-filter-0.jpg",
+      "fill": 0.19,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/sterile-syringe-filters-0.png",
+      "fill": 0.38,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/sterile-syringe-filters-1.png",
+      "fill": 0.384,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/stopper-valve-filter-0.png",
+      "fill": 0.396,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/stopper-valve-filter-1.png",
+      "fill": 0.399,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/swimming-pool-filters-0.png",
+      "fill": 0.398,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/swimming-pool-filters-1.png",
+      "fill": 0.325,
+      "method": "rembg-birefnet-general"
+    },
+    {
+      "webPath": "/products/syringe-filters-0.png",
+      "fill": 0.115,
+      "method": "rembg-isnet-general-use"
+    },
+    {
+      "webPath": "/products/syringe-filters-1.png",
+      "fill": 0.122,
+      "method": "rembg-isnet-general-use"
+    }
+  ]
+}

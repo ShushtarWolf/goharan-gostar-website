@@ -2,21 +2,27 @@ import sharp from "sharp";
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { gradeSubjectRgba } from "./color-grade.mjs";
 
-export const CANVAS = 1600;
-export const PAD = 0.11;
-export const SIZES = [480, 960, 1600];
+/** Fixed square master — product + glow stay well inside; edges are fully transparent. */
+export const CANVAS = 1200;
+export const PAD = 0.14;
+export const FILL_LONG = 0.78;
+export const FILL_AREA = 0.4;
+export const BASELINE_FRAC = 0.8;
+export const SIZES = [480, 960, 1200];
 export const WEBP_Q = 82;
 export const AVIF_Q = 52;
+export const PIPELINE_VERSION = "studio-uniform-v3";
 
 const REMBG = process.env.REMBG_BIN ?? `${process.env.HOME}/.local/bin/rembg`;
 const REMBG_MODEL = process.env.REMBG_MODEL ?? "isnet-general-use";
 
-export function rembgCutout(inputPath, outPngPath) {
+export function rembgCutout(inputPath, outPngPath, model = REMBG_MODEL) {
   fs.mkdirSync(pathDir(outPngPath), { recursive: true });
   const r = spawnSync(
     REMBG,
-    ["i", inputPath, outPngPath, "-m", REMBG_MODEL],
+    ["i", inputPath, outPngPath, "-m", model],
     { encoding: "utf8", timeout: 300_000 },
   );
   if (r.status !== 0 || !fs.existsSync(outPngPath)) {
@@ -55,7 +61,7 @@ export async function assessCutout(pngPath) {
         if (x > maxX) maxX = x;
         if (y > maxY) maxY = y;
       }
-      if ((y < 3 || y >= h - 3) && (x < 3 || x >= w - 3) && a > 64) {
+      if ((y < 4 || y >= h - 4) && (x < 4 || x >= w - 4) && a > 32) {
         cornerOpaque++;
       }
     }
@@ -71,21 +77,59 @@ export async function assessCutout(pngPath) {
     ratio < 0.04 ||
     bboxRatio < 0.06 ||
     (marginX < 0.01 && marginY < 0.01 && bboxRatio > 0.92) ||
-    cornerOpaque > 80;
+    cornerOpaque > 60;
 
-  return { bad, ratio, bboxRatio, marginX, marginY };
+  return { bad, ratio, bboxRatio, marginX, marginY, cornerOpaque };
 }
 
-/** Radial feather + light background key when rembg fails QA */
+/** Multiply alpha by elliptical ramp so corners/edges are fully transparent (no square frame). */
+export async function applyCanvasAlphaVignette(rgbaBuffer, size = CANVAS) {
+  const { data, info } = await sharp(rgbaBuffer)
+    .ensureAlpha()
+    .resize(size, size, {
+      fit: "contain",
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    })
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  const w = info.width;
+  const h = info.height;
+  const cx = w / 2;
+  const cy = h * 0.47;
+  const rx = w * 0.34;
+  const ry = h * 0.34;
+
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const dx = (x - cx) / rx;
+      const dy = (y - cy) / ry;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      let m = 1;
+      if (d > 0.78) m = Math.max(0, 1 - (d - 0.78) / 0.24);
+      const i = (y * w + x) * 4;
+      data[i + 3] = Math.round(data[i + 3] * m);
+      if (data[i + 3] < 6) data[i + 3] = 0;
+    }
+  }
+
+  return sharp(data, { raw: { width: w, height: h, channels: 4 } })
+    .png()
+    .toBuffer();
+}
+
+/** Radial feather — alpha → 0 before image edges (no hard square). */
 export async function featherFallback(inputPath) {
   const meta = await sharp(inputPath).metadata();
   const w = meta.width ?? 512;
   const h = meta.height ?? 512;
 
-  const maskSvg = `<svg width="${w}" height="${h}">
+  const maskSvg = `<svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <radialGradient id="g" cx="50%" cy="46%" rx="46%" ry="44%">
-        <stop offset="52%" stop-color="white"/>
+      <radialGradient id="g" cx="50%" cy="46%" rx="38%" ry="36%" gradientUnits="objectBoundingBox">
+        <stop offset="0%" stop-color="white"/>
+        <stop offset="72%" stop-color="white"/>
+        <stop offset="92%" stop-color="rgba(255,255,255,0.15)"/>
         <stop offset="100%" stop-color="black"/>
       </radialGradient>
     </defs>
@@ -97,7 +141,11 @@ export async function featherFallback(inputPath) {
     .raw()
     .toBuffer({ resolveWithObject: true });
 
-  const mask = await sharp(Buffer.from(maskSvg)).resize(w, h).greyscale().raw().toBuffer();
+  const mask = await sharp(Buffer.from(maskSvg))
+    .resize(w, h)
+    .greyscale()
+    .raw()
+    .toBuffer();
 
   for (let i = 0; i < w * h; i++) {
     const mi = mask[i] / 255;
@@ -106,60 +154,112 @@ export async function featherFallback(inputPath) {
     const b = data[i * 4 + 2];
     const lum = (r + g + b) / 3;
     const bg = lum > 248 ? 0 : lum > 218 ? (248 - lum) / 30 : 1;
-    data[i * 4 + 3] = Math.round(data[i * 4 + 3] * mi * bg);
+    data[i * 4 + 3] = Math.round(data[i * 4 + 3] * mi * mi * bg);
+    if (data[i * 4 + 3] < 6) data[i * 4 + 3] = 0;
   }
 
   return sharp(data, { raw: { width: w, height: h, channels: 4 } }).png();
 }
 
-async function subjectShadowBuffer(subjectPng, w, h) {
-  const alpha = await sharp(subjectPng).ensureAlpha().extractChannel(3).blur(22).toBuffer();
-  const colored = await sharp({
-    create: { width: w, height: h, channels: 3, background: { r: 12, g: 110, b: 135 } },
-  })
-    .joinChannel(alpha)
-    .png()
-    .toBuffer();
-  return colored;
+/** Soft radial glow under product — fades to 0 long before canvas edge. */
+async function groundGlowLayer(canvasSize, cx, baselineY) {
+  const spread = Math.round(canvasSize * 0.22);
+  const svg = `<svg width="${canvasSize}" height="${canvasSize}" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="glow" cx="${cx}" cy="${baselineY}" r="${spread}" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="rgba(0,175,205,0.22)"/>
+        <stop offset="45%" stop-color="rgba(0,130,160,0.06)"/>
+        <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+      </radialGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#glow)"/>
+  </svg>`;
+  return sharp(Buffer.from(svg)).png().toBuffer();
 }
 
-/** Trim cutout, center on square canvas with padding + cyan glass shadow */
-export async function composeStudioSquare(rgbaInput) {
-  const trimmedBuf = await sharp(rgbaInput).trim().png().toBuffer();
-  const trimmed = sharp(trimmedBuf);
-  const meta = await trimmed.metadata();
+function subjectScale(sw, sh, fillBoost = 1) {
+  const inner = CANVAS * (1 - 2 * PAD);
+  const long = Math.max(sw, sh);
+  const area = sw * sh;
+  const byLong = ((FILL_LONG * CANVAS) / long) * fillBoost;
+  const byArea =
+    Math.sqrt((FILL_AREA * CANVAS * CANVAS) / Math.max(area, 1)) * fillBoost;
+  const scale = Math.min(byLong, byArea, (inner / sw) * 1.02, (inner / sh) * 1.02);
+  return Math.max(0.05, scale);
+}
+
+/** Bbox opaque area / canvas² on a square RGBA master. */
+export async function measureBboxFill(rgbaBuffer, size = CANVAS) {
+  const { data, info } = await sharp(rgbaBuffer)
+    .ensureAlpha()
+    .resize(size, size, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  const w = info.width;
+  const h = info.height;
+  let minX = w;
+  let minY = h;
+  let maxX = 0;
+  let maxY = 0;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      if (data[(y * w + x) * 4 + 3] > 64) {
+        if (x < minX) minX = x;
+        if (y < minY) minY = y;
+        if (x > maxX) maxX = x;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+  const box = Math.max(0, maxX - minX) * Math.max(0, maxY - minY);
+  return { fill: box / (w * h), bbox: [minX, minY, maxX, maxY] };
+}
+
+/** Trim cutout, uniform fill, ground glow, full transparent canvas with edge vignette. */
+export async function composeStudioSquare(rgbaInput, opts = {}) {
+  const fillBoost = opts.fillBoost ?? 1;
+  let trimmedBuf = await sharp(rgbaInput).trim().png().toBuffer();
+  trimmedBuf = await gradeSubjectRgba(trimmedBuf);
+  const meta = await sharp(trimmedBuf).metadata();
   const sw = meta.width ?? 1;
   const sh = meta.height ?? 1;
-  const sourceLong = Math.max(sw, sh);
 
-  const canvasSize = Math.min(CANVAS, Math.max(480, sourceLong));
-  const inner = Math.round(canvasSize * (1 - 2 * PAD));
-  const scale = Math.min(inner / sw, inner / sh, 1);
+  const scale = subjectScale(sw, sh, fillBoost);
   const nw = Math.max(1, Math.round(sw * scale));
   const nh = Math.max(1, Math.round(sh * scale));
 
-  const subject = await sharp(trimmedBuf).resize(nw, nh).png().toBuffer();
-  const shadow = await subjectShadowBuffer(subject, nw, nh);
-  const left = Math.round((canvasSize - nw) / 2);
-  const top = Math.round((canvasSize - nh) / 2);
-  const shadowTop = top + Math.round(nh * 0.06);
+  const subject = await sharp(trimmedBuf)
+    .resize(nw, nh, { kernel: sharp.kernel.lanczos3 })
+    .sharpen({ sigma: 0.45, m1: 0.35, m2: 0.2 })
+    .png()
+    .toBuffer();
+  const left = Math.round((CANVAS - nw) / 2);
+  const baseline = Math.round(CANVAS * BASELINE_FRAC);
+  const top = Math.max(Math.round(CANVAS * PAD), baseline - nh);
+  const cx = left + Math.round(nw / 2);
 
-  const composed = await sharp({
+  const glow = await groundGlowLayer(CANVAS, cx, baseline + 8);
+
+  let composed = await sharp({
     create: {
-      width: canvasSize,
-      height: canvasSize,
+      width: CANVAS,
+      height: CANVAS,
       channels: 4,
       background: { r: 0, g: 0, b: 0, alpha: 0 },
     },
   })
     .composite([
-      { input: shadow, left: left - 6, top: shadowTop, blend: "over" },
+      { input: glow, left: 0, top: 0, blend: "over" },
       { input: subject, left, top, blend: "over" },
     ])
     .png()
     .toBuffer();
 
-  return { composed, canvasSize };
+  const { fill: subjectFill } = await measureBboxFill(composed, CANVAS);
+
+  composed = await applyCanvasAlphaVignette(composed, CANVAS);
+  const { fill } = await measureBboxFill(composed, CANVAS);
+  return { composed, canvasSize: CANVAS, fill, subjectFill };
 }
 
 export function buildSrcSet(variants, format) {
@@ -173,11 +273,11 @@ export function buildSrcSet(variants, format) {
 export async function emitStudioVariants(
   outBase,
   masterPngBuffer,
-  squareEdge,
+  _squareEdge,
   publicRoot,
 ) {
   const variants = { webp: {}, avif: {} };
-  const maxEdge = Math.min(CANVAS, squareEdge);
+  const maxEdge = CANVAS;
 
   for (const edge of SIZES) {
     if (edge > maxEdge + 2) continue;
@@ -185,19 +285,25 @@ export async function emitStudioVariants(
     const webpOut = `${outBase}-${target}.webp`;
     const avifOut = `${outBase}-${target}.avif`;
 
-    await sharp(masterPngBuffer)
-      .resize(target, target, { fit: "cover", withoutEnlargement: true })
-      .webp({ quality: WEBP_Q, alphaQuality: 90 })
+    const resized = await sharp(masterPngBuffer)
+      .resize(target, target, {
+        fit: "contain",
+        background: { r: 0, g: 0, b: 0, alpha: 0 },
+      })
+      .png()
+      .toBuffer();
+
+    const vignetted = await applyCanvasAlphaVignette(resized, target);
+
+    await sharp(vignetted)
+      .webp({ quality: WEBP_Q, alphaQuality: 92, effort: 4 })
       .toFile(webpOut);
 
     const rel = path.relative(publicRoot, webpOut).split(path.sep).join("/");
     variants.webp[target] = rel;
 
     try {
-      await sharp(masterPngBuffer)
-        .resize(target, target, { fit: "cover", withoutEnlargement: true })
-        .avif({ quality: AVIF_Q })
-        .toFile(avifOut);
+      await sharp(vignetted).avif({ quality: AVIF_Q }).toFile(avifOut);
       variants.avif[target] = path.relative(publicRoot, avifOut).split(path.sep).join("/");
     } catch {
       /* optional */

@@ -298,9 +298,18 @@ body {
   );
 }
 
-/* Transparent studio cutouts — shadow baked in PNG; light glass lift on dark UI */
+/* Studio cutouts: glow is baked in the asset — no CSS box shadow (avoids visible rects). */
 .product-studio-img {
-  filter: drop-shadow(0 10px 22px rgba(0, 140, 170, 0.22));
+  background: transparent;
+  box-shadow: none;
+  filter: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.product-studio-frame {
+  background: transparent;
+  box-shadow: none;
 }
 
 /* Home customers: monochrome on mist, full color on hover when the pointer can hover. */
