@@ -35,8 +35,12 @@ export default function ProductDetailView({
           {t(ui.productDetail.back, locale)}
         </TransitionLink>
 
-        {product.images && product.images.length > 0 ? (
-          <ProductGallery images={product.images} slug={product.slug} />
+        {product.media && product.media.length > 0 ? (
+          <ProductGallery
+            media={product.media}
+            slug={product.slug}
+            locale={locale}
+          />
         ) : null}
 
         <section className="mt-12" data-reveal>

@@ -45,4 +45,33 @@ export const faCopyOverrides: Record<string, { name?: string; intro?: string }> 
     intro:
       "فیلترهای سرنگ برای آماده‌سازی محلول، فیلتراسیون سترون و آماده‌سازی نمونه‌های زیستی مناسب‌اند.",
   },
+  "pva-film-blowing-granules": {
+    name: "گرانول PVA Film Blowing",
+  },
+  "pva-extrusion-granules": {
+    name: "گرانول PVA extrusion",
+  },
+  "detergent-packaging-pva-film": {
+    name: "فیلم بسته‌بندی شوینده",
+  },
+  "agricultural-pva-packaging-film": {
+    name: "فیلم بسته‌بندی کشاورزی",
+    intro:
+      "فیلم و کیسه PVA محلول در آب برای بسته‌بندی ورودی‌های کشاورزی؛ پس از استفاده در مزرعه حل می‌شوند و بخشی از خط پایدار فیلم‌های PVA گوهران‌گستر هستند.",
+  },
+  "pva-shrink-wrap-film": {
+    name: "فیلم شرینک رپ",
+  },
+  "soluble-seed-tape": {
+    name: "نوار بذر محلول",
+  },
+  "embroidery-soluble-film": {
+    name: "فیلم‌های محلول گلدوزی",
+  },
+  "nonalcoholic-beverage-filtration": {
+    name: "فیلتراسیون نوشیدنی غیر الکلی",
+  },
+  "juice-filtration": {
+    name: "فیلتراسیون آبمیوه",
+  },
 };

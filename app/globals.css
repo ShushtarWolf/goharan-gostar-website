@@ -284,6 +284,7 @@ body {
 
 /* Reserved: do NOT add hidden goo-picture anchors — WebGL paints them opaque. */
 
+/* Legacy feather mask (pre-studio assets) */
 .product-feather-img {
   -webkit-mask-image: radial-gradient(
     ellipse 92% 88% at 50% 46%,
@@ -297,6 +298,10 @@ body {
   );
 }
 
+/* Transparent studio cutouts — shadow baked in PNG; light glass lift on dark UI */
+.product-studio-img {
+  filter: drop-shadow(0 10px 22px rgba(0, 140, 170, 0.22));
+}
 
 /* Home customers: monochrome on mist, full color on hover when the pointer can hover. */
 .customer-logo {

@@ -8,6 +8,30 @@ export const productSpecOverrides: Partial<
     Partial<Pick<Product, "specsStatus" | "specsTable" | "features" | "homeScene">>
   >
 > = {
+  "pva-film-blowing-granules": {
+    specsStatus: "none",
+    features: {
+      fa: ["گرانول PVA برای خط فیلم‌دمیدن", "محلول در آب و هم‌راستا با خط فیلم‌های PVA گوهران‌گستر"],
+      en: ["PVA granules for blown-film lines", "Water-soluble; part of Goharan Gostar’s PVA film program"],
+      tr: ["Üfleme filmi hatları için PVA granül", "Suda çözünür; Goharan Gostar PVA film programının parçası"],
+    },
+  },
+  "juice-filtration": {
+    specsStatus: "none",
+    features: {
+      fa: ["فیلتراسیون آبمیوه در خط تولید", "سازگار با سامانه‌های کارتریج متخلخل گوهران‌گستر"],
+      en: ["Juice clarification on the production line", "Compatible with Goharan Gostar porous cartridge systems"],
+      tr: ["Üretim hattında meyve suyu berraklaştırma", "Goharan Gostar gözenekli kartuş sistemleriyle uyumlu"],
+    },
+  },
+  "nonalcoholic-beverage-filtration": {
+    specsStatus: "none",
+    features: {
+      fa: ["تصفیه نوشیدنی غیرالکلی پیش از بسته‌بندی", "هم‌خانواده با راهکارهای فیلتراسیون غذایی شرکت"],
+      en: ["Beverage finishing before packaging", "Part of the company’s food-and-beverage filtration family"],
+      tr: ["Ambalaj öncesi alkolsüz içecek bitirme", "Şirketin gıda-içecek filtrasyon ailesinin parçası"],
+    },
+  },
   "pneumatic-silencer": {
     homeScene: "silencer",
     features: {

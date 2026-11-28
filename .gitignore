@@ -48,3 +48,6 @@ next-env.d.ts
 
 # local motion-audit output
 /motion-audit/
+
+# photos:cutout rembg cache (reproducible from sources)
+.cache/photos-cutout/

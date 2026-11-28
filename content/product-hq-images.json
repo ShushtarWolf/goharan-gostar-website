@@ -1,0 +1,583 @@
+{
+  "pva-film-blowing-granules": {
+    "primary": {
+      "slug": "pva-film-blowing-granules",
+      "role": "primary",
+      "sourceFile": "01-pva-film-blowing-granules.jpg",
+      "width": 3002,
+      "height": 4076,
+      "default": "/products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-960.webp",
+      "srcSet": "/products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-480.webp 480w, /products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-960.webp 960w, /products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-480.avif 480w, /products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-960.avif 960w, /products/hq/pva-film-blowing-granules--01-pva-film-blowing-granules-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC BY-SA 3.0 — LHcheM (Wikimedia Commons)",
+        "en": "CC BY-SA 3.0 — LHcheM (Wikimedia Commons)",
+        "tr": "CC BY-SA 3.0 — LHcheM (Wikimedia Commons)"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  },
+  "pva-extrusion-granules": {
+    "primary": {
+      "slug": "pva-extrusion-granules",
+      "role": "primary",
+      "sourceFile": "02-pva-extrusion-granules.jpg",
+      "width": 3002,
+      "height": 4076,
+      "default": "/products/hq/pva-extrusion-granules--02-pva-extrusion-granules-960.webp",
+      "srcSet": "/products/hq/pva-extrusion-granules--02-pva-extrusion-granules-480.webp 480w, /products/hq/pva-extrusion-granules--02-pva-extrusion-granules-960.webp 960w, /products/hq/pva-extrusion-granules--02-pva-extrusion-granules-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/pva-extrusion-granules--02-pva-extrusion-granules-480.avif 480w, /products/hq/pva-extrusion-granules--02-pva-extrusion-granules-960.avif 960w, /products/hq/pva-extrusion-granules--02-pva-extrusion-granules-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC BY-SA 3.0 — LHcheM (Wikimedia Commons)",
+        "en": "CC BY-SA 3.0 — LHcheM (Wikimedia Commons)",
+        "tr": "CC BY-SA 3.0 — LHcheM (Wikimedia Commons)"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  },
+  "detergent-packaging-pva-film": {
+    "primary": {
+      "slug": "detergent-packaging-pva-film",
+      "role": "primary",
+      "sourceFile": "03-detergent-packaging-film.jpg",
+      "width": 4000,
+      "height": 2667,
+      "default": "/products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-960.webp",
+      "srcSet": "/products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-480.webp 480w, /products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-960.webp 960w, /products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-480.avif 480w, /products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-960.avif 960w, /products/hq/detergent-packaging-pva-film--03-detergent-packaging-film-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC0 — ajcespedes (Wikimedia Commons)",
+        "en": "CC0 — ajcespedes (Wikimedia Commons)",
+        "tr": "CC0 — ajcespedes (Wikimedia Commons)"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  },
+  "pva-shrink-wrap-film": {
+    "primary": {
+      "slug": "pva-shrink-wrap-film",
+      "role": "primary",
+      "sourceFile": "05-shrink-wrap-film.jpg",
+      "width": 1000,
+      "height": 998,
+      "default": "/products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-960.webp",
+      "srcSet": "/products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-480.webp 480w, /products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-960.webp 960w",
+      "avifSrcSet": "/products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-480.avif 480w, /products/hq/pva-shrink-wrap-film--05-shrink-wrap-film-960.avif 960w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 960
+    },
+    "gallery": []
+  },
+  "soluble-seed-tape": {
+    "primary": {
+      "slug": "soluble-seed-tape",
+      "role": "primary",
+      "sourceFile": "06-soluble-seed-tape.jpg",
+      "width": 5152,
+      "height": 3864,
+      "default": "/products/hq/soluble-seed-tape--06-soluble-seed-tape-960.webp",
+      "srcSet": "/products/hq/soluble-seed-tape--06-soluble-seed-tape-480.webp 480w, /products/hq/soluble-seed-tape--06-soluble-seed-tape-960.webp 960w, /products/hq/soluble-seed-tape--06-soluble-seed-tape-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/soluble-seed-tape--06-soluble-seed-tape-480.avif 480w, /products/hq/soluble-seed-tape--06-soluble-seed-tape-960.avif 960w, /products/hq/soluble-seed-tape--06-soluble-seed-tape-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC BY-SA 4.0 — Wargo (Wikimedia Commons)",
+        "en": "CC BY-SA 4.0 — Wargo (Wikimedia Commons)",
+        "tr": "CC BY-SA 4.0 — Wargo (Wikimedia Commons)"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  },
+  "embroidery-soluble-film": {
+    "primary": {
+      "slug": "embroidery-soluble-film",
+      "role": "primary",
+      "sourceFile": "07-embroidery-soluble-film.jpg",
+      "width": 800,
+      "height": 800,
+      "default": "/products/hq/embroidery-soluble-film--07-embroidery-soluble-film-480.webp",
+      "srcSet": "/products/hq/embroidery-soluble-film--07-embroidery-soluble-film-480.webp 480w",
+      "avifSrcSet": "/products/hq/embroidery-soluble-film--07-embroidery-soluble-film-480.avif 480w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 480
+    },
+    "gallery": []
+  },
+  "dialysis-filter": {
+    "primary": {
+      "slug": "dialysis-filter",
+      "role": "primary",
+      "sourceFile": "10-dialysis-filter.jpg",
+      "width": 2816,
+      "height": 1880,
+      "default": "/products/hq/dialysis-filter--10-dialysis-filter-960.webp",
+      "srcSet": "/products/hq/dialysis-filter--10-dialysis-filter-480.webp 480w, /products/hq/dialysis-filter--10-dialysis-filter-960.webp 960w, /products/hq/dialysis-filter--10-dialysis-filter-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/dialysis-filter--10-dialysis-filter-480.avif 480w, /products/hq/dialysis-filter--10-dialysis-filter-960.avif 960w, /products/hq/dialysis-filter--10-dialysis-filter-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC BY-SA 3.0 — Mr Vacchi (Wikimedia Commons)؛ ذکر منبع لازم است",
+        "en": "CC BY-SA 3.0 — Mr Vacchi (Wikimedia Commons)؛ ذکر منبع لازم است",
+        "tr": "CC BY-SA 3.0 — Mr Vacchi (Wikimedia Commons)؛ ذکر منبع لازم است"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": [
+      {
+        "slug": "dialysis-filter",
+        "role": "gallery",
+        "sourceFile": "08-dialysis-hollow-fiber.jpg",
+        "width": 4474,
+        "height": 3172,
+        "default": "/products/hq/dialysis-filter--08-dialysis-hollow-fiber-960.webp",
+        "srcSet": "/products/hq/dialysis-filter--08-dialysis-hollow-fiber-480.webp 480w, /products/hq/dialysis-filter--08-dialysis-hollow-fiber-960.webp 960w, /products/hq/dialysis-filter--08-dialysis-hollow-fiber-1600.webp 1600w",
+        "avifSrcSet": "/products/hq/dialysis-filter--08-dialysis-hollow-fiber-480.avif 480w, /products/hq/dialysis-filter--08-dialysis-hollow-fiber-960.avif 960w, /products/hq/dialysis-filter--08-dialysis-hollow-fiber-1600.avif 1600w",
+        "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+        "credit": {
+          "fa": "CC BY-SA 4.0 — Superikonoskop (Wikimedia Commons)؛ ذکر منبع لازم است",
+          "en": "CC BY-SA 4.0 — Superikonoskop (Wikimedia Commons)؛ ذکر منبع لازم است",
+          "tr": "CC BY-SA 4.0 — Superikonoskop (Wikimedia Commons)؛ ذکر منبع لازم است"
+        },
+        "placeholder": false,
+        "licenseClass": "آزاد (free)"
+      }
+    ]
+  },
+  "oxygen-humidifier-bottle-filter": {
+    "primary": {
+      "slug": "oxygen-humidifier-bottle-filter",
+      "role": "primary",
+      "sourceFile": "09-humidifier-filter.jpg",
+      "width": 1500,
+      "height": 1500,
+      "default": "/products/hq/oxygen-humidifier-bottle-filter--09-humidifier-filter-960.webp",
+      "srcSet": "/products/hq/oxygen-humidifier-bottle-filter--09-humidifier-filter-480.webp 480w, /products/hq/oxygen-humidifier-bottle-filter--09-humidifier-filter-960.webp 960w, /products/hq/oxygen-humidifier-bottle-filter--09-humidifier-filter-1500.webp 1500w",
+      "avifSrcSet": "/products/hq/oxygen-humidifier-bottle-filter--09-humidifier-filter-480.avif 480w, /products/hq/oxygen-humidifier-bottle-filter--09-humidifier-filter-960.avif 960w, /products/hq/oxygen-humidifier-bottle-filter--09-humidifier-filter-1500.avif 1500w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 1500
+    },
+    "gallery": []
+  },
+  "stopper-valve-filter": {
+    "primary": {
+      "slug": "stopper-valve-filter",
+      "role": "primary",
+      "sourceFile": "11-suction-bag-flow-stop-filter.jpg",
+      "width": 862,
+      "height": 505,
+      "default": "/products/hq/stopper-valve-filter--11-suction-bag-flow-stop-filter-862.webp",
+      "srcSet": "/products/hq/stopper-valve-filter--11-suction-bag-flow-stop-filter-480.webp 480w, /products/hq/stopper-valve-filter--11-suction-bag-flow-stop-filter-862.webp 862w",
+      "avifSrcSet": "/products/hq/stopper-valve-filter--11-suction-bag-flow-stop-filter-480.avif 480w, /products/hq/stopper-valve-filter--11-suction-bag-flow-stop-filter-862.avif 862w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": false,
+      "licenseClass": "رسمی (official)",
+      "largestVariant": 862
+    },
+    "gallery": []
+  },
+  "pipette-tips-filter": {
+    "primary": {
+      "slug": "pipette-tips-filter",
+      "role": "primary",
+      "sourceFile": "12-pipette-tip-filter.jpg",
+      "width": 442,
+      "height": 950,
+      "default": "/products/hq/pipette-tips-filter--12-pipette-tip-filter-950.webp",
+      "srcSet": "/products/hq/pipette-tips-filter--12-pipette-tip-filter-480.webp 480w, /products/hq/pipette-tips-filter--12-pipette-tip-filter-950.webp 950w",
+      "avifSrcSet": "/products/hq/pipette-tips-filter--12-pipette-tip-filter-480.avif 480w, /products/hq/pipette-tips-filter--12-pipette-tip-filter-950.avif 950w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": false,
+      "licenseClass": "رسمی (official)",
+      "largestVariant": 950
+    },
+    "gallery": []
+  },
+  "empty-gravity-flow-nucleic-acid-purification-columns": {
+    "primary": {
+      "slug": "empty-gravity-flow-nucleic-acid-purification-columns",
+      "role": "primary",
+      "sourceFile": "13-nucleic-acid-filter.jpg",
+      "width": 1000,
+      "height": 1000,
+      "default": "/products/hq/empty-gravity-flow-nucleic-acid-purification-columns--13-nucleic-acid-filter-960.webp",
+      "srcSet": "/products/hq/empty-gravity-flow-nucleic-acid-purification-columns--13-nucleic-acid-filter-480.webp 480w, /products/hq/empty-gravity-flow-nucleic-acid-purification-columns--13-nucleic-acid-filter-960.webp 960w",
+      "avifSrcSet": "/products/hq/empty-gravity-flow-nucleic-acid-purification-columns--13-nucleic-acid-filter-480.avif 480w, /products/hq/empty-gravity-flow-nucleic-acid-purification-columns--13-nucleic-acid-filter-960.avif 960w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 960
+    },
+    "gallery": []
+  },
+  "syringe-filters": {
+    "primary": {
+      "slug": "syringe-filters",
+      "role": "primary",
+      "sourceFile": "14-syringe-filter.jpg",
+      "width": 4160,
+      "height": 3120,
+      "default": "/products/hq/syringe-filters--14-syringe-filter-960.webp",
+      "srcSet": "/products/hq/syringe-filters--14-syringe-filter-480.webp 480w, /products/hq/syringe-filters--14-syringe-filter-960.webp 960w, /products/hq/syringe-filters--14-syringe-filter-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/syringe-filters--14-syringe-filter-480.avif 480w, /products/hq/syringe-filters--14-syringe-filter-960.avif 960w, /products/hq/syringe-filters--14-syringe-filter-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC BY 3.0 — Salino01 (Wikimedia Commons)؛ ذکر منبع لازم است",
+        "en": "CC BY 3.0 — Salino01 (Wikimedia Commons)؛ ذکر منبع لازم است",
+        "tr": "CC BY 3.0 — Salino01 (Wikimedia Commons)؛ ذکر منبع لازم است"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  },
+  "perfume-wicks": {
+    "primary": {
+      "slug": "perfume-wicks",
+      "role": "primary",
+      "sourceFile": "15-fragrance-wick.jpg",
+      "width": 1024,
+      "height": 1024,
+      "default": "/products/hq/perfume-wicks--15-fragrance-wick-960.webp",
+      "srcSet": "/products/hq/perfume-wicks--15-fragrance-wick-480.webp 480w, /products/hq/perfume-wicks--15-fragrance-wick-960.webp 960w",
+      "avifSrcSet": "/products/hq/perfume-wicks--15-fragrance-wick-480.avif 480w, /products/hq/perfume-wicks--15-fragrance-wick-960.avif 960w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 960
+    },
+    "gallery": []
+  },
+  "insecticide-wicks": {
+    "primary": {
+      "slug": "insecticide-wicks",
+      "role": "primary",
+      "sourceFile": "16-insecticide-wick.jpg",
+      "width": 2318,
+      "height": 2318,
+      "default": "/products/hq/insecticide-wicks--16-insecticide-wick-960.webp",
+      "srcSet": "/products/hq/insecticide-wicks--16-insecticide-wick-480.webp 480w, /products/hq/insecticide-wicks--16-insecticide-wick-960.webp 960w, /products/hq/insecticide-wicks--16-insecticide-wick-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/insecticide-wicks--16-insecticide-wick-480.avif 480w, /products/hq/insecticide-wicks--16-insecticide-wick-960.avif 960w, /products/hq/insecticide-wicks--16-insecticide-wick-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  },
+  "profile-ii-filters": {
+    "primary": {
+      "slug": "profile-ii-filters",
+      "role": "primary",
+      "sourceFile": "17-dust-collector-filter.jpg",
+      "width": 3624,
+      "height": 3808,
+      "default": "/products/hq/profile-ii-filters--17-dust-collector-filter-960.webp",
+      "srcSet": "/products/hq/profile-ii-filters--17-dust-collector-filter-480.webp 480w, /products/hq/profile-ii-filters--17-dust-collector-filter-960.webp 960w, /products/hq/profile-ii-filters--17-dust-collector-filter-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/profile-ii-filters--17-dust-collector-filter-480.avif 480w, /products/hq/profile-ii-filters--17-dust-collector-filter-960.avif 960w, /products/hq/profile-ii-filters--17-dust-collector-filter-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC0 — Tpclean (Wikimedia Commons)",
+        "en": "CC0 — Tpclean (Wikimedia Commons)",
+        "tr": "CC0 — Tpclean (Wikimedia Commons)"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  },
+  "pneumatic-silencer": {
+    "primary": {
+      "slug": "pneumatic-silencer",
+      "role": "primary",
+      "sourceFile": "18-pneumatic-silencer.jpg",
+      "width": 840,
+      "height": 535,
+      "default": "/products/hq/pneumatic-silencer--18-pneumatic-silencer-840.webp",
+      "srcSet": "/products/hq/pneumatic-silencer--18-pneumatic-silencer-480.webp 480w, /products/hq/pneumatic-silencer--18-pneumatic-silencer-840.webp 840w",
+      "avifSrcSet": "/products/hq/pneumatic-silencer--18-pneumatic-silencer-480.avif 480w, /products/hq/pneumatic-silencer--18-pneumatic-silencer-840.avif 840w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": false,
+      "licenseClass": "رسمی (official)",
+      "largestVariant": 840
+    },
+    "gallery": []
+  },
+  "flame-arrestor": {
+    "primary": {
+      "slug": "flame-arrestor",
+      "role": "primary",
+      "sourceFile": "19-battery-flame-arrestor.jpg",
+      "width": 750,
+      "height": 750,
+      "default": "/products/hq/flame-arrestor--19-battery-flame-arrestor-480.webp",
+      "srcSet": "/products/hq/flame-arrestor--19-battery-flame-arrestor-480.webp 480w",
+      "avifSrcSet": "/products/hq/flame-arrestor--19-battery-flame-arrestor-480.avif 480w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 480
+    },
+    "gallery": []
+  },
+  "diffusion-tubes": {
+    "primary": {
+      "slug": "diffusion-tubes",
+      "role": "primary",
+      "sourceFile": "20-diffuser-tubes.jpg",
+      "width": 900,
+      "height": 900,
+      "default": "/products/hq/diffusion-tubes--20-diffuser-tubes-900.webp",
+      "srcSet": "/products/hq/diffusion-tubes--20-diffuser-tubes-480.webp 480w, /products/hq/diffusion-tubes--20-diffuser-tubes-900.webp 900w",
+      "avifSrcSet": "/products/hq/diffusion-tubes--20-diffuser-tubes-480.avif 480w, /products/hq/diffusion-tubes--20-diffuser-tubes-900.avif 900w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 900
+    },
+    "gallery": []
+  },
+  "dissolution-filters": {
+    "primary": {
+      "slug": "dissolution-filters",
+      "role": "primary",
+      "sourceFile": "21-dissolution-filter.webp",
+      "width": 810,
+      "height": 810,
+      "default": "/products/hq/dissolution-filters--21-dissolution-filter-480.webp",
+      "srcSet": "/products/hq/dissolution-filters--21-dissolution-filter-480.webp 480w",
+      "avifSrcSet": "/products/hq/dissolution-filters--21-dissolution-filter-480.avif 480w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 480
+    },
+    "gallery": []
+  },
+  "fluid-reservoir-vents-filters": {
+    "primary": {
+      "slug": "fluid-reservoir-vents-filters",
+      "role": "primary",
+      "sourceFile": "22-tank-vent-filter-valve.png",
+      "width": 500,
+      "height": 500,
+      "default": "/products/hq/fluid-reservoir-vents-filters--22-tank-vent-filter-valve-480.webp",
+      "srcSet": "/products/hq/fluid-reservoir-vents-filters--22-tank-vent-filter-valve-480.webp 480w",
+      "avifSrcSet": "/products/hq/fluid-reservoir-vents-filters--22-tank-vent-filter-valve-480.avif 480w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": false,
+      "licenseClass": "رسمی (official)",
+      "largestVariant": 480
+    },
+    "gallery": []
+  },
+  "electrolyte-reservoirs-and-wicks": {
+    "primary": {
+      "slug": "electrolyte-reservoirs-and-wicks",
+      "role": "primary",
+      "sourceFile": "23-electrolyte-wick.png",
+      "width": 500,
+      "height": 500,
+      "default": "/products/hq/electrolyte-reservoirs-and-wicks--23-electrolyte-wick-480.webp",
+      "srcSet": "/products/hq/electrolyte-reservoirs-and-wicks--23-electrolyte-wick-480.webp 480w",
+      "avifSrcSet": "/products/hq/electrolyte-reservoirs-and-wicks--23-electrolyte-wick-480.avif 480w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": false,
+      "licenseClass": "رسمی (official)",
+      "largestVariant": 480
+    },
+    "gallery": []
+  },
+  "separators-and-isolators": {
+    "primary": {
+      "slug": "separators-and-isolators",
+      "role": "primary",
+      "sourceFile": "24-battery-separator.jpg",
+      "width": 750,
+      "height": 750,
+      "default": "/products/hq/separators-and-isolators--24-battery-separator-480.webp",
+      "srcSet": "/products/hq/separators-and-isolators--24-battery-separator-480.webp 480w",
+      "avifSrcSet": "/products/hq/separators-and-isolators--24-battery-separator-480.avif 480w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 480
+    },
+    "gallery": []
+  },
+  "carbon-block-pre-filters": {
+    "primary": {
+      "slug": "carbon-block-pre-filters",
+      "role": "primary",
+      "sourceFile": "25-carbon-block-filter.jpg",
+      "width": 1500,
+      "height": 1500,
+      "default": "/products/hq/carbon-block-pre-filters--25-carbon-block-filter-960.webp",
+      "srcSet": "/products/hq/carbon-block-pre-filters--25-carbon-block-filter-480.webp 480w, /products/hq/carbon-block-pre-filters--25-carbon-block-filter-960.webp 960w, /products/hq/carbon-block-pre-filters--25-carbon-block-filter-1500.webp 1500w",
+      "avifSrcSet": "/products/hq/carbon-block-pre-filters--25-carbon-block-filter-480.avif 480w, /products/hq/carbon-block-pre-filters--25-carbon-block-filter-960.avif 960w, /products/hq/carbon-block-pre-filters--25-carbon-block-filter-1500.avif 1500w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 1500
+    },
+    "gallery": []
+  },
+  "aquarium-diffuser": {
+    "primary": {
+      "slug": "aquarium-diffuser",
+      "role": "primary",
+      "sourceFile": "26-aquarium-diffuser.jpg",
+      "width": 2809,
+      "height": 3610,
+      "default": "/products/hq/aquarium-diffuser--26-aquarium-diffuser-960.webp",
+      "srcSet": "/products/hq/aquarium-diffuser--26-aquarium-diffuser-480.webp 480w, /products/hq/aquarium-diffuser--26-aquarium-diffuser-960.webp 960w, /products/hq/aquarium-diffuser--26-aquarium-diffuser-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/aquarium-diffuser--26-aquarium-diffuser-480.avif 480w, /products/hq/aquarium-diffuser--26-aquarium-diffuser-960.avif 960w, /products/hq/aquarium-diffuser--26-aquarium-diffuser-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC BY-SA 4.0 — Nimmerwelk (Wikimedia Commons)؛ ذکر منبع لازم است",
+        "en": "CC BY-SA 4.0 — Nimmerwelk (Wikimedia Commons)؛ ذکر منبع لازم است",
+        "tr": "CC BY-SA 4.0 — Nimmerwelk (Wikimedia Commons)؛ ذکر منبع لازم است"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  },
+  "sintered-filter-cartridge": {
+    "primary": {
+      "slug": "sintered-filter-cartridge",
+      "role": "primary",
+      "sourceFile": "28-sintered-metal-filter-cartridge.jpg",
+      "width": 828,
+      "height": 990,
+      "default": "/products/hq/sintered-filter-cartridge--28-sintered-metal-filter-cartridge-960.webp",
+      "srcSet": "/products/hq/sintered-filter-cartridge--28-sintered-metal-filter-cartridge-480.webp 480w, /products/hq/sintered-filter-cartridge--28-sintered-metal-filter-cartridge-960.webp 960w",
+      "avifSrcSet": "/products/hq/sintered-filter-cartridge--28-sintered-metal-filter-cartridge-480.avif 480w, /products/hq/sintered-filter-cartridge--28-sintered-metal-filter-cartridge-960.avif 960w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC BY-SA 4.0 — Michael KR (Wikimedia Commons)",
+        "en": "CC BY-SA 4.0 — Michael KR (Wikimedia Commons)",
+        "tr": "CC BY-SA 4.0 — Michael KR (Wikimedia Commons)"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 960
+    },
+    "gallery": []
+  },
+  "sintered-porous-metal-filter-disc-20-micron": {
+    "primary": {
+      "slug": "sintered-porous-metal-filter-disc-20-micron",
+      "role": "primary",
+      "sourceFile": "29-metal-filter-disc-20-micron.jpg",
+      "width": 800,
+      "height": 800,
+      "default": "/products/hq/sintered-porous-metal-filter-disc-20-micron--29-metal-filter-disc-20-micron-480.webp",
+      "srcSet": "/products/hq/sintered-porous-metal-filter-disc-20-micron--29-metal-filter-disc-20-micron-480.webp 480w",
+      "avifSrcSet": "/products/hq/sintered-porous-metal-filter-disc-20-micron--29-metal-filter-disc-20-micron-480.avif 480w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 480
+    },
+    "gallery": []
+  },
+  "highlighter-nib": {
+    "primary": {
+      "slug": "highlighter-nib",
+      "role": "primary",
+      "sourceFile": "30-highlighter-nib.png",
+      "width": 1575,
+      "height": 1000,
+      "default": "/products/hq/highlighter-nib--30-highlighter-nib-960.webp",
+      "srcSet": "/products/hq/highlighter-nib--30-highlighter-nib-480.webp 480w, /products/hq/highlighter-nib--30-highlighter-nib-960.webp 960w, /products/hq/highlighter-nib--30-highlighter-nib-1575.webp 1575w",
+      "avifSrcSet": "/products/hq/highlighter-nib--30-highlighter-nib-480.avif 480w, /products/hq/highlighter-nib--30-highlighter-nib-960.avif 960w, /products/hq/highlighter-nib--30-highlighter-nib-1575.avif 1575w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": false,
+      "licenseClass": "رسمی (official)",
+      "largestVariant": 1575
+    },
+    "gallery": []
+  },
+  "nonalcoholic-beverage-filtration": {
+    "primary": {
+      "slug": "nonalcoholic-beverage-filtration",
+      "role": "primary",
+      "sourceFile": "31-nonalcoholic-beverage-filtration.jpg",
+      "width": 800,
+      "height": 800,
+      "default": "/products/hq/nonalcoholic-beverage-filtration--31-nonalcoholic-beverage-filtration-480.webp",
+      "srcSet": "/products/hq/nonalcoholic-beverage-filtration--31-nonalcoholic-beverage-filtration-480.webp 480w",
+      "avifSrcSet": "/products/hq/nonalcoholic-beverage-filtration--31-nonalcoholic-beverage-filtration-480.avif 480w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": null,
+      "placeholder": true,
+      "licenseClass": "حق‌نشر سازنده (copyrighted)",
+      "largestVariant": 480
+    },
+    "gallery": []
+  },
+  "juice-filtration": {
+    "primary": {
+      "slug": "juice-filtration",
+      "role": "primary",
+      "sourceFile": "32-juice-filtration.jpg",
+      "width": 1936,
+      "height": 2592,
+      "default": "/products/hq/juice-filtration--32-juice-filtration-960.webp",
+      "srcSet": "/products/hq/juice-filtration--32-juice-filtration-480.webp 480w, /products/hq/juice-filtration--32-juice-filtration-960.webp 960w, /products/hq/juice-filtration--32-juice-filtration-1600.webp 1600w",
+      "avifSrcSet": "/products/hq/juice-filtration--32-juice-filtration-480.avif 480w, /products/hq/juice-filtration--32-juice-filtration-960.avif 960w, /products/hq/juice-filtration--32-juice-filtration-1600.avif 1600w",
+      "sizes": "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 520px",
+      "credit": {
+        "fa": "CC BY-SA 3.0 — Agne27 (Wikimedia Commons)",
+        "en": "CC BY-SA 3.0 — Agne27 (Wikimedia Commons)",
+        "tr": "CC BY-SA 3.0 — Agne27 (Wikimedia Commons)"
+      },
+      "placeholder": false,
+      "licenseClass": "آزاد (free)",
+      "largestVariant": 1600
+    },
+    "gallery": []
+  }
+}

@@ -4,6 +4,18 @@ import type { Localized } from "@/lib/i18n";
 
 export type SpecsStatus = "ok" | "partial" | "placeholder" | "none";
 
+export type ProductMedia = {
+  src: string;
+  srcSet?: string;
+  avifSrcSet?: string;
+  sizes?: string;
+  width?: number;
+  height?: number;
+  credit?: Localized<string>;
+  /** Manufacturer-copyrighted HQ shot — swap when official asset arrives */
+  placeholder?: boolean;
+};
+
 export type Product = {
   slug: string;
   category: CategoryId;
@@ -15,6 +27,7 @@ export type Product = {
   body?: Localized<string[]>;
   features: Localized<string[]>;
   images?: string[];
+  media?: ProductMedia[];
   /** Markdown-ish table rows: first row = headers */
   specsTable: Localized<string[][]> | null;
   specsStatus: SpecsStatus;
