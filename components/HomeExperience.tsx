@@ -85,16 +85,26 @@ function wireFrameScrub(
     return null;
   };
 
+  // Memory (iOS): the backing store is only reallocated when the stage's size changes,
+  // not on every scrub frame, and released while the stage is far off screen.
+  let lastImg: HTMLImageElement | null = null;
+  let near = true;
   const draw = (img: HTMLImageElement) => {
+    lastImg = img;
+    if (!near) return;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = stage.clientWidth;
     const h = stage.clientHeight;
     if (w < 1 || h < 1) return;
 
-    canvas.width = Math.round(w * dpr);
-    canvas.height = Math.round(h * dpr);
-    canvas.style.width = `${w}px`;
-    canvas.style.height = `${h}px`;
+    const bw = Math.round(w * dpr);
+    const bh = Math.round(h * dpr);
+    if (canvas.width !== bw || canvas.height !== bh) {
+      canvas.width = bw;
+      canvas.height = bh;
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+    }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const ir = img.naturalWidth / img.naturalHeight;
@@ -121,12 +131,13 @@ function wireFrameScrub(
   // Create scrub ST immediately (DOM order) — do not wait on image load.
   wireTypoFrameScrub(copy, track, onScrub);
 
-  const loadFrames = async () => {
+  const loadFrames = async (again = false) => {
+    loaded = true;
     try {
-      const first = await loadImage(frameUrl(folder, 0));
+      const first = frames[0] ?? (await loadImage(frameUrl(folder, 0)));
       frames[0] = first;
-      draw(first);
-      ScrollTrigger.refresh();
+      draw(lastImg && again ? lastImg : first);
+      if (!again) ScrollTrigger.refresh();
     } catch {
       /* poster CSS still shows */
     }
@@ -139,7 +150,7 @@ function wireFrameScrub(
         jobs.push(
           loadImage(frameUrl(folder, idx))
             .then((img) => {
-              frames[idx] = img;
+              if (!released) frames[idx] = img;
             })
             .catch(() => undefined),
         );
@@ -147,6 +158,36 @@ function wireFrameScrub(
       await Promise.all(jobs);
     }
   };
+
+  // Far off screen (more than ~1.5 screens away): free the canvas backing store and the
+  // decoded frames (re-fetched from the HTTP cache on the way back; frame 0 stays as a
+  // fallback). The stage is never visible while released, so nothing on screen changes.
+  let loaded = eager;
+  let released = false;
+  if (typeof IntersectionObserver !== "undefined") {
+    new IntersectionObserver(
+      (entries) => {
+        const e = entries[entries.length - 1];
+        if (!e) return;
+        if (e.isIntersecting) {
+          near = true;
+          if (released) {
+            released = false;
+            void loadFrames(true);
+          } else if (lastImg) {
+            draw(lastImg);
+          }
+        } else if (loaded) {
+          near = false;
+          released = true;
+          for (let i = 1; i < FRAME_COUNT; i++) frames[i] = null;
+          canvas.width = 1;
+          canvas.height = 1;
+        }
+      },
+      { rootMargin: "150% 0px 150% 0px" },
+    ).observe(track);
+  }
 
   if (eager) {
     void loadFrames();
