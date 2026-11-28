@@ -56,6 +56,7 @@ export default function IndustryCatalog({
               title={t(p.name, locale)}
               body={t(p.intro, locale)}
               image={p.images?.[0]}
+              media={p.media?.[0]}
             />
           ))
         )}

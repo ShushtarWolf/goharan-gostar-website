@@ -55,6 +55,7 @@ export default function ProductsCatalog({ locale }: { locale: Locale }) {
                       title={t(p.name, locale)}
                       body={t(p.intro, locale)}
                       image={p.images?.[0]}
+                      media={p.media?.[0]}
                     />
                   ))}
                 </div>

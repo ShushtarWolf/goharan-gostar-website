@@ -7,6 +7,7 @@ import {
 import { faCopyOverrides } from "@/content/fa-copy-overrides";
 import { productSpecOverrides } from "@/content/product-spec-overrides";
 import type { Product, SpecsStatus } from "@/content/products.types";
+import { mergeProductImages } from "@/lib/mergeProductImages";
 import type { Localized } from "@/lib/i18n";
 import productMeta from "@/content/products.json";
 import wpSync from "@/content/wp-sync.json";
@@ -183,10 +184,12 @@ function buildProduct(slug: string): Product | null {
   const { table, status } = specsFromSync(slug, sync);
 
   const wpImages = (wpSync.mediaBySlug as Record<string, string[]>)[slug];
-  const images = [
+  const baseImages = [
     ...(catalog?.image ? [catalog.image] : []),
     ...(wpImages ?? meta?.images ?? []),
   ].filter((src, i, arr) => arr.indexOf(src) === i);
+
+  const { images, media } = mergeProductImages(slug, baseImages);
 
   return {
     slug,
@@ -230,6 +233,7 @@ function buildProduct(slug: string): Product | null {
       : undefined,
     features,
     images,
+    media,
     specsTable: table,
     specsStatus: override?.specsStatus ?? status,
     wpPath: {

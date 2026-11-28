@@ -55,6 +55,11 @@ export const ui = {
       en: "The specifications table will be updated with final data soon.",
     },
     back: { fa: "بازگشت به محصولات", tr: "Ürünlere dön", en: "Back to products" },
+    imageCredit: {
+      fa: "اعتبار تصویر",
+      tr: "Görsel kaynağı",
+      en: "Image credit",
+    },
   },
   contact: {
     title: { fa: "تماس با ما", tr: "İletişim", en: "Contact Us" },

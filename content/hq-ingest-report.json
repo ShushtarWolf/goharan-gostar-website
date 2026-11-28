@@ -1,0 +1,147 @@
+{
+  "applied": [
+    {
+      "file": "08-dialysis-hollow-fiber.jpg",
+      "slug": "dialysis-filter",
+      "role": "gallery",
+      "default": "/products/hq/dialysis-filter--08-dialysis-hollow-fiber-960.webp"
+    },
+    {
+      "file": "09-humidifier-filter.jpg",
+      "slug": "oxygen-humidifier-bottle-filter",
+      "role": "primary",
+      "default": "/products/hq/oxygen-humidifier-bottle-filter--09-humidifier-filter-960.webp"
+    },
+    {
+      "file": "10-dialysis-filter.jpg",
+      "slug": "dialysis-filter",
+      "role": "primary",
+      "default": "/products/hq/dialysis-filter--10-dialysis-filter-960.webp"
+    },
+    {
+      "file": "11-suction-bag-flow-stop-filter.jpg",
+      "slug": "stopper-valve-filter",
+      "role": "primary",
+      "default": "/products/hq/stopper-valve-filter--11-suction-bag-flow-stop-filter-862.webp"
+    },
+    {
+      "file": "12-pipette-tip-filter.jpg",
+      "slug": "pipette-tips-filter",
+      "role": "primary",
+      "default": "/products/hq/pipette-tips-filter--12-pipette-tip-filter-950.webp"
+    },
+    {
+      "file": "13-nucleic-acid-filter.jpg",
+      "slug": "empty-gravity-flow-nucleic-acid-purification-columns",
+      "role": "primary",
+      "default": "/products/hq/empty-gravity-flow-nucleic-acid-purification-columns--13-nucleic-acid-filter-960.webp"
+    },
+    {
+      "file": "14-syringe-filter.jpg",
+      "slug": "syringe-filters",
+      "role": "primary",
+      "default": "/products/hq/syringe-filters--14-syringe-filter-960.webp"
+    },
+    {
+      "file": "15-fragrance-wick.jpg",
+      "slug": "perfume-wicks",
+      "role": "primary",
+      "default": "/products/hq/perfume-wicks--15-fragrance-wick-960.webp"
+    },
+    {
+      "file": "16-insecticide-wick.jpg",
+      "slug": "insecticide-wicks",
+      "role": "primary",
+      "default": "/products/hq/insecticide-wicks--16-insecticide-wick-960.webp"
+    },
+    {
+      "file": "17-dust-collector-filter.jpg",
+      "slug": "profile-ii-filters",
+      "role": "primary",
+      "default": "/products/hq/profile-ii-filters--17-dust-collector-filter-960.webp"
+    },
+    {
+      "file": "18-pneumatic-silencer.jpg",
+      "slug": "pneumatic-silencer",
+      "role": "primary",
+      "default": "/products/hq/pneumatic-silencer--18-pneumatic-silencer-840.webp"
+    },
+    {
+      "file": "19-battery-flame-arrestor.jpg",
+      "slug": "flame-arrestor",
+      "role": "primary",
+      "default": "/products/hq/flame-arrestor--19-battery-flame-arrestor-480.webp"
+    },
+    {
+      "file": "20-diffuser-tubes.jpg",
+      "slug": "diffusion-tubes",
+      "role": "primary",
+      "default": "/products/hq/diffusion-tubes--20-diffuser-tubes-900.webp"
+    },
+    {
+      "file": "21-dissolution-filter.webp",
+      "slug": "dissolution-filters",
+      "role": "primary",
+      "default": "/products/hq/dissolution-filters--21-dissolution-filter-480.webp"
+    },
+    {
+      "file": "22-tank-vent-filter-valve.png",
+      "slug": "fluid-reservoir-vents-filters",
+      "role": "primary",
+      "default": "/products/hq/fluid-reservoir-vents-filters--22-tank-vent-filter-valve-480.webp"
+    },
+    {
+      "file": "23-electrolyte-wick.png",
+      "slug": "electrolyte-reservoirs-and-wicks",
+      "role": "primary",
+      "default": "/products/hq/electrolyte-reservoirs-and-wicks--23-electrolyte-wick-480.webp"
+    },
+    {
+      "file": "24-battery-separator.jpg",
+      "slug": "separators-and-isolators",
+      "role": "primary",
+      "default": "/products/hq/separators-and-isolators--24-battery-separator-480.webp"
+    },
+    {
+      "file": "25-carbon-block-filter.jpg",
+      "slug": "carbon-block-pre-filters",
+      "role": "primary",
+      "default": "/products/hq/carbon-block-pre-filters--25-carbon-block-filter-960.webp"
+    },
+    {
+      "file": "26-aquarium-diffuser.jpg",
+      "slug": "aquarium-diffuser",
+      "role": "primary",
+      "default": "/products/hq/aquarium-diffuser--26-aquarium-diffuser-960.webp"
+    },
+    {
+      "file": "28-sintered-metal-filter-cartridge.jpg",
+      "slug": "sintered-filter-cartridge",
+      "role": "primary",
+      "default": "/products/hq/sintered-filter-cartridge--28-sintered-metal-filter-cartridge-960.webp"
+    },
+    {
+      "file": "29-metal-filter-disc-20-micron.jpg",
+      "slug": "sintered-porous-metal-filter-disc-20-micron",
+      "role": "primary",
+      "default": "/products/hq/sintered-porous-metal-filter-disc-20-micron--29-metal-filter-disc-20-micron-480.webp"
+    },
+    {
+      "file": "30-highlighter-nib.png",
+      "slug": "highlighter-nib",
+      "role": "primary",
+      "default": "/products/hq/highlighter-nib--30-highlighter-nib-960.webp"
+    }
+  ],
+  "skipped": [],
+  "unmatched": [
+    "01-pva-film-blowing-granules.jpg",
+    "02-pva-extrusion-granules.jpg",
+    "03-detergent-packaging-film.jpg",
+    "05-shrink-wrap-film.jpg",
+    "06-soluble-seed-tape.jpg",
+    "07-embroidery-soluble-film.jpg",
+    "31-nonalcoholic-beverage-filtration.jpg",
+    "32-juice-filtration.jpg"
+  ]
+}
