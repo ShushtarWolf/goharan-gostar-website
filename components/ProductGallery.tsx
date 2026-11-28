@@ -23,7 +23,7 @@ export default function ProductGallery({
           return (
             <figure
               key={`${m.src}-${i}`}
-              className={`w-full ${isHero ? "max-w-xl" : "max-w-md"} border-white/0 bg-transparent`}
+              className={`product-studio-frame w-full ${isHero ? "max-w-xl" : "max-w-md"} border-0 bg-transparent shadow-none`}
             >
               <ProductResponsiveImage
                 media={m}

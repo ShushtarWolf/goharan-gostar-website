@@ -34,26 +34,28 @@ export default function ProductListItem({
   return (
     <div data-reveal className="space-y-4">
       {heroMedia ? (
-        heroMedia.srcSet ? (
-          <ProductResponsiveImage
-            media={heroMedia}
-            slug={slug}
-            hero
-            loading="lazy"
-            className="product-studio-img goo-picture mx-auto block h-52 w-full max-w-lg object-contain p-3 opacity-95 sm:h-56"
-          />
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            data-photo
-            src={asset(heroMedia.src)}
-            alt=""
-            loading="lazy"
-            decoding="async"
-            className="product-studio-img goo-picture mx-auto block h-52 w-full max-w-lg object-contain p-3 opacity-95 sm:h-56"
-            style={{ viewTransitionName: vtName }}
-          />
-        )
+        <div className="product-studio-frame mx-auto w-full max-w-lg px-3 py-2">
+          {heroMedia.srcSet ? (
+            <ProductResponsiveImage
+              media={heroMedia}
+              slug={slug}
+              hero
+              loading="lazy"
+              className="product-studio-img mx-auto block h-52 w-full object-contain sm:h-56"
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              data-photo
+              src={asset(heroMedia.src)}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="product-studio-img mx-auto block h-52 w-full object-contain sm:h-56"
+              style={{ viewTransitionName: vtName }}
+            />
+          )}
+        </div>
       ) : null}
       <RelatedMagneticLink href={href} title={title} body={short} />
     </div>

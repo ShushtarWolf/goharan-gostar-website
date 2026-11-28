@@ -10,6 +10,7 @@
     "catalog:build": "node scripts/build-catalog.mjs",
     "photos:ingest": "node scripts/ingest-hq-photos.mjs",
     "photos:cutout": "node scripts/photos-cutout.mjs",
+    "photos:qa-sheet": "node scripts/photos-qa-sheet.mjs",
     "photos:placeholder-agricultural": "node scripts/generate-agricultural-placeholder.mjs"
   },
   "dependencies": {

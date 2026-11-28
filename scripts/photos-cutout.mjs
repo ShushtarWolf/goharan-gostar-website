@@ -15,9 +15,11 @@ import { execSync } from "node:child_process";
 import {
   assessCutout,
   buildSrcSet,
+  CANVAS,
   composeStudioSquare,
   emitStudioVariants,
   featherFallback,
+  PIPELINE_VERSION,
   rembgCutout,
 } from "./lib/studio-image.mjs";
 
@@ -144,10 +146,15 @@ async function processOne(webPath, report, bySource) {
   const outBase = path.join(STUDIO_DIR, id, "hero");
   fs.mkdirSync(path.dirname(outBase), { recursive: true });
 
+  fs.writeFileSync(
+    path.join(CACHE_DIR, `${id}.pipeline`),
+    PIPELINE_VERSION,
+  );
+
   const emitted = await emitStudioVariants(
     outBase,
     composed,
-    Math.min(1600, sourceLong),
+    CANVAS,
     path.join(ROOT, "public"),
   );
 
