@@ -109,6 +109,109 @@ export const homeCopy = {
     tr: "Sırada ne varsa birlikte mühendislik yapalım",
     en: "Let’s engineer what comes next",
   } satisfies Localized<string>,
+  customersTitle: {
+    fa: "مشتریان ما",
+    tr: "Müşterilerimiz",
+    en: "Our customers",
+  } satisfies Localized<string>,
+  customers: [
+    {
+      src: "/customers/saba-battery.png",
+      alt: {
+        fa: "صبا باتری",
+        tr: "Saba Battery",
+        en: "Saba Battery",
+      } satisfies Localized<string>,
+    },
+    {
+      src: "/customers/abadis-logo-lockup.svg",
+      alt: {
+        fa: "آبادیس مد",
+        tr: "Abadis Med",
+        en: "Abadis Med",
+      } satisfies Localized<string>,
+    },
+    {
+      src: "/customers/soha-helal-iran.png",
+      alt: {
+        fa: "شرکت تجهیزات پزشکی هلال ایران (سها)",
+        tr: "SOHA (Helal Iran Tıbbi Ekipman)",
+        en: "SOHA (Helal Iran Medical Equipment)",
+      } satisfies Localized<string>,
+    },
+  ],
+  teamTitle: {
+    fa: "تیم ما",
+    tr: "Ekibimiz",
+    en: "Our team",
+  } satisfies Localized<string>,
+  team: [
+    {
+      monogram: { fa: "ب‌آ", tr: "BA", en: "BA" } satisfies Localized<string>,
+      name: {
+        fa: "برهان آرمند",
+        tr: "Borhan Armand",
+        en: "Borhan Armand",
+      } satisfies Localized<string>,
+      role: {
+        fa: "مدیرعامل",
+        tr: "Genel Müdür",
+        en: "CEO",
+      } satisfies Localized<string>,
+    },
+    {
+      monogram: { fa: "رم", tr: "RM", en: "RM" } satisfies Localized<string>,
+      name: {
+        fa: "رضا محمودی",
+        tr: "Reza Mahmoudi",
+        en: "Reza Mahmoudi",
+      } satisfies Localized<string>,
+      role: {
+        fa: "مدیر اجرایی",
+        tr: "İcra Direktörü",
+        en: "Executive Director",
+      } satisfies Localized<string>,
+    },
+    {
+      monogram: { fa: "مش", tr: "MS", en: "MS" } satisfies Localized<string>,
+      name: {
+        fa: "ملیکا شراهی",
+        tr: "Melika Sharahi",
+        en: "Melika Sharahi",
+      } satisfies Localized<string>,
+      role: {
+        fa: "تحقیق و توسعه",
+        tr: "Ar-Ge",
+        en: "R&D",
+      } satisfies Localized<string>,
+    },
+    {
+      monogram: { fa: "حص", tr: "HS", en: "HS" } satisfies Localized<string>,
+      name: {
+        fa: "حسن صافی",
+        tr: "Hasan Safi",
+        en: "Hasan Safi",
+      } satisfies Localized<string>,
+      role: {
+        fa: "امور مالی",
+        tr: "Mali İşler",
+        en: "Financial",
+      } satisfies Localized<string>,
+    },
+    {
+      monogram: { fa: "مخ", tr: "MK", en: "MK" } satisfies Localized<string>,
+      name: {
+        fa: "محمدرضا خواست خدایی",
+        tr: "Mohammad Reza Khastkhodaei",
+        en: "Mohammad Reza Khastkhodaei",
+      } satisfies Localized<string>,
+      role: {
+        fa: "وبمستر و دیجیتال مارکتر",
+        tr: "Webmaster ve Dijital Pazarlamacı",
+        en: "Webmaster & Digital Marketer",
+      } satisfies Localized<string>,
+    },
+  ],
   scenes: {
     silencer: {
       title: {

@@ -11,6 +11,7 @@ import { productsForHomeScene } from "@/content/products";
 import { href } from "@/lib/paths";
 import { t, type Locale } from "@/lib/i18n";
 import RelatedMagneticLink from "@/components/RelatedMagneticLink";
+import HomeCustomersTeam from "@/components/HomeCustomersTeam";
 import {
   wirePhotoEnter,
   wireTypoFrameScrub,
@@ -513,6 +514,8 @@ export default function HomeExperience({
           </div>
         );
       })}
+
+      <HomeCustomersTeam locale={locale} />
 
       <section
         data-typo-scene
