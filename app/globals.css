@@ -296,3 +296,26 @@ body {
     transparent 100%
   );
 }
+
+
+/* Home customers: monochrome on mist, full color on hover when the pointer can hover. */
+.customer-logo {
+  filter: grayscale(1) opacity(0.78);
+  transition: filter 0.35s ease;
+}
+@media (hover: hover) {
+  .customer-logo:hover,
+  .customer-logo:focus-visible {
+    filter: none;
+  }
+}
+@media (hover: none) {
+  .customer-logo {
+    filter: grayscale(1) opacity(0.88);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .customer-logo {
+    transition: none;
+  }
+}
