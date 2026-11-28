@@ -248,4 +248,42 @@ export const homeCopy = {
       } satisfies Localized<string>,
     },
   ],
+  scenes: {
+    silencer: {
+      title: {
+        fa: "صداگیر پنوماتیک",
+        tr: "Pnömatik Susturucu",
+        en: "Pneumatic Silencer",
+      } satisfies Localized<string>,
+      body: {
+        fa: "هوای فشرده از مسیر پرپیچ‌وخم منافذ می‌گذرد؛ فشار و شدت صدا کم می‌شود و جریان خروجی تحت کنترل می‌ماند.",
+        tr: "Basınçlı hava kıvrımlı gözeneklerden geçerek basınç ve gürültüyü düşürür; çıkış akışı kontrol altına alınır.",
+        en: "Compressed air travels through tortuous pores — pressure and noise drop while outlet flow stays controlled.",
+      } satisfies Localized<string>,
+    },
+    pipette: {
+      title: {
+        fa: "فیلتر سرسمپلر",
+        tr: "Pipet Ucu Filtresi",
+        en: "Pipette Tip Filter",
+      } satisfies Localized<string>,
+      body: {
+        fa: "ذرات و آلودگی در شبکهٔ متخلخل گیر می‌افتند؛ نمونه از مسیر پاک می‌گذرد و جلوی آلودگی متقابل گرفته می‌شود.",
+        tr: "Parçacıklar gözenekli ağda tutulur; numune temiz geçer ve çapraz bulaşma engellenir.",
+        en: "Particles lodge in the porous network while the sample passes clean — blocking cross-contamination.",
+      } satisfies Localized<string>,
+    },
+    medical: {
+      title: {
+        fa: "کاربرد پزشکی",
+        tr: "Tıbbi Uygulama",
+        en: "Medical Application",
+      } satisfies Localized<string>,
+      body: {
+        fa: "گاز از منافذ می‌گذرد و مسیر پرپیچ‌وخم جلوی جریان ناخواسته یا جرقه را می‌گیرد؛ با رسیدن مایع، جریان قطع می‌شود.",
+        tr: "Gaz gözeneklerden geçer; kıvrımlı yol istenmeyen akışı veya kıvılcımı engeller. Sıvı değince akış kesilir.",
+        en: "Gas vents through pores; the tortuous path blocks unwanted flow or sparks. On liquid contact, flow stops.",
+      } satisfies Localized<string>,
+    },
+  },
 };

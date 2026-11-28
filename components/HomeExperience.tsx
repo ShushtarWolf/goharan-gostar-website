@@ -7,8 +7,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { asset } from "@/lib/asset";
 import { homeCopy } from "@/content/home";
 import { ui } from "@/content/ui";
+import { productsForHomeScene } from "@/content/products";
 import { href } from "@/lib/paths";
 import { t, type Locale } from "@/lib/i18n";
+import RelatedMagneticLink from "@/components/RelatedMagneticLink";
 import HomeSolutions from "@/components/HomeSolutions";
 import HomeCollabArticlesAbadis from "@/components/HomeCollabArticlesAbadis";
 import SiteFooter from "@/components/SiteFooter";
@@ -25,6 +27,20 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const FRAME_COUNT = 48;
 /** Tall track ≈ 1.85× viewport; sticky stage is 100vh (no GSAP pin). */
 const FRAME_TRACK_CLASS = "relative h-[185vh] bg-graphite";
+
+type SceneId = "hero" | "silencer" | "pipette" | "medical";
+
+const SCENES: {
+  id: SceneId;
+  folder: string;
+  eager?: boolean;
+  homeScene?: "silencer" | "pipette" | "medical";
+}[] = [
+  { id: "hero", folder: "sUOZV", eager: true },
+  { id: "silencer", folder: "ggT4W", homeScene: "silencer" },
+  { id: "pipette", folder: "T3KVy", homeScene: "pipette" },
+  { id: "medical", folder: "GcRW0", homeScene: "medical" },
+];
 
 const INTRO_PHOTOS = [
   asset("/photos/ead0bbd7-a967-487d-be1c-817c241baab5.webp"),
@@ -229,6 +245,53 @@ function FrameStage({
   );
 }
 
+function RelatedStrip({
+  locale,
+  scene,
+}: {
+  locale: Locale;
+  scene: "silencer" | "pipette" | "medical";
+}) {
+  const items = productsForHomeScene(scene);
+  if (!items.length) return null;
+  return (
+    <section className={`bg-graphite-soft ${typo.homeRelatedY} ${typo.sectionX}`}>
+      <div className="mx-auto max-w-3xl text-center">
+        <p
+          data-typo
+          className={typo.eyebrowCyan}
+        >
+          {t(homeCopy.related, locale)}
+        </p>
+        <div className={`${typo.stackXl} space-y-8 md:space-y-10`}>
+          {items.map((p) => {
+            const intro = t(p.intro, locale);
+            const short =
+              intro.length > 140
+                ? `${intro.slice(0, 137).replace(/\s+\S*$/, "")}…`
+                : intro;
+            return (
+              <RelatedMagneticLink
+                key={p.slug}
+                href={href(locale, `products/${p.slug}`)}
+                title={t(p.name, locale)}
+                body={short}
+              />
+            );
+          })}
+        </div>
+        <a
+          data-typo
+          href={href(locale, "products")}
+          className={`mt-14 inline-block md:mt-16 ${typo.linkCta}`}
+        >
+          {t(homeCopy.viewAll, locale)}
+        </a>
+      </div>
+    </section>
+  );
+}
+
 export default function HomeExperience({
   locale,
 }: {
@@ -423,6 +486,34 @@ export default function HomeExperience({
           </p>
         </div>
       </section>
+
+      {SCENES.filter((s) => s.id !== "hero").map((scene) => {
+        const copyKey = scene.homeScene!;
+        const sceneCopy = homeCopy.scenes[copyKey];
+        return (
+          <div key={scene.id}>
+            <FrameStage folder={scene.folder} id={scene.id}>
+              <div
+                data-copy
+                className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
+              >
+                <span
+                  data-goo-hold
+                  aria-hidden
+                  className="pointer-events-none absolute bottom-28 left-1/2 h-2 w-28 -translate-x-1/2"
+                />
+                <h2 data-typo className={`max-w-3xl ${typo.heroTitle} md:text-6xl lg:text-6xl`}>
+                  {t(sceneCopy.title, locale)}
+                </h2>
+                <p data-typo className={`max-w-xl ${typo.stackMd} ${typo.bodyOnDarkSm}`}>
+                  {t(sceneCopy.body, locale)}
+                </p>
+              </div>
+            </FrameStage>
+            <RelatedStrip locale={locale} scene={copyKey} />
+          </div>
+        );
+      })}
 
       <HomeSolutions locale={locale} />
       <HomeCollabArticlesAbadis locale={locale} />
