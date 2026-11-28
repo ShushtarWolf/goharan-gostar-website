@@ -2,16 +2,18 @@ import sharp from "sharp";
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { gradeSubjectRgba } from "./color-grade.mjs";
 
 /** Fixed square master — product + glow stay well inside; edges are fully transparent. */
 export const CANVAS = 1200;
 export const PAD = 0.14;
-export const FILL_LONG = 0.72;
-export const FILL_AREA = 0.36;
+export const FILL_LONG = 0.78;
+export const FILL_AREA = 0.4;
+export const BASELINE_FRAC = 0.8;
 export const SIZES = [480, 960, 1200];
 export const WEBP_Q = 82;
 export const AVIF_Q = 52;
-export const PIPELINE_VERSION = "edge-vignette-v2";
+export const PIPELINE_VERSION = "studio-uniform-v3";
 
 const REMBG = process.env.REMBG_BIN ?? `${process.env.HOME}/.local/bin/rembg`;
 const REMBG_MODEL = process.env.REMBG_MODEL ?? "isnet-general-use";
@@ -175,30 +177,64 @@ async function groundGlowLayer(canvasSize, cx, baselineY) {
   return sharp(Buffer.from(svg)).png().toBuffer();
 }
 
-function subjectScale(sw, sh) {
+function subjectScale(sw, sh, fillBoost = 1) {
   const inner = CANVAS * (1 - 2 * PAD);
   const long = Math.max(sw, sh);
   const area = sw * sh;
-  const byLong = (FILL_LONG * CANVAS) / long;
-  const byArea = Math.sqrt((FILL_AREA * CANVAS * CANVAS) / Math.max(area, 1));
-  const scale = Math.min(byLong, byArea, inner / sw, inner / sh);
+  const byLong = ((FILL_LONG * CANVAS) / long) * fillBoost;
+  const byArea =
+    Math.sqrt((FILL_AREA * CANVAS * CANVAS) / Math.max(area, 1)) * fillBoost;
+  const scale = Math.min(byLong, byArea, (inner / sw) * 1.02, (inner / sh) * 1.02);
   return Math.max(0.05, scale);
 }
 
+/** Bbox opaque area / canvas² on a square RGBA master. */
+export async function measureBboxFill(rgbaBuffer, size = CANVAS) {
+  const { data, info } = await sharp(rgbaBuffer)
+    .ensureAlpha()
+    .resize(size, size, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  const w = info.width;
+  const h = info.height;
+  let minX = w;
+  let minY = h;
+  let maxX = 0;
+  let maxY = 0;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      if (data[(y * w + x) * 4 + 3] > 64) {
+        if (x < minX) minX = x;
+        if (y < minY) minY = y;
+        if (x > maxX) maxX = x;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+  const box = Math.max(0, maxX - minX) * Math.max(0, maxY - minY);
+  return { fill: box / (w * h), bbox: [minX, minY, maxX, maxY] };
+}
+
 /** Trim cutout, uniform fill, ground glow, full transparent canvas with edge vignette. */
-export async function composeStudioSquare(rgbaInput) {
-  const trimmedBuf = await sharp(rgbaInput).trim().png().toBuffer();
+export async function composeStudioSquare(rgbaInput, opts = {}) {
+  const fillBoost = opts.fillBoost ?? 1;
+  let trimmedBuf = await sharp(rgbaInput).trim().png().toBuffer();
+  trimmedBuf = await gradeSubjectRgba(trimmedBuf);
   const meta = await sharp(trimmedBuf).metadata();
   const sw = meta.width ?? 1;
   const sh = meta.height ?? 1;
 
-  const scale = subjectScale(sw, sh);
+  const scale = subjectScale(sw, sh, fillBoost);
   const nw = Math.max(1, Math.round(sw * scale));
   const nh = Math.max(1, Math.round(sh * scale));
 
-  const subject = await sharp(trimmedBuf).resize(nw, nh).png().toBuffer();
+  const subject = await sharp(trimmedBuf)
+    .resize(nw, nh, { kernel: sharp.kernel.lanczos3 })
+    .sharpen({ sigma: 0.45, m1: 0.35, m2: 0.2 })
+    .png()
+    .toBuffer();
   const left = Math.round((CANVAS - nw) / 2);
-  const baseline = Math.round(CANVAS * 0.8);
+  const baseline = Math.round(CANVAS * BASELINE_FRAC);
   const top = Math.max(Math.round(CANVAS * PAD), baseline - nh);
   const cx = left + Math.round(nw / 2);
 
@@ -219,8 +255,11 @@ export async function composeStudioSquare(rgbaInput) {
     .png()
     .toBuffer();
 
+  const { fill: subjectFill } = await measureBboxFill(composed, CANVAS);
+
   composed = await applyCanvasAlphaVignette(composed, CANVAS);
-  return { composed, canvasSize: CANVAS };
+  const { fill } = await measureBboxFill(composed, CANVAS);
+  return { composed, canvasSize: CANVAS, fill, subjectFill };
 }
 
 export function buildSrcSet(variants, format) {
